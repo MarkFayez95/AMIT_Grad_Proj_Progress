@@ -9,11 +9,9 @@
 
 void UART_Init(void)
 {
-	// Set Tx Pin as output 
-	DDRD |= (1<<PIN0);
-	
-	// Set Rx Pin as input
-	DDRD &= ~(1<<PIN1);
+	// Set Tx Pin as output & Rx Pin as input
+	UART_PORT->DDR |= (1<<UART_TX_PIN);
+	UART_PORT->DDR &= ~(1<<UART_RX_PIN);
 	
 	// enable Tx and Rx
 	UCSRB |= (1<<TXEN) | (1<<RXEN);

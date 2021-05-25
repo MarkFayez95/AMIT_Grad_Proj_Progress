@@ -12,6 +12,10 @@
 #include "MCU.h"
 #include "Bit_math.h"
 
+#define UART_PORT   PORT_D
+#define UART_TX_PIN PIN0
+#define UART_RX_PIN PIN1
+
 #define Baud_Rate_Hundred 96
 #define UART_Presc	16
 #define UART_Clk_Sor 160000

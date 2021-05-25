@@ -12,10 +12,10 @@
 #include "Bit_math.h"
 #include "MCU.h"
 
-#define DIO_PORTA 10
-#define DIO_PORTB 20
-#define DIO_PORTC 30
-#define DIO_PORTD 40
+#define DIO_PORTA PORT_A
+#define DIO_PORTB PORT_B
+#define DIO_PORTC PORT_C
+#define DIO_PORTD PORT_D
 
 #define DIO_PIN_0 0
 #define DIO_PIN_1 1
@@ -38,19 +38,19 @@
 #define DIO_PIN_HIGH 1
 #define DIO_PIN_LOW 0
 
-void DIO_SetPortDir(uint8 Port, uint8 Dir);
-void DIO_SetPinDir(uint8 Port, uint8 Pin, uint8 Dir);
+void DIO_SetPortDir(PORT_REG* Port, uint8 Dir);
+void DIO_SetPinDir(PORT_REG* Port, uint8 Pin, uint8 Dir);
 
-void DIO_SetPortValue(uint8 Port, uint8 Value);
-void DIO_SetPinValue(uint8 Port, uint8 Pin, uint8 Value);
+void DIO_SetPortValue(PORT_REG* Port, uint8 Value);
+void DIO_SetPinValue(PORT_REG* Port, uint8 Pin, uint8 Value);
 
-void DIO_ReadPortValue(uint8 Port, uint8* Value);
-void DIO_ReadPinValue(uint8 Port, uint8 Pin, uint8* Value);
+void DIO_ReadPortValue(PORT_REG* Port, uint8* Value);
+void DIO_ReadPinValue(PORT_REG* Port, uint8 Pin, uint8* Value);
 
-void DIO_TogglePort(uint8 Port);
-void DIO_TogglePin(uint8 Port, uint8 Pin);
+void DIO_TogglePort(PORT_REG* Port);
+void DIO_TogglePin(PORT_REG* Port, uint8 Pin);
 
-void DIO_SetPortPullup(uint8 Port);
-void DIO_SetPinPullup(uint8 Port, uint8 Pin);
+void DIO_SetPortPullup(PORT_REG* Port);
+void DIO_SetPinPullup(PORT_REG* Port, uint8 Pin);
 
 #endif /* DIO_H_ */

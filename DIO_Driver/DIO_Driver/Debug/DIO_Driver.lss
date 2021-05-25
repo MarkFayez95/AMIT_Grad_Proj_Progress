@@ -1,0 +1,541 @@
+
+DIO_Driver.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000031c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000370  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000370  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003a0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000e8  00000000  00000000  000003dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000011d7  00000000  00000000  000004c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000897  00000000  00000000  0000169b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000073a  00000000  00000000  00001f32  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000170  00000000  00000000  0000266c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000489  00000000  00000000  000027dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000046b  00000000  00000000  00002c65  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000a8  00000000  00000000  000030d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 3c 01 	call	0x278	; 0x278 <main>
+  64:	0c 94 8c 01 	jmp	0x318	; 0x318 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <Button_Init>:
+#define F_CPU 16000000
+#include "util/delay.h"
+
+void Button_Init(uint8 Button)
+{
+	switch(Button)
+  6c:	81 30       	cpi	r24, 0x01	; 1
+  6e:	59 f0       	breq	.+22     	; 0x86 <Button_Init+0x1a>
+  70:	18 f0       	brcs	.+6      	; 0x78 <Button_Init+0xc>
+  72:	82 30       	cpi	r24, 0x02	; 2
+  74:	79 f0       	breq	.+30     	; 0x94 <Button_Init+0x28>
+  76:	08 95       	ret
+	{
+		case BUTTON0:
+			DIO_SetPinDir(Button0_Port, Button0_Pin, DIO_PIN_OUTPUT);
+  78:	41 e0       	ldi	r20, 0x01	; 1
+  7a:	60 e0       	ldi	r22, 0x00	; 0
+  7c:	86 e3       	ldi	r24, 0x36	; 54
+  7e:	90 e0       	ldi	r25, 0x00	; 0
+  80:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+		break;
+  84:	08 95       	ret
+		
+		case BUTTON1:
+		DIO_SetPinDir(Button1_Port, Button1_Pin, DIO_PIN_OUTPUT);
+  86:	41 e0       	ldi	r20, 0x01	; 1
+  88:	66 e0       	ldi	r22, 0x06	; 6
+  8a:	80 e3       	ldi	r24, 0x30	; 48
+  8c:	90 e0       	ldi	r25, 0x00	; 0
+  8e:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+		break;
+  92:	08 95       	ret
+		
+		case BUTTON2:
+		DIO_SetPinDir(Button2_Port, Button2_Pin, DIO_PIN_OUTPUT);
+  94:	41 e0       	ldi	r20, 0x01	; 1
+  96:	62 e0       	ldi	r22, 0x02	; 2
+  98:	80 e3       	ldi	r24, 0x30	; 48
+  9a:	90 e0       	ldi	r25, 0x00	; 0
+  9c:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+  a0:	08 95       	ret
+
+000000a2 <Button_GetValue>:
+		break;
+	}
+}
+
+uint8 Button_GetValue(uint8 Button)
+{
+  a2:	cf 93       	push	r28
+  a4:	df 93       	push	r29
+  a6:	00 d0       	rcall	.+0      	; 0xa8 <Button_GetValue+0x6>
+  a8:	cd b7       	in	r28, 0x3d	; 61
+  aa:	de b7       	in	r29, 0x3e	; 62
+	uint8 Value = 0;
+  ac:	19 82       	std	Y+1, r1	; 0x01
+	uint8 DeBounce = 0;
+  ae:	1a 82       	std	Y+2, r1	; 0x02
+	
+	
+	switch(Button)
+  b0:	81 30       	cpi	r24, 0x01	; 1
+  b2:	09 f1       	breq	.+66     	; 0xf6 <Button_GetValue+0x54>
+  b4:	18 f0       	brcs	.+6      	; 0xbc <Button_GetValue+0x1a>
+  b6:	82 30       	cpi	r24, 0x02	; 2
+  b8:	d9 f1       	breq	.+118    	; 0x130 <Button_GetValue+0x8e>
+  ba:	56 c0       	rjmp	.+172    	; 0x168 <Button_GetValue+0xc6>
+	{
+		case BUTTON0:
+			DIO_ReadPinValue(Button0_Port, Button0_Pin, &Value);
+  bc:	ae 01       	movw	r20, r28
+  be:	4f 5f       	subi	r20, 0xFF	; 255
+  c0:	5f 4f       	sbci	r21, 0xFF	; 255
+  c2:	60 e0       	ldi	r22, 0x00	; 0
+  c4:	86 e3       	ldi	r24, 0x36	; 54
+  c6:	90 e0       	ldi	r25, 0x00	; 0
+  c8:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+			DIO_ReadPinValue(Button0_Port, Button0_Pin, &DeBounce);
+  cc:	ae 01       	movw	r20, r28
+  ce:	4e 5f       	subi	r20, 0xFE	; 254
+  d0:	5f 4f       	sbci	r21, 0xFF	; 255
+  d2:	60 e0       	ldi	r22, 0x00	; 0
+  d4:	86 e3       	ldi	r24, 0x36	; 54
+  d6:	90 e0       	ldi	r25, 0x00	; 0
+  d8:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+			while(DeBounce == 1)
+  dc:	08 c0       	rjmp	.+16     	; 0xee <Button_GetValue+0x4c>
+				DIO_ReadPinValue(Button0_Port, Button0_Pin, &DeBounce);
+  de:	ae 01       	movw	r20, r28
+  e0:	4e 5f       	subi	r20, 0xFE	; 254
+  e2:	5f 4f       	sbci	r21, 0xFF	; 255
+  e4:	60 e0       	ldi	r22, 0x00	; 0
+  e6:	86 e3       	ldi	r24, 0x36	; 54
+  e8:	90 e0       	ldi	r25, 0x00	; 0
+  ea:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+	switch(Button)
+	{
+		case BUTTON0:
+			DIO_ReadPinValue(Button0_Port, Button0_Pin, &Value);
+			DIO_ReadPinValue(Button0_Port, Button0_Pin, &DeBounce);
+			while(DeBounce == 1)
+  ee:	8a 81       	ldd	r24, Y+2	; 0x02
+  f0:	81 30       	cpi	r24, 0x01	; 1
+  f2:	a9 f3       	breq	.-22     	; 0xde <Button_GetValue+0x3c>
+  f4:	39 c0       	rjmp	.+114    	; 0x168 <Button_GetValue+0xc6>
+				DIO_ReadPinValue(Button0_Port, Button0_Pin, &DeBounce);
+		break;
+		
+		case BUTTON1:
+			DIO_ReadPinValue(Button1_Port, Button1_Pin, &Value);
+  f6:	ae 01       	movw	r20, r28
+  f8:	4f 5f       	subi	r20, 0xFF	; 255
+  fa:	5f 4f       	sbci	r21, 0xFF	; 255
+  fc:	66 e0       	ldi	r22, 0x06	; 6
+  fe:	80 e3       	ldi	r24, 0x30	; 48
+ 100:	90 e0       	ldi	r25, 0x00	; 0
+ 102:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+			DIO_ReadPinValue(Button1_Port, Button1_Pin, &DeBounce);
+ 106:	ae 01       	movw	r20, r28
+ 108:	4e 5f       	subi	r20, 0xFE	; 254
+ 10a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 10c:	66 e0       	ldi	r22, 0x06	; 6
+ 10e:	80 e3       	ldi	r24, 0x30	; 48
+ 110:	90 e0       	ldi	r25, 0x00	; 0
+ 112:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+			while(DeBounce == 1)
+ 116:	08 c0       	rjmp	.+16     	; 0x128 <Button_GetValue+0x86>
+				DIO_ReadPinValue(Button1_Port, Button1_Pin, &DeBounce);
+ 118:	ae 01       	movw	r20, r28
+ 11a:	4e 5f       	subi	r20, 0xFE	; 254
+ 11c:	5f 4f       	sbci	r21, 0xFF	; 255
+ 11e:	66 e0       	ldi	r22, 0x06	; 6
+ 120:	80 e3       	ldi	r24, 0x30	; 48
+ 122:	90 e0       	ldi	r25, 0x00	; 0
+ 124:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+		break;
+		
+		case BUTTON1:
+			DIO_ReadPinValue(Button1_Port, Button1_Pin, &Value);
+			DIO_ReadPinValue(Button1_Port, Button1_Pin, &DeBounce);
+			while(DeBounce == 1)
+ 128:	8a 81       	ldd	r24, Y+2	; 0x02
+ 12a:	81 30       	cpi	r24, 0x01	; 1
+ 12c:	a9 f3       	breq	.-22     	; 0x118 <Button_GetValue+0x76>
+ 12e:	1c c0       	rjmp	.+56     	; 0x168 <Button_GetValue+0xc6>
+				DIO_ReadPinValue(Button1_Port, Button1_Pin, &DeBounce);
+		break;
+		
+		case BUTTON2:
+			DIO_ReadPinValue(Button2_Port, Button2_Pin, &Value);
+ 130:	ae 01       	movw	r20, r28
+ 132:	4f 5f       	subi	r20, 0xFF	; 255
+ 134:	5f 4f       	sbci	r21, 0xFF	; 255
+ 136:	62 e0       	ldi	r22, 0x02	; 2
+ 138:	80 e3       	ldi	r24, 0x30	; 48
+ 13a:	90 e0       	ldi	r25, 0x00	; 0
+ 13c:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+			DIO_ReadPinValue(Button2_Port, Button2_Pin, &DeBounce);
+ 140:	ae 01       	movw	r20, r28
+ 142:	4e 5f       	subi	r20, 0xFE	; 254
+ 144:	5f 4f       	sbci	r21, 0xFF	; 255
+ 146:	62 e0       	ldi	r22, 0x02	; 2
+ 148:	80 e3       	ldi	r24, 0x30	; 48
+ 14a:	90 e0       	ldi	r25, 0x00	; 0
+ 14c:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+			while(DeBounce == 1)
+ 150:	08 c0       	rjmp	.+16     	; 0x162 <Button_GetValue+0xc0>
+				DIO_ReadPinValue(Button2_Port, Button2_Pin, &DeBounce);
+ 152:	ae 01       	movw	r20, r28
+ 154:	4e 5f       	subi	r20, 0xFE	; 254
+ 156:	5f 4f       	sbci	r21, 0xFF	; 255
+ 158:	62 e0       	ldi	r22, 0x02	; 2
+ 15a:	80 e3       	ldi	r24, 0x30	; 48
+ 15c:	90 e0       	ldi	r25, 0x00	; 0
+ 15e:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <DIO_ReadPinValue>
+		break;
+		
+		case BUTTON2:
+			DIO_ReadPinValue(Button2_Port, Button2_Pin, &Value);
+			DIO_ReadPinValue(Button2_Port, Button2_Pin, &DeBounce);
+			while(DeBounce == 1)
+ 162:	8a 81       	ldd	r24, Y+2	; 0x02
+ 164:	81 30       	cpi	r24, 0x01	; 1
+ 166:	a9 f3       	breq	.-22     	; 0x152 <Button_GetValue+0xb0>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 168:	8f e3       	ldi	r24, 0x3F	; 63
+ 16a:	9c e9       	ldi	r25, 0x9C	; 156
+ 16c:	01 97       	sbiw	r24, 0x01	; 1
+ 16e:	f1 f7       	brne	.-4      	; 0x16c <Button_GetValue+0xca>
+ 170:	00 c0       	rjmp	.+0      	; 0x172 <Button_GetValue+0xd0>
+ 172:	00 00       	nop
+	
+	_delay_ms(10);
+	
+	return Value;
+	
+ 174:	89 81       	ldd	r24, Y+1	; 0x01
+ 176:	0f 90       	pop	r0
+ 178:	0f 90       	pop	r0
+ 17a:	df 91       	pop	r29
+ 17c:	cf 91       	pop	r28
+ 17e:	08 95       	ret
+
+00000180 <DIO_SetPinDir>:
+	*Value = GetBit(Port->PIN,Pin);
+}
+
+void DIO_TogglePort(PORT_REG* Port)
+{
+	Port->PORT ^= DIO_PORT_HIGH;
+ 180:	fc 01       	movw	r30, r24
+ 182:	94 2f       	mov	r25, r20
+ 184:	81 81       	ldd	r24, Z+1	; 0x01
+ 186:	41 e0       	ldi	r20, 0x01	; 1
+ 188:	50 e0       	ldi	r21, 0x00	; 0
+ 18a:	9a 01       	movw	r18, r20
+ 18c:	06 2e       	mov	r0, r22
+ 18e:	02 c0       	rjmp	.+4      	; 0x194 <DIO_SetPinDir+0x14>
+ 190:	22 0f       	add	r18, r18
+ 192:	33 1f       	adc	r19, r19
+ 194:	0a 94       	dec	r0
+ 196:	e2 f7       	brpl	.-8      	; 0x190 <DIO_SetPinDir+0x10>
+ 198:	32 2f       	mov	r19, r18
+ 19a:	30 95       	com	r19
+ 19c:	83 23       	and	r24, r19
+ 19e:	81 83       	std	Z+1, r24	; 0x01
+ 1a0:	81 81       	ldd	r24, Z+1	; 0x01
+ 1a2:	49 2f       	mov	r20, r25
+ 1a4:	50 e0       	ldi	r21, 0x00	; 0
+ 1a6:	02 c0       	rjmp	.+4      	; 0x1ac <DIO_SetPinDir+0x2c>
+ 1a8:	44 0f       	add	r20, r20
+ 1aa:	55 1f       	adc	r21, r21
+ 1ac:	6a 95       	dec	r22
+ 1ae:	e2 f7       	brpl	.-8      	; 0x1a8 <DIO_SetPinDir+0x28>
+ 1b0:	42 23       	and	r20, r18
+ 1b2:	48 2b       	or	r20, r24
+ 1b4:	41 83       	std	Z+1, r20	; 0x01
+ 1b6:	08 95       	ret
+
+000001b8 <DIO_ReadPinValue>:
+ 1b8:	fc 01       	movw	r30, r24
+ 1ba:	80 81       	ld	r24, Z
+ 1bc:	90 e0       	ldi	r25, 0x00	; 0
+ 1be:	02 c0       	rjmp	.+4      	; 0x1c4 <DIO_ReadPinValue+0xc>
+ 1c0:	95 95       	asr	r25
+ 1c2:	87 95       	ror	r24
+ 1c4:	6a 95       	dec	r22
+ 1c6:	e2 f7       	brpl	.-8      	; 0x1c0 <DIO_ReadPinValue+0x8>
+ 1c8:	81 70       	andi	r24, 0x01	; 1
+ 1ca:	fa 01       	movw	r30, r20
+ 1cc:	80 83       	st	Z, r24
+ 1ce:	08 95       	ret
+
+000001d0 <DIO_TogglePin>:
+	
+}
+void DIO_TogglePin(PORT_REG* Port, uint8 Pin)
+{
+	ToggleBit(Port->PORT,Pin);
+ 1d0:	fc 01       	movw	r30, r24
+ 1d2:	42 81       	ldd	r20, Z+2	; 0x02
+ 1d4:	21 e0       	ldi	r18, 0x01	; 1
+ 1d6:	30 e0       	ldi	r19, 0x00	; 0
+ 1d8:	02 c0       	rjmp	.+4      	; 0x1de <DIO_TogglePin+0xe>
+ 1da:	22 0f       	add	r18, r18
+ 1dc:	33 1f       	adc	r19, r19
+ 1de:	6a 95       	dec	r22
+ 1e0:	e2 f7       	brpl	.-8      	; 0x1da <DIO_TogglePin+0xa>
+ 1e2:	24 27       	eor	r18, r20
+ 1e4:	22 83       	std	Z+2, r18	; 0x02
+ 1e6:	08 95       	ret
+
+000001e8 <LED_Init>:
+			case LED1:
+			DIO_SetPinValue(LED1_PORT, LED1_PIN, DIO_PIN_LOW);
+			break;
+			
+			case LED2:
+			DIO_SetPinValue(LED2_PORT, LED2_PIN, DIO_PIN_LOW);
+ 1e8:	81 30       	cpi	r24, 0x01	; 1
+ 1ea:	69 f0       	breq	.+26     	; 0x206 <LED_Init+0x1e>
+ 1ec:	28 f0       	brcs	.+10     	; 0x1f8 <LED_Init+0x10>
+ 1ee:	82 30       	cpi	r24, 0x02	; 2
+ 1f0:	89 f0       	breq	.+34     	; 0x214 <LED_Init+0x2c>
+ 1f2:	83 30       	cpi	r24, 0x03	; 3
+ 1f4:	b1 f0       	breq	.+44     	; 0x222 <LED_Init+0x3a>
+ 1f6:	08 95       	ret
+ 1f8:	40 e0       	ldi	r20, 0x00	; 0
+ 1fa:	62 e0       	ldi	r22, 0x02	; 2
+ 1fc:	83 e3       	ldi	r24, 0x33	; 51
+ 1fe:	90 e0       	ldi	r25, 0x00	; 0
+ 200:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+ 204:	08 95       	ret
+ 206:	40 e0       	ldi	r20, 0x00	; 0
+ 208:	67 e0       	ldi	r22, 0x07	; 7
+ 20a:	83 e3       	ldi	r24, 0x33	; 51
+ 20c:	90 e0       	ldi	r25, 0x00	; 0
+ 20e:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+ 212:	08 95       	ret
+ 214:	40 e0       	ldi	r20, 0x00	; 0
+ 216:	63 e0       	ldi	r22, 0x03	; 3
+ 218:	80 e3       	ldi	r24, 0x30	; 48
+ 21a:	90 e0       	ldi	r25, 0x00	; 0
+ 21c:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+ 220:	08 95       	ret
+ 222:	40 e0       	ldi	r20, 0x00	; 0
+ 224:	62 e0       	ldi	r22, 0x02	; 2
+ 226:	83 e3       	ldi	r24, 0x33	; 51
+ 228:	90 e0       	ldi	r25, 0x00	; 0
+ 22a:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+ 22e:	40 e0       	ldi	r20, 0x00	; 0
+ 230:	67 e0       	ldi	r22, 0x07	; 7
+ 232:	83 e3       	ldi	r24, 0x33	; 51
+ 234:	90 e0       	ldi	r25, 0x00	; 0
+ 236:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+ 23a:	40 e0       	ldi	r20, 0x00	; 0
+ 23c:	63 e0       	ldi	r22, 0x03	; 3
+ 23e:	80 e3       	ldi	r24, 0x30	; 48
+ 240:	90 e0       	ldi	r25, 0x00	; 0
+ 242:	0e 94 c0 00 	call	0x180	; 0x180 <DIO_SetPinDir>
+ 246:	08 95       	ret
+
+00000248 <LED_Toggle>:
+#endif
+
+#ifndef CALLBACK_INT_ENABLE
+	void LED_Toggle(uint8 LED)
+	{
+		switch(LED)
+ 248:	81 30       	cpi	r24, 0x01	; 1
+ 24a:	51 f0       	breq	.+20     	; 0x260 <LED_Toggle+0x18>
+ 24c:	18 f0       	brcs	.+6      	; 0x254 <LED_Toggle+0xc>
+ 24e:	82 30       	cpi	r24, 0x02	; 2
+ 250:	69 f0       	breq	.+26     	; 0x26c <LED_Toggle+0x24>
+ 252:	08 95       	ret
+		{
+			case LED0:
+			DIO_TogglePin(LED0_PORT, LED0_PIN);
+ 254:	62 e0       	ldi	r22, 0x02	; 2
+ 256:	83 e3       	ldi	r24, 0x33	; 51
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <DIO_TogglePin>
+			break;
+ 25e:	08 95       	ret
+			
+			case LED1:
+			DIO_TogglePin(LED1_PORT, LED1_PIN);
+ 260:	67 e0       	ldi	r22, 0x07	; 7
+ 262:	83 e3       	ldi	r24, 0x33	; 51
+ 264:	90 e0       	ldi	r25, 0x00	; 0
+ 266:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <DIO_TogglePin>
+			break;
+ 26a:	08 95       	ret
+			
+			case LED2:
+			DIO_TogglePin(LED2_PORT, LED2_PIN);
+ 26c:	63 e0       	ldi	r22, 0x03	; 3
+ 26e:	80 e3       	ldi	r24, 0x30	; 48
+ 270:	90 e0       	ldi	r25, 0x00	; 0
+ 272:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <DIO_TogglePin>
+ 276:	08 95       	ret
+
+00000278 <main>:
+#include <Util/delay.h>
+
+
+int main(void)
+{
+	LED_Init(LED0);
+ 278:	80 e0       	ldi	r24, 0x00	; 0
+ 27a:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <LED_Init>
+	LED_Init(LED1);
+ 27e:	81 e0       	ldi	r24, 0x01	; 1
+ 280:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <LED_Init>
+	LED_Init(LED2);
+ 284:	82 e0       	ldi	r24, 0x02	; 2
+ 286:	0e 94 f4 00 	call	0x1e8	; 0x1e8 <LED_Init>
+	
+	Button_Init(BUTTON0);
+ 28a:	80 e0       	ldi	r24, 0x00	; 0
+ 28c:	0e 94 36 00 	call	0x6c	; 0x6c <Button_Init>
+	Button_Init(BUTTON1);
+ 290:	81 e0       	ldi	r24, 0x01	; 1
+ 292:	0e 94 36 00 	call	0x6c	; 0x6c <Button_Init>
+	Button_Init(BUTTON2);
+ 296:	82 e0       	ldi	r24, 0x02	; 2
+ 298:	0e 94 36 00 	call	0x6c	; 0x6c <Button_Init>
+	
+	/* Replace with your application code */
+	while (1)
+	{
+		if(Button_GetValue(BUTTON0) == 1)
+ 29c:	80 e0       	ldi	r24, 0x00	; 0
+ 29e:	0e 94 51 00 	call	0xa2	; 0xa2 <Button_GetValue>
+ 2a2:	81 30       	cpi	r24, 0x01	; 1
+ 2a4:	81 f4       	brne	.+32     	; 0x2c6 <main+0x4e>
+		{
+			LED_Toggle(LED0);
+ 2a6:	80 e0       	ldi	r24, 0x00	; 0
+ 2a8:	0e 94 24 01 	call	0x248	; 0x248 <LED_Toggle>
+ 2ac:	2f ef       	ldi	r18, 0xFF	; 255
+ 2ae:	89 e6       	ldi	r24, 0x69	; 105
+ 2b0:	98 e1       	ldi	r25, 0x18	; 24
+ 2b2:	21 50       	subi	r18, 0x01	; 1
+ 2b4:	80 40       	sbci	r24, 0x00	; 0
+ 2b6:	90 40       	sbci	r25, 0x00	; 0
+ 2b8:	e1 f7       	brne	.-8      	; 0x2b2 <main+0x3a>
+ 2ba:	00 c0       	rjmp	.+0      	; 0x2bc <main+0x44>
+ 2bc:	00 00       	nop
+			_delay_ms(500);
+			LED_Toggle(LED0);
+ 2be:	80 e0       	ldi	r24, 0x00	; 0
+ 2c0:	0e 94 24 01 	call	0x248	; 0x248 <LED_Toggle>
+ 2c4:	eb cf       	rjmp	.-42     	; 0x29c <main+0x24>
+		}
+		else if(Button_GetValue(BUTTON1) == 1)
+ 2c6:	81 e0       	ldi	r24, 0x01	; 1
+ 2c8:	0e 94 51 00 	call	0xa2	; 0xa2 <Button_GetValue>
+ 2cc:	81 30       	cpi	r24, 0x01	; 1
+ 2ce:	79 f4       	brne	.+30     	; 0x2ee <main+0x76>
+		{
+			LED_Toggle(LED1);
+ 2d0:	0e 94 24 01 	call	0x248	; 0x248 <LED_Toggle>
+ 2d4:	2f ef       	ldi	r18, 0xFF	; 255
+ 2d6:	89 e6       	ldi	r24, 0x69	; 105
+ 2d8:	98 e1       	ldi	r25, 0x18	; 24
+ 2da:	21 50       	subi	r18, 0x01	; 1
+ 2dc:	80 40       	sbci	r24, 0x00	; 0
+ 2de:	90 40       	sbci	r25, 0x00	; 0
+ 2e0:	e1 f7       	brne	.-8      	; 0x2da <main+0x62>
+ 2e2:	00 c0       	rjmp	.+0      	; 0x2e4 <main+0x6c>
+ 2e4:	00 00       	nop
+			_delay_ms(500);
+			LED_Toggle(LED1);
+ 2e6:	81 e0       	ldi	r24, 0x01	; 1
+ 2e8:	0e 94 24 01 	call	0x248	; 0x248 <LED_Toggle>
+ 2ec:	d7 cf       	rjmp	.-82     	; 0x29c <main+0x24>
+		}
+		else if(Button_GetValue(BUTTON2) == 1)
+ 2ee:	82 e0       	ldi	r24, 0x02	; 2
+ 2f0:	0e 94 51 00 	call	0xa2	; 0xa2 <Button_GetValue>
+ 2f4:	81 30       	cpi	r24, 0x01	; 1
+ 2f6:	91 f6       	brne	.-92     	; 0x29c <main+0x24>
+		{
+			LED_Toggle(LED2);
+ 2f8:	82 e0       	ldi	r24, 0x02	; 2
+ 2fa:	0e 94 24 01 	call	0x248	; 0x248 <LED_Toggle>
+ 2fe:	2f ef       	ldi	r18, 0xFF	; 255
+ 300:	89 e6       	ldi	r24, 0x69	; 105
+ 302:	98 e1       	ldi	r25, 0x18	; 24
+ 304:	21 50       	subi	r18, 0x01	; 1
+ 306:	80 40       	sbci	r24, 0x00	; 0
+ 308:	90 40       	sbci	r25, 0x00	; 0
+ 30a:	e1 f7       	brne	.-8      	; 0x304 <main+0x8c>
+ 30c:	00 c0       	rjmp	.+0      	; 0x30e <main+0x96>
+ 30e:	00 00       	nop
+			_delay_ms(500);
+			LED_Toggle(LED2);
+ 310:	82 e0       	ldi	r24, 0x02	; 2
+ 312:	0e 94 24 01 	call	0x248	; 0x248 <LED_Toggle>
+ 316:	c2 cf       	rjmp	.-124    	; 0x29c <main+0x24>
+
+00000318 <_exit>:
+ 318:	f8 94       	cli
+
+0000031a <__stop_program>:
+ 31a:	ff cf       	rjmp	.-2      	; 0x31a <__stop_program>

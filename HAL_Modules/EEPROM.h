@@ -10,13 +10,7 @@
 #define EEPROM_H_
 
 #include "I2C.h"
-
-#define EEPROM_SLAVE_ADDR	0x50
-#define EEPROM_EN_PIN_STAT	0
-#define EEPROM_EN_BIT_LOC	3
-#define EEPROM_BLOCK_SEL	0
-
-#define EEPROM_ADDR		0b01010000 //(EEPROM_SLAVE_ADDR | (EEPROM_EN_PIN_STAT << EEPROM_EN_BIT_LOC) | EEPROM_BLOCK_SEL)
+#include "EEPROM_CFG.h"
 
 void EEPROM_Init(void);
 

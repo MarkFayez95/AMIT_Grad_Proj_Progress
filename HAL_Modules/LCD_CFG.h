@@ -15,23 +15,23 @@
 
 #if LCD_MODE == 4
 
-#define		LCD_4BIT_MODE_CMD_PORT		DIO_PORTB
-#define		LCD_4BIT_MODE_DATA_PORT		DIO_PORTA
-#define		LCD_4BIT_MODE_DATA_BUS		PORTA
+    #define		LCD_4BIT_MODE_CMD_PORT		DIO_PORTB
+    #define		LCD_4BIT_MODE_DATA_PORT		DIO_PORTA
+    #define		LCD_4BIT_MODE_DATA_BUS		PORTA
 
-#define		LCD_RS_PIN		DIO_PIN_1
-#define		LCD_RW_PIN		DIO_PIN_2
-#define		LCD_E_PIN		DIO_PIN_3
+    #define		LCD_RS_PIN		DIO_PIN_1
+    #define		LCD_RW_PIN		DIO_PIN_2
+    #define		LCD_E_PIN		DIO_PIN_3
 
 #elif LCD_MODE == 8
 
-#define		LCD_8BIT_MODE_CMD_PORT		DIO_PORTA
-#define		LCD_8BIT_MODE_DATA_PORT		DIO_PORTB
-#define		LCD_8BIT_MODE_DATA_BUS		PORTB
+    #define		LCD_8BIT_MODE_CMD_PORT		DIO_PORTA
+    #define		LCD_8BIT_MODE_DATA_PORT		DIO_PORTB
+    #define		LCD_8BIT_MODE_DATA_BUS		PORTB
 
-#define		LCD_RS_PIN		DIO_PIN_1
-#define		LCD_RW_PIN		DIO_PIN_2
-#define		LCD_E_PIN		DIO_PIN_3
+    #define		LCD_RS_PIN		DIO_PIN_1
+    #define		LCD_RW_PIN		DIO_PIN_2
+    #define		LCD_E_PIN		DIO_PIN_3
 
 #endif
 
@@ -43,5 +43,9 @@
 #define		LCD_D5_PIN		DIO_PIN_5
 #define		LCD_D6_PIN		DIO_PIN_6
 #define		LCD_D7_PIN		DIO_PIN_7
+
+#define LCD_ROW_1   0x80
+#define LCD_ROW_2   0xc0
+#define LCD_CLR_CMD 0x01
 
 #endif /* LCD_CFG_H_ */

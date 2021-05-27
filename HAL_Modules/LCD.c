@@ -178,7 +178,7 @@ void LCD_WriteString(uint8* str)
 
 void LCD_GoToLocation(uint8 row, uint8 col)
 {
-	uint8 rows[2] = {0x80,0xc0};
+	uint8 rows[2] = {LCD_ROW_1,LCD_ROW_2};
 	
 	LCD_WriteCommand(rows[row]+col);
 	
@@ -186,6 +186,6 @@ void LCD_GoToLocation(uint8 row, uint8 col)
 
 void LCD_Clear (void)
 {
-	LCD_WriteCommand(0x01);
+	LCD_WriteCommand(LCD_CLR_CMD);
 }
 

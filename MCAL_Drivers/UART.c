@@ -10,8 +10,8 @@
 void UART_Init(void)
 {
 	// Set Tx Pin as output & Rx Pin as input
-	UART_PORT->DDR |= (1<<UART_TX_PIN);
-	UART_PORT->DDR &= ~(1<<UART_RX_PIN);
+	DIO_SetPinDir(UART_PORT, UART_TX_PIN, DIO_PIN_OUTPUT);
+	DIO_SetPinDir(UART_PORT,UART_RX_PIN, DIO_PIN_INPUT);
 	
 	// enable Tx and Rx
 	UCSRB |= (1<<TXEN) | (1<<RXEN);
@@ -26,15 +26,25 @@ void UART_Init(void)
 void UART_Tx(uint8 data)
 {
 	UDR = data;
-	while ( GetBit(UCSRA,TXCIE) == 0 );
+	while ( GetBit(UCSRA,TXCIE) == UART_Flag_Down );
 	ClearBit(UCSRA,TXCIE);
 }
 
 uint8 UART_Rx(void)
 {
-	while (GetBit(UCSRA,RXCIE) == 0);
+	while (GetBit(UCSRA,RXCIE) == UART_Flag_Down);
 	ClearBit(UCSRA,RXCIE);
 	return UDR;
+}
+void UART_RxString(uint8* str)
+{
+	uint8 Count = 0;
+	str[count]=UART_Rx();
+	while(str[count] != '\0')
+	{
+		count++;
+		str[count] = UART_Rx();
+	}
 }
 
 // Maximum characters for this function is 255 character

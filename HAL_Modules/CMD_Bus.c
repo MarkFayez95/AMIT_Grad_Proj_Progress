@@ -106,7 +106,10 @@ uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
             SPI_Master_TermTrans();
         #endif /* SPI_ROLE */
 
-        return RECEIVED;
+        if ((*Ack_Req_Response == ACK_RES) || (*Ack_Req_Response == NACK_RES))
+            return RECEIVED;
+        else 
+            return INVALID_ACK_RESPONSE;
     }
 }
 
@@ -132,6 +135,9 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
             SPI_Master_TermTrans();
         #endif /* SPI_ROLE */
 
-        return DELIVERED;
+        if (Response == REQUEST_ACK)
+            return DELIVERED;
+        else 
+            return INVALID_ACK_REQUEST;
     }
 }

@@ -12,13 +12,13 @@
 #endif
 
 #if ECU_ROLE == CONTROL_ECU
-    #define SPI_ROLE SPI_MASTER
-    #define CMD_BUS_DEV_ID 0xA0
-    #define CMD_BUS_PEER_ID 0xB0
+    #define SPI_ROLE            SPI_MASTER
+    #define CMD_BUS_DEV_ID      0xA0
+    #define CMD_BUS_PEER_ID     0xB0
 #elif ECU_ROLE == ACTUATOR_ECU
-    #define SPI_ROLE SPI_SLAVE
-    #define CMD_BUS_DEV_ID 0xB0
-    #define CMD_BUS_PEER_ID 0xA0
+    #define SPI_ROLE            SPI_SLAVE
+    #define CMD_BUS_DEV_ID      0xB0
+    #define CMD_BUS_PEER_ID     0xA0
 #endif /* ECU_ROLE */
 
 #include "SPI.h"

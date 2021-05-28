@@ -11,7 +11,10 @@
 
 #include "DIO.h"
 
-#define	LCD_MODE 4
+#ifndef LCD_MODE
+    #define	LCD_MODE 4
+#endif /* LCD_MODE */
+
 
 #if LCD_MODE == 4
 

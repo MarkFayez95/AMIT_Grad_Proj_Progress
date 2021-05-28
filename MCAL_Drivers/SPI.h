@@ -21,7 +21,9 @@
 #define SPI_MASTER  0xA0
 #define SPI_SLAVE   0xB0
 
-#define SPI_ROLE SPI_MASTER
+#ifndef SPI_ROLE
+    #define SPI_ROLE    SPI_MASTER
+#endif
 
 #if SPI_ROLE == SPI_MASTER
     #define SPI_PORT     DIO_PORTB
@@ -30,19 +32,18 @@
     #define SPI_MISO_PIN DIO_PIN_6
     #define SPI_CLK_PIN  DIO_PIN_7
 
-    void SPI_Master_Init(void);
-    void SPI_Master_InitTrans(void);
-    void SPI_Master_TermTrans(void);
-    uint8 SPI_Master_Transiver(uint8 data);
 #elif SPI_ROLE == SPI_SLAVE
+
     #define SPI_PORT     DIO_PORTB
     #define SPI_SS_PIN   DIO_PIN_4
     #define SPI_MOSI_PIN DIO_PIN_5
     #define SPI_MISO_PIN DIO_PIN_6
     #define SPI_CLK_PIN  DIO_PIN_7
-
-    void SPI_Slave_Init(void);
-    uint8 SPI_Slave_Transiver(uint8 data);
 #endif
 
+void SPI_Master_Init(void);
+void SPI_Master_InitTrans(void);
+void SPI_Master_TermTrans(void);
+uint8 SPI_Transiver(uint8 data);
+void SPI_Slave_Init(void);
 #endif /* SPI_H_ */

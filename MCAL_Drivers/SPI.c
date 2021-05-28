@@ -7,8 +7,6 @@
 
 #include "SPI.h"
 
-#if SPI_ROLE == SPI_MASTER
-
 void SPI_Master_Init(void)
 {
 	//MISO
@@ -43,20 +41,24 @@ void SPI_Master_TermTrans(void)
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_HIGH);
 }
 
-uint8 SPI_Master_Transiver(uint8 data)
+uint8 SPI_Transiver(uint8 data)
 {
 	uint8 Received_Data = 0;
-	SPI_Master_InitTrans();
-	SPI->SPDR = data;
-	while(GetBit(SPI->SPSR,SPIF) == 0);
+	#if SPI_ROLE == SPI_MASTER
+		SPI_Master_InitTrans();
+		SPI->SPDR = data;
+		while(GetBit(SPI->SPSR,SPIF) == 0);
+		
+		Received_Data = SPI->SPDR;
+		SPI_Master_TermTrans();
+	#elif SPI_ROLE == SPI_SLAVE
+		SPI->SPDR = data;
+		while(GetBit(SPI->SPSR,SPIF) == 0);
 	
-	Received_Data = SPI->SPDR;
-	SPI_Master_TermTrans();
+		Received_Data = SPI->SPDR;
+	#endif
 	return Received_Data;
-	
 }
-
-#elif SPI_ROLE == SPI_SLAVE
 
 void SPI_Slave_Init(void)
 {
@@ -72,16 +74,3 @@ void SPI_Slave_Init(void)
 	// Enable SPI Peripheral
 	SPI->SPCR |= (1<<SPE);
 }
-uint8 SPI_Slave_Transiver(uint8 data)
-{
-	uint8 Received_Data = 0;
-	
-	SPI->SPDR = data;
-	while(GetBit(SPI->SPSR,SPIF) == 0);
-	
-	Received_Data = SPI->SPDR;
-	
-	return Received_Data;
-	
-}
-#endif

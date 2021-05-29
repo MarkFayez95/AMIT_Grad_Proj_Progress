@@ -21,7 +21,6 @@ typedef enum {
     ACK_RES,
     INVALID_ACK_REQUEST,
     INVALID_ACK_RESPONSE,
-    SEND_FAILED,
     PEER_UNAVAILABLE
 }CMD_Bus_States;
 

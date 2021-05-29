@@ -7,4 +7,4 @@
 
  #include "Devices.h"
 
- DeviceEntry DeviceDB[NUM_OF_DEVICES];
+ DeviceEntry DevicesDB[NUM_OF_DEVICES];

@@ -7,7 +7,7 @@
 
 #include "CMD_Bus.h"
 
-const uint8 CMD_Bus_HandShake(void)
+uint8 CMD_Bus_HandShake(void)
 {
     uint8 Peer_ID;
 

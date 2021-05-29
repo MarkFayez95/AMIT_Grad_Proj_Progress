@@ -27,7 +27,7 @@ typedef enum {
 
 void CMD_Bus_Master_Init(void);
 void CMD_Bus_Slave_Init(void);
-const uint8 CMD_Bus_HandShake(void);
+uint8 CMD_Bus_HandShake(void);
 uint8 CMD_Bus_Write(uint8 Req_Command);
 uint8 CMD_Bus_Read(uint8* Req_Command);
 uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response);

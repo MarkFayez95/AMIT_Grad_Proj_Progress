@@ -47,8 +47,8 @@
 #define		LCD_D6_PIN		DIO_PIN_6
 #define		LCD_D7_PIN		DIO_PIN_7
 
-#define LCD_ROW_1   0x80
-#define LCD_ROW_2   0xc0
+#define LCD_ROW_1_ADDR   0x80
+#define LCD_ROW_2_ADDR   0xc0
 #define LCD_CLR_CMD 0x01
 
 #endif /* LCD_CFG_H_ */

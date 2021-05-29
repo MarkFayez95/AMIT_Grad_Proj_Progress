@@ -11,6 +11,10 @@
 
 #include "LCD_CFG.h"
 
+#define LCD_ROW_1   0
+#define LCD_ROW_2   1
+#define LCD_SHIFT_CURSOR    1
+
 #define F_CPU 16000000UL
 #include <util/delay.h>
 

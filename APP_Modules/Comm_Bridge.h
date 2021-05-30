@@ -45,7 +45,7 @@ void Comm_Bridge_Init(void);
 
 void Comm_Bridge_BT_Read(uint8* Command);
 void Comm_Bridge_BT_Send(uint8 Response);
-void Comm_Bridge_BT_SendStream(uint8* data_stream)
+void Comm_Bridge_BT_SendStream(uint8* data_stream);
 
 uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
 void Comm_Bridge_CMD_Read_Req(uint8* Request_Command);

@@ -8,8 +8,19 @@
 #ifndef SMART_HOME_H_
 #define SMART_HOME_H_
 
+#define CONTROL_ECU		0xAA
+#define ACTUATOR_ECU	0xBB
+
+#define ECU_ROLE	CONTROL_ECU
+
 #include "Comm_Bridge.h"
+#if ECU_ROLE == ACTUATOR_ECU
 #include "Devices.h"
+#endif /* ECU_ROLE */
+
+
+
+
 
 
 #endif /* SMART_HOME_H_ */

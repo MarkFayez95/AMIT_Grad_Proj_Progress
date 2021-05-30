@@ -93,8 +93,8 @@ void Comm_Bridge_BT_Read(uint8* Command)
         LCD_WriteString('Pending Input');
         _delay_ms(20);
 
-        Bluetooth_Mod_Seq_Rx(Command);
-        #if PUID_DB == CREATED
+        Bluetooth_Mod_Seq_Rx(&Command);
+        #ifdef PUID_DB_H_
             Check_Valid_PUID = PUID_DB_Search(Command[0]);
         #else
             if(Command[0] == VALID_PUID)
@@ -113,8 +113,10 @@ void Comm_Bridge_BT_Read(uint8* Command)
 
     // Shift the received frame to delete the PUID from it.
     Command[0] = Command[1];
-    Command[1] = Command[2];
-
+#if COMMAND_BYTE_LENGTH == 2
+	Command[1] = Command[2];
+#endif /* COMMAND_BYTE_LENGTH */
+    
     LCD_Clear();
     LCD_WriteString('Valid PUID');
     LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
@@ -303,8 +305,8 @@ void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
         {
             LCD_Clear();
             LCD_WriteString('Control Bus');
-            LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-            LCD_WriteString('Oper. Selected');
+            LCD_GoToLocation(LCD_ROW_2,3*LCD_SHIFT_CURSOR);
+            LCD_WriteString('Op Selected');
             _delay_ms(10);
         }
     }

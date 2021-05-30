@@ -8,13 +8,6 @@
 #ifndef COMM_BRIDGE_H_
 #define COMM_BRIDGE_H_
 
-#define CREATED       (1)
-#define NOT_CREATED   (0)
-
-#ifndef PUID_DB
-    #define PUID_DB     NOT_CREATED
-#endif /* PUID_DB */
-
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
 #include "LCD.h"
@@ -34,7 +27,7 @@
 
 typedef enum 
 {
-    SEND_FAILED=16,
+    SEND_FAILED=(PEER_UNAVAILABLE+1),
     REQ_DONE,
     NACK_REASON_REQ,
     INV_DEV_SEL,

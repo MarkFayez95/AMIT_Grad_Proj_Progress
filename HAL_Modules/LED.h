@@ -25,9 +25,7 @@
 #define LED2_PORT 	DIO_PORTD
 #define LED2_PIN	DIO_PIN_3
 
-//#define CALLBACK_INT_ENABLE	1
-
-#ifdef CALLBACK_INT_ENABLE
+#ifdef LEDS_VOID_INPUT_FUNCTIONS
 	void LED0_Init(void);
 	void LED1_Init(void);
 	void LED2_Init(void);

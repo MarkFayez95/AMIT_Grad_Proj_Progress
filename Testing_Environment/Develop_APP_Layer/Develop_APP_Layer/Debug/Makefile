@@ -37,20 +37,20 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../../../../APP_Modules/Comm_Bridge.c \
-../../../../APP_Modules/Devices.c \
-../../../../APP_Modules/Devices_CFG.c \
-../../../../APP_Modules/Smart_Home.c \
-../../../../HAL_Drivers/Bluetooth_Mod.c \
-../../../../HAL_Drivers/CMD_Bus.c \
-../../../../HAL_Drivers/EEPROM.c \
-../../../../HAL_Drivers/LCD.c \
-../../../../HAL_Drivers/LED.c \
-../../../../MCAL_Drivers/DIO.c \
-../../../../MCAL_Drivers/I2C.c \
-../../../../MCAL_Drivers/SPI.c \
-../../../../MCAL_Drivers/UART.c \
-../main.c
+../Bluetooth_Mod.c \
+../CMD_Bus.c \
+../Comm_Bridge.c \
+../Devices.c \
+../Devices_CFG.c \
+../DIO.c \
+../EEPROM.c \
+../I2C.c \
+../LCD.c \
+../LED.c \
+../main.c \
+../Smart_Home.c \
+../SPI.c \
+../UART.c
 
 
 PREPROCESSING_SRCS += 
@@ -60,68 +60,68 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Bluetooth_Mod.o \
+CMD_Bus.o \
 Comm_Bridge.o \
 Devices.o \
 Devices_CFG.o \
-Smart_Home.o \
-Bluetooth_Mod.o \
-CMD_Bus.o \
+DIO.o \
 EEPROM.o \
+I2C.o \
 LCD.o \
 LED.o \
-DIO.o \
-I2C.o \
+main.o \
+Smart_Home.o \
 SPI.o \
-UART.o \
-main.o
+UART.o
 
 OBJS_AS_ARGS +=  \
+Bluetooth_Mod.o \
+CMD_Bus.o \
 Comm_Bridge.o \
 Devices.o \
 Devices_CFG.o \
-Smart_Home.o \
-Bluetooth_Mod.o \
-CMD_Bus.o \
+DIO.o \
 EEPROM.o \
+I2C.o \
 LCD.o \
 LED.o \
-DIO.o \
-I2C.o \
+main.o \
+Smart_Home.o \
 SPI.o \
-UART.o \
-main.o
+UART.o
 
 C_DEPS +=  \
+Bluetooth_Mod.d \
+CMD_Bus.d \
 Comm_Bridge.d \
 Devices.d \
 Devices_CFG.d \
-Smart_Home.d \
-Bluetooth_Mod.d \
-CMD_Bus.d \
+DIO.d \
 EEPROM.d \
+I2C.d \
 LCD.d \
 LED.d \
-DIO.d \
-I2C.d \
+main.d \
+Smart_Home.d \
 SPI.d \
-UART.d \
-main.d
+UART.d
 
 C_DEPS_AS_ARGS +=  \
+Bluetooth_Mod.d \
+CMD_Bus.d \
 Comm_Bridge.d \
 Devices.d \
 Devices_CFG.d \
-Smart_Home.d \
-Bluetooth_Mod.d \
-CMD_Bus.d \
+DIO.d \
 EEPROM.d \
+I2C.d \
 LCD.d \
 LED.d \
-DIO.d \
-I2C.d \
+main.d \
+Smart_Home.d \
 SPI.d \
-UART.d \
-main.d
+UART.d
 
 OUTPUT_FILE_PATH +=Develop_APP_Layer.elf
 
@@ -137,91 +137,70 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-./Comm_Bridge.o: ../../../../APP_Modules/Comm_Bridge.c
+./Bluetooth_Mod.o: .././Bluetooth_Mod.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./Devices.o: ../../../../APP_Modules/Devices.c
+./CMD_Bus.o: .././CMD_Bus.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./Devices_CFG.o: ../../../../APP_Modules/Devices_CFG.c
+./Comm_Bridge.o: .././Comm_Bridge.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./Smart_Home.o: ../../../../APP_Modules/Smart_Home.c
+./Devices.o: .././Devices.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./Bluetooth_Mod.o: ../../../../HAL_Drivers/Bluetooth_Mod.c
+./Devices_CFG.o: .././Devices_CFG.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./CMD_Bus.o: ../../../../HAL_Drivers/CMD_Bus.c
+./DIO.o: .././DIO.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./EEPROM.o: ../../../../HAL_Drivers/EEPROM.c
+./EEPROM.o: .././EEPROM.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./LCD.o: ../../../../HAL_Drivers/LCD.c
+./I2C.o: .././I2C.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./LED.o: ../../../../HAL_Drivers/LED.c
+./LCD.o: .././LCD.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-./DIO.o: ../../../../MCAL_Drivers/DIO.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./I2C.o: ../../../../MCAL_Drivers/I2C.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./SPI.o: ../../../../MCAL_Drivers/SPI.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./UART.o: ../../../../MCAL_Drivers/UART.c
+./LED.o: .././LED.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -229,6 +208,27 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./main.o: .././main.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./Smart_Home.o: .././Smart_Home.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./SPI.o: .././SPI.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./UART.o: .././UART.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -70,98 +70,100 @@
     #endif /* ECU_ROLE */
  }
 
-void Comm_Bridge_BT_Read(uint8* Command)
-{
-    uint8 Check_Valid_PUID = 0;
-    if(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
-    {
-        LCD_Clear();
-        LCD_WriteString('BT Peer');
-        LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-        LCD_WriteString('Not Connected');
-        _delay_ms(20);
+#if ECU_ROLE == CONTROL_ECU
+	void Comm_Bridge_BT_Read(uint8* Command)
+	{
+		uint8 Check_Valid_PUID = 0;
+		if(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
+		{
+			LCD_Clear();
+			LCD_WriteString('BT Peer');
+			LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
+			LCD_WriteString('Not Connected');
+			_delay_ms(20);
 
-        while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED);
-    }
-    else{}
+			while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED);
+		}
+		else{}
 
-    do 
-    {
-        LCD_Clear();
-        LCD_WriteString('BT Peer Paired');
-        LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-        LCD_WriteString('Pending Input');
-        _delay_ms(20);
+		do 
+		{
+			LCD_Clear();
+			LCD_WriteString('BT Peer Paired');
+			LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
+			LCD_WriteString('Pending Input');
+			_delay_ms(20);
 
-        Bluetooth_Mod_Seq_Rx(&Command);
-        #ifdef PUID_DB_H_
-            Check_Valid_PUID = PUID_DB_Search(Command[BT_PUID_BYTE]);
-        #else
-            if(Command[BT_PUID_BYTE] == VALID_PUID)
-            {
-                Check_Valid_PUID = VALID_ID;
-            }
-            else
-            {
-                Check_Valid_PUID = INVALID_ID;
-                LCD_Clear();
-                LCD_WriteString('Invalid PUID');
-                _delay_ms(20);
-            }
-        #endif /* PUID_DB */
-    } while(Check_Valid_PUID = INVALID_ID);
+			Bluetooth_Mod_Seq_Rx(&Command);
+			#ifdef PUID_DB_H_
+				Check_Valid_PUID = PUID_DB_Search(Command[BT_PUID_BYTE]);
+			#else
+				if(Command[BT_PUID_BYTE] == VALID_PUID)
+				{
+					Check_Valid_PUID = VALID_ID;
+				}
+				else
+				{
+					Check_Valid_PUID = INVALID_ID;
+					LCD_Clear();
+					LCD_WriteString('Invalid PUID');
+					_delay_ms(20);
+				}
+			#endif /* PUID_DB */
+		} while(Check_Valid_PUID = INVALID_ID);
 
-    // Shift the received frame to delete the PUID from it.
-    Command[BT_PUID_BYTE] = Command[BT_DATA_BYTE];
-#if COMMAND_BYTE_LENGTH == 2
-	Command[BT_DATA_BYTE] = Command[BT_DATA_BYTE_2];
-#endif /* COMMAND_BYTE_LENGTH */
+		// Shift the received frame to delete the PUID from it.
+		Command[BT_PUID_BYTE] = Command[BT_DATA_BYTE];
+	#if COMMAND_BYTE_LENGTH == 2
+		Command[BT_DATA_BYTE] = Command[BT_DATA_BYTE_2];
+	#endif /* COMMAND_BYTE_LENGTH */
     
-    LCD_Clear();
-    LCD_WriteString('Valid PUID');
-    LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
-    LCD_WriteString('Proceeding...');
-    _delay_ms(20);
-}
-void Comm_Bridge_BT_Send(uint8 Response)
-{
-    Bluetooth_Mod_Tx(Response);
-    if(Response == REQ_DONE)
-    {
-        Bluetooth_Mod_Seq_Tx('Request Done!');
+		LCD_Clear();
+		LCD_WriteString('Valid PUID');
+		LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
+		LCD_WriteString('Proceeding...');
+		_delay_ms(20);
+	}
+	void Comm_Bridge_BT_Send(uint8 Response)
+	{
+		Bluetooth_Mod_Tx(Response);
+		if(Response == REQ_DONE)
+		{
+			Bluetooth_Mod_Seq_Tx('Request Done!');
         
-        LCD_Clear();
-        LCD_WriteString('Send to BT Peer');
-        LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-        LCD_WriteString('Request Done!');
-        _delay_ms(10);
-    }
-    else if(Response == INV_DEV_SEL)
-    {
-        Bluetooth_Mod_Seq_Tx('Invalid Device Requested!');
+			LCD_Clear();
+			LCD_WriteString('Send to BT Peer');
+			LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
+			LCD_WriteString('Request Done!');
+			_delay_ms(10);
+		}
+		else if(Response == INV_DEV_SEL)
+		{
+			Bluetooth_Mod_Seq_Tx('Invalid Device Requested!');
         
-        LCD_Clear();
-        LCD_WriteString('Send to BT Peer');
-        LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-        LCD_WriteString('Invalid Device!');
-        _delay_ms(10);
-    }
-    else
-    {
-        Bluetooth_Mod_Seq_Tx('Invalid Operation Requested!');
+			LCD_Clear();
+			LCD_WriteString('Send to BT Peer');
+			LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
+			LCD_WriteString('Invalid Device!');
+			_delay_ms(10);
+		}
+		else
+		{
+			Bluetooth_Mod_Seq_Tx('Invalid Operation Requested!');
         
-        LCD_Clear();
-        LCD_WriteString('Send to BT Peer');
-        LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-        LCD_WriteString('Invalid Option!');
-        _delay_ms(10);
-    }
-}
-void Comm_Bridge_BT_SendStream(uint8* data_stream)
-{
-    Bluetooth_Mod_Tx(ECU_PUID);
-    Bluetooth_Mod_Seq_Tx(data_stream);
-}
+			LCD_Clear();
+			LCD_WriteString('Send to BT Peer');
+			LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
+			LCD_WriteString('Invalid Option!');
+			_delay_ms(10);
+		}
+	}
+	void Comm_Bridge_BT_SendStream(uint8* data_stream)
+	{
+		Bluetooth_Mod_Tx(ECU_PUID);
+		Bluetooth_Mod_Seq_Tx(data_stream);
+	}
+#endif	/* ECU_ROLE */
 
 uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
 {

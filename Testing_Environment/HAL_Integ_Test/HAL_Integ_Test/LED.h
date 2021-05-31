@@ -10,6 +10,7 @@
 #define LED_H_
 
 #include "DIO.h"
+#define LEDS_VOID_INPUT_FUNCTIONS	1
 
 #define LED0		0
 #define LED1		1
@@ -25,9 +26,7 @@
 #define LED2_PORT 	DIO_PORTD
 #define LED2_PIN	DIO_PIN_3
 
-//#define CALLBACK_INT_ENABLE	1
-
-#ifdef CALLBACK_INT_ENABLE
+#if LEDS_VOID_INPUT_FUNCTIONS == 1
 	void LED0_Init(void);
 	void LED1_Init(void);
 	void LED2_Init(void);

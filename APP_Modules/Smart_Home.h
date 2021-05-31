@@ -11,7 +11,7 @@
 #define CONTROL_ECU		0xAA
 #define ACTUATOR_ECU	0xBB
 
-#define ECU_ROLE	CONTROL_ECU
+#define ECU_ROLE	ACTUATOR_ECU
 
 #include "Comm_Bridge.h"
 #if ECU_ROLE == ACTUATOR_ECU

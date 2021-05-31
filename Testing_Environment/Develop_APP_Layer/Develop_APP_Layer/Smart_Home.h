@@ -16,7 +16,6 @@
 #include "Comm_Bridge.h"
 #if ECU_ROLE == ACTUATOR_ECU
 	#include "Devices.h"
-	#include "Devices_L_CFG.h"
 #endif /* ECU_ROLE */
 
 void Smart_Home_Init(void);

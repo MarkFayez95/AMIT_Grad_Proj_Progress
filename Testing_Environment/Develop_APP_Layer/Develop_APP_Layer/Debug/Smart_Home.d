@@ -8,8 +8,7 @@ Smart_Home.d Smart_Home.o: .././Smart_Home.c .././Smart_Home.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././LCD.h .././LCD_CFG.h .././Devices.h .././Devices_CFG.h \
- .././Devices_DTypes.h .././Devices_L_CFG.h .././LED.h
+ .././LCD.h .././LCD_CFG.h .././Devices.h .././Devices_CFG.h .././LED.h
 
 .././Smart_Home.h:
 
@@ -54,9 +53,5 @@ d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr
 .././Devices.h:
 
 .././Devices_CFG.h:
-
-.././Devices_DTypes.h:
-
-.././Devices_L_CFG.h:
 
 .././LED.h:

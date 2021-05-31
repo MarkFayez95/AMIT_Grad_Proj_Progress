@@ -10,6 +10,7 @@
 #define LED_H_
 
 #include "DIO.h"
+#define LEDS_VOID_INPUT_FUNCTIONS	1
 
 #define LED0		0
 #define LED1		1

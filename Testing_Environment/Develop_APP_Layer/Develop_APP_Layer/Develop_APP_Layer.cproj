@@ -20,10 +20,10 @@
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -156,28 +156,10 @@
     <Compile Include="Devices_CFG.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Devices_L_CFG.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Devices_L_CFG.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Devices_DTypes.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="DIO.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DIO.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM_CFG.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="I2C.c">

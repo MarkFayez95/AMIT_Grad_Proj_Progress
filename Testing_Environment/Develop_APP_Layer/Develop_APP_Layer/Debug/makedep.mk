@@ -10,7 +10,7 @@ Comm_Bridge.c
 
 Devices.c
 
-Devices_CFG.c
+Devices_L_CFG.c
 
 DIO.c
 

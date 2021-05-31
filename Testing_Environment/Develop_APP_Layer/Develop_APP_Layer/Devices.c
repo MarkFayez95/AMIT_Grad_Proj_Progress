@@ -5,16 +5,15 @@
  *  Author: Mark Fayez
  */ 
 
-#include "Devices.h"
 
-extern volatile DevicesDB Smart_Home_Devices;
+#include "Devices.h"
+#include "Devices_CFG.h"
+
+volatile DevicesDB Smart_Home_Devices;
 
 void Devices_Init(void)
 {
-	Devices_DB_Config();
-	
 	uint8 device_counter = 0;
-	uint8 Operation_counter = 0;
 	for(device_counter = 0; device_counter < NUM_OF_DEVICES; device_counter++)
 	{
 		Smart_Home_Devices.Device[device_counter].Init();

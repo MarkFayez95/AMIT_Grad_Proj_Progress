@@ -12,7 +12,7 @@
 #include "CMD_Bus.h"
 #include "LCD.h"
 
-#if PUID_DB == CREATED
+#ifdef PUID_DB_H_
     #include "PUID_DB.h"
 #else
     #define VALID_PUID    0xA8 // static pre-defined Pin User ID for security communicating with peer
@@ -25,9 +25,22 @@
     #define COMMAND_BYTE_LENGTH     1
 #endif /* COMMAND_BYTE_LENGTH */
 
+#define BT_PUID_BYTE	0
+
+#if COMMAND_BYTE_LENGTH == 1
+	#define REQ_DEV_SHIFT_MASK	4
+	#define REQ_OP_MASK			0x0F
+	#define BT_DATA_BYTE		1
+	#define CMD_DATA_BYTE		0
+#elif COMMAND_BYTE_LENGTH == 2
+	#define BT_DATA_BYTE_2		2
+	#define CMD_DATA_BYTE_1		0
+	#define CMD_DATA_BYTE_2		1
+#endif /* COMMAND_BYTE_LENGTH */
+
 typedef enum 
 {
-    SEND_FAILED=(PEER_UNAVAILABLE+1),
+    SEND_FAILED=NACK_RES,
     REQ_DONE,
     NACK_REASON_REQ,
     INV_DEV_SEL,

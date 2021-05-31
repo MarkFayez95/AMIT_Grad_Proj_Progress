@@ -5,14 +5,15 @@
  * Author : Mark Fayez
  */ 
 
-#include <avr/io.h>
+#include "Smart_Home.h"
 
 
 int main(void)
 {
-    /* Replace with your application code */
+	Smart_Home_Init();
     while (1) 
     {
+		Smart_Home_Run();
     }
 }
 

@@ -95,9 +95,9 @@ void Comm_Bridge_BT_Read(uint8* Command)
 
         Bluetooth_Mod_Seq_Rx(&Command);
         #ifdef PUID_DB_H_
-            Check_Valid_PUID = PUID_DB_Search(Command[0]);
+            Check_Valid_PUID = PUID_DB_Search(Command[BT_PUID_BYTE]);
         #else
-            if(Command[0] == VALID_PUID)
+            if(Command[BT_PUID_BYTE] == VALID_PUID)
             {
                 Check_Valid_PUID = VALID_ID;
             }
@@ -112,9 +112,9 @@ void Comm_Bridge_BT_Read(uint8* Command)
     } while(Check_Valid_PUID = INVALID_ID);
 
     // Shift the received frame to delete the PUID from it.
-    Command[0] = Command[1];
+    Command[BT_PUID_BYTE] = Command[BT_DATA_BYTE];
 #if COMMAND_BYTE_LENGTH == 2
-	Command[1] = Command[2];
+	Command[BT_DATA_BYTE] = Command[BT_DATA_BYTE_2];
 #endif /* COMMAND_BYTE_LENGTH */
     
     LCD_Clear();

@@ -15,11 +15,19 @@
 
 #include "Comm_Bridge.h"
 #if ECU_ROLE == ACTUATOR_ECU
-#include "Devices.h"
+	#include "Devices.h"
 #endif /* ECU_ROLE */
 
+void Smart_Home_Init(void);
+void Smart_Home_Run(void);
 
-
+#if ECU_ROLE == CONTROL_ECU
+static void Smart_Home_User_Selection(void);
+static void Smart_Home_Process_N_Respond(void);
+#elif ECU_ROLE == ACTUATOR_ECU
+static void Smart_Home_Read_N_Decode(void);
+static void Smart_Home_Process_N_Respond(void);
+#endif /* ECU_ROLE */
 
 
 

@@ -49,13 +49,15 @@ typedef enum
 
 typedef enum
 {
-	DEV_N_OP_VALID=1,
+	RESERVED_0,
+	DEV_N_OP_VALID,
+	RESERVED_1,
 	DEV_INVALID,
 	OP_INVALID
 } Dev_Ops_Check_Status;
 
 void Devices_Init(void);
-uint8 Dev_Op_Check_Valid(uint8* Command_Request);
+uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation);
 void Device_Apply_Request(uint8 Req_Device, uint8 Req_Operation);
 
 #endif /* DEVICES_H_ */

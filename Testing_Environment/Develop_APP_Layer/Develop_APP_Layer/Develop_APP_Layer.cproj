@@ -120,6 +120,138 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\APP_Modules\Comm_Bridge.c">
+      <SubType>compile</SubType>
+      <Link>Comm_Bridge.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Comm_Bridge.h">
+      <SubType>compile</SubType>
+      <Link>Comm_Bridge.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Devices.c">
+      <SubType>compile</SubType>
+      <Link>Devices.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Devices.h">
+      <SubType>compile</SubType>
+      <Link>Devices.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Devices_CFG.c">
+      <SubType>compile</SubType>
+      <Link>Devices_CFG.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Devices_CFG.h">
+      <SubType>compile</SubType>
+      <Link>Devices_CFG.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Smart_Home.c">
+      <SubType>compile</SubType>
+      <Link>Smart_Home.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\APP_Modules\Smart_Home.h">
+      <SubType>compile</SubType>
+      <Link>Smart_Home.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\Bluetooth_Mod.c">
+      <SubType>compile</SubType>
+      <Link>Bluetooth_Mod.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\Bluetooth_Mod.h">
+      <SubType>compile</SubType>
+      <Link>Bluetooth_Mod.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\Bluetooth_Mod_CFG.h">
+      <SubType>compile</SubType>
+      <Link>Bluetooth_Mod_CFG.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\CMD_Bus.c">
+      <SubType>compile</SubType>
+      <Link>CMD_Bus.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\CMD_Bus.h">
+      <SubType>compile</SubType>
+      <Link>CMD_Bus.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\CMD_Bus_CFG.h">
+      <SubType>compile</SubType>
+      <Link>CMD_Bus_CFG.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\EEPROM.c">
+      <SubType>compile</SubType>
+      <Link>EEPROM.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\EEPROM.h">
+      <SubType>compile</SubType>
+      <Link>EEPROM.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\EEPROM_CFG.h">
+      <SubType>compile</SubType>
+      <Link>EEPROM_CFG.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\LCD.c">
+      <SubType>compile</SubType>
+      <Link>LCD.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\LCD.h">
+      <SubType>compile</SubType>
+      <Link>LCD.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\LCD_CFG.h">
+      <SubType>compile</SubType>
+      <Link>LCD_CFG.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\LED.c">
+      <SubType>compile</SubType>
+      <Link>LED.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\HAL_Drivers\LED.h">
+      <SubType>compile</SubType>
+      <Link>LED.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\DIO.c">
+      <SubType>compile</SubType>
+      <Link>DIO.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\DIO.h">
+      <SubType>compile</SubType>
+      <Link>DIO.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\I2C.c">
+      <SubType>compile</SubType>
+      <Link>I2C.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\I2C.h">
+      <SubType>compile</SubType>
+      <Link>I2C.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\SPI.c">
+      <SubType>compile</SubType>
+      <Link>SPI.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\SPI.h">
+      <SubType>compile</SubType>
+      <Link>SPI.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\UART.c">
+      <SubType>compile</SubType>
+      <Link>UART.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\MCAL_Drivers\UART.h">
+      <SubType>compile</SubType>
+      <Link>UART.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\Required Libraries\Bit_math.h">
+      <SubType>compile</SubType>
+      <Link>Bit_math.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\Required Libraries\MCU.h">
+      <SubType>compile</SubType>
+      <Link>MCU.h</Link>
+    </Compile>
+    <Compile Include="..\..\..\Required Libraries\STD_DTypes.h">
+      <SubType>compile</SubType>
+      <Link>STD_DTypes.h</Link>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

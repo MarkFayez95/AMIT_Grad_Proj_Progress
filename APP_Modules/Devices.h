@@ -8,7 +8,7 @@
 #define DEVICES_H_
 
 
-#include "LCD.h"
+#include "Status_FollowUp.h"
 #include "Devices_CFG.h"
 
 #include "LED.h"

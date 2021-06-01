@@ -8,7 +8,7 @@
 #include "LED.h"
 
 
-#ifdef CALLBACK_INT_ENABLE
+#ifdef LEDS_VOID_INPUT_FUNCTIONS
 	void LED0_Init(void)
 	{
 		DIO_SetPinDir(LED0_PORT, LED0_PIN, DIO_PIN_OUTPUT);

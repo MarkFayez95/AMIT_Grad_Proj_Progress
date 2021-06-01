@@ -10,7 +10,7 @@
 
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
-#include "LCD.h"
+#include "Status_FollowUp.h"
 
 #ifdef PUID_DB_H_
     #include "PUID_DB.h"

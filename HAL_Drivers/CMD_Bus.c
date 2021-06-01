@@ -7,6 +7,13 @@
 
 #include "CMD_Bus.h"
 
+
+/*
+ * Description: CMD Bus Handshake between Master and Slave of SPI bus
+ * Inputs: None
+ * Outputs: ...
+ *
+ */
 uint8 CMD_Bus_HandShake(void)
 {
     uint8 Peer_ID;
@@ -15,33 +22,51 @@ uint8 CMD_Bus_HandShake(void)
         SPI_Master_InitTrans();
     #endif /* SPI_ROLE */
 
-    Peer_ID = SPI_Transiver(CMD_BUS_DEV_ID);
-
+    do{Peer_ID = SPI_Transiver(CMD_BUS_DEV_ID);}
+    while(Peer_ID == REQ_DROPPED);
+    
      #if SPI_ROLE == SPI_MASTER
         SPI_Master_TermTrans();
     #endif /* SPI_ROLE */
 
     if(Peer_ID == CMD_BUS_PEER_ID)
         return VALID_PEER;
-    else if(Peer_ID == REQ_DROPPED)
-        return REQ_DROPPED;
     else
         return INVALID_PEER;
 }
+
+/*
+ * Description: ...
+ * Inputs: ...
+ * Outputs: ...
+ * Author: Mark Fayez
+ */
 void CMD_Bus_Master_Init(void)
 {
     SPI_Master_Init();
 }
+
+/*
+ * Description: ...
+ * Inputs: ...
+ * Outputs: ...
+ * Author: Mark Fayez
+ */
 void CMD_Bus_Slave_Init(void)
 {
     SPI_Slave_Init();
 }
+
+/*
+ * Description: ...
+ * Inputs: ...
+ * Outputs: ...
+ * Author: Mark Fayez
+ */
 uint8 CMD_Bus_Write(uint8 Req_Command)
 {
     uint8 Response=0;
-    do {Response = CMD_Bus_HandShake();}
-    while(Response == REQ_DROPPED);
-
+    Response = CMD_Bus_HandShake();
 
     if(Response == INVALID_PEER)
         return PEER_UNAVAILABLE;
@@ -61,14 +86,16 @@ uint8 CMD_Bus_Write(uint8 Req_Command)
         return Response;
     }
 }
+
+/*
+ * Description: ...
+ * Inputs: ...
+ * Outputs: ...
+ * Author: Mark Fayez
+ */
 uint8 CMD_Bus_Read(uint8* Req_Command)
 {
-    uint8 Response=0;
-    do {Response = CMD_Bus_HandShake();}
-    while(Response == REQ_DROPPED);
-
-
-    if(Response == INVALID_PEER)
+    if(CMD_Bus_HandShake() == INVALID_PEER)
         return PEER_UNAVAILABLE;
     else 
     {
@@ -85,14 +112,16 @@ uint8 CMD_Bus_Read(uint8* Req_Command)
         return RECEIVED;
     }
 }
+
+/*
+ * Description: ...
+ * Inputs: ...
+ * Outputs: ...
+ * Author: Mark Fayez
+ */
 uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
 {
-    uint8 Response=0;
-    do {Response = CMD_Bus_HandShake();}
-    while(Response == REQ_DROPPED);
-
-
-    if(Response == INVALID_PEER)
+    if(CMD_Bus_HandShake() == INVALID_PEER)
         return PEER_UNAVAILABLE;
     else 
     {
@@ -113,12 +142,16 @@ uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
     }
 }
 
+/*
+ * Description: ...
+ * Inputs: ...
+ * Outputs: ...
+ * Author: Mark Fayez
+ */
 uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
 {
     uint8 Response=0;
-    do {Response = CMD_Bus_HandShake();}
-    while(Response == REQ_DROPPED);
-
+    Response = CMD_Bus_HandShake();
 
     if(Response == INVALID_PEER)
         return PEER_UNAVAILABLE;

@@ -19,7 +19,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00000fb7  00000000  00000000  00004225  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001603  00000000  00000000  000051dc  2**0
+  8 .debug_line   00001604  00000000  00000000  000051dc  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000548  00000000  00000000  000067e0  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -293,12 +293,12 @@ uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
  1ac:	08 95       	ret
 
 000001ae <Comm_Bridge_Init>:
-}
-void Comm_Bridge_BT_SendStream(uint8* data_stream)
-{
-    Bluetooth_Mod_Tx(ECU_PUID);
-    Bluetooth_Mod_Seq_Tx(data_stream);
-}
+	}
+	void Comm_Bridge_BT_SendStream(uint8* data_stream)
+	{
+		Bluetooth_Mod_Tx(ECU_PUID);
+		Bluetooth_Mod_Seq_Tx(data_stream);
+	}
  1ae:	0e 94 9e 00 	call	0x13c	; 0x13c <CMD_Bus_Master_Init>
  1b2:	0e 94 8a 00 	call	0x114	; 0x114 <CMD_Bus_HandShake>
  1b6:	82 30       	cpi	r24, 0x02	; 2
@@ -537,6 +537,7 @@ void Comm_Bridge_BT_SendStream(uint8* data_stream)
  3e2:	08 95       	ret
 
 000003e4 <Comm_Bridge_CMD_Req>:
+#endif	/* ECU_ROLE */
 
 uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
 {

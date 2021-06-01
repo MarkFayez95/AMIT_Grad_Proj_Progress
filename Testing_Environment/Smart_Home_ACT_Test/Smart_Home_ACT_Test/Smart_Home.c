@@ -6,9 +6,12 @@
  */
 
 #include "Smart_Home.h"
+
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
 
+
 #if ECU_ROLE == ACTUATOR_ECU
+	extern volatile DevicesDB Smart_Home_Devices;
 	uint8 Selected_Device = DEV_1;
 	uint8 Selected_Operation = OP_1;
 #endif /* ECU_ROLE */
@@ -43,6 +46,8 @@ void Smart_Home_Init(void)
 		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
 		LCD_WriteString('Starting...');
 		_delay_ms(10);
+		
+		Devices_DB_Config(&Smart_Home_Devices);
 		
 		Devices_Init();
 		

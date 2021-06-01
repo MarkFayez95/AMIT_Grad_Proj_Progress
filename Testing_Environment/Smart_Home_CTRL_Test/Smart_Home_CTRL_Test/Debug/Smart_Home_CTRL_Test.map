@@ -7,9 +7,9 @@ d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/av
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o (exit)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              Devices_CFG.o (__do_copy_data)
+                              Devices.o (__do_copy_data)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              Devices_CFG.o (__do_clear_bss)
+                              Devices.o (__do_clear_bss)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
                               LCD.o (__umulhisi3)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -19,7 +19,7 @@ Allocating common symbols
 Common symbol       size              file
 
 User_Selection      0x2               Smart_Home.o
-Smart_Home_Devices  0x1e              Devices_CFG.o
+Smart_Home_Devices  0x1e              Devices.o
 
 Discarded input sections
 
@@ -51,41 +51,26 @@ Discarded input sections
  .text          0x00000000        0x0 Devices.o
  .data          0x00000000        0x0 Devices.o
  .bss           0x00000000        0x0 Devices.o
+ .rodata        0x00000000       0x18 Devices.o
+ .text.Devices_DB_Config
+                0x00000000       0xd6 Devices.o
  .text.Devices_Init
-                0x00000000       0xa4 Devices.o
+                0x00000000       0xa0 Devices.o
  .text.Dev_Op_Check_Valid
                 0x00000000      0x106 Devices.o
  .text.Device_Apply_Request
                 0x00000000       0x8e Devices.o
- .debug_info    0x00000000      0x645 Devices.o
- .debug_abbrev  0x00000000      0x1b3 Devices.o
- .debug_loc     0x00000000      0x316 Devices.o
+ .debug_info    0x00000000      0x6de Devices.o
+ .debug_abbrev  0x00000000      0x1eb Devices.o
+ .debug_loc     0x00000000      0x3d7 Devices.o
  .debug_aranges
-                0x00000000       0x30 Devices.o
- .debug_ranges  0x00000000       0x20 Devices.o
- .debug_line    0x00000000      0x308 Devices.o
- .debug_str     0x00000000      0x3ac Devices.o
+                0x00000000       0x38 Devices.o
+ .debug_ranges  0x00000000       0x28 Devices.o
+ .debug_line    0x00000000      0x36c Devices.o
+ .debug_str     0x00000000      0x3ff Devices.o
  .comment       0x00000000       0x31 Devices.o
- .debug_frame   0x00000000       0x70 Devices.o
- .text          0x00000000        0x0 Devices_CFG.o
- .data          0x00000000        0x0 Devices_CFG.o
- .bss           0x00000000        0x0 Devices_CFG.o
- .text.Devices_DB_Config
-                0x00000000       0x90 Devices_CFG.o
- .data.Op_Fun_Ptr
-                0x00000000       0x18 Devices_CFG.o
- .data.Dev_Cod  0x00000000        0x1 Devices_CFG.o
- .debug_info    0x00000000      0x1c3 Devices_CFG.o
- .debug_abbrev  0x00000000       0xc5 Devices_CFG.o
- .debug_loc     0x00000000       0x60 Devices_CFG.o
- .debug_aranges
-                0x00000000       0x20 Devices_CFG.o
- .debug_ranges  0x00000000       0x10 Devices_CFG.o
- .debug_line    0x00000000       0xbb Devices_CFG.o
- .debug_str     0x00000000      0x27e Devices_CFG.o
- .comment       0x00000000       0x31 Devices_CFG.o
- .debug_frame   0x00000000       0x24 Devices_CFG.o
- COMMON         0x00000000       0x1e Devices_CFG.o
+ .debug_frame   0x00000000       0x9c Devices.o
+ COMMON         0x00000000       0x1e Devices.o
  .text          0x00000000        0x0 DIO.o
  .data          0x00000000        0x0 DIO.o
  .bss           0x00000000        0x0 DIO.o
@@ -103,29 +88,6 @@ Discarded input sections
                 0x00000000        0x8 DIO.o
  .text.DIO_SetPinPullup
                 0x00000000       0x18 DIO.o
- .text          0x00000000        0x0 EEPROM.o
- .data          0x00000000        0x0 EEPROM.o
- .bss           0x00000000        0x0 EEPROM.o
- .text.EEPROM_Init
-                0x00000000        0x6 EEPROM.o
- .text.EEPROM_Write_Byte
-                0x00000000       0x28 EEPROM.o
- .text.EEPROM_Write_Data
-                0x00000000       0x42 EEPROM.o
- .text.EEPROM_Read_Byte
-                0x00000000       0x2e EEPROM.o
- .text.EEPROM_Read_Data
-                0x00000000       0x62 EEPROM.o
- .debug_info    0x00000000      0x380 EEPROM.o
- .debug_abbrev  0x00000000       0xea EEPROM.o
- .debug_loc     0x00000000      0x311 EEPROM.o
- .debug_aranges
-                0x00000000       0x40 EEPROM.o
- .debug_ranges  0x00000000       0x30 EEPROM.o
- .debug_line    0x00000000      0x17e EEPROM.o
- .debug_str     0x00000000      0x2d0 EEPROM.o
- .comment       0x00000000       0x31 EEPROM.o
- .debug_frame   0x00000000       0xb0 EEPROM.o
  .text          0x00000000        0x0 I2C.o
  .data          0x00000000        0x0 I2C.o
  .bss           0x00000000        0x0 I2C.o
@@ -165,22 +127,43 @@ Discarded input sections
  .text          0x00000000        0x0 LED.o
  .data          0x00000000        0x0 LED.o
  .bss           0x00000000        0x0 LED.o
+ .text.LED0_Init
+                0x00000000        0xe LED.o
+ .text.LED1_Init
+                0x00000000        0xe LED.o
+ .text.LED2_Init
+                0x00000000        0xe LED.o
+ .text.LED0_ON  0x00000000        0xe LED.o
+ .text.LED1_ON  0x00000000        0xe LED.o
+ .text.LED2_ON  0x00000000        0xe LED.o
+ .text.LED0_OFF
+                0x00000000        0xe LED.o
+ .text.LED1_OFF
+                0x00000000        0xe LED.o
+ .text.LED2_OFF
+                0x00000000        0xe LED.o
+ .text.LED0_Toggle
+                0x00000000        0xc LED.o
+ .text.LED1_Toggle
+                0x00000000        0xc LED.o
+ .text.LED2_Toggle
+                0x00000000        0xc LED.o
  .text.LED_Init
                 0x00000000       0x60 LED.o
  .text.LED_ON   0x00000000       0x36 LED.o
  .text.LED_OFF  0x00000000       0x36 LED.o
  .text.LED_Toggle
                 0x00000000       0x30 LED.o
- .debug_info    0x00000000      0x36d LED.o
+ .debug_info    0x00000000      0x616 LED.o
  .debug_abbrev  0x00000000       0xbf LED.o
  .debug_loc     0x00000000      0x165 LED.o
  .debug_aranges
-                0x00000000       0x38 LED.o
- .debug_ranges  0x00000000       0x28 LED.o
- .debug_line    0x00000000      0x136 LED.o
- .debug_str     0x00000000      0x20e LED.o
+                0x00000000       0x98 LED.o
+ .debug_ranges  0x00000000       0x88 LED.o
+ .debug_line    0x00000000      0x23e LED.o
+ .debug_str     0x00000000      0x283 LED.o
  .comment       0x00000000       0x31 LED.o
- .debug_frame   0x00000000       0x54 LED.o
+ .debug_frame   0x00000000      0x114 LED.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -327,9 +310,7 @@ LOAD Bluetooth_Mod.o
 LOAD CMD_Bus.o
 LOAD Comm_Bridge.o
 LOAD Devices.o
-LOAD Devices_CFG.o
 LOAD DIO.o
-LOAD EEPROM.o
 LOAD I2C.o
 LOAD LCD.o
 LOAD LED.o
@@ -808,7 +789,7 @@ END GROUP
  .debug_abbrev  0x00000d2a      0x168 SPI.o
  .debug_abbrev  0x00000e92      0x125 UART.o
 
-.debug_line     0x00000000     0x1603
+.debug_line     0x00000000     0x1604
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x147 Bluetooth_Mod.o
@@ -817,9 +798,9 @@ END GROUP
  .debug_line    0x00000ae4      0x129 DIO.o
  .debug_line    0x00000c0d      0x37c LCD.o
  .debug_line    0x00000f89       0x59 main.o
- .debug_line    0x00000fe2      0x2c4 Smart_Home.o
- .debug_line    0x000012a6      0x224 SPI.o
- .debug_line    0x000014ca      0x139 UART.o
+ .debug_line    0x00000fe2      0x2c5 Smart_Home.o
+ .debug_line    0x000012a7      0x224 SPI.o
+ .debug_line    0x000014cb      0x139 UART.o
 
 .debug_frame    0x00000000      0x548
  *(.debug_frame)

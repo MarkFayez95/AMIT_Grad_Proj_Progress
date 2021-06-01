@@ -30,15 +30,15 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.49.1" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.49.1" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -153,9 +153,6 @@
     <Compile Include="Devices.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Devices_CFG.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Devices_CFG.h">
       <SubType>compile</SubType>
     </Compile>
@@ -163,15 +160,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DIO.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM_CFG.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="I2C.c">

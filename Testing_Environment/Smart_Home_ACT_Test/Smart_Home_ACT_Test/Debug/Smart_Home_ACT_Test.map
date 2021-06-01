@@ -7,9 +7,9 @@ d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/av
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o (exit)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                              Devices_CFG.o (__do_copy_data)
+                              Devices.o (__do_copy_data)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              Devices_CFG.o (__do_clear_bss)
+                              Devices.o (__do_clear_bss)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
                               LCD.o (__umulhisi3)
 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -19,7 +19,7 @@ Allocating common symbols
 Common symbol       size              file
 
 User_Selection      0x2               Smart_Home.o
-Smart_Home_Devices  0x1e              Devices_CFG.o
+Smart_Home_Devices  0x1e              Devices.o
 
 Discarded input sections
 
@@ -57,9 +57,6 @@ Discarded input sections
  .text          0x00000000        0x0 Devices.o
  .data          0x00000000        0x0 Devices.o
  .bss           0x00000000        0x0 Devices.o
- .text          0x00000000        0x0 Devices_CFG.o
- .data          0x00000000        0x0 Devices_CFG.o
- .bss           0x00000000        0x0 Devices_CFG.o
  .text          0x00000000        0x0 DIO.o
  .data          0x00000000        0x0 DIO.o
  .bss           0x00000000        0x0 DIO.o
@@ -71,35 +68,10 @@ Discarded input sections
                 0x00000000        0xa DIO.o
  .text.DIO_TogglePort
                 0x00000000        0xa DIO.o
- .text.DIO_TogglePin
-                0x00000000       0x18 DIO.o
  .text.DIO_SetPortPullup
                 0x00000000        0x8 DIO.o
  .text.DIO_SetPinPullup
                 0x00000000       0x18 DIO.o
- .text          0x00000000        0x0 EEPROM.o
- .data          0x00000000        0x0 EEPROM.o
- .bss           0x00000000        0x0 EEPROM.o
- .text.EEPROM_Init
-                0x00000000        0x6 EEPROM.o
- .text.EEPROM_Write_Byte
-                0x00000000       0x28 EEPROM.o
- .text.EEPROM_Write_Data
-                0x00000000       0x42 EEPROM.o
- .text.EEPROM_Read_Byte
-                0x00000000       0x2e EEPROM.o
- .text.EEPROM_Read_Data
-                0x00000000       0x62 EEPROM.o
- .debug_info    0x00000000      0x380 EEPROM.o
- .debug_abbrev  0x00000000       0xea EEPROM.o
- .debug_loc     0x00000000      0x311 EEPROM.o
- .debug_aranges
-                0x00000000       0x40 EEPROM.o
- .debug_ranges  0x00000000       0x30 EEPROM.o
- .debug_line    0x00000000      0x17e EEPROM.o
- .debug_str     0x00000000      0x2ce EEPROM.o
- .comment       0x00000000       0x31 EEPROM.o
- .debug_frame   0x00000000       0xb0 EEPROM.o
  .text          0x00000000        0x0 I2C.o
  .data          0x00000000        0x0 I2C.o
  .bss           0x00000000        0x0 I2C.o
@@ -143,16 +115,6 @@ Discarded input sections
  .text.LED_OFF  0x00000000       0x36 LED.o
  .text.LED_Toggle
                 0x00000000       0x30 LED.o
- .debug_info    0x00000000      0x36d LED.o
- .debug_abbrev  0x00000000       0xbf LED.o
- .debug_loc     0x00000000      0x165 LED.o
- .debug_aranges
-                0x00000000       0x38 LED.o
- .debug_ranges  0x00000000       0x28 LED.o
- .debug_line    0x00000000      0x136 LED.o
- .debug_str     0x00000000      0x20c LED.o
- .comment       0x00000000       0x31 LED.o
- .debug_frame   0x00000000       0x54 LED.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -297,9 +259,7 @@ LOAD Bluetooth_Mod.o
 LOAD CMD_Bus.o
 LOAD Comm_Bridge.o
 LOAD Devices.o
-LOAD Devices_CFG.o
 LOAD DIO.o
-LOAD EEPROM.o
 LOAD I2C.o
 LOAD LCD.o
 LOAD LED.o
@@ -416,7 +376,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xce8
+.text           0x00000000      0xdec
  *(.vectors)
  .vectors       0x00000000       0x54 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -528,92 +488,128 @@ END GROUP
  .text.Comm_Bridge_CMD_Res
                 0x000002e4      0x100 Comm_Bridge.o
                 0x000002e4                Comm_Bridge_CMD_Res
- .text.Devices_Init
-                0x000003e4       0xa4 Devices.o
-                0x000003e4                Devices_Init
- .text.Dev_Op_Check_Valid
-                0x00000488      0x106 Devices.o
-                0x00000488                Dev_Op_Check_Valid
- .text.Device_Apply_Request
-                0x0000058e       0x8e Devices.o
-                0x0000058e                Device_Apply_Request
  .text.Devices_DB_Config
-                0x0000061c       0x90 Devices_CFG.o
-                0x0000061c                Devices_DB_Config
+                0x000003e4       0xd6 Devices.o
+                0x000003e4                Devices_DB_Config
+ .text.Devices_Init
+                0x000004ba       0xa0 Devices.o
+                0x000004ba                Devices_Init
+ .text.Dev_Op_Check_Valid
+                0x0000055a      0x106 Devices.o
+                0x0000055a                Dev_Op_Check_Valid
+ .text.Device_Apply_Request
+                0x00000660       0x8e Devices.o
+                0x00000660                Device_Apply_Request
  .text.DIO_SetPinDir
-                0x000006ac       0x38 DIO.o
-                0x000006ac                DIO_SetPinDir
+                0x000006ee       0x38 DIO.o
+                0x000006ee                DIO_SetPinDir
  .text.DIO_SetPinValue
-                0x000006e4       0x38 DIO.o
-                0x000006e4                DIO_SetPinValue
+                0x00000726       0x38 DIO.o
+                0x00000726                DIO_SetPinValue
  .text.DIO_ReadPinValue
-                0x0000071c       0x18 DIO.o
-                0x0000071c                DIO_ReadPinValue
+                0x0000075e       0x18 DIO.o
+                0x0000075e                DIO_ReadPinValue
+ .text.DIO_TogglePin
+                0x00000776       0x18 DIO.o
+                0x00000776                DIO_TogglePin
  .text.LCD_WriteCommand
-                0x00000734       0x9c LCD.o
-                0x00000734                LCD_WriteCommand
+                0x0000078e       0x9c LCD.o
+                0x0000078e                LCD_WriteCommand
  .text.LCD_Init
-                0x000007d0       0x92 LCD.o
-                0x000007d0                LCD_Init
+                0x0000082a       0x92 LCD.o
+                0x0000082a                LCD_Init
  .text.LCD_WriteChar
-                0x00000862       0x9c LCD.o
-                0x00000862                LCD_WriteChar
+                0x000008bc       0x9c LCD.o
+                0x000008bc                LCD_WriteChar
  .text.LCD_WriteInteger
-                0x000008fe       0xf4 LCD.o
-                0x000008fe                LCD_WriteInteger
+                0x00000958       0xf4 LCD.o
+                0x00000958                LCD_WriteInteger
  .text.LCD_WriteString
-                0x000009f2       0x26 LCD.o
-                0x000009f2                LCD_WriteString
+                0x00000a4c       0x26 LCD.o
+                0x00000a4c                LCD_WriteString
  .text.LCD_GoToLocation
-                0x00000a18       0x30 LCD.o
-                0x00000a18                LCD_GoToLocation
+                0x00000a72       0x30 LCD.o
+                0x00000a72                LCD_GoToLocation
  .text.LCD_Clear
-                0x00000a48        0x8 LCD.o
-                0x00000a48                LCD_Clear
- .text.main     0x00000a50        0xa main.o
-                0x00000a50                main
+                0x00000aa2        0x8 LCD.o
+                0x00000aa2                LCD_Clear
+ .text.LED0_Init
+                0x00000aaa        0xe LED.o
+                0x00000aaa                LED0_Init
+ .text.LED1_Init
+                0x00000ab8        0xe LED.o
+                0x00000ab8                LED1_Init
+ .text.LED2_Init
+                0x00000ac6        0xe LED.o
+                0x00000ac6                LED2_Init
+ .text.LED0_ON  0x00000ad4        0xe LED.o
+                0x00000ad4                LED0_ON
+ .text.LED1_ON  0x00000ae2        0xe LED.o
+                0x00000ae2                LED1_ON
+ .text.LED2_ON  0x00000af0        0xe LED.o
+                0x00000af0                LED2_ON
+ .text.LED0_OFF
+                0x00000afe        0xe LED.o
+                0x00000afe                LED0_OFF
+ .text.LED1_OFF
+                0x00000b0c        0xe LED.o
+                0x00000b0c                LED1_OFF
+ .text.LED2_OFF
+                0x00000b1a        0xe LED.o
+                0x00000b1a                LED2_OFF
+ .text.LED0_Toggle
+                0x00000b28        0xc LED.o
+                0x00000b28                LED0_Toggle
+ .text.LED1_Toggle
+                0x00000b34        0xc LED.o
+                0x00000b34                LED1_Toggle
+ .text.LED2_Toggle
+                0x00000b40        0xc LED.o
+                0x00000b40                LED2_Toggle
+ .text.main     0x00000b4c        0xa main.o
+                0x00000b4c                main
  .text.Smart_Home_Read_N_Decode
-                0x00000a5a       0x1e Smart_Home.o
+                0x00000b56       0x1e Smart_Home.o
  .text.Smart_Home_Process_N_Respond
-                0x00000a78       0x70 Smart_Home.o
+                0x00000b74       0x70 Smart_Home.o
  .text.Smart_Home_Init
-                0x00000ae8       0x7e Smart_Home.o
-                0x00000ae8                Smart_Home_Init
+                0x00000be4       0x86 Smart_Home.o
+                0x00000be4                Smart_Home_Init
  .text.Smart_Home_Run
-                0x00000b66        0xa Smart_Home.o
-                0x00000b66                Smart_Home_Run
+                0x00000c6a        0xa Smart_Home.o
+                0x00000c6a                Smart_Home_Run
  .text.SPI_Master_Init
-                0x00000b70       0x62 SPI.o
-                0x00000b70                SPI_Master_Init
+                0x00000c74       0x62 SPI.o
+                0x00000c74                SPI_Master_Init
  .text.SPI_Master_InitTrans
-                0x00000bd2       0x20 SPI.o
-                0x00000bd2                SPI_Master_InitTrans
+                0x00000cd6       0x20 SPI.o
+                0x00000cd6                SPI_Master_InitTrans
  .text.SPI_Master_TermTrans
-                0x00000bf2        0xe SPI.o
-                0x00000bf2                SPI_Master_TermTrans
+                0x00000cf6        0xe SPI.o
+                0x00000cf6                SPI_Master_TermTrans
  .text.SPI_Transiver
-                0x00000c00       0x1a SPI.o
-                0x00000c00                SPI_Transiver
+                0x00000d04       0x1a SPI.o
+                0x00000d04                SPI_Transiver
  .text.UART_Init
-                0x00000c1a       0x2a UART.o
-                0x00000c1a                UART_Init
+                0x00000d1e       0x2a UART.o
+                0x00000d1e                UART_Init
  .text.libgcc.div
-                0x00000c44       0x2e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                0x00000c44                __divmodsi4
+                0x00000d48       0x2e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000d48                __divmodsi4
  .text.libgcc.div
-                0x00000c72       0x10 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
-                0x00000c72                __negsi2
+                0x00000d76       0x10 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
+                0x00000d76                __negsi2
  .text.libgcc.mul
-                0x00000c82       0x1e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000c82                __umulhisi3
+                0x00000d86       0x1e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00000d86                __umulhisi3
  .text.libgcc.div
-                0x00000ca0       0x44 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000ca0                __udivmodsi4
-                0x00000ce4                . = ALIGN (0x2)
+                0x00000da4       0x44 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000da4                __udivmodsi4
+                0x00000de8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000ce4        0x0 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000ce4                _exit
-                0x00000ce4                exit
+ .fini9         0x00000de8        0x0 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000de8                _exit
+                0x00000de8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -632,52 +628,47 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000ce4        0x4 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000de8        0x4 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000ce8                _etext = .
+                0x00000dec                _etext = .
 
-.data           0x00800060       0x1a load address 0x00000ce8
+.data           0x00800060       0x18 load address 0x00000dec
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.Op_Fun_Ptr
-                0x00800060       0x18 Devices_CFG.o
-                0x00800060                Op_Fun_Ptr
- .data.Dev_Cod  0x00800078        0x1 Devices_CFG.o
-                0x00800078                Dev_Cod
  *(.gnu.linkonce.d*)
  *(.rodata)
+ .rodata        0x00800060       0x18 Devices.o
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x0080007a                . = ALIGN (0x2)
- *fill*         0x00800079        0x1 
-                0x0080007a                _edata = .
-                0x0080007a                PROVIDE (__data_end, .)
+                0x00800078                . = ALIGN (0x2)
+                0x00800078                _edata = .
+                0x00800078                PROVIDE (__data_end, .)
 
-.bss            0x0080007a       0x22
-                0x0080007a                PROVIDE (__bss_start, .)
+.bss            0x00800078       0x22
+                0x00800078                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.Selected_Operation
-                0x0080007a        0x1 Smart_Home.o
-                0x0080007a                Selected_Operation
+                0x00800078        0x1 Smart_Home.o
+                0x00800078                Selected_Operation
  .bss.Selected_Device
-                0x0080007b        0x1 Smart_Home.o
-                0x0080007b                Selected_Device
+                0x00800079        0x1 Smart_Home.o
+                0x00800079                Selected_Device
  *(COMMON)
- COMMON         0x0080007c       0x1e Devices_CFG.o
-                0x0080007c                Smart_Home_Devices
- COMMON         0x0080009a        0x2 Smart_Home.o
-                0x0080009a                User_Selection
-                0x0080009c                PROVIDE (__bss_end, .)
-                0x00000ce8                __data_load_start = LOADADDR (.data)
-                0x00000d02                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080007a       0x1e Devices.o
+                0x0080007a                Smart_Home_Devices
+ COMMON         0x00800098        0x2 Smart_Home.o
+                0x00800098                User_Selection
+                0x0080009a                PROVIDE (__bss_end, .)
+                0x00000dec                __data_load_start = LOADADDR (.data)
+                0x00000e04                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080009c        0x0
+.noinit         0x0080009a        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080009c                _end = .
+                0x0080009a                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -724,9 +715,9 @@ END GROUP
  .comment       0x00000030       0x31 CMD_Bus.o
  .comment       0x00000030       0x31 Comm_Bridge.o
  .comment       0x00000030       0x31 Devices.o
- .comment       0x00000030       0x31 Devices_CFG.o
  .comment       0x00000030       0x31 DIO.o
  .comment       0x00000030       0x31 LCD.o
+ .comment       0x00000030       0x31 LED.o
  .comment       0x00000030       0x31 main.o
  .comment       0x00000030       0x31 Smart_Home.o
  .comment       0x00000030       0x31 SPI.o
@@ -752,7 +743,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2c8
+.debug_aranges  0x00000000      0x348
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x48 Bluetooth_Mod.o
@@ -761,85 +752,85 @@ END GROUP
  .debug_aranges
                 0x00000098       0x50 Comm_Bridge.o
  .debug_aranges
-                0x000000e8       0x30 Devices.o
+                0x000000e8       0x38 Devices.o
  .debug_aranges
-                0x00000118       0x20 Devices_CFG.o
+                0x00000120       0x68 DIO.o
  .debug_aranges
-                0x00000138       0x68 DIO.o
+                0x00000188       0x50 LCD.o
  .debug_aranges
-                0x000001a0       0x50 LCD.o
+                0x000001d8       0x98 LED.o
  .debug_aranges
-                0x000001f0       0x20 main.o
+                0x00000270       0x20 main.o
  .debug_aranges
-                0x00000210       0x38 Smart_Home.o
+                0x00000290       0x38 Smart_Home.o
  .debug_aranges
-                0x00000248       0x40 SPI.o
+                0x000002c8       0x40 SPI.o
  .debug_aranges
-                0x00000288       0x40 UART.o
+                0x00000308       0x40 UART.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3b1b
+.debug_info     0x00000000     0x40d1
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x2c3 Bluetooth_Mod.o
  .debug_info    0x000007a9      0x36f CMD_Bus.o
  .debug_info    0x00000b18     0x108e Comm_Bridge.o
- .debug_info    0x00001ba6      0x639 Devices.o
- .debug_info    0x000021df      0x1c3 Devices_CFG.o
- .debug_info    0x000023a2      0x310 DIO.o
- .debug_info    0x000026b2      0x805 LCD.o
- .debug_info    0x00002eb7       0xd1 main.o
- .debug_info    0x00002f88      0x59c Smart_Home.o
- .debug_info    0x00003524      0x406 SPI.o
- .debug_info    0x0000392a      0x1f1 UART.o
+ .debug_info    0x00001ba6      0x6de Devices.o
+ .debug_info    0x00002284      0x310 DIO.o
+ .debug_info    0x00002594      0x805 LCD.o
+ .debug_info    0x00002d99      0x616 LED.o
+ .debug_info    0x000033af       0xd1 main.o
+ .debug_info    0x00003480      0x65a Smart_Home.o
+ .debug_info    0x00003ada      0x406 SPI.o
+ .debug_info    0x00003ee0      0x1f1 UART.o
 
-.debug_abbrev   0x00000000     0x1220
+.debug_abbrev   0x00000000     0x12a5
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3      0x13f Bluetooth_Mod.o
  .debug_abbrev  0x000005e2       0xe4 CMD_Bus.o
  .debug_abbrev  0x000006c6      0x210 Comm_Bridge.o
- .debug_abbrev  0x000008d6      0x1a4 Devices.o
- .debug_abbrev  0x00000a7a       0xc5 Devices_CFG.o
- .debug_abbrev  0x00000b3f       0xd7 DIO.o
- .debug_abbrev  0x00000c16      0x19f LCD.o
- .debug_abbrev  0x00000db5       0x68 main.o
- .debug_abbrev  0x00000e1d      0x176 Smart_Home.o
- .debug_abbrev  0x00000f93      0x168 SPI.o
- .debug_abbrev  0x000010fb      0x125 UART.o
+ .debug_abbrev  0x000008d6      0x1eb Devices.o
+ .debug_abbrev  0x00000ac1       0xd7 DIO.o
+ .debug_abbrev  0x00000b98      0x19f LCD.o
+ .debug_abbrev  0x00000d37       0xbf LED.o
+ .debug_abbrev  0x00000df6       0x68 main.o
+ .debug_abbrev  0x00000e5e      0x1ba Smart_Home.o
+ .debug_abbrev  0x00001018      0x168 SPI.o
+ .debug_abbrev  0x00001180      0x125 UART.o
 
-.debug_line     0x00000000     0x1980
+.debug_line     0x00000000     0x1b6e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x147 Bluetooth_Mod.o
  .debug_line    0x0000025d      0x233 CMD_Bus.o
  .debug_line    0x00000490      0x654 Comm_Bridge.o
- .debug_line    0x00000ae4      0x308 Devices.o
- .debug_line    0x00000dec       0xbb Devices_CFG.o
- .debug_line    0x00000ea7      0x129 DIO.o
- .debug_line    0x00000fd0      0x37c LCD.o
- .debug_line    0x0000134c       0x59 main.o
- .debug_line    0x000013a5      0x27e Smart_Home.o
- .debug_line    0x00001623      0x224 SPI.o
- .debug_line    0x00001847      0x139 UART.o
+ .debug_line    0x00000ae4      0x36c Devices.o
+ .debug_line    0x00000e50      0x129 DIO.o
+ .debug_line    0x00000f79      0x37c LCD.o
+ .debug_line    0x000012f5      0x23e LED.o
+ .debug_line    0x00001533       0x59 main.o
+ .debug_line    0x0000158c      0x285 Smart_Home.o
+ .debug_line    0x00001811      0x224 SPI.o
+ .debug_line    0x00001a35      0x139 UART.o
 
-.debug_frame    0x00000000      0x5e4
+.debug_frame    0x00000000      0x700
  *(.debug_frame)
  .debug_frame   0x00000000       0xa4 Bluetooth_Mod.o
  .debug_frame   0x000000a4       0xbc CMD_Bus.o
  .debug_frame   0x00000160       0xe0 Comm_Bridge.o
- .debug_frame   0x00000240       0x70 Devices.o
- .debug_frame   0x000002b0       0x24 Devices_CFG.o
- .debug_frame   0x000002d4       0xb4 DIO.o
- .debug_frame   0x00000388       0xd8 LCD.o
- .debug_frame   0x00000460       0x24 main.o
- .debug_frame   0x00000484       0x64 Smart_Home.o
- .debug_frame   0x000004e8       0x6c SPI.o
- .debug_frame   0x00000554       0x90 UART.o
+ .debug_frame   0x00000240       0x9c Devices.o
+ .debug_frame   0x000002dc       0xb4 DIO.o
+ .debug_frame   0x00000390       0xd8 LCD.o
+ .debug_frame   0x00000468      0x114 LED.o
+ .debug_frame   0x0000057c       0x24 main.o
+ .debug_frame   0x000005a0       0x64 Smart_Home.o
+ .debug_frame   0x00000604       0x6c SPI.o
+ .debug_frame   0x00000670       0x90 UART.o
 
-.debug_str      0x00000000      0xb60
+.debug_str      0x00000000      0xc11
  *(.debug_str)
  .debug_str     0x00000000      0x196 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x2a6 Bluetooth_Mod.o
@@ -848,35 +839,35 @@ END GROUP
                                 0x381 (size before relaxing)
  .debug_str     0x000005f0      0x1a8 Comm_Bridge.o
                                 0x50f (size before relaxing)
- .debug_str     0x00000798      0x147 Devices.o
-                                0x398 (size before relaxing)
- .debug_str     0x000008df       0x57 Devices_CFG.o
-                                0x27c (size before relaxing)
- .debug_str     0x00000936       0x8d DIO.o
+ .debug_str     0x00000798      0x1ac Devices.o
+                                0x3fd (size before relaxing)
+ .debug_str     0x00000944       0x8d DIO.o
                                 0x269 (size before relaxing)
- .debug_str     0x000009c3       0x6e LCD.o
+ .debug_str     0x000009d1       0x6e LCD.o
                                 0x30a (size before relaxing)
- .debug_str     0x00000a31       0x30 main.o
+ .debug_str     0x00000a3f       0xa3 LED.o
+                                0x281 (size before relaxing)
+ .debug_str     0x00000ae2       0x30 main.o
                                 0x209 (size before relaxing)
- .debug_str     0x00000a61       0xbd Smart_Home.o
-                                0x4dc (size before relaxing)
- .debug_str     0x00000b1e       0x30 SPI.o
+ .debug_str     0x00000b12       0xbd Smart_Home.o
+                                0x545 (size before relaxing)
+ .debug_str     0x00000bcf       0x30 SPI.o
                                 0x2d2 (size before relaxing)
- .debug_str     0x00000b4e       0x12 UART.o
+ .debug_str     0x00000bff       0x12 UART.o
                                 0x213 (size before relaxing)
 
-.debug_loc      0x00000000     0x1a2a
+.debug_loc      0x00000000     0x1bf0
  *(.debug_loc)
  .debug_loc     0x00000000      0x160 Bluetooth_Mod.o
  .debug_loc     0x00000160      0x26f CMD_Bus.o
  .debug_loc     0x000003cf      0x8bf Comm_Bridge.o
- .debug_loc     0x00000c8e      0x316 Devices.o
- .debug_loc     0x00000fa4       0x60 Devices_CFG.o
- .debug_loc     0x00001004       0xf8 DIO.o
- .debug_loc     0x000010fc      0x549 LCD.o
- .debug_loc     0x00001645      0x168 Smart_Home.o
- .debug_loc     0x000017ad      0x114 SPI.o
- .debug_loc     0x000018c1      0x169 UART.o
+ .debug_loc     0x00000c8e      0x3d7 Devices.o
+ .debug_loc     0x00001065       0xf8 DIO.o
+ .debug_loc     0x0000115d      0x549 LCD.o
+ .debug_loc     0x000016a6      0x165 LED.o
+ .debug_loc     0x0000180b      0x168 Smart_Home.o
+ .debug_loc     0x00001973      0x114 SPI.o
+ .debug_loc     0x00001a87      0x169 UART.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -896,19 +887,19 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x218
+.debug_ranges   0x00000000      0x298
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x38 Bluetooth_Mod.o
  .debug_ranges  0x00000038       0x40 CMD_Bus.o
  .debug_ranges  0x00000078       0x40 Comm_Bridge.o
- .debug_ranges  0x000000b8       0x20 Devices.o
- .debug_ranges  0x000000d8       0x10 Devices_CFG.o
- .debug_ranges  0x000000e8       0x58 DIO.o
- .debug_ranges  0x00000140       0x40 LCD.o
- .debug_ranges  0x00000180       0x10 main.o
- .debug_ranges  0x00000190       0x28 Smart_Home.o
- .debug_ranges  0x000001b8       0x30 SPI.o
- .debug_ranges  0x000001e8       0x30 UART.o
+ .debug_ranges  0x000000b8       0x28 Devices.o
+ .debug_ranges  0x000000e0       0x58 DIO.o
+ .debug_ranges  0x00000138       0x40 LCD.o
+ .debug_ranges  0x00000178       0x88 LED.o
+ .debug_ranges  0x00000200       0x10 main.o
+ .debug_ranges  0x00000210       0x28 Smart_Home.o
+ .debug_ranges  0x00000238       0x30 SPI.o
+ .debug_ranges  0x00000268       0x30 UART.o
 
 .debug_macro
  *(.debug_macro)

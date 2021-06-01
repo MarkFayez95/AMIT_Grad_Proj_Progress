@@ -48,6 +48,7 @@ C_SRCS +=  \
 ../main.c \
 ../Smart_Home.c \
 ../SPI.c \
+../Status_FollowUp.c \
 ../UART.c
 
 
@@ -69,6 +70,7 @@ LED.o \
 main.o \
 Smart_Home.o \
 SPI.o \
+Status_FollowUp.o \
 UART.o
 
 OBJS_AS_ARGS +=  \
@@ -83,6 +85,7 @@ LED.o \
 main.o \
 Smart_Home.o \
 SPI.o \
+Status_FollowUp.o \
 UART.o
 
 C_DEPS +=  \
@@ -97,6 +100,7 @@ LED.d \
 main.d \
 Smart_Home.d \
 SPI.d \
+Status_FollowUp.d \
 UART.d
 
 C_DEPS_AS_ARGS +=  \
@@ -111,6 +115,7 @@ LED.d \
 main.d \
 Smart_Home.d \
 SPI.d \
+Status_FollowUp.d \
 UART.d
 
 OUTPUT_FILE_PATH +=Develop_APP_Layer.elf
@@ -198,6 +203,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./SPI.o: .././SPI.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./Status_FollowUp.o: .././Status_FollowUp.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "D:\Studies\AMIT Embedded Systems course\Tools\ATMEL Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

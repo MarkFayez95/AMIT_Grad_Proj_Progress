@@ -7,6 +7,7 @@
 
 
 #include "Devices.h"
+#include "Status_FollowUp.h"
 
 volatile DevicesDB Smart_Home_Devices;
 
@@ -55,12 +56,8 @@ void Devices_Init(void)
 		Smart_Home_Devices.Device[device_counter].Init();
 		Smart_Home_Devices.Device[device_counter].OpFn[OP_1]();
 		Smart_Home_Devices.Device[device_counter].Current_Operation = OP_1;
-		LCD_Clear();
-		LCD_WriteString('Device ');
-		LCD_WriteInteger(device_counter+1);
-		LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
-		LCD_WriteString('READY!');
-		_delay_ms(20);
+		
+		Status_Disp_LCD_IncludeInteger(LCD_ROW_TXT_DEVICE_,(device_counter + 1),LCD_ROW_TXT_READY);
 	}
 }
 uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
@@ -71,44 +68,28 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 		{
 			if((Req_Operation-OPER_CONST) == Smart_Home_Devices.Device[(Req_Device-DEV_CONST)].Current_Operation)
 			{
-				LCD_Clear();
-				LCD_WriteString('Op Selected');
-				LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-				LCD_WriteString('Already Running');
-				_delay_ms(20);
+				Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_ALREADY_RUNNING);
 				
 				return OP_INVALID;
 			}
 			else
 			{
-				LCD_Clear();
-				LCD_WriteString('Valid Select');
-				LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
-				LCD_WriteString('Proceeding...');
-				_delay_ms(20);
-				
+				Status_Disp_LCD(LCD_ROW_TXT_VALID_SELECTION,LCD_ROW_TXT_PROCEEDING);
+
 				return DEV_N_OP_VALID;
 			}
 		}
 		else
 		{
-			LCD_Clear();
-			LCD_WriteString('Op Selected');
-			LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-			LCD_WriteString('INVALID');
-			_delay_ms(20);
-			
+			Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_INVALID);
+
 			return OP_INVALID;
 		}
 	}
 	else
 	{
-		LCD_Clear();
-		LCD_WriteString('Device Selected');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('INVALID');
-		_delay_ms(20);
-		
+		Status_Disp_LCD(LCD_ROW_TXT_DEVICE_SELECTED,LCD_ROW_TXT_INVALID);
+
 		return DEV_INVALID;
 	}
 }
@@ -117,10 +98,6 @@ void Device_Apply_Request(uint8 Req_Device, uint8 Req_Operation)
 	Smart_Home_Devices.Device[Req_Device-DEV_CONST].OpFn[Req_Operation-OPER_CONST]();
 	Smart_Home_Devices.Device[Req_Device-DEV_CONST].Current_Operation = (Req_Operation-OPER_CONST);
 	
-	LCD_Clear();
-	LCD_WriteString('Device Op');
-	LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
-	LCD_WriteString('APPLIED!');
-	_delay_ms(20);
+	Status_Disp_LCD(LCD_ROW_TXT_DEVICE_OP,LCD_ROW_TXT_APPLIED);
 }
  

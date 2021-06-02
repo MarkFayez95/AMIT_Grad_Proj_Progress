@@ -47,7 +47,6 @@ LCD_Row_Text LCD_Row_Text_Options[LCD_ROW_TXT_NONE+1] =
     "APPLIED!",
     "Control System",
     "Actuator System",
-    "Ready.",
     "Selected",
     "Op Status:..",
     "Done!",

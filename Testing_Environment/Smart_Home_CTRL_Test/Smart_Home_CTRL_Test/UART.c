@@ -4,6 +4,7 @@
  * Created: 05/05/2021 5:08:24 PM
  *  Author: Mark Fayez
  */ 
+#include "Smart_Home_Sys_Config.h"
 #include "UART.h"
 
 

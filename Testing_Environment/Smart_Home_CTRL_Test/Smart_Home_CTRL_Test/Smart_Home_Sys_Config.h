@@ -30,6 +30,8 @@
         #define INVALID_ID    0x0C
     #endif /* PUID_DB_H_ */
 
+    #define BT_END_PACKET_CODE 0x0D
+
         // UART Driver Configurations //
         #define Baud_Rate_Hundred 384
         #define UART_Presc	16
@@ -49,8 +51,8 @@
         #define CMD_DATA_BYTE_2		1
     #endif /* COMMAND_BYTE_LENGTH */
 
-    #define CMD_FAILED_TRANS_REPEAT_DELAY_MS    15
-    #define CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS   50
+    #define CMD_FAILED_TRANS_REPEAT_DELAY_MS    30
+    #define CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS   2000
 
         // SPI Driver Configurations //
         #if ECU_ROLE == CONTROL_ECU

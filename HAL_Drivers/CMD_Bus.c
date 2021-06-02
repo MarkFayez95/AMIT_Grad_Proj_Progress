@@ -23,7 +23,11 @@ uint8 CMD_Bus_HandShake(void)
         SPI_Master_InitTrans();
     #endif /* SPI_ROLE */
 
-    do{Peer_ID = SPI_Transiver(CMD_BUS_DEV_ID);}
+    do
+    {
+        _delay_ms(CMD_FAILED_TRANS_REPEAT_DELAY_MS);
+        Peer_ID = SPI_Transiver(CMD_BUS_DEV_ID);
+    }
     while(Peer_ID == REQ_DROPPED);
     
      #if SPI_ROLE == SPI_MASTER

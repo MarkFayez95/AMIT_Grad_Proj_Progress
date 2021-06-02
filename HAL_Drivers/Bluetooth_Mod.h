@@ -7,7 +7,6 @@
 #ifndef BLUETOOTH_MOD_H_
 #define BLUETOOTH_MOD_H_
 
-#include "Bluetooth_Mod_CFG.h"
 #include "UART.h"
 #include "DIO.h"
 

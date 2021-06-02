@@ -52,7 +52,7 @@ void SPI_Master_TermTrans(void)
 uint8 SPI_Transiver(uint8 data)
 {
 	uint8 Received_Data = 0;
-	uint8 Trans_N_Started_counter = 1;
+	uint16 Trans_N_Started_counter = 1;
 	
 	#if SPI_ROLE == SPI_MASTER
 		// Clear SS Pin to start transmission
@@ -78,9 +78,7 @@ uint8 SPI_Transiver(uint8 data)
 			Received_Data = TRANS_FAILED;
 		else
 			Received_Data = SPI->SPDR;
-		
-		
-	#endif
+	#endif /* SPI_ROLE */
 	return Received_Data;
 }
 

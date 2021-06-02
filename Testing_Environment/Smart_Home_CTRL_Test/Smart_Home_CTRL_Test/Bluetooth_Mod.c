@@ -35,6 +35,14 @@ void Bluetooth_Mod_Seq_Tx(uint8* Data_Stream)
 }
 void Bluetooth_Mod_Seq_Rx(uint8* Data_Stream)
 {
+    uint8 Data_byte_counter = 0;
     while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED);
-    UART_RxString(Data_Stream);
+    
+    do
+    {
+        Data_Stream[Data_byte_counter] = UART_Rx();
+        Data_byte_counter++;
+    }
+    while(Data_Stream[Data_byte_counter-1] != BT_END_PACKET_CODE);
+    Data_Stream[Data_byte_counter-1] = 0x00;
 }

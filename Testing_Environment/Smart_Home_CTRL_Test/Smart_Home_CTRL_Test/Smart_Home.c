@@ -10,7 +10,7 @@
 #include "Smart_Home.h"
 #include "Status_FollowUp.h"
 
-uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
+uint8 User_Selection[COMMAND_BYTE_LENGTH+2];
 
 #if ECU_ROLE == ACTUATOR_ECU
 	uint8 Selected_Device = DEV_1;
@@ -71,7 +71,7 @@ static void Smart_Home_Read_N_Decode(void)
 			Selected_Device = User_Selection[CMD_DATA_BYTE] >> REQ_DEV_SHIFT_MASK;
 			Selected_Operation = (User_Selection[CMD_DATA_BYTE] & REQ_OP_MASK);
 		#elif COMMAND_BYTE_LENGTH == 2
-			Selected_Device = User_Selection[CMD_DATA_BYTE_1];
+			Selected_Device = User_Selection[CMD_DATA_BYTE];
 			Selected_Operation = User_Selection[CMD_DATA_BYTE_2];
 		#endif /* COMMAND_BYTE_LENGTH */
 	#endif /* ECU_ROLE */

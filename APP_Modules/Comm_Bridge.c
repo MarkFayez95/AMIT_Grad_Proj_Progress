@@ -64,7 +64,7 @@
 void Comm_Bridge_BT_Read(uint8* Command)
 {
 #if ECU_ROLE == CONTROL_ECU    
-    uint8 Check_Valid_PUID = 0;
+    uint8 Check_Valid_PUID = INVALID_ID;
     while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
     {
         // Status LCD Display 'BT Peer' 'Not Connected'
@@ -77,22 +77,23 @@ void Comm_Bridge_BT_Read(uint8* Command)
         Status_Disp_LCD(LCD_ROW_TXT_BT_PEER_PAIRED,LCD_ROW_TXT_PENDING_INPUT);
 
         Bluetooth_Mod_Seq_Rx(Command);
-        #ifdef PUID_DB_H_
-            Check_Valid_PUID = PUID_DB_Search(Command[BT_PUID_BYTE]);
-        #else
-            if(Command[BT_PUID_BYTE] == VALID_PUID)
-            {
-                Check_Valid_PUID = VALID_ID;
-            }
-            else
-            {
-                Check_Valid_PUID = INVALID_ID;
-                // Comm_Bridge_BT_Read :: Status LCD Display "Invalid PUID"
-                Status_Disp_LCD(LCD_ROW_TXT_INVALID_PUID,LCD_ROW_TXT_NONE);
-            }
-        #endif /* PUID_DB */
+
+        if(Command[BT_PUID_BYTE] == VALID_PUID)
+        {
+            Check_Valid_PUID = VALID_ID;
+            // Comm_Bridge_BT_Read :: Status LCD Display "Valid PUID" "Proceeding..."
+            Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_VALID_PUID);
+            break;
+        }
+        else
+        {
+            Check_Valid_PUID = INVALID_ID;
+            // Comm_Bridge_BT_Read :: Status LCD Display "Invalid PUID"
+            Status_Disp_LCD(LCD_ROW_TXT_INVALID_PUID,LCD_ROW_TXT_NONE);
+        }
+        
     } 
-    while(Check_Valid_PUID = INVALID_ID);
+    while(Check_Valid_PUID == INVALID_ID);
 
     // Shift the received frame to delete the PUID from it.
     Command[BT_PUID_BYTE] = Command[BT_DATA_BYTE];

@@ -11,9 +11,7 @@
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
 #if ECU_ROLE == ACTUATOR_ECU
 	extern volatile DevicesDB Smart_Home_Devices;
-#endif /* ECU_ROLE */
 
-#if ECU_ROLE == ACTUATOR_ECU
 	uint8 Selected_Device = DEV_1;
 	uint8 Selected_Operation = OP_1;
 #endif /* ECU_ROLE */
@@ -32,7 +30,6 @@ void Smart_Home_Init(void)
 		Status_Disp_LCD(LCD_ROW_TXT_CONTROL_SYSTEM,LCD_ROW_TXT_READY);
 		
 	#elif ECU_ROLE == ACTUATOR_ECU
-		
 		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_STARTING);
 

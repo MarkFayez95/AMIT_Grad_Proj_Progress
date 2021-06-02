@@ -8,7 +8,10 @@
 #ifndef COMM_BRIDGE_H_
 #define COMM_BRIDGE_H_
 
-#define COMM_BI_ROLE	ECU_ROLE
+#define CONTROL_ECU 0xAA
+#define ACTUATOR_ECU 0xAB
+
+#define COMM_BRI_ROLE	ACTUATOR_ECU
 
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"

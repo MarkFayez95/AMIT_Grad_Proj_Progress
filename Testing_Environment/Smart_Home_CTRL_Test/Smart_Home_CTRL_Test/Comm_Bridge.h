@@ -8,7 +8,7 @@
 #ifndef COMM_BRIDGE_H_
 #define COMM_BRIDGE_H_
 
-#define COMM_BI_ROLE	ECU_ROLE
+#define COMM_BRI_ROLE	ECU_ROLE
 
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"

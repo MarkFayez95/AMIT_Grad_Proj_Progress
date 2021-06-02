@@ -7,8 +7,7 @@ main.d main.o: .././main.c .././Smart_Home.h .././Comm_Bridge.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././Devices.h .././Devices_CFG.h .././LED.h
+ d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 .././Smart_Home.h:
 
@@ -43,9 +42,3 @@ d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr
 d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
-
-.././Devices.h:
-
-.././Devices_CFG.h:
-
-.././LED.h:

@@ -8,13 +8,10 @@
 #ifndef SMART_HOME_H_
 #define SMART_HOME_H_
 
-typedef enum {
-	CONTROL_ECU=0xAA,
-	ACTUATOR_ECU
-} Roles;
+#define CONTROL_ECU 0xAA
+#define ACTUATOR_ECU 0xAB
 
-
-#define ECU_ROLE	ACTUATOR_ECU
+#define ECU_ROLE	CONTROL_ECU
 
 #include "Comm_Bridge.h"
 #if ECU_ROLE == ACTUATOR_ECU

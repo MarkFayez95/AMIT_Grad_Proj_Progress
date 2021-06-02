@@ -10,7 +10,6 @@
 
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
-#include "LCD.h"
 
 #ifdef PUID_DB_H_
     #include "PUID_DB.h"
@@ -26,17 +25,20 @@
 #endif /* COMMAND_BYTE_LENGTH */
 
 #define BT_PUID_BYTE	0
+#define BT_DATA_BYTE	1
+
+#define CMD_DATA_BYTE	0
 
 #if COMMAND_BYTE_LENGTH == 1
 	#define REQ_DEV_SHIFT_MASK	4
 	#define REQ_OP_MASK			0x0F
-	#define BT_DATA_BYTE		1
-	#define CMD_DATA_BYTE		0
 #elif COMMAND_BYTE_LENGTH == 2
 	#define BT_DATA_BYTE_2		2
-	#define CMD_DATA_BYTE_1		0
 	#define CMD_DATA_BYTE_2		1
 #endif /* COMMAND_BYTE_LENGTH */
+
+#define CMD_FAILED_TRANS_REPEAT_DELAY_MS    15
+#define CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS   50
 
 typedef enum 
 {
@@ -44,7 +46,8 @@ typedef enum
     REQ_DONE,
     NACK_REASON_REQ,
     INV_DEV_SEL,
-    INV_OP_SEL
+    INV_OP_SEL,
+	OUT_OF_SYNC
 }Comm_Bridge_Extra_Porting_Codes;
 
 void Comm_Bridge_Init(void);

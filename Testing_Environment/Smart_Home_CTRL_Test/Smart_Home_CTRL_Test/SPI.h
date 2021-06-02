@@ -23,6 +23,9 @@
 #define SPI_MASTER  0xA0
 #define SPI_SLAVE   0xB0
 
+#define TRANS_FAILED    0
+#define MASTER_SS_SET_DELAY_MS    30
+
 #ifndef SPI_ROLE
     #define SPI_ROLE    SPI_MASTER
 #endif
@@ -41,6 +44,7 @@
     #define SPI_MOSI_PIN DIO_PIN_5
     #define SPI_MISO_PIN DIO_PIN_6
     #define SPI_CLK_PIN  DIO_PIN_7
+
 #endif
 
 void SPI_Master_Init(void);

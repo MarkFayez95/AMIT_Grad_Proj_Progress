@@ -7,8 +7,6 @@
 #ifndef DEVICES_H_
 #define DEVICES_H_
 
-
-#include "LCD.h"
 #include "Devices_CFG.h"
 
 #include "LED.h"

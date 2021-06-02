@@ -201,6 +201,12 @@
     <Compile Include="SPI.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Status_FollowUp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Status_FollowUp.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="STD_DTypes.h">
       <SubType>compile</SubType>
     </Compile>

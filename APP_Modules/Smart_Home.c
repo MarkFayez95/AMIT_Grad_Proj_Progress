@@ -9,7 +9,9 @@
 #include "Status_FollowUp.h"
 
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
-extern volatile DevicesDB Smart_Home_Devices;
+#if ECU_ROLE == ACTUATOR_ECU
+	extern volatile DevicesDB Smart_Home_Devices;
+#endif /* ECU_ROLE */
 
 #if ECU_ROLE == ACTUATOR_ECU
 	uint8 Selected_Device = DEV_1;

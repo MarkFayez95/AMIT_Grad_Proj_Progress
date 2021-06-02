@@ -6,12 +6,14 @@
  */
 
 #include "Smart_Home.h"
+#include "Status_FollowUp.h"
 
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
-
-
 #if ECU_ROLE == ACTUATOR_ECU
 	extern volatile DevicesDB Smart_Home_Devices;
+#endif /* ECU_ROLE */
+
+#if ECU_ROLE == ACTUATOR_ECU
 	uint8 Selected_Device = DEV_1;
 	uint8 Selected_Operation = OP_1;
 #endif /* ECU_ROLE */
@@ -23,42 +25,24 @@ void Smart_Home_Init(void)
 	
 	#if ECU_ROLE == CONTROL_ECU
 		
-		LCD_Clear();
-		LCD_WriteString('Control System');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Starting...');
-		_delay_ms(20);
+		Status_Disp_LCD(LCD_ROW_TXT_CONTROL_SYSTEM,LCD_ROW_TXT_STARTING);
 		
 		Comm_Bridge_Init();
-		
-		_delay_ms(20);
-		LCD_Clear();
-		LCD_WriteString('Control System');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Ready.');
-		_delay_ms(20);
+
+		Status_Disp_LCD(LCD_ROW_TXT_CONTROL_SYSTEM,LCD_ROW_TXT_READY);
 		
 	#elif ECU_ROLE == ACTUATOR_ECU
 		
-		LCD_Clear();
-		LCD_GoToLocation(LCD_ROW_1,3*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Actuator System');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Starting...');
-		_delay_ms(10);
 		
+		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_STARTING);
+
 		Devices_DB_Config(&Smart_Home_Devices);
 		
 		Devices_Init();
 		
 		Comm_Bridge_Init();
 		
-		_delay_ms(20);
-		LCD_Clear();
-		LCD_WriteString('Actuator System');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Ready.');
-		_delay_ms(20);
+		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_READY);
 		
 	#endif /* ECU_ROLE */
 }
@@ -77,13 +61,8 @@ void Smart_Home_Run(void)
 static void Smart_Home_User_Selection(void)
 {
 	Comm_Bridge_BT_Read(User_Selection);
-	
-	_delay_ms(20);
-	LCD_Clear();
-	LCD_WriteString('Dev and Op');
-	LCD_GoToLocation(LCD_ROW_2,4*LCD_SHIFT_CURSOR);
-	LCD_WriteString('Selected');
-	_delay_ms(20);
+
+	Status_Disp_LCD(LCD_ROW_TXT_DEV_OP_SELECTED,LCD_ROW_TXT_NONE);
 }
 static void Smart_Home_Process_N_Respond(void)
 {
@@ -93,27 +72,19 @@ static void Smart_Home_Process_N_Respond(void)
 	
 	if(Selection_Validity == REQ_DONE)
 	{
-		LCD_Clear();
-		LCD_WriteString('Op Status:..');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Done!');
-		_delay_ms(100);
+		Status_Disp_LCD(LCD_ROW_TXT_OP_STATUS,LCD_ROW_TXT_DONE);
 	}
 	else if(Selection_Validity == INV_DEV_SEL)
 	{
-		LCD_Clear();
-		LCD_WriteString('Selection ERROR!');
-		LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Invalid Device!');
-		_delay_ms(100);
+		Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_DEVICE);
+	}
+	else if(Selection_Validity == INV_OP_SEL)
+	{
+		Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_OPTION);
 	}
 	else
 	{
-		LCD_Clear();
-		LCD_WriteString('Selection ERROR!');
-		LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Invalid Option!');
-		_delay_ms(100);
+		Status_Disp_LCD(LCD_ROW_TXT_CTRL_ACT_SYSTEM,LCD_ROW_TXT_NOT_IN_SYNC);
 	}
 	
 	Comm_Bridge_BT_Send(Selection_Validity);
@@ -138,11 +109,7 @@ static void Smart_Home_Process_N_Respond(void)
 	{
 		Device_Apply_Request(Selected_Device,Selected_Operation);
 		
-		LCD_Clear();
-		LCD_WriteString('Request:...');
-		LCD_GoToLocation(LCD_ROW_2,5*LCD_SHIFT_CURSOR);
-		LCD_WriteString('Done!');
-		_delay_ms(100);
+		Status_Disp_LCD(LCD_ROW_TXT_REQUEST,LCD_ROW_TXT_DONE);
 	}
 	Selection_Validity += NACK_RES;
 	Comm_Bridge_CMD_Res(&Selection_Validity);

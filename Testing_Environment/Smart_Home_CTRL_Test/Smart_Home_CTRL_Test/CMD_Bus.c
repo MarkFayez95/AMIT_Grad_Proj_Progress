@@ -5,8 +5,8 @@
  *  Author: Mark Fayez
 **/ 
 
+#include "Smart_Home_Sys_Config.h"
 #include "CMD_Bus.h"
-
 
 /*
  * Description: CMD Bus Handshake between Master and Slave of SPI bus

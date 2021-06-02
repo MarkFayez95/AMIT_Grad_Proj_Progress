@@ -10,7 +10,11 @@ Comm_Bridge.c
 
 Devices.c
 
+Devices_LCFG.c
+
 DIO.c
+
+EEPROM.c
 
 I2C.c
 

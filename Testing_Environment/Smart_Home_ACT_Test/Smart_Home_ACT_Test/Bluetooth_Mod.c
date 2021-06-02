@@ -4,8 +4,8 @@
  * Created: 27/05/2021 08:40:30 PM
  *  Author: Mark Fayez
  */ 
-
- #include "Bluetooth_Mod.h"
+#include "Smart_Home_Sys_Config.h"
+#include "Bluetooth_Mod.h"
 
 void Bluetooth_Mod_Init(void)
 {

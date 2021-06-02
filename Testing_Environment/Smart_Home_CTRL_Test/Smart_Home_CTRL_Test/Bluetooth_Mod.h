@@ -9,6 +9,10 @@
 
 #include "Bluetooth_Mod_CFG.h"
 #include "UART.h"
+#include "DIO.h"
+
+#define BT_STAT_PIN_PORT    DIO_PORTD
+#define BT_STAT_PIN_PIN     DIO_PIN_7
 
 typedef enum {
     BT_NOT_PAIRED,

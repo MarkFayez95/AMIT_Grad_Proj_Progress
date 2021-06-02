@@ -8,42 +8,12 @@
 #ifndef COMM_BRIDGE_H_
 #define COMM_BRIDGE_H_
 
-#define CONTROL_ECU 0xAA
-#define ACTUATOR_ECU 0xAB
-
-#define COMM_BRI_ROLE	ACTUATOR_ECU
-
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
 
 #ifdef PUID_DB_H_
     #include "PUID_DB.h"
-#else
-    #define VALID_PUID    0xA8 // static pre-defined Pin User ID for security communicating with peer
-    #define ECU_PUID      0xAB
-    #define VALID_ID      0x0A
-    #define INVALID_ID    0x0C
 #endif /* PUID_DB_H_ */
-
-#ifndef COMMAND_BYTE_LENGTH
-    #define COMMAND_BYTE_LENGTH     1
-#endif /* COMMAND_BYTE_LENGTH */
-
-#define BT_PUID_BYTE	0
-#define BT_DATA_BYTE	1
-
-#define CMD_DATA_BYTE	0
-
-#if COMMAND_BYTE_LENGTH == 1
-	#define REQ_DEV_SHIFT_MASK	4
-	#define REQ_OP_MASK			0x0F
-#elif COMMAND_BYTE_LENGTH == 2
-	#define BT_DATA_BYTE_2		2
-	#define CMD_DATA_BYTE_2		1
-#endif /* COMMAND_BYTE_LENGTH */
-
-#define CMD_FAILED_TRANS_REPEAT_DELAY_MS    15
-#define CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS   50
 
 typedef enum 
 {
@@ -57,12 +27,10 @@ typedef enum
 
 void Comm_Bridge_Init(void);
 
-#if ECU_ROLE == CONTROL_ECU
-	void Comm_Bridge_BT_Read(uint8* Command);
-	void Comm_Bridge_BT_Send(uint8 Response);
-	void Comm_Bridge_BT_SendStream(uint8* data_stream);
-    uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
-#endif	/* ECU_ROLE */
+void Comm_Bridge_BT_Read(uint8* Command);
+void Comm_Bridge_BT_Send(uint8 Response);
+void Comm_Bridge_BT_SendStream(uint8* data_stream);
+uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
 
 void Comm_Bridge_CMD_Read_Req(uint8* Request_Command);
 void Comm_Bridge_CMD_Res(uint8* Ack_Response);

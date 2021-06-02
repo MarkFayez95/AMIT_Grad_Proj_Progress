@@ -5,13 +5,14 @@
  *  Author: Mark Fayez
  */
 
+#include "Smart_Home_Sys_Config.h"
+
 #include "Smart_Home.h"
 #include "Status_FollowUp.h"
 
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
-#if ECU_ROLE == ACTUATOR_ECU
-	extern volatile DevicesDB Smart_Home_Devices;
 
+#if ECU_ROLE == ACTUATOR_ECU
 	uint8 Selected_Device = DEV_1;
 	uint8 Selected_Operation = OP_1;
 #endif /* ECU_ROLE */
@@ -31,9 +32,8 @@ void Smart_Home_Init(void)
 		
 	#elif ECU_ROLE == ACTUATOR_ECU
 		
+		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_STARTING);
-
-		Devices_DB_Config(&Smart_Home_Devices);
 		
 		Devices_Init();
 		
@@ -54,13 +54,29 @@ void Smart_Home_Run(void)
 	#endif /* ECU_ROLE */
 }
 
-#if ECU_ROLE == CONTROL_ECU
+
 static void Smart_Home_User_Selection(void)
 {
-	Comm_Bridge_BT_Read(User_Selection);
+	#if ECU_ROLE == CONTROL_ECU
+		Comm_Bridge_BT_Read(User_Selection);
 
-	Status_Disp_LCD(LCD_ROW_TXT_DEV_OP_SELECTED,LCD_ROW_TXT_NONE);
+		Status_Disp_LCD(LCD_ROW_TXT_DEV_OP_SELECTED,LCD_ROW_TXT_NONE);
+	#endif /* ECU_ROLE */
 }
+static void Smart_Home_Read_N_Decode(void)
+{
+	#if ECU_ROLE == ACTUATOR_ECU
+		Comm_Bridge_CMD_Read_Req(User_Selection);
+		#if COMMAND_BYTE_LENGTH == 1
+			Selected_Device = User_Selection[CMD_DATA_BYTE] >> REQ_DEV_SHIFT_MASK;
+			Selected_Operation = (User_Selection[CMD_DATA_BYTE] & REQ_OP_MASK);
+		#elif COMMAND_BYTE_LENGTH == 2
+			Selected_Device = User_Selection[CMD_DATA_BYTE_1];
+			Selected_Operation = User_Selection[CMD_DATA_BYTE_2];
+		#endif /* COMMAND_BYTE_LENGTH */
+	#endif /* ECU_ROLE */
+}
+#if ECU_ROLE == CONTROL_ECU
 static void Smart_Home_Process_N_Respond(void)
 {
 	uint8 Selection_Validity = SEND_FAILED;
@@ -87,17 +103,6 @@ static void Smart_Home_Process_N_Respond(void)
 	Comm_Bridge_BT_Send(Selection_Validity);
 }
 #elif ECU_ROLE == ACTUATOR_ECU
-static void Smart_Home_Read_N_Decode(void)
-{
-	Comm_Bridge_CMD_Read_Req(User_Selection);
-	#if COMMAND_BYTE_LENGTH == 1
-		Selected_Device = User_Selection[CMD_DATA_BYTE] >> REQ_DEV_SHIFT_MASK;
-		Selected_Operation = (User_Selection[CMD_DATA_BYTE] & REQ_OP_MASK);
-	#elif COMMAND_BYTE_LENGTH == 2
-		Selected_Device = User_Selection[CMD_DATA_BYTE_1];
-		Selected_Operation = User_Selection[CMD_DATA_BYTE_2];
-	#endif /* COMMAND_BYTE_LENGTH */
-}
 static void Smart_Home_Process_N_Respond(void)
 {
 	uint8 Selection_Validity = SEND_FAILED;

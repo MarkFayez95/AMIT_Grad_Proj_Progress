@@ -11,9 +11,6 @@
 #include "Status_FollowUp.h"
 
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
-#if ECU_ROLE == ACTUATOR_ECU
-	extern volatile DevicesDB Smart_Home_Devices;
-#endif /* ECU_ROLE */
 
 #if ECU_ROLE == ACTUATOR_ECU
 	uint8 Selected_Device = DEV_1;
@@ -37,8 +34,6 @@ void Smart_Home_Init(void)
 		
 		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_STARTING);
-
-		Devices_DB_Config(&Smart_Home_Devices);
 		
 		Devices_Init();
 		

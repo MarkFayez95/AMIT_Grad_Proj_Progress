@@ -11,6 +11,10 @@
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
 
+#ifdef PUID_DB_H_
+    #include "PUID_DB.h"
+#endif /* PUID_DB_H_ */
+
 typedef enum 
 {
     SEND_FAILED=NACK_RES,

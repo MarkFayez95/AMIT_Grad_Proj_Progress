@@ -19,10 +19,11 @@
     // Bluetooth Driver configurations //
     #define BT_PUID_BYTE	0
     #define BT_DATA_BYTE	1
+    #if COMMAND_BYTE_LENGTH == 2
+        #define BT_DATA_BYTE_2		2
+    #endif /* COMMAND_BYTE_LENGTH */
 
-    #ifdef PUID_DB_H_
-        #include "PUID_DB.h"
-    #else
+    #ifndef PUID_DB_H_
         #define VALID_PUID    0xA8 // static pre-defined Pin User ID for security communicating with peer
         #define ECU_PUID      0xAB
         #define VALID_ID      0x0A
@@ -45,7 +46,6 @@
         #define REQ_DEV_SHIFT_MASK	4
         #define REQ_OP_MASK			0x0F
     #elif COMMAND_BYTE_LENGTH == 2
-        #define BT_DATA_BYTE_2		2
         #define CMD_DATA_BYTE_2		1
     #endif /* COMMAND_BYTE_LENGTH */
 
@@ -64,6 +64,13 @@
         #endif /* ECU_ROLE */
 
 /** Devices Module configurations **/
+#define NUM_OF_DEVICES      3
+#define MAX_OPS_PER_DEV     3
 
+#define INIT_FUN_INDEX		0
+#define OP_2_INDEX			INIT_FUN_INDEX+1
+
+#define DEV_CONST	0x07
+#define OPER_CONST	0x07
 
 #endif /* SMART_HOME_SYS_CONFIG_H_ */

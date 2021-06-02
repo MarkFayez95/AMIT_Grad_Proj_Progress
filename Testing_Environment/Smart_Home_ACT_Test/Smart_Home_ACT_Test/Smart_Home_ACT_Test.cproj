@@ -138,9 +138,6 @@
     <Compile Include="CMD_Bus.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="CMD_Bus_CFG.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Comm_Bridge.c">
       <SubType>compile</SubType>
     </Compile>

@@ -8,6 +8,8 @@
 #ifndef COMM_BRIDGE_H_
 #define COMM_BRIDGE_H_
 
+#define COMM_BI_ROLE	ECU_ROLE
+
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
 
@@ -56,9 +58,9 @@ void Comm_Bridge_Init(void);
 	void Comm_Bridge_BT_Read(uint8* Command);
 	void Comm_Bridge_BT_Send(uint8 Response);
 	void Comm_Bridge_BT_SendStream(uint8* data_stream);
+    uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
 #endif	/* ECU_ROLE */
 
-uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
 void Comm_Bridge_CMD_Read_Req(uint8* Request_Command);
 void Comm_Bridge_CMD_Res(uint8* Ack_Response);
 

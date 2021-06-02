@@ -8,8 +8,10 @@
 #ifndef SMART_HOME_H_
 #define SMART_HOME_H_
 
-#define CONTROL_ECU		0xAA
-#define ACTUATOR_ECU	0xBB
+typedef enum {
+	CONTROL_ECU=0xAA,
+	ACTUATOR_ECU
+} Roles;
 
 #define ECU_ROLE	ACTUATOR_ECU
 

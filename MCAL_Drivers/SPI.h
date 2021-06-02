@@ -20,8 +20,10 @@
 
 #include "DIO.h"
 
-#define SPI_MASTER  0xA0
-#define SPI_SLAVE   0xB0
+typedef enum {
+    SPI_MASTER=0xA0,
+    SPI_SLAVE
+} SPI_Roles;
 
 #define TRANS_FAILED    0
 #define MASTER_SS_SET_DELAY_MS    30

@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000002b0  00000000  00000000  00000c64  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002eaf  00000000  00000000  00000f14  2**0
+  6 .debug_info   00002f54  00000000  00000000  00000f14  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001085  00000000  00000000  00003dc3  2**0
+  7 .debug_abbrev 00001085  00000000  00000000  00003e68  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001424  00000000  00000000  00004e48  2**0
+  8 .debug_line   00001431  00000000  00000000  00004eed  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000005a8  00000000  00000000  0000626c  2**2
+  9 .debug_frame  000005a8  00000000  00000000  00006320  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000ee0  00000000  00000000  00006814  2**0
+ 10 .debug_str    00000f5b  00000000  00000000  000068c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000013fe  00000000  00000000  000076f4  2**0
+ 11 .debug_loc    000013fe  00000000  00000000  00007823  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000210  00000000  00000000  00008af2  2**0
+ 12 .debug_ranges 00000210  00000000  00000000  00008c21  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -367,12 +367,12 @@ uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
  252:	08 95       	ret
 
 00000254 <Comm_Bridge_CMD_Req>:
- * Outputs: ...
- * Returns: ...
- * Author: Mark Fayez
-**/
-uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
-{
+    * Outputs: ...
+    * Returns: ...
+    * Author: Mark Fayez
+    **/
+    uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
+    {
  254:	0f 93       	push	r16
  256:	1f 93       	push	r17
  258:	cf 93       	push	r28
@@ -381,25 +381,25 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
  25e:	cd b7       	in	r28, 0x3d	; 61
  260:	de b7       	in	r29, 0x3e	; 62
  262:	8c 01       	movw	r16, r24
-    uint8 ECUs_Comm_State = REQ_DROPPED;
-    uint8 Ack_Validity = INVALID_ACK_RESPONSE;
-    uint8 Ack_Response = INVALID_ACK_RESPONSE;
+        uint8 ECUs_Comm_State = REQ_DROPPED;
+        uint8 Ack_Validity = INVALID_ACK_RESPONSE;
+        uint8 Ack_Response = INVALID_ACK_RESPONSE;
  264:	8a e0       	ldi	r24, 0x0A	; 10
  266:	89 83       	std	Y+1, r24	; 0x01
-    ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
+        ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
  268:	f8 01       	movw	r30, r16
  26a:	80 81       	ld	r24, Z
  26c:	0e 94 9f 00 	call	0x13e	; 0x13e <CMD_Bus_Write>
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
+        while(ECUs_Comm_State == PEER_UNAVAILABLE)
  270:	0e c0       	rjmp	.+28     	; 0x28e <Comm_Bridge_CMD_Req+0x3a>
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  272:	65 e1       	ldi	r22, 0x15	; 21
  274:	82 e0       	ldi	r24, 0x02	; 2
  276:	0e 94 95 03 	call	0x72a	; 0x72a <Status_Disp_LCD>
 
-        ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
+            ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
  27a:	f8 01       	movw	r30, r16
  27c:	80 81       	ld	r24, Z
  27e:	0e 94 9f 00 	call	0x13e	; 0x13e <CMD_Bus_Write>
@@ -415,20 +415,20 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
  288:	f1 f7       	brne	.-4      	; 0x286 <Comm_Bridge_CMD_Req+0x32>
  28a:	00 c0       	rjmp	.+0      	; 0x28c <Comm_Bridge_CMD_Req+0x38>
  28c:	00 00       	nop
-{
-    uint8 ECUs_Comm_State = REQ_DROPPED;
-    uint8 Ack_Validity = INVALID_ACK_RESPONSE;
-    uint8 Ack_Response = INVALID_ACK_RESPONSE;
-    ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
+    {
+        uint8 ECUs_Comm_State = REQ_DROPPED;
+        uint8 Ack_Validity = INVALID_ACK_RESPONSE;
+        uint8 Ack_Response = INVALID_ACK_RESPONSE;
+        ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
+        while(ECUs_Comm_State == PEER_UNAVAILABLE)
  28e:	8b 30       	cpi	r24, 0x0B	; 11
  290:	81 f3       	breq	.-32     	; 0x272 <Comm_Bridge_CMD_Req+0x1e>
-        Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
 
-        return SEND_FAILED;
-    }
-    #elif COMMAND_BYTE_LENGTH == 1
-    if(ECUs_Comm_State != READING)
+            return SEND_FAILED;
+        }
+        #elif COMMAND_BYTE_LENGTH == 1
+        if(ECUs_Comm_State != READING)
  292:	83 30       	cpi	r24, 0x03	; 3
  294:	09 f0       	breq	.+2      	; 0x298 <Comm_Bridge_CMD_Req+0x44>
  296:	48 c0       	rjmp	.+144    	; 0x328 <Comm_Bridge_CMD_Req+0xd4>
@@ -442,96 +442,96 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
  2a6:	00 c0       	rjmp	.+0      	; 0x2a8 <Comm_Bridge_CMD_Req+0x54>
  2a8:	00 00       	nop
 
-    _delay_ms(CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS);
+        _delay_ms(CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS);
 
-    //* Request Sent, Now confirm with with actuator status of performing the request.*//
+        //* Request Sent, Now confirm with with actuator status of performing the request.*//
 
-    Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
+        Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
  2aa:	ce 01       	movw	r24, r28
  2ac:	01 96       	adiw	r24, 0x01	; 1
  2ae:	0e 94 b6 00 	call	0x16c	; 0x16c <CMD_Bus_Req_Ack>
-    while((Ack_Validity == PEER_UNAVAILABLE) || (Ack_Validity == INVALID_ACK_RESPONSE))
+        while((Ack_Validity == PEER_UNAVAILABLE) || (Ack_Validity == INVALID_ACK_RESPONSE))
  2b2:	11 c0       	rjmp	.+34     	; 0x2d6 <Comm_Bridge_CMD_Req+0x82>
-    {
-        if(Ack_Validity == PEER_UNAVAILABLE)
+        {
+            if(Ack_Validity == PEER_UNAVAILABLE)
  2b4:	8b 30       	cpi	r24, 0x0B	; 11
  2b6:	29 f4       	brne	.+10     	; 0x2c2 <Comm_Bridge_CMD_Req+0x6e>
-        {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+            {
+                // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  2b8:	65 e1       	ldi	r22, 0x15	; 21
  2ba:	82 e0       	ldi	r24, 0x02	; 2
  2bc:	0e 94 95 03 	call	0x72a	; 0x72a <Status_Disp_LCD>
  2c0:	06 c0       	rjmp	.+12     	; 0x2ce <Comm_Bridge_CMD_Req+0x7a>
-        }
-        else if (Ack_Validity == INVALID_ACK_RESPONSE)
+            }
+            else if (Ack_Validity == INVALID_ACK_RESPONSE)
  2c2:	8a 30       	cpi	r24, 0x0A	; 10
  2c4:	21 f4       	brne	.+8      	; 0x2ce <Comm_Bridge_CMD_Req+0x7a>
-        {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Invalid Response'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_RESPONSE);
+            {
+                // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Invalid Response'
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_RESPONSE);
  2c6:	67 e1       	ldi	r22, 0x17	; 23
  2c8:	82 e0       	ldi	r24, 0x02	; 2
  2ca:	0e 94 95 03 	call	0x72a	; 0x72a <Status_Disp_LCD>
-        }
-        
-        Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
+            }
+            
+            Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
  2ce:	ce 01       	movw	r24, r28
  2d0:	01 96       	adiw	r24, 0x01	; 1
  2d2:	0e 94 b6 00 	call	0x16c	; 0x16c <CMD_Bus_Req_Ack>
-    _delay_ms(CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS);
+        _delay_ms(CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS);
 
-    //* Request Sent, Now confirm with with actuator status of performing the request.*//
+        //* Request Sent, Now confirm with with actuator status of performing the request.*//
 
-    Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
-    while((Ack_Validity == PEER_UNAVAILABLE) || (Ack_Validity == INVALID_ACK_RESPONSE))
+        Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
+        while((Ack_Validity == PEER_UNAVAILABLE) || (Ack_Validity == INVALID_ACK_RESPONSE))
  2d6:	96 ef       	ldi	r25, 0xF6	; 246
  2d8:	98 0f       	add	r25, r24
  2da:	92 30       	cpi	r25, 0x02	; 2
  2dc:	58 f3       	brcs	.-42     	; 0x2b4 <Comm_Bridge_CMD_Req+0x60>
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_RESPONSE);
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_RESPONSE);
+            }
+            
+            Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
         }
-        
-        Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
-    }
-    if(Ack_Response == ACK_RES)
+        if(Ack_Response == ACK_RES)
  2de:	19 81       	ldd	r17, Y+1	; 0x01
  2e0:	18 30       	cpi	r17, 0x08	; 8
  2e2:	29 f4       	brne	.+10     	; 0x2ee <Comm_Bridge_CMD_Req+0x9a>
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Request Done!' ''
-        Status_Disp_LCD(LCD_ROW_TXT_REQUEST_DONE,LCD_ROW_TXT_NONE);
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Request Done!' ''
+            Status_Disp_LCD(LCD_ROW_TXT_REQUEST_DONE,LCD_ROW_TXT_NONE);
  2e4:	6c e2       	ldi	r22, 0x2C	; 44
  2e6:	87 e0       	ldi	r24, 0x07	; 7
  2e8:	0e 94 95 03 	call	0x72a	; 0x72a <Status_Disp_LCD>
 
-        return REQ_DONE;
+            return REQ_DONE;
  2ec:	20 c0       	rjmp	.+64     	; 0x32e <Comm_Bridge_CMD_Req+0xda>
-    }
-    else if(Ack_Response == NACK_RES)
+        }
+        else if(Ack_Response == NACK_RES)
  2ee:	17 30       	cpi	r17, 0x07	; 7
  2f0:	e9 f4       	brne	.+58     	; 0x32c <Comm_Bridge_CMD_Req+0xd8>
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Invalid Request!' 'Requesting Reason'
-        Status_Disp_LCD(LCD_ROW_TXT_INVALID_REQUEST,LCD_ROW_TXT_REQUESTING_REASON);
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Invalid Request!' 'Requesting Reason'
+            Status_Disp_LCD(LCD_ROW_TXT_INVALID_REQUEST,LCD_ROW_TXT_REQUESTING_REASON);
  2f2:	68 e1       	ldi	r22, 0x18	; 24
  2f4:	8a e0       	ldi	r24, 0x0A	; 10
  2f6:	0e 94 95 03 	call	0x72a	; 0x72a <Status_Disp_LCD>
 
-        Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
+            Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
  2fa:	89 e0       	ldi	r24, 0x09	; 9
  2fc:	0e 94 9f 00 	call	0x13e	; 0x13e <CMD_Bus_Write>
  300:	89 83       	std	Y+1, r24	; 0x01
-        while(Ack_Response == PEER_UNAVAILABLE)
+            while(Ack_Response == PEER_UNAVAILABLE)
  302:	0e c0       	rjmp	.+28     	; 0x320 <Comm_Bridge_CMD_Req+0xcc>
-        {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+            {
+                // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  304:	65 e1       	ldi	r22, 0x15	; 21
  306:	82 e0       	ldi	r24, 0x02	; 2
  308:	0e 94 95 03 	call	0x72a	; 0x72a <Status_Disp_LCD>
 
-            Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
+                Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
  30c:	89 e0       	ldi	r24, 0x09	; 9
  30e:	0e 94 9f 00 	call	0x13e	; 0x13e <CMD_Bus_Write>
  312:	89 83       	std	Y+1, r24	; 0x01
@@ -541,32 +541,32 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
  31a:	f1 f7       	brne	.-4      	; 0x318 <Comm_Bridge_CMD_Req+0xc4>
  31c:	00 c0       	rjmp	.+0      	; 0x31e <Comm_Bridge_CMD_Req+0xca>
  31e:	00 00       	nop
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Invalid Request!' 'Requesting Reason'
-        Status_Disp_LCD(LCD_ROW_TXT_INVALID_REQUEST,LCD_ROW_TXT_REQUESTING_REASON);
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Invalid Request!' 'Requesting Reason'
+            Status_Disp_LCD(LCD_ROW_TXT_INVALID_REQUEST,LCD_ROW_TXT_REQUESTING_REASON);
 
-        Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
-        while(Ack_Response == PEER_UNAVAILABLE)
+            Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
+            while(Ack_Response == PEER_UNAVAILABLE)
  320:	19 81       	ldd	r17, Y+1	; 0x01
  322:	1b 30       	cpi	r17, 0x0B	; 11
  324:	79 f3       	breq	.-34     	; 0x304 <Comm_Bridge_CMD_Req+0xb0>
  326:	03 c0       	rjmp	.+6      	; 0x32e <Comm_Bridge_CMD_Req+0xda>
-    }
-    #elif COMMAND_BYTE_LENGTH == 1
-    if(ECUs_Comm_State != READING)
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
-        return SEND_FAILED;
+        }
+        #elif COMMAND_BYTE_LENGTH == 1
+        if(ECUs_Comm_State != READING)
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+            return SEND_FAILED;
  328:	17 e0       	ldi	r17, 0x07	; 7
  32a:	01 c0       	rjmp	.+2      	; 0x32e <Comm_Bridge_CMD_Req+0xda>
-        
-        // Return the received code (reason for NACK) - as it is - to caller function
-        return Ack_Response;
-    }
-	else
-		return OUT_OF_SYNC;
+            
+            // Return the received code (reason for NACK) - as it is - to caller function
+            return Ack_Response;
+        }
+        else
+            return OUT_OF_SYNC;
  32c:	1c e0       	ldi	r17, 0x0C	; 12
-}
+    }
  32e:	81 2f       	mov	r24, r17
  330:	0f 90       	pop	r0
  332:	df 91       	pop	r29

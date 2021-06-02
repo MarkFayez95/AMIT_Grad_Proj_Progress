@@ -170,6 +170,10 @@ Discarded input sections
  .text          0x00000000        0x0 Smart_Home.o
  .data          0x00000000        0x0 Smart_Home.o
  .bss           0x00000000        0x0 Smart_Home.o
+ .bss.Selected_Operation
+                0x00000000        0x1 Smart_Home.o
+ .bss.Selected_Device
+                0x00000000        0x1 Smart_Home.o
  .text          0x00000000        0x0 SPI.o
  .data          0x00000000        0x0 SPI.o
  .bss           0x00000000        0x0 SPI.o
@@ -787,7 +791,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x2eaf
+.debug_info     0x00000000     0x2f54
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x2c3 Bluetooth_Mod.o
@@ -795,11 +799,11 @@ END GROUP
  .debug_info    0x00000afa      0x96c Comm_Bridge.o
  .debug_info    0x00001466      0x310 DIO.o
  .debug_info    0x00001776      0x805 LCD.o
- .debug_info    0x00001f7b       0xca main.o
- .debug_info    0x00002045      0x42e Smart_Home.o
- .debug_info    0x00002473      0x389 SPI.o
- .debug_info    0x000027fc      0x4c2 Status_FollowUp.o
- .debug_info    0x00002cbe      0x1f1 UART.o
+ .debug_info    0x00001f7b       0xd1 main.o
+ .debug_info    0x0000204c      0x4cc Smart_Home.o
+ .debug_info    0x00002518      0x389 SPI.o
+ .debug_info    0x000028a1      0x4c2 Status_FollowUp.o
+ .debug_info    0x00002d63      0x1f1 UART.o
 
 .debug_abbrev   0x00000000     0x1085
  *(.debug_abbrev)
@@ -815,7 +819,7 @@ END GROUP
  .debug_abbrev  0x00000e00      0x160 Status_FollowUp.o
  .debug_abbrev  0x00000f60      0x125 UART.o
 
-.debug_line     0x00000000     0x1424
+.debug_line     0x00000000     0x1431
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x147 Bluetooth_Mod.o
@@ -824,10 +828,10 @@ END GROUP
  .debug_line    0x00000886      0x129 DIO.o
  .debug_line    0x000009af      0x37c LCD.o
  .debug_line    0x00000d2b       0x59 main.o
- .debug_line    0x00000d84      0x11f Smart_Home.o
- .debug_line    0x00000ea3      0x233 SPI.o
- .debug_line    0x000010d6      0x215 Status_FollowUp.o
- .debug_line    0x000012eb      0x139 UART.o
+ .debug_line    0x00000d84      0x12c Smart_Home.o
+ .debug_line    0x00000eb0      0x233 SPI.o
+ .debug_line    0x000010e3      0x215 Status_FollowUp.o
+ .debug_line    0x000012f8      0x139 UART.o
 
 .debug_frame    0x00000000      0x5a8
  *(.debug_frame)
@@ -842,7 +846,7 @@ END GROUP
  .debug_frame   0x000004a8       0x70 Status_FollowUp.o
  .debug_frame   0x00000518       0x90 UART.o
 
-.debug_str      0x00000000      0xee0
+.debug_str      0x00000000      0xf5b
  *(.debug_str)
  .debug_str     0x00000000      0x196 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x2a8 Bluetooth_Mod.o
@@ -856,14 +860,14 @@ END GROUP
  .debug_str     0x00000cb5       0xaa LCD.o
                                 0x30c (size before relaxing)
  .debug_str     0x00000d5f       0x30 main.o
-                                0x202 (size before relaxing)
- .debug_str     0x00000d8f       0x71 Smart_Home.o
-                                0x807 (size before relaxing)
- .debug_str     0x00000e00       0x48 SPI.o
+                                0x20b (size before relaxing)
+ .debug_str     0x00000d8f       0xec Smart_Home.o
+                                0x882 (size before relaxing)
+ .debug_str     0x00000e7b       0x48 SPI.o
                                 0x2ec (size before relaxing)
- .debug_str     0x00000e48       0x86 Status_FollowUp.o
+ .debug_str     0x00000ec3       0x86 Status_FollowUp.o
                                 0x790 (size before relaxing)
- .debug_str     0x00000ece       0x12 UART.o
+ .debug_str     0x00000f49       0x12 UART.o
                                 0x215 (size before relaxing)
 
 .debug_loc      0x00000000     0x13fe

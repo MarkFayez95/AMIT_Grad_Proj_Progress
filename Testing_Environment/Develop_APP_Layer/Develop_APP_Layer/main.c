@@ -10,9 +10,7 @@
 
 int main(void)
 {
-	Status_FollowUp_Init();
 	
-	Status_Disp_LCD(LCD_ROW_TXT_CONTROL_SYSTEM,LCD_ROW_TXT_STARTING);
 	
 	//Smart_Home_Init();
     while (1) 

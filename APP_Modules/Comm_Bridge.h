@@ -8,6 +8,8 @@
 #ifndef COMM_BRIDGE_H_
 #define COMM_BRIDGE_H_
 
+#define COMM_BRI_ROLE   ECU_ROLE
+
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
 
@@ -52,13 +54,13 @@ typedef enum
 
 void Comm_Bridge_Init(void);
 
-#if ECU_ROLE == CONTROL_ECU
+#if COMM_BRI_ROLE == CONTROL_ECU
 	void Comm_Bridge_BT_Read(uint8* Command);
 	void Comm_Bridge_BT_Send(uint8 Response);
 	void Comm_Bridge_BT_SendStream(uint8* data_stream);
-#endif	/* ECU_ROLE */
+    uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
+#endif	/* COMM_BI_ROLE */
 
-uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
 void Comm_Bridge_CMD_Read_Req(uint8* Request_Command);
 void Comm_Bridge_CMD_Res(uint8* Ack_Response);
 

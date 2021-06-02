@@ -7,7 +7,19 @@
 #ifndef CMD_BUS_H_
 #define CMD_BUS_H_
 
-#include "CMD_Bus_CFG.h"
+#define CMD_BUS_ROLE    COMM_BRI_ROLE
+
+#if CMD_BUS_ROLE == CONTROL_ECU
+    #define SPI_ROLE            SPI_MASTER
+    #define CMD_BUS_DEV_ID      0xA0
+    #define CMD_BUS_PEER_ID     0xB0
+#elif CMD_BUS_ROLE == ACTUATOR_ECU
+    #define SPI_ROLE            SPI_SLAVE
+    #define CMD_BUS_DEV_ID      0xB0
+    #define CMD_BUS_PEER_ID     0xA0
+#endif /* ECU_ROLE */
+
+#include "SPI.h"
 
 typedef enum {
     REQ_DROPPED=0, // if response from peer is 0 then it might indicate that Peer ECU is down.

@@ -21,7 +21,7 @@ uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
 
 void Smart_Home_Init(void)
 {
-	LCD_Init();
+	Status_FollowUp_Init();
 	
 	#if ECU_ROLE == CONTROL_ECU
 		

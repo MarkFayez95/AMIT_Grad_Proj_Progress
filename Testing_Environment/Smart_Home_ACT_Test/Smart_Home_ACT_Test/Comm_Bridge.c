@@ -18,6 +18,17 @@
  void Comm_Bridge_Init(void)
  {
     #if ECU_ROLE == CONTROL_ECU
+		Bluetooth_Mod_Init();
+		while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
+		{
+			// Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Not Connected'
+			Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_NOT_CONNECTED);
+		}
+
+		// Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Paired'
+		Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_PAIRED);
+		
+		
         CMD_Bus_Master_Init();
         while(CMD_Bus_HandShake() == INVALID_PEER)
         {
@@ -28,16 +39,6 @@
         // Comm_Bridge_Init :: Status LCD Display 'Control Bus' 'Slave Ready'
         Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_SLAVE_READY);
         
-        Bluetooth_Mod_Init();
-        while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
-        {
-            // Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Not Connected'
-            Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_NOT_CONNECTED);
-        }
-
-        // Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Paired'
-        Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_PAIRED);
-
     #elif ECU_ROLE == ACTUATOR_ECU
         CMD_Bus_Slave_Init();
         while(CMD_Bus_HandShake() == INVALID_PEER)

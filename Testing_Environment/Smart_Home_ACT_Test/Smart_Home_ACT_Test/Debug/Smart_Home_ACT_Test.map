@@ -129,8 +129,6 @@ Discarded input sections
  .text          0x00000000        0x0 Status_FollowUp.o
  .data          0x00000000        0x0 Status_FollowUp.o
  .bss           0x00000000        0x0 Status_FollowUp.o
- .text.Status_FollowUp_Init
-                0x00000000        0x6 Status_FollowUp.o
  .text.Status_Send_BT
                 0x00000000       0x12 Status_FollowUp.o
  .data.BT_Text_Options
@@ -386,7 +384,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xbac
+.text           0x00000000      0xbb2
  *(.vectors)
  .vectors       0x00000000       0x54 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -600,32 +598,35 @@ END GROUP
  .text.SPI_Transiver
                 0x00000a08       0x2c SPI.o
                 0x00000a08                SPI_Transiver
+ .text.Status_FollowUp_Init
+                0x00000a34        0x6 Status_FollowUp.o
+                0x00000a34                Status_FollowUp_Init
  .text.Status_Disp_LCD
-                0x00000a34       0x4c Status_FollowUp.o
-                0x00000a34                Status_Disp_LCD
+                0x00000a3a       0x4c Status_FollowUp.o
+                0x00000a3a                Status_Disp_LCD
  .text.Status_Disp_LCD_IncludeInteger
-                0x00000a80       0x5e Status_FollowUp.o
-                0x00000a80                Status_Disp_LCD_IncludeInteger
+                0x00000a86       0x5e Status_FollowUp.o
+                0x00000a86                Status_Disp_LCD_IncludeInteger
  .text.UART_Init
-                0x00000ade       0x2a UART.o
-                0x00000ade                UART_Init
+                0x00000ae4       0x2a UART.o
+                0x00000ae4                UART_Init
  .text.libgcc.div
-                0x00000b08       0x2e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                0x00000b08                __divmodsi4
+                0x00000b0e       0x2e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000b0e                __divmodsi4
  .text.libgcc.div
-                0x00000b36       0x10 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
-                0x00000b36                __negsi2
+                0x00000b3c       0x10 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
+                0x00000b3c                __negsi2
  .text.libgcc.mul
-                0x00000b46       0x1e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000b46                __umulhisi3
+                0x00000b4c       0x1e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00000b4c                __umulhisi3
  .text.libgcc.div
-                0x00000b64       0x44 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000b64                __udivmodsi4
-                0x00000ba8                . = ALIGN (0x2)
+                0x00000b6a       0x44 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000b6a                __udivmodsi4
+                0x00000bae                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000ba8        0x0 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000ba8                _exit
-                0x00000ba8                exit
+ .fini9         0x00000bae        0x0 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000bae                _exit
+                0x00000bae                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -644,50 +645,50 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000ba8        0x4 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000bae        0x4 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000bac                _etext = .
+                0x00000bb2                _etext = .
 
-.data           0x00800060       0x48 load address 0x00000bac
+.data           0x00800060      0x2e8 load address 0x00000bb2
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  .data.LCD_Row_Text_Options
-                0x00800060       0x30 Status_FollowUp.o
+                0x00800060      0x2d0 Status_FollowUp.o
                 0x00800060                LCD_Row_Text_Options
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x00800090       0x18 Devices.o
+ .rodata        0x00800330       0x18 Devices.o
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x008000a8                . = ALIGN (0x2)
-                0x008000a8                _edata = .
-                0x008000a8                PROVIDE (__data_end, .)
+                0x00800348                . = ALIGN (0x2)
+                0x00800348                _edata = .
+                0x00800348                PROVIDE (__data_end, .)
 
-.bss            0x008000a8       0x22
-                0x008000a8                PROVIDE (__bss_start, .)
+.bss            0x00800348       0x22
+                0x00800348                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.Selected_Operation
-                0x008000a8        0x1 Smart_Home.o
-                0x008000a8                Selected_Operation
+                0x00800348        0x1 Smart_Home.o
+                0x00800348                Selected_Operation
  .bss.Selected_Device
-                0x008000a9        0x1 Smart_Home.o
-                0x008000a9                Selected_Device
+                0x00800349        0x1 Smart_Home.o
+                0x00800349                Selected_Device
  *(COMMON)
- COMMON         0x008000aa       0x1e Devices.o
-                0x008000aa                Smart_Home_Devices
- COMMON         0x008000c8        0x2 Smart_Home.o
-                0x008000c8                User_Selection
-                0x008000ca                PROVIDE (__bss_end, .)
-                0x00000bac                __data_load_start = LOADADDR (.data)
-                0x00000bf4                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080034a       0x1e Devices.o
+                0x0080034a                Smart_Home_Devices
+ COMMON         0x00800368        0x2 Smart_Home.o
+                0x00800368                User_Selection
+                0x0080036a                PROVIDE (__bss_end, .)
+                0x00000bb2                __data_load_start = LOADADDR (.data)
+                0x00000e9a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008000ca        0x0
+.noinit         0x0080036a        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008000ca                _end = .
+                0x0080036a                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -793,7 +794,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x39b0
+.debug_info     0x00000000     0x3acb
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x2c3 Bluetooth_Mod.o
@@ -806,10 +807,10 @@ END GROUP
  .debug_info    0x00002a50       0xd1 main.o
  .debug_info    0x00002b21      0x56e Smart_Home.o
  .debug_info    0x0000308f      0x389 SPI.o
- .debug_info    0x00003418      0x3a7 Status_FollowUp.o
- .debug_info    0x000037bf      0x1f1 UART.o
+ .debug_info    0x00003418      0x4c2 Status_FollowUp.o
+ .debug_info    0x000038da      0x1f1 UART.o
 
-.debug_abbrev   0x00000000     0x12e8
+.debug_abbrev   0x00000000     0x1300
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3      0x13f Bluetooth_Mod.o
@@ -822,10 +823,10 @@ END GROUP
  .debug_abbrev  0x00000d59       0x68 main.o
  .debug_abbrev  0x00000dc1      0x152 Smart_Home.o
  .debug_abbrev  0x00000f13      0x168 SPI.o
- .debug_abbrev  0x0000107b      0x148 Status_FollowUp.o
- .debug_abbrev  0x000011c3      0x125 UART.o
+ .debug_abbrev  0x0000107b      0x160 Status_FollowUp.o
+ .debug_abbrev  0x000011db      0x125 UART.o
 
-.debug_line     0x00000000     0x1812
+.debug_line     0x00000000     0x181e
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x147 Bluetooth_Mod.o
@@ -836,10 +837,10 @@ END GROUP
  .debug_line    0x00000b57      0x37c LCD.o
  .debug_line    0x00000ed3      0x23e LED.o
  .debug_line    0x00001111       0x59 main.o
- .debug_line    0x0000116a      0x13c Smart_Home.o
- .debug_line    0x000012a6      0x233 SPI.o
- .debug_line    0x000014d9      0x200 Status_FollowUp.o
- .debug_line    0x000016d9      0x139 UART.o
+ .debug_line    0x0000116a      0x133 Smart_Home.o
+ .debug_line    0x0000129d      0x233 SPI.o
+ .debug_line    0x000014d0      0x215 Status_FollowUp.o
+ .debug_line    0x000016e5      0x139 UART.o
 
 .debug_frame    0x00000000      0x754
  *(.debug_frame)
@@ -875,12 +876,12 @@ END GROUP
                                 0x281 (size before relaxing)
  .debug_str     0x00000fb1       0x30 main.o
                                 0x209 (size before relaxing)
- .debug_str     0x00000fe1       0xbd Smart_Home.o
-                                0x93e (size before relaxing)
- .debug_str     0x0000109e       0x48 SPI.o
+ .debug_str     0x00000fe1       0xd2 Smart_Home.o
+                                0x94a (size before relaxing)
+ .debug_str     0x000010b3       0x48 SPI.o
                                 0x2ea (size before relaxing)
- .debug_str     0x000010e6       0x7c Status_FollowUp.o
-                                0x342 (size before relaxing)
+ .debug_str     0x000010fb       0x67 Status_FollowUp.o
+                                0x78e (size before relaxing)
  .debug_str     0x00001162       0x12 UART.o
                                 0x213 (size before relaxing)
 

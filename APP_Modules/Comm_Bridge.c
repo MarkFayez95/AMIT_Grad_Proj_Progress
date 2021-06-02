@@ -6,6 +6,7 @@
  */ 
 
  #include "Comm_Bridge.h"
+ #include "Status_FollowUp.h"
  
 /*
  * Description: ...
@@ -72,7 +73,7 @@
 			// Comm_Bridge_BT_Read :: Status LCD Display "BT Peer Paired" "pending input"
             Status_Disp_LCD(LCD_ROW_TXT_BT_PEER_PAIRED,LCD_ROW_TXT_PENDING_INPUT);
 
-			Bluetooth_Mod_Seq_Rx(&Command);
+			Bluetooth_Mod_Seq_Rx(Command);
 			#ifdef PUID_DB_H_
 				Check_Valid_PUID = PUID_DB_Search(Command[BT_PUID_BYTE]);
 			#else
@@ -87,7 +88,8 @@
                     Status_Disp_LCD(LCD_ROW_TXT_INVALID_PUID,LCD_ROW_TXT_NONE);
 				}
 			#endif /* PUID_DB */
-		} while(Check_Valid_PUID = INVALID_ID);
+		} 
+		while(Check_Valid_PUID = INVALID_ID);
 
 		// Shift the received frame to delete the PUID from it.
 		Command[BT_PUID_BYTE] = Command[BT_DATA_BYTE];
@@ -250,6 +252,8 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
         // Return the received code (reason for NACK) - as it is - to caller function
         return Ack_Response;
     }
+	else
+		return OUT_OF_SYNC;
 }
 
 /*
@@ -306,7 +310,6 @@ void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
 **/
 void Comm_Bridge_CMD_Res(uint8* Ack_Response)
 {
-    uint8 ECUs_Comm_State = REQ_DROPPED;
     uint8 Ack_Request = INVALID_ACK_REQUEST;
     if(*Ack_Response == REQ_DONE)
     {

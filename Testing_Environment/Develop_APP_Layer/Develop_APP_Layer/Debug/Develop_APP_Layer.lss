@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000380  00000000  00000000  00000cf4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00003a28  00000000  00000000  00001074  2**0
+  6 .debug_info   000039b0  00000000  00000000  00001074  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001306  00000000  00000000  00004a9c  2**0
+  7 .debug_abbrev 000012e8  00000000  00000000  00004a24  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001810  00000000  00000000  00005da2  2**0
+  8 .debug_line   00001812  00000000  00000000  00005d0c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000764  00000000  00000000  000075b4  2**2
+  9 .debug_frame  00000754  00000000  00000000  00007520  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001148  00000000  00000000  00007d18  2**0
+ 10 .debug_str    00001170  00000000  00000000  00007c74  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001739  00000000  00000000  00008e60  2**0
+ 11 .debug_loc    00001742  00000000  00000000  00008de4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000002c0  00000000  00000000  0000a599  2**0
+ 12 .debug_ranges 000002c0  00000000  00000000  0000a526  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -146,13 +146,13 @@ uint8 Bluetooth_Mod_Ch_Pair(void)
     }
 }
   ca:	cf 93       	push	r28
-  cc:	0e 94 f6 04 	call	0x9ec	; 0x9ec <SPI_Master_InitTrans>
+  cc:	0e 94 ed 04 	call	0x9da	; 0x9da <SPI_Master_InitTrans>
   d0:	80 ea       	ldi	r24, 0xA0	; 160
-  d2:	0e 94 0d 05 	call	0xa1a	; 0xa1a <SPI_Transiver>
+  d2:	0e 94 04 05 	call	0xa08	; 0xa08 <SPI_Transiver>
   d6:	c8 2f       	mov	r28, r24
   d8:	88 23       	and	r24, r24
   da:	d1 f3       	breq	.-12     	; 0xd0 <CMD_Bus_HandShake+0x6>
-  dc:	0e 94 06 05 	call	0xa0c	; 0xa0c <SPI_Master_TermTrans>
+  dc:	0e 94 fd 04 	call	0x9fa	; 0x9fa <SPI_Master_TermTrans>
   e0:	c0 3b       	cpi	r28, 0xB0	; 176
   e2:	11 f4       	brne	.+4      	; 0xe8 <CMD_Bus_HandShake+0x1e>
   e4:	81 e0       	ldi	r24, 0x01	; 1
@@ -172,13 +172,13 @@ uint8 Bluetooth_Mod_Ch_Pair(void)
   fa:	0e 94 65 00 	call	0xca	; 0xca <CMD_Bus_HandShake>
   fe:	82 30       	cpi	r24, 0x02	; 2
  100:	61 f0       	breq	.+24     	; 0x11a <CMD_Bus_Write+0x26>
- 102:	0e 94 f6 04 	call	0x9ec	; 0x9ec <SPI_Master_InitTrans>
+ 102:	0e 94 ed 04 	call	0x9da	; 0x9da <SPI_Master_InitTrans>
  106:	8d 2f       	mov	r24, r29
- 108:	0e 94 0d 05 	call	0xa1a	; 0xa1a <SPI_Transiver>
+ 108:	0e 94 04 05 	call	0xa08	; 0xa08 <SPI_Transiver>
  10c:	c8 2f       	mov	r28, r24
  10e:	88 23       	and	r24, r24
  110:	d1 f3       	breq	.-12     	; 0x106 <CMD_Bus_Write+0x12>
- 112:	0e 94 06 05 	call	0xa0c	; 0xa0c <SPI_Master_TermTrans>
+ 112:	0e 94 fd 04 	call	0x9fa	; 0x9fa <SPI_Master_TermTrans>
  116:	8c 2f       	mov	r24, r28
  118:	01 c0       	rjmp	.+2      	; 0x11c <CMD_Bus_Write+0x28>
  11a:	8b e0       	ldi	r24, 0x0B	; 11
@@ -193,11 +193,11 @@ uint8 Bluetooth_Mod_Ch_Pair(void)
  128:	0e 94 65 00 	call	0xca	; 0xca <CMD_Bus_HandShake>
  12c:	82 30       	cpi	r24, 0x02	; 2
  12e:	51 f0       	breq	.+20     	; 0x144 <CMD_Bus_Read+0x22>
- 130:	0e 94 f6 04 	call	0x9ec	; 0x9ec <SPI_Master_InitTrans>
+ 130:	0e 94 ed 04 	call	0x9da	; 0x9da <SPI_Master_InitTrans>
  134:	83 e0       	ldi	r24, 0x03	; 3
- 136:	0e 94 0d 05 	call	0xa1a	; 0xa1a <SPI_Transiver>
+ 136:	0e 94 04 05 	call	0xa08	; 0xa08 <SPI_Transiver>
  13a:	88 83       	st	Y, r24
- 13c:	0e 94 06 05 	call	0xa0c	; 0xa0c <SPI_Master_TermTrans>
+ 13c:	0e 94 fd 04 	call	0x9fa	; 0x9fa <SPI_Master_TermTrans>
  140:	84 e0       	ldi	r24, 0x04	; 4
  142:	01 c0       	rjmp	.+2      	; 0x146 <CMD_Bus_Read+0x24>
  144:	8b e0       	ldi	r24, 0x0B	; 11
@@ -227,12 +227,12 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
     {
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_InitTrans();
- 15a:	0e 94 f6 04 	call	0x9ec	; 0x9ec <SPI_Master_InitTrans>
+ 15a:	0e 94 ed 04 	call	0x9da	; 0x9da <SPI_Master_InitTrans>
         #endif /* SPI_ROLE */
 
         do{Response = SPI_Transiver(Ack_Response);}
  15e:	8d 2f       	mov	r24, r29
- 160:	0e 94 0d 05 	call	0xa1a	; 0xa1a <SPI_Transiver>
+ 160:	0e 94 04 05 	call	0xa08	; 0xa08 <SPI_Transiver>
  164:	c8 2f       	mov	r28, r24
         while(Response == REQ_DROPPED);
  166:	88 23       	and	r24, r24
@@ -240,7 +240,7 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
 
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
- 16a:	0e 94 06 05 	call	0xa0c	; 0xa0c <SPI_Master_TermTrans>
+ 16a:	0e 94 fd 04 	call	0x9fa	; 0x9fa <SPI_Master_TermTrans>
         #endif /* SPI_ROLE */
 
         if (Response == REQUEST_ACK)
@@ -270,11 +270,11 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
  180:	08 95       	ret
 
 00000182 <Comm_Bridge_Init>:
-        }
-        
         // Return the received code (reason for NACK) - as it is - to caller function
         return Ack_Response;
     }
+	else
+		return OUT_OF_SYNC;
 }
  182:	0e 94 77 00 	call	0xee	; 0xee <CMD_Bus_Master_Init>
  186:	04 c0       	rjmp	.+8      	; 0x190 <Comm_Bridge_Init+0xe>
@@ -372,7 +372,6 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
  1fa:	1f 93       	push	r17
  1fc:	cf 93       	push	r28
  1fe:	8c 01       	movw	r16, r24
-    uint8 ECUs_Comm_State = REQ_DROPPED;
     uint8 Ack_Request = INVALID_ACK_REQUEST;
     if(*Ack_Response == REQ_DONE)
  200:	fc 01       	movw	r30, r24
@@ -1764,145 +1763,174 @@ void Smart_Home_Init(void)
  982:	08 95       	ret
 
 00000984 <SPI_Master_Init>:
-#include "SPI.h"
-
 void SPI_Master_Init(void)
 {
 	//MISO
-	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
- 984:	40 e0       	ldi	r20, 0x00	; 0
- 986:	66 e0       	ldi	r22, 0x06	; 6
+	//DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
+	//MOSI
+	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_OUTPUT);
+ 984:	41 e0       	ldi	r20, 0x01	; 1
+ 986:	65 e0       	ldi	r22, 0x05	; 5
  988:	86 e3       	ldi	r24, 0x36	; 54
  98a:	90 e0       	ldi	r25, 0x00	; 0
  98c:	0e 94 42 02 	call	0x484	; 0x484 <DIO_SetPinDir>
-	//MOSI
-	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_OUTPUT);
+	//CLK
+	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_OUTPUT);
  990:	41 e0       	ldi	r20, 0x01	; 1
- 992:	65 e0       	ldi	r22, 0x05	; 5
+ 992:	67 e0       	ldi	r22, 0x07	; 7
  994:	86 e3       	ldi	r24, 0x36	; 54
  996:	90 e0       	ldi	r25, 0x00	; 0
  998:	0e 94 42 02 	call	0x484	; 0x484 <DIO_SetPinDir>
-	//CLK
-	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_OUTPUT);
+	//SS
+	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_OUTPUT);
  99c:	41 e0       	ldi	r20, 0x01	; 1
- 99e:	67 e0       	ldi	r22, 0x07	; 7
+ 99e:	64 e0       	ldi	r22, 0x04	; 4
  9a0:	86 e3       	ldi	r24, 0x36	; 54
  9a2:	90 e0       	ldi	r25, 0x00	; 0
  9a4:	0e 94 42 02 	call	0x484	; 0x484 <DIO_SetPinDir>
-	//SS
-	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_OUTPUT);
- 9a8:	41 e0       	ldi	r20, 0x01	; 1
- 9aa:	64 e0       	ldi	r22, 0x04	; 4
- 9ac:	86 e3       	ldi	r24, 0x36	; 54
- 9ae:	90 e0       	ldi	r25, 0x00	; 0
- 9b0:	0e 94 42 02 	call	0x484	; 0x484 <DIO_SetPinDir>
 	
-	// Set Master & Set Clk Presc
-	SPI->SPCR |= (1<<MSTR);
- 9b4:	8d b1       	in	r24, 0x0d	; 13
- 9b6:	80 61       	ori	r24, 0x10	; 16
- 9b8:	8d b9       	out	0x0d, r24	; 13
+	// Set Master  & Set the polarity of the transmission to setup then sample
+	SPI->SPCR |= (1<<MSTR) | (1<<CPHA);;
+ 9a8:	8d b1       	in	r24, 0x0d	; 13
+ 9aa:	84 61       	ori	r24, 0x14	; 20
+ 9ac:	8d b9       	out	0x0d, r24	; 13
+	
+	// Set Clk Presc Osc/128
 	SPI->SPCR |= (1<<SPR1) | (1<<SPR0);
- 9ba:	8d b1       	in	r24, 0x0d	; 13
- 9bc:	83 60       	ori	r24, 0x03	; 3
- 9be:	8d b9       	out	0x0d, r24	; 13
-	
+ 9ae:	8d b1       	in	r24, 0x0d	; 13
+ 9b0:	83 60       	ori	r24, 0x03	; 3
+ 9b2:	8d b9       	out	0x0d, r24	; 13
 
 	// Make the least significant bit to be transmitted first. i.e shift right
-	SPI->SPCR |= (1<<DORD);
- 9c0:	8d b1       	in	r24, 0x0d	; 13
- 9c2:	80 62       	ori	r24, 0x20	; 32
- 9c4:	8d b9       	out	0x0d, r24	; 13
+	//SPI->SPCR |= (1<<DORD);
 
 	// Enable SPI Peripheral
 	SPI->SPCR |= (1<<SPE);
- 9c6:	8d b1       	in	r24, 0x0d	; 13
- 9c8:	80 64       	ori	r24, 0x40	; 64
- 9ca:	8d b9       	out	0x0d, r24	; 13
+ 9b4:	8d b1       	in	r24, 0x0d	; 13
+ 9b6:	80 64       	ori	r24, 0x40	; 64
+ 9b8:	8d b9       	out	0x0d, r24	; 13
 	
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_HIGH);
- 9cc:	41 e0       	ldi	r20, 0x01	; 1
- 9ce:	64 e0       	ldi	r22, 0x04	; 4
- 9d0:	86 e3       	ldi	r24, 0x36	; 54
- 9d2:	90 e0       	ldi	r25, 0x00	; 0
- 9d4:	0e 94 5e 02 	call	0x4bc	; 0x4bc <DIO_SetPinValue>
- 9d8:	2f ef       	ldi	r18, 0xFF	; 255
- 9da:	86 e7       	ldi	r24, 0x76	; 118
- 9dc:	91 e0       	ldi	r25, 0x01	; 1
- 9de:	21 50       	subi	r18, 0x01	; 1
- 9e0:	80 40       	sbci	r24, 0x00	; 0
- 9e2:	90 40       	sbci	r25, 0x00	; 0
- 9e4:	e1 f7       	brne	.-8      	; 0x9de <SPI_Master_Init+0x5a>
- 9e6:	00 c0       	rjmp	.+0      	; 0x9e8 <SPI_Master_Init+0x64>
- 9e8:	00 00       	nop
- 9ea:	08 95       	ret
+ 9ba:	41 e0       	ldi	r20, 0x01	; 1
+ 9bc:	64 e0       	ldi	r22, 0x04	; 4
+ 9be:	86 e3       	ldi	r24, 0x36	; 54
+ 9c0:	90 e0       	ldi	r25, 0x00	; 0
+ 9c2:	0e 94 5e 02 	call	0x4bc	; 0x4bc <DIO_SetPinValue>
+ 9c6:	2f ef       	ldi	r18, 0xFF	; 255
+ 9c8:	86 e7       	ldi	r24, 0x76	; 118
+ 9ca:	91 e0       	ldi	r25, 0x01	; 1
+ 9cc:	21 50       	subi	r18, 0x01	; 1
+ 9ce:	80 40       	sbci	r24, 0x00	; 0
+ 9d0:	90 40       	sbci	r25, 0x00	; 0
+ 9d2:	e1 f7       	brne	.-8      	; 0x9cc <SPI_Master_Init+0x48>
+ 9d4:	00 c0       	rjmp	.+0      	; 0x9d6 <SPI_Master_Init+0x52>
+ 9d6:	00 00       	nop
+ 9d8:	08 95       	ret
 
-000009ec <SPI_Master_InitTrans>:
+000009da <SPI_Master_InitTrans>:
 }
 
 void SPI_Master_InitTrans(void)
 {
 	// Clear the SS to have the slaves ready to receive data
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_LOW);
- 9ec:	40 e0       	ldi	r20, 0x00	; 0
- 9ee:	64 e0       	ldi	r22, 0x04	; 4
- 9f0:	86 e3       	ldi	r24, 0x36	; 54
- 9f2:	90 e0       	ldi	r25, 0x00	; 0
- 9f4:	0e 94 5e 02 	call	0x4bc	; 0x4bc <DIO_SetPinValue>
- 9f8:	2f ef       	ldi	r18, 0xFF	; 255
- 9fa:	86 e7       	ldi	r24, 0x76	; 118
- 9fc:	91 e0       	ldi	r25, 0x01	; 1
- 9fe:	21 50       	subi	r18, 0x01	; 1
- a00:	80 40       	sbci	r24, 0x00	; 0
- a02:	90 40       	sbci	r25, 0x00	; 0
- a04:	e1 f7       	brne	.-8      	; 0x9fe <SPI_Master_InitTrans+0x12>
- a06:	00 c0       	rjmp	.+0      	; 0xa08 <SPI_Master_InitTrans+0x1c>
- a08:	00 00       	nop
- a0a:	08 95       	ret
+ 9da:	40 e0       	ldi	r20, 0x00	; 0
+ 9dc:	64 e0       	ldi	r22, 0x04	; 4
+ 9de:	86 e3       	ldi	r24, 0x36	; 54
+ 9e0:	90 e0       	ldi	r25, 0x00	; 0
+ 9e2:	0e 94 5e 02 	call	0x4bc	; 0x4bc <DIO_SetPinValue>
+ 9e6:	2f ef       	ldi	r18, 0xFF	; 255
+ 9e8:	86 e7       	ldi	r24, 0x76	; 118
+ 9ea:	91 e0       	ldi	r25, 0x01	; 1
+ 9ec:	21 50       	subi	r18, 0x01	; 1
+ 9ee:	80 40       	sbci	r24, 0x00	; 0
+ 9f0:	90 40       	sbci	r25, 0x00	; 0
+ 9f2:	e1 f7       	brne	.-8      	; 0x9ec <SPI_Master_InitTrans+0x12>
+ 9f4:	00 c0       	rjmp	.+0      	; 0x9f6 <SPI_Master_InitTrans+0x1c>
+ 9f6:	00 00       	nop
+ 9f8:	08 95       	ret
 
-00000a0c <SPI_Master_TermTrans>:
+000009fa <SPI_Master_TermTrans>:
 }
 
 void SPI_Master_TermTrans(void)
 {
 	// Set SS to terminate transmission to slaves
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_HIGH);
- a0c:	41 e0       	ldi	r20, 0x01	; 1
- a0e:	64 e0       	ldi	r22, 0x04	; 4
- a10:	86 e3       	ldi	r24, 0x36	; 54
- a12:	90 e0       	ldi	r25, 0x00	; 0
- a14:	0e 94 5e 02 	call	0x4bc	; 0x4bc <DIO_SetPinValue>
- a18:	08 95       	ret
+ 9fa:	41 e0       	ldi	r20, 0x01	; 1
+ 9fc:	64 e0       	ldi	r22, 0x04	; 4
+ 9fe:	86 e3       	ldi	r24, 0x36	; 54
+ a00:	90 e0       	ldi	r25, 0x00	; 0
+ a02:	0e 94 5e 02 	call	0x4bc	; 0x4bc <DIO_SetPinValue>
+ a06:	08 95       	ret
 
-00000a1a <SPI_Transiver>:
+00000a08 <SPI_Transiver>:
 }
 
 uint8 SPI_Transiver(uint8 data)
 {
- a1a:	cf 93       	push	r28
- a1c:	c8 2f       	mov	r28, r24
+ a08:	cf 93       	push	r28
+ a0a:	c8 2f       	mov	r28, r24
 	uint8 Received_Data = 0;
 	uint8 Trans_N_Started_counter = 1;
 	
 	#if SPI_ROLE == SPI_MASTER
 		// Clear SS Pin to start transmission
 		SPI_Master_InitTrans();
- a1e:	0e 94 f6 04 	call	0x9ec	; 0x9ec <SPI_Master_InitTrans>
+ a0c:	0e 94 ed 04 	call	0x9da	; 0x9da <SPI_Master_InitTrans>
 		
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
- a22:	cf b9       	out	0x0f, r28	; 15
+ a10:	cf b9       	out	0x0f, r28	; 15
+}
+
+uint8 SPI_Transiver(uint8 data)
+{
+	uint8 Received_Data = 0;
+	uint8 Trans_N_Started_counter = 1;
+ a12:	81 e0       	ldi	r24, 0x01	; 1
+		SPI_Master_InitTrans();
 		
-		while(GetBit(SPI->SPSR,SPIF) == 0);
- a24:	77 9b       	sbis	0x0e, 7	; 14
- a26:	fe cf       	rjmp	.-4      	; 0xa24 <SPI_Transiver+0xa>
-		Received_Data = SPI->SPDR;
- a28:	cf b1       	in	r28, 0x0f	; 15
+		// write to SPDR of the Master to start the transmission and clock
+		SPI->SPDR = data;
+		
+		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
+ a14:	01 c0       	rjmp	.+2      	; 0xa18 <SPI_Transiver+0x10>
+			Trans_N_Started_counter++;
+ a16:	8f 5f       	subi	r24, 0xFF	; 255
+		SPI_Master_InitTrans();
+		
+		// write to SPDR of the Master to start the transmission and clock
+		SPI->SPDR = data;
+		
+		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
+ a18:	77 99       	sbic	0x0e, 7	; 14
+ a1a:	02 c0       	rjmp	.+4      	; 0xa20 <SPI_Transiver+0x18>
+ a1c:	81 11       	cpse	r24, r1
+ a1e:	fb cf       	rjmp	.-10     	; 0xa16 <SPI_Transiver+0xe>
+			Trans_N_Started_counter++;
+		if(Trans_N_Started_counter == 0)
+ a20:	88 23       	and	r24, r24
+ a22:	11 f0       	breq	.+4      	; 0xa28 <SPI_Transiver+0x20>
+			Received_Data = TRANS_FAILED;
+		else
+			Received_Data = SPI->SPDR;
+ a24:	cf b1       	in	r28, 0x0f	; 15
+ a26:	01 c0       	rjmp	.+2      	; 0xa2a <SPI_Transiver+0x22>
+		SPI->SPDR = data;
+		
+		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
+			Trans_N_Started_counter++;
+		if(Trans_N_Started_counter == 0)
+			Received_Data = TRANS_FAILED;
+ a28:	c0 e0       	ldi	r28, 0x00	; 0
+		else
+			Received_Data = SPI->SPDR;
 
 		SPI_Master_TermTrans();
- a2a:	0e 94 06 05 	call	0xa0c	; 0xa0c <SPI_Master_TermTrans>
-			}
-		}
+ a2a:	0e 94 fd 04 	call	0x9fa	; 0x9fa <SPI_Master_TermTrans>
+			Received_Data = SPI->SPDR;
+		
 		
 	#endif
 	return Received_Data;

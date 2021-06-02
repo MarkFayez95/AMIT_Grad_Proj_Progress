@@ -53,6 +53,7 @@ LCD_Row_Text LCD_Row_Text_Options[] =
     'Done!',
     'Selection ERROR!',
     'Request:...',
+	'CTRL ACT System',
     '\0'
 };
 

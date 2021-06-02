@@ -46,7 +46,8 @@ typedef enum
     REQ_DONE,
     NACK_REASON_REQ,
     INV_DEV_SEL,
-    INV_OP_SEL
+    INV_OP_SEL,
+	OUT_OF_SYNC
 }Comm_Bridge_Extra_Porting_Codes;
 
 void Comm_Bridge_Init(void);

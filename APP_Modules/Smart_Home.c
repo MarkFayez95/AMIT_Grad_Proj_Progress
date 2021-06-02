@@ -6,6 +6,7 @@
  */
 
 #include "Smart_Home.h"
+#include "Status_FollowUp.h"
 
 uint8 User_Selection[COMMAND_BYTE_LENGTH+1];
 extern volatile DevicesDB Smart_Home_Devices;
@@ -75,9 +76,13 @@ static void Smart_Home_Process_N_Respond(void)
 	{
 		Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_DEVICE);
 	}
-	else
+	else if(Selection_Validity == INV_OP_SEL)
 	{
 		Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_OPTION);
+	}
+	else
+	{
+		Status_Disp_LCD(LCD_ROW_TXT_CTRL_ACT_SYSTEM,LCD_ROW_TXT_NOT_IN_SYNC);
 	}
 	
 	Comm_Bridge_BT_Send(Selection_Validity);

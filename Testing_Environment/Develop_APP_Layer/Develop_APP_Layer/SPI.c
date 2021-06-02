@@ -10,7 +10,7 @@
 void SPI_Master_Init(void)
 {
 	//MISO
-	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
+	//DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
 	//MOSI
 	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_OUTPUT);
 	//CLK
@@ -18,13 +18,15 @@ void SPI_Master_Init(void)
 	//SS
 	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_OUTPUT);
 	
-	// Set Master & Set Clk Presc
-	SPI->SPCR |= (1<<MSTR);
+	// Set Master  & Set the polarity of the transmission to setup then sample
+	SPI->SPCR |= (1<<MSTR) | (1<<CPHA);;
+	
+	// Set Clk Presc Osc/128
 	SPI->SPCR |= (1<<SPR1) | (1<<SPR0);
 	
 
 	// Make the least significant bit to be transmitted first. i.e shift right
-	SPI->SPCR |= (1<<DORD);
+	//SPI->SPCR |= (1<<DORD);
 
 	// Enable SPI Peripheral
 	SPI->SPCR |= (1<<SPE);
@@ -59,39 +61,24 @@ uint8 SPI_Transiver(uint8 data)
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
 		
-		while(GetBit(SPI->SPSR,SPIF) == 0);
-		Received_Data = SPI->SPDR;
+		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
+			Trans_N_Started_counter++;
+		if(Trans_N_Started_counter == 0)
+			Received_Data = TRANS_FAILED;
+		else
+			Received_Data = SPI->SPDR;
 
 		SPI_Master_TermTrans();
 	#elif SPI_ROLE == SPI_SLAVE
-		uint8 Check_Trans_start = 0;
+		SPI->SPDR = data;
 		
-		DIO_GetPinValue(SPI_PORT,SPI_SS_PIN,&Check_Trans_start);
-		if(Check_Trans_start != 0)
-		{
-			SPI->SPDR = data;
-			while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
-				Trans_N_Started_counter++;
-			if(Trans_N_Started_counter == 0)
-				Received_Data = TRANS_FAILED;
-			else
-				Received_Data = SPI->SPDR;
-		}
+		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
+			Trans_N_Started_counter++;
+		if(Trans_N_Started_counter == 0)
+			Received_Data = TRANS_FAILED;
 		else
-		{
-			// wait till current transmission is completed
-			while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
-				Trans_N_Started_counter++;
-			if(Trans_N_Started_counter == 0)
-				Received_Data = TRANS_FAILED;
-			else
-			{
-				// Load the required data to be sent
-				SPI->SPDR = data;
-				while(GetBit(SPI->SPSR,SPIF) == 0);
-				Received_Data = SPI->SPDR;
-			}
-		}
+			Received_Data = SPI->SPDR;
+		
 		
 	#endif
 	return Received_Data;
@@ -102,15 +89,15 @@ void SPI_Slave_Init(void)
 	//MISO
 	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_OUTPUT);
 	//MOSI
-	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
+	//DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
 	//CLK
-	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
+	//DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
 	//SS
-	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
+	//DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
 	
-	// Enable SPI Peripheral
-	SPI->SPCR |= (1<<SPE);
+	// Enable SPI Peripheral & Set the polarity of the transmission to setup then sample
+	SPI->SPCR |= (1<<SPE) | (1<<CPHA);
 
 	//make the least significant bit to be transmitted first. i.e shift right
-	SPI->SPCR |= (1<<DORD);		
+	//SPI->SPCR |= (1<<DORD);		
 }

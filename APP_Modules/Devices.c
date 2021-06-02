@@ -7,6 +7,7 @@
 
 
 #include "Devices.h"
+#include "Status_FollowUp.h"
 
 volatile DevicesDB Smart_Home_Devices;
 

@@ -7,7 +7,7 @@
 
 #include "Status_FollowUp.h"
 
-const LCD_Row_Text LCD_Row_Text_Options[] =
+LCD_Row_Text LCD_Row_Text_Options[] =
 {
     'Control ECU',
     'Actuator ECU',
@@ -28,7 +28,6 @@ const LCD_Row_Text LCD_Row_Text_Options[] =
     'Master Ready',
     'pending input',
     'Proceeding...',
-    'Request Done!',
     'Invalid Device!',
     'Invalid Option!',
     'Peer Unavailable',
@@ -48,17 +47,17 @@ const LCD_Row_Text LCD_Row_Text_Options[] =
     'APPLIED!',
     'Control System',
     'Actuator System',
-    'Starting...',
     'Ready.',
     'Selected',
     'Op Status:..',
     'Done!',
     'Selection ERROR!',
     'Request:...',
-    ''
+	'CTRL ACT System',
+    '\0'
 };
 
-const uint8 BT_Text_Options[][] =
+uint8 BT_Text_Options[3][30] =
 {
     'Request Done!',
     'Invalid Device Requested!',

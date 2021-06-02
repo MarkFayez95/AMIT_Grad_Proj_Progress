@@ -10,7 +10,6 @@
 
 #include "Bluetooth_Mod.h"
 #include "CMD_Bus.h"
-#include "Status_FollowUp.h"
 
 #ifdef PUID_DB_H_
     #include "PUID_DB.h"
@@ -47,7 +46,8 @@ typedef enum
     REQ_DONE,
     NACK_REASON_REQ,
     INV_DEV_SEL,
-    INV_OP_SEL
+    INV_OP_SEL,
+	OUT_OF_SYNC
 }Comm_Bridge_Extra_Porting_Codes;
 
 void Comm_Bridge_Init(void);

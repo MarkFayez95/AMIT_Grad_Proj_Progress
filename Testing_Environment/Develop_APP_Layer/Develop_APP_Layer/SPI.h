@@ -24,6 +24,7 @@
 #define SPI_SLAVE   0xB0
 
 #define TRANS_FAILED    0
+#define MASTER_SS_SET_DELAY_MS    30
 
 #ifndef SPI_ROLE
     #define SPI_ROLE    SPI_MASTER
@@ -35,8 +36,6 @@
     #define SPI_MOSI_PIN DIO_PIN_5
     #define SPI_MISO_PIN DIO_PIN_6
     #define SPI_CLK_PIN  DIO_PIN_7
-
-    #define MASTER_SS_SET_DELAY_MS    30
 
 #elif SPI_ROLE == SPI_SLAVE
 

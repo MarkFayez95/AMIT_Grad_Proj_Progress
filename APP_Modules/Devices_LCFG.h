@@ -18,7 +18,7 @@ typedef enum
 
 typedef enum
 {
-	LED_OFF_OP=OP_2_INDEX,
+	LED_OFF_OP,
 	LED_ON_OP,
 	LED_TOGGLE_OP
 } Operation_Codes;

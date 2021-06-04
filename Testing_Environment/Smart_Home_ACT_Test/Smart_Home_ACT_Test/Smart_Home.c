@@ -158,7 +158,7 @@ static void Smart_Home_Read_N_Decode(void)
 				Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
 			}
 		}
-		else if(Selection_Validity = DEV_INVALID)
+		else if(Selection_Validity == DEV_INVALID)
 		{
 			Respond_Send_Status = Comm_Bridge_CMD_Res(INV_DEV_SEL);
 			if(Respond_Send_Status == OUT_OF_SYNC)
@@ -184,7 +184,9 @@ void Smart_Home_Clear_User_Selection(void)
 	{
 		User_Selection[Command_byte_counter] = 0;
 	}
-	Selected_Device = 0;
-	Selected_Operation = 0;
+	#if ECU_ROLE == ACTUATOR_ECU
+		Selected_Device = 0;
+		Selected_Operation = 0;
+	#endif /* ECU_ROLE */
 	
 }

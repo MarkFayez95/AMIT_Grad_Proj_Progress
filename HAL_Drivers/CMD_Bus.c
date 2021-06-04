@@ -19,15 +19,19 @@ uint8 CMD_Bus_HandShake(void)
 {
     uint8 Peer_ID;
 
-    #if SPI_ROLE == SPI_MASTER
-        SPI_Master_InitTrans();
-    #endif /* SPI_ROLE */
+    do
+    {
+        #if SPI_ROLE == SPI_MASTER
+            SPI_Master_InitTrans();
+        #endif /* SPI_ROLE */
 
-    Peer_ID = SPI_Transiver(CMD_BUS_DEV_ID);
-    
-    #if SPI_ROLE == SPI_MASTER
-        SPI_Master_TermTrans();
-    #endif /* SPI_ROLE */
+        Peer_ID = SPI_Transiver(CMD_BUS_DEV_ID);
+        
+        #if SPI_ROLE == SPI_MASTER
+            SPI_Master_TermTrans();
+        #endif /* SPI_ROLE */
+    }
+    while(Peer_ID == PEER_DROPPED);
 
     if(Peer_ID == CMD_BUS_PEER_ID)
         return VALID_PEER;

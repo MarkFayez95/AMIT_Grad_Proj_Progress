@@ -12,7 +12,7 @@
 #include "System_DTypes.h"
 
 /** Main ECU configuration **/
-#define ECU_ROLE	ACTUATOR_ECU
+#define ECU_ROLE	CONTROL_ECU
 #define NUM_OF_RESYNC_HANDSHAKES    8
 
 /** Status Follow Up configurations **/

@@ -180,7 +180,7 @@ void Smart_Home_Clear_User_Selection(void)
 	uint8 Command_byte_counter = 0;
 	for(Command_byte_counter = 0; Command_byte_counter < (COMMAND_BYTE_LENGTH+COMMAND_PACKET_HEADER_TAIL_LENGTH); Command_byte_counter++ )
 	{
-		User_Selection[Data_byte_counter] = 0;
+		User_Selection[Command_byte_counter] = 0;
 	}
 	Selected_Device = 0;
 	Selected_Operation = 0;

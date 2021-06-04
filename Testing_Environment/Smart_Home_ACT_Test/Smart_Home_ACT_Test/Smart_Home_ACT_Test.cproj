@@ -160,6 +160,9 @@
     <Compile Include="Devices.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Devices_DTypes.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Devices_LCFG.c">
       <SubType>compile</SubType>
     </Compile>

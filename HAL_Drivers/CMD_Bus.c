@@ -126,7 +126,6 @@ uint8 CMD_Bus_Read(uint8* Req_Command)
 **/
 uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
 {
-    uint16 Iteration_counter = 0;
     do
     {
         #if SPI_ROLE == SPI_MASTER
@@ -138,11 +137,8 @@ uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
         #endif /* SPI_ROLE */
-
-        Iteration_counter ++;
     }
-    while((*Ack_Req_Response != ACK_RES) && (*Ack_Req_Response != NACK_RES) && (Iteration_counter != 0));
-    
+    while(*Ack_Req_Response == PEER_DROPPED);
 
     if ((*Ack_Req_Response == ACK_RES) || (*Ack_Req_Response == NACK_RES))
         return RECEIVED;
@@ -161,8 +157,6 @@ uint8 CMD_Bus_Req_Ack(uint8* Ack_Req_Response)
 uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
 {
     uint8 Response = 0;
-    uint16 Iteration_counter = 0;
-
     do
     {
         #if SPI_ROLE == SPI_MASTER
@@ -174,11 +168,9 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
         #endif /* SPI_ROLE */
-        
-        Iteration_counter ++;
     }
-    while((Response != REQUEST_ACK) && (Iteration_counter != 0));
-
+    while(Response == PEER_DROPPED);
+    
     if (Response == REQUEST_ACK)
         return DELIVERED;
     else 
@@ -194,7 +186,6 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
 **/
 uint8 CMD_Bus_Req_Reason_NACK(uint8* Nack_Res_Reason)
 {
-    uint16 Iteration_counter = 0;
     do
     {
         #if SPI_ROLE == SPI_MASTER
@@ -206,11 +197,8 @@ uint8 CMD_Bus_Req_Reason_NACK(uint8* Nack_Res_Reason)
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
         #endif /* SPI_ROLE */
-
-        Iteration_counter ++;
     }
-    while((*Nack_Res_Reason != INV_DEV_SEL) && (*Nack_Res_Reason != INV_OP_SEL) && (Iteration_counter != 0));
-    
+    while(*Nack_Res_Reason == PEER_DROPPED);
 
     if ((*Nack_Res_Reason == INV_DEV_SEL) || (*Nack_Res_Reason == INV_OP_SEL))
         return RECEIVED;
@@ -229,7 +217,6 @@ uint8 CMD_Bus_Req_Reason_NACK(uint8* Nack_Res_Reason)
 uint8 CMD_Bus_Res_Reason_NACK(uint8 NACK_Reason)
 {
     uint8 Response = 0;
-    uint16 Iteration_counter = 0;
 
     do
     {
@@ -242,10 +229,8 @@ uint8 CMD_Bus_Res_Reason_NACK(uint8 NACK_Reason)
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
         #endif /* SPI_ROLE */
-        
-        Iteration_counter ++;
     }
-    while((Response != NACK_REASON_REQ) && (Iteration_counter != 0));
+    while(Response == PEER_DROPPED);
 
     if (Response == NACK_REASON_REQ)
         return DELIVERED;

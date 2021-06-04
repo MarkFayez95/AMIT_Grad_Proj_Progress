@@ -11,30 +11,6 @@
 
 #define PEER_DROPPED    0xFF  // if response from peer is FF then it might indicate that Peer ECU is down.
 
-typedef enum 
-{
-    VALID_PEER = 0x01, // Valid Peer code 0x01
-    INVALID_PEER, // Invalid Peer code 0x02
-    READING, // Reading code 0x03
-    RECEIVED, // Received data byte code 0x04
-    DELIVERED, // Delivered successfully code 0x05
-    FAILED_SEND, // Failed Send code 0x06
-    REQUEST_ACK, // Request Acknowledgement code 0x07
-    NACK_RES, // NACK response code 0x08
-    ACK_RES, // Ack response code 0x09
-    INVALID_ACK_REQUEST, // Invalid Ack request code 0x0A
-    INVALID_ACK_RESPONSE, // Invalid Ack response code 0x0B
-    PEER_UNAVAILABLE, // Peer unavailable code 0x0C
-    NACK_REASON_REQ, // Request Reason for NACK code 0x0D
-    INVALID_NACK_REASON_REQ, //Invalid Reason for NACK code 0x0E
-    INV_DEV_SEL, // Invalide device selection code 0x0F
-    INV_OP_SEL, // Invalid device selection code 0x10
-    INVALID_NACK_REASON, // Invalid Reason for NACK code 0x11
-    REQ_DONE, // Request Done code 0x12
-	OUT_OF_SYNC, // Out of Sync state code 0x13
-    IN_SYNC // In Sync state code 0x14
-}CMD_Bus_States;
-
 /*
  * Description: Initiate the CMD_Bus communication as Master
  * Inputs: None

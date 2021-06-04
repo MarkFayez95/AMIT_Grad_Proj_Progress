@@ -13,11 +13,6 @@
 #define BT_STAT_PIN_PORT    DIO_PORTD
 #define BT_STAT_PIN_PIN     DIO_PIN_7
 
-typedef enum {
-    BT_NOT_PAIRED,
-    BT_PAIRED
-} BT_Pair_State;
-
 void Bluetooth_Mod_Init(void);
 uint8 Bluetooth_Mod_Ch_Pair(void);
 void Bluetooth_Mod_Tx(uint8 Data_Byte);

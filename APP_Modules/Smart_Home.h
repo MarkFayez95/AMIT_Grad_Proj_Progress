@@ -22,4 +22,6 @@ static void Smart_Home_Read_N_Decode(void);
 
 static void Smart_Home_Process_N_Respond(void);
 
+void Smart_Home_Clear_User_Selection(void)
+
 #endif /* SMART_HOME_H_ */

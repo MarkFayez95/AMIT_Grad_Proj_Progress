@@ -9,6 +9,7 @@
 #define SMART_HOME_SYS_CONFIG_H_
 
 #include "System_Config_Options.h"
+#include "System_DTypes.h"
 
 /** Main ECU configuration **/
 #define ECU_ROLE	ACTUATOR_ECU
@@ -19,6 +20,7 @@
 
 /** Communication Bridge Module configurations **/
 #define COMMAND_BYTE_LENGTH     1
+#define COMMAND_PACKET_HEADER_TAIL_LENGTH 2
 #define MAX_FAILED_COMM_BRI_HANDSHAKES    5
 #define MAX_FAILED_COMM_BRI_TRANSMISSIONS   10
 #define PRIOR_RE_SYNC_HANDSHAKES_DELAY_MS   50
@@ -90,7 +92,7 @@
             #define SPI_CLK_PIN  DIO_PIN_7
         #endif
 
-/** Devices Module configurations **/
+/** Devices Manager Application Module configurations **/
 #define NUM_OF_DEVICES      3
 #define MAX_OPS_PER_DEV     3
 

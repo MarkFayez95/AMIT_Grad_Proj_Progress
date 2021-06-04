@@ -32,19 +32,19 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 	{
 		if (((Req_Operation-OPER_CONST) >= 0) && ((Req_Operation-OPER_CONST) < MAX_OPS_PER_DEV))
 		{
-			if((Req_Operation-OPER_CONST) < OP_3)
+			if((Req_Operation-OPER_CONST) == Smart_Home_Devices.Device[(Req_Device-DEV_CONST)].Current_Operation)
 			{
-				if((Req_Operation-OPER_CONST) == Smart_Home_Devices.Device[(Req_Device-DEV_CONST)].Current_Operation)
-				{
-					Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_ALREADY_RUNNING);
-					
-					return OP_INVALID;
-				}
-				else
+				if((Req_Operation-OPER_CONST) == OP_3)
 				{
 					Status_Disp_LCD(LCD_ROW_TXT_VALID_SELECTION,LCD_ROW_TXT_PROCEEDING);
 
 					return DEV_N_OP_VALID;
+				}
+				else
+				{
+					Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_ALREADY_RUNNING);
+				
+					return OP_INVALID;
 				}
 			}
 			else
@@ -53,6 +53,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 
 				return DEV_N_OP_VALID;
 			}
+
 		}
 		else
 		{

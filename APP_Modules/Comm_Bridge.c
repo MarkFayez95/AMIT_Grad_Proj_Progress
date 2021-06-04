@@ -184,7 +184,7 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
     
 
     uint8 Ack_Validity = INVALID_ACK_RESPONSE;
-    uint8 Ack_Response = INVALID_ACK_RESPONSE;
+    uint8 Ack_Response = ACK_RES;
     
     ECUs_Comm_State = CMD_Bus_HandShake();
     for(Failed_Iteration_counter = 0; (ECUs_Comm_State == INVALID_PEER) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_HANDSHAKES); Failed_Iteration_counter++)
@@ -273,7 +273,6 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
         // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
         Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS, LCD_ROW_TXT_NOT_IN_SYNC);
         Request_Command[RESPONSE_DATA_BYTE] = OUT_OF_SYNC;
-        ECUs_Comm_State = OUT_OF_SYNC;
         return OUT_OF_SYNC;
     }
 
@@ -319,6 +318,8 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
 
         return IN_SYNC; // since communication protocol is completed return success IN_SYNC code ensuring both peers are still in sync.
     }
+    else
+		return OUT_OF_SYNC;
 
 #endif	/* ECU_ROLE */
 }
@@ -389,21 +390,21 @@ uint8 Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
  * Returns: None
  * Author: Mark Fayez
 **/
-uint8 Comm_Bridge_CMD_Res(uint8* Ack_Response)
+uint8 Comm_Bridge_CMD_Res(uint8 Ack_Response)
 {
 #if ECU_ROLE == ACTUATOR_ECU
     uint8 Ack_Request = INVALID_ACK_REQUEST;
     uint8 Failed_Iteration_counter = 0;
 
-    if(*Ack_Response == REQ_DONE)
+    if(Ack_Response == REQ_DONE)
     {
-        Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
-        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+        Ack_Request = CMD_Bus_Res_Ack(ACK_RES);
+        for(Failed_Iteration_counter = 0; ((Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS)); Failed_Iteration_counter++)
         {
             // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
             Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
 
-            Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
+            Ack_Request = CMD_Bus_Res_Ack(Ack_Response);
         }
         if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS ) && (Ack_Request == INVALID_ACK_REQUEST))
         {
@@ -412,6 +413,8 @@ uint8 Comm_Bridge_CMD_Res(uint8* Ack_Response)
 
             return OUT_OF_SYNC;
         }
+
+        return IN_SYNC; // since communication protocol is completed return success IN_SYNC code ensuring both peers are still in sync.
     }
     else
     {
@@ -434,13 +437,13 @@ uint8 Comm_Bridge_CMD_Res(uint8* Ack_Response)
         else if(Ack_Request == DELIVERED)
         {
 
-            Ack_Request = CMD_Bus_Res_Reason_NACK(*Ack_Response);
+            Ack_Request = CMD_Bus_Res_Reason_NACK(Ack_Response);
             for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_NACK_REASON_REQ) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
             {
                 // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
                 Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
 
-                Ack_Request = CMD_Bus_Res_Reason_NACK(*Ack_Response);
+                Ack_Request = CMD_Bus_Res_Reason_NACK(Ack_Response);
             }
             if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS) && (Ack_Request == INVALID_NACK_REASON_REQ))
             {

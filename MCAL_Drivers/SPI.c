@@ -5,12 +5,13 @@
  *  Author: Mark Fayez
  */ 
 
+#include "Smart_Home_Sys_Config.h"
 #include "SPI.h"
 
 void SPI_Master_Init(void)
 {
 	//MISO
-	//DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
 	//MOSI
 	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_OUTPUT);
 	//CLK
@@ -52,7 +53,6 @@ void SPI_Master_TermTrans(void)
 uint8 SPI_Transiver(uint8 data)
 {
 	uint8 Received_Data = 0;
-	uint16 Trans_N_Started_counter = 1;
 	
 	#if SPI_ROLE == SPI_MASTER
 		// Clear SS Pin to start transmission
@@ -61,23 +61,17 @@ uint8 SPI_Transiver(uint8 data)
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
 		
-		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
-			Trans_N_Started_counter++;
-		if(Trans_N_Started_counter == 0)
-			Received_Data = TRANS_FAILED;
-		else
-			Received_Data = SPI->SPDR;
+		while(GetBit(SPI->SPSR,SPIF) == 0);
+		
+		Received_Data = SPI->SPDR;
 
 		SPI_Master_TermTrans();
 	#elif SPI_ROLE == SPI_SLAVE
 		SPI->SPDR = data;
 		
-		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
-			Trans_N_Started_counter++;
-		if(Trans_N_Started_counter == 0)
-			Received_Data = TRANS_FAILED;
-		else
-			Received_Data = SPI->SPDR;
+		while(GetBit(SPI->SPSR,SPIF) == 0);
+
+		Received_Data = SPI->SPDR;
 	#endif /* SPI_ROLE */
 	return Received_Data;
 }
@@ -87,11 +81,11 @@ void SPI_Slave_Init(void)
 	//MISO
 	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_OUTPUT);
 	//MOSI
-	//DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
 	//CLK
-	//DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
 	//SS
-	//DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
 	
 	// Enable SPI Peripheral & Set the polarity of the transmission to setup then sample
 	SPI->SPCR |= (1<<SPE) | (1<<CPHA);

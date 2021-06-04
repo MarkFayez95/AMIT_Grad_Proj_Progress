@@ -3,31 +3,31 @@ Smart_Home_ACT_Test.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000ab4  00000000  00000000  00000094  2**1
+  0 .text         00000ae6  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         000002e8  00800060  00000ab4  00000b48  2**0
+  1 .data         000002e8  00800060  00000ae6  00000b7a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000023  00800348  00800348  00000e30  2**0
+  2 .bss          00000023  00800348  00800348  00000e62  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000e30  2**0
+  3 .comment      00000030  00000000  00000000  00000e62  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000e60  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000e94  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000310  00000000  00000000  00000e9c  2**0
+  5 .debug_aranges 00000310  00000000  00000000  00000ed0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000335a  00000000  00000000  000011ac  2**0
+  6 .debug_info   000033e6  00000000  00000000  000011e0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000010fe  00000000  00000000  00004506  2**0
+  7 .debug_abbrev 000010fe  00000000  00000000  000045c6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000015b8  00000000  00000000  00005604  2**0
+  8 .debug_line   000015e2  00000000  00000000  000056c4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000005f4  00000000  00000000  00006bbc  2**2
+  9 .debug_frame  000005f4  00000000  00000000  00006ca8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000101a  00000000  00000000  000071b0  2**0
+ 10 .debug_str    0000101a  00000000  00000000  0000729c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000011c3  00000000  00000000  000081ca  2**0
+ 11 .debug_loc    000011c3  00000000  00000000  000082b6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000260  00000000  00000000  0000938d  2**0
+ 12 .debug_ranges 00000260  00000000  00000000  00009479  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -67,7 +67,7 @@ Disassembly of section .text:
   60:	13 e0       	ldi	r17, 0x03	; 3
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e4 eb       	ldi	r30, 0xB4	; 180
+  66:	e6 ee       	ldi	r30, 0xE6	; 230
   68:	fa e0       	ldi	r31, 0x0A	; 10
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -90,7 +90,7 @@ Disassembly of section .text:
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 27 04 	call	0x84e	; 0x84e <main>
-  8a:	0c 94 58 05 	jmp	0xab0	; 0xab0 <_exit>
+  8a:	0c 94 71 05 	jmp	0xae2	; 0xae2 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -103,7 +103,7 @@ Disassembly of section .text:
     }
 }
   92:	cf 93       	push	r28
-  94:	0e 94 78 04 	call	0x8f0	; 0x8f0 <SPI_Master_InitTrans>
+  94:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
   98:	2f ef       	ldi	r18, 0xFF	; 255
   9a:	86 e7       	ldi	r24, 0x76	; 118
   9c:	91 e0       	ldi	r25, 0x01	; 1
@@ -114,11 +114,11 @@ Disassembly of section .text:
   a6:	00 c0       	rjmp	.+0      	; 0xa8 <CMD_Bus_HandShake+0x16>
   a8:	00 00       	nop
   aa:	80 eb       	ldi	r24, 0xB0	; 176
-  ac:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Transiver>
+  ac:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
   b0:	c8 2f       	mov	r28, r24
   b2:	88 23       	and	r24, r24
   b4:	89 f3       	breq	.-30     	; 0x98 <CMD_Bus_HandShake+0x6>
-  b6:	0e 94 88 04 	call	0x910	; 0x910 <SPI_Master_TermTrans>
+  b6:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
   ba:	c0 3a       	cpi	r28, 0xA0	; 160
   bc:	11 f4       	brne	.+4      	; 0xc2 <CMD_Bus_HandShake+0x30>
   be:	81 e0       	ldi	r24, 0x01	; 1
@@ -128,7 +128,7 @@ Disassembly of section .text:
   c6:	08 95       	ret
 
 000000c8 <CMD_Bus_Slave_Init>:
-  c8:	0e 94 a6 04 	call	0x94c	; 0x94c <SPI_Slave_Init>
+  c8:	0e 94 ad 04 	call	0x95a	; 0x95a <SPI_Slave_Init>
   cc:	08 95       	ret
 
 000000ce <CMD_Bus_Write>:
@@ -138,13 +138,13 @@ Disassembly of section .text:
   d4:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
   d8:	82 30       	cpi	r24, 0x02	; 2
   da:	61 f0       	breq	.+24     	; 0xf4 <CMD_Bus_Write+0x26>
-  dc:	0e 94 78 04 	call	0x8f0	; 0x8f0 <SPI_Master_InitTrans>
+  dc:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
   e0:	8d 2f       	mov	r24, r29
-  e2:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Transiver>
+  e2:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
   e6:	c8 2f       	mov	r28, r24
   e8:	88 23       	and	r24, r24
   ea:	d1 f3       	breq	.-12     	; 0xe0 <CMD_Bus_Write+0x12>
-  ec:	0e 94 88 04 	call	0x910	; 0x910 <SPI_Master_TermTrans>
+  ec:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
   f0:	8c 2f       	mov	r24, r28
   f2:	01 c0       	rjmp	.+2      	; 0xf6 <CMD_Bus_Write+0x28>
   f4:	8b e0       	ldi	r24, 0x0B	; 11
@@ -159,11 +159,11 @@ Disassembly of section .text:
  102:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
  106:	82 30       	cpi	r24, 0x02	; 2
  108:	51 f0       	breq	.+20     	; 0x11e <CMD_Bus_Read+0x22>
- 10a:	0e 94 78 04 	call	0x8f0	; 0x8f0 <SPI_Master_InitTrans>
+ 10a:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
  10e:	83 e0       	ldi	r24, 0x03	; 3
- 110:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Transiver>
+ 110:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
  114:	88 83       	st	Y, r24
- 116:	0e 94 88 04 	call	0x910	; 0x910 <SPI_Master_TermTrans>
+ 116:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
  11a:	84 e0       	ldi	r24, 0x04	; 4
  11c:	01 c0       	rjmp	.+2      	; 0x120 <CMD_Bus_Read+0x24>
  11e:	8b e0       	ldi	r24, 0x0B	; 11
@@ -193,12 +193,12 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
     {
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_InitTrans();
- 134:	0e 94 78 04 	call	0x8f0	; 0x8f0 <SPI_Master_InitTrans>
+ 134:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
         #endif /* SPI_ROLE */
 
         do{Response = SPI_Transiver(Ack_Response);}
  138:	8d 2f       	mov	r24, r29
- 13a:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Transiver>
+ 13a:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
  13e:	c8 2f       	mov	r28, r24
         while(Response == REQ_DROPPED);
  140:	88 23       	and	r24, r24
@@ -206,7 +206,7 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
 
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
- 144:	0e 94 88 04 	call	0x910	; 0x910 <SPI_Master_TermTrans>
+ 144:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
         #endif /* SPI_ROLE */
 
         if (Response == REQUEST_ACK)
@@ -246,13 +246,13 @@ uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
  160:	04 c0       	rjmp	.+8      	; 0x16a <Comm_Bridge_Init+0xe>
  162:	6c e0       	ldi	r22, 0x0C	; 12
  164:	82 e0       	ldi	r24, 0x02	; 2
- 166:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 166:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
  16a:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
  16e:	82 30       	cpi	r24, 0x02	; 2
  170:	c1 f3       	breq	.-16     	; 0x162 <Comm_Bridge_Init+0x6>
  172:	60 e1       	ldi	r22, 0x10	; 16
  174:	82 e0       	ldi	r24, 0x02	; 2
- 176:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 176:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
  17a:	08 95       	ret
 
 0000017c <Comm_Bridge_CMD_Read_Req>:
@@ -276,7 +276,7 @@ void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
         Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  188:	65 e1       	ldi	r22, 0x15	; 21
  18a:	82 e0       	ldi	r24, 0x02	; 2
- 18c:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 18c:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 
         ECUs_Comm_State = CMD_Bus_Read(Request_Command);
  190:	ce 01       	movw	r24, r28
@@ -312,7 +312,7 @@ void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
     Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEV_OP_SELECTED);
  1ac:	6b e1       	ldi	r22, 0x1B	; 27
  1ae:	82 e0       	ldi	r24, 0x02	; 2
- 1b0:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 1b0:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
     
     #endif /* COMMAND_BYTE_LENGTH */
 #endif /* ECU_ROLE */
@@ -355,7 +355,7 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
                 Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  1d8:	65 e1       	ldi	r22, 0x15	; 21
  1da:	82 e0       	ldi	r24, 0x02	; 2
- 1dc:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 1dc:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
  1e0:	06 c0       	rjmp	.+12     	; 0x1ee <Comm_Bridge_CMD_Res+0x34>
             }
             else if (Ack_Request == INVALID_ACK_REQUEST)
@@ -366,7 +366,7 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
                 Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
  1e6:	6a e0       	ldi	r22, 0x0A	; 10
  1e8:	82 e0       	ldi	r24, 0x02	; 2
- 1ea:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 1ea:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
             }
             
         }
@@ -393,7 +393,7 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
                 Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  204:	65 e1       	ldi	r22, 0x15	; 21
  206:	82 e0       	ldi	r24, 0x02	; 2
- 208:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 208:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
  20c:	06 c0       	rjmp	.+12     	; 0x21a <Comm_Bridge_CMD_Res+0x60>
             }
             else if (Ack_Request == INVALID_ACK_REQUEST)
@@ -404,7 +404,7 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
                 Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
  212:	6a e0       	ldi	r22, 0x0A	; 10
  214:	82 e0       	ldi	r24, 0x02	; 2
- 216:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 216:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
             }
             
         }
@@ -431,7 +431,7 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
             Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
  234:	65 e1       	ldi	r22, 0x15	; 21
  236:	82 e0       	ldi	r24, 0x02	; 2
- 238:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 238:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
         }
         while(Ack_Request == PEER_UNAVAILABLE);
  23c:	cb 30       	cpi	r28, 0x0B	; 11
@@ -441,7 +441,7 @@ void Comm_Bridge_CMD_Res(uint8* Ack_Response)
     Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_RESPONSE_SENT);
  240:	6c e1       	ldi	r22, 0x1C	; 28
  242:	82 e0       	ldi	r24, 0x02	; 2
- 244:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 244:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 
 #endif /* ECU_ROLE */
  248:	cf 91       	pop	r28
@@ -500,7 +500,7 @@ void Devices_Init(void)
  290:	4e e1       	ldi	r20, 0x1E	; 30
  292:	61 2f       	mov	r22, r17
  294:	8d e1       	ldi	r24, 0x1D	; 29
- 296:	0e 94 d9 04 	call	0x9b2	; 0x9b2 <Status_Disp_LCD_IncludeInteger>
+ 296:	0e 94 f2 04 	call	0x9e4	; 0x9e4 <Status_Disp_LCD_IncludeInteger>
 void Devices_Init(void)
 {
 	Devices_DB_Config(&Smart_Home_Devices);
@@ -561,7 +561,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 				Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_ALREADY_RUNNING);
  2e0:	6f e1       	ldi	r22, 0x1F	; 31
  2e2:	8a e1       	ldi	r24, 0x1A	; 26
- 2e4:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 2e4:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 				
 				return OP_INVALID;
  2e8:	84 e0       	ldi	r24, 0x04	; 4
@@ -572,7 +572,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 				Status_Disp_LCD(LCD_ROW_TXT_VALID_SELECTION,LCD_ROW_TXT_PROCEEDING);
  2ec:	62 e1       	ldi	r22, 0x12	; 18
  2ee:	80 e2       	ldi	r24, 0x20	; 32
- 2f0:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 2f0:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 
 				return DEV_N_OP_VALID;
  2f4:	81 e0       	ldi	r24, 0x01	; 1
@@ -584,7 +584,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 			Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_INVALID);
  2f8:	61 e2       	ldi	r22, 0x21	; 33
  2fa:	8a e1       	ldi	r24, 0x1A	; 26
- 2fc:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 2fc:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 
 			return OP_INVALID;
  300:	84 e0       	ldi	r24, 0x04	; 4
@@ -596,7 +596,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 		Status_Disp_LCD(LCD_ROW_TXT_DEVICE_SELECTED,LCD_ROW_TXT_INVALID);
  304:	61 e2       	ldi	r22, 0x21	; 33
  306:	89 e1       	ldi	r24, 0x19	; 25
- 308:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 308:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 
 		return DEV_INVALID;
  30c:	83 e0       	ldi	r24, 0x03	; 3
@@ -657,7 +657,7 @@ void Device_Apply_Request(uint8 Req_Device, uint8 Req_Operation)
 	Status_Disp_LCD(LCD_ROW_TXT_DEVICE_OP,LCD_ROW_TXT_APPLIED);
  368:	63 e2       	ldi	r22, 0x23	; 35
  36a:	82 e2       	ldi	r24, 0x22	; 34
- 36c:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 36c:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 }
  370:	df 91       	pop	r29
  372:	cf 91       	pop	r28
@@ -1221,7 +1221,7 @@ void LCD_WriteInteger (sint32 num)
  6b4:	30 e0       	ldi	r19, 0x00	; 0
  6b6:	40 e0       	ldi	r20, 0x00	; 0
  6b8:	50 e0       	ldi	r21, 0x00	; 0
- 6ba:	0e 94 08 05 	call	0xa10	; 0xa10 <__divmodsi4>
+ 6ba:	0e 94 21 05 	call	0xa42	; 0xa42 <__divmodsi4>
  6be:	c6 0f       	add	r28, r22
  6c0:	d7 1f       	adc	r29, r23
 			temp_num /= 10;
@@ -1262,7 +1262,7 @@ void LCD_WriteInteger (sint32 num)
  6e6:	9e 01       	movw	r18, r28
  6e8:	ad ec       	ldi	r26, 0xCD	; 205
  6ea:	bc ec       	ldi	r27, 0xCC	; 204
- 6ec:	0e 94 27 05 	call	0xa4e	; 0xa4e <__umulhisi3>
+ 6ec:	0e 94 40 05 	call	0xa80	; 0xa80 <__umulhisi3>
  6f0:	96 95       	lsr	r25
  6f2:	87 95       	ror	r24
  6f4:	96 95       	lsr	r25
@@ -1290,7 +1290,7 @@ void LCD_WriteInteger (sint32 num)
  720:	9e 01       	movw	r18, r28
  722:	ad ec       	ldi	r26, 0xCD	; 205
  724:	bc ec       	ldi	r27, 0xCC	; 204
- 726:	0e 94 27 05 	call	0xa4e	; 0xa4e <__umulhisi3>
+ 726:	0e 94 40 05 	call	0xa80	; 0xa80 <__umulhisi3>
  72a:	ec 01       	movw	r28, r24
  72c:	d6 95       	lsr	r29
  72e:	c7 95       	ror	r28
@@ -1558,11 +1558,11 @@ void LCD_Clear (void)
 int main(void)
 {
     Smart_Home_Init();
- 84e:	0e 94 64 04 	call	0x8c8	; 0x8c8 <Smart_Home_Init>
+ 84e:	0e 94 6b 04 	call	0x8d6	; 0x8d6 <Smart_Home_Init>
     while (1) 
     {
 		Smart_Home_Run();
- 852:	0e 94 73 04 	call	0x8e6	; 0x8e6 <Smart_Home_Run>
+ 852:	0e 94 7a 04 	call	0x8f4	; 0x8f4 <Smart_Home_Run>
  856:	fd cf       	rjmp	.-6      	; 0x852 <main+0x4>
 
 00000858 <Smart_Home_Read_N_Decode>:
@@ -1574,7 +1574,7 @@ static void Smart_Home_Read_N_Decode(void)
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_PENDING_INPUT);
  858:	61 e1       	ldi	r22, 0x11	; 17
  85a:	85 e2       	ldi	r24, 0x25	; 37
- 85c:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 85c:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 		Comm_Bridge_CMD_Read_Req(User_Selection);
  860:	88 e6       	ldi	r24, 0x68	; 104
  862:	93 e0       	ldi	r25, 0x03	; 3
@@ -1613,7 +1613,7 @@ static void Smart_Home_Process_N_Respond(void)
  898:	89 83       	std	Y+1, r24	; 0x01
 	if(Selection_Validity == DEV_N_OP_VALID)
  89a:	81 30       	cpi	r24, 0x01	; 1
- 89c:	51 f4       	brne	.+20     	; 0x8b2 <Smart_Home_Process_N_Respond+0x34>
+ 89c:	69 f4       	brne	.+26     	; 0x8b8 <Smart_Home_Process_N_Respond+0x3a>
 	{
 		Device_Apply_Request(Selected_Device,Selected_Operation);
  89e:	60 91 48 03 	lds	r22, 0x0348	; 0x800348 <__data_end>
@@ -1623,402 +1623,433 @@ static void Smart_Home_Process_N_Respond(void)
 		Status_Disp_LCD(LCD_ROW_TXT_REQUEST,LCD_ROW_TXT_DONE);
  8aa:	68 e2       	ldi	r22, 0x28	; 40
  8ac:	8a e2       	ldi	r24, 0x2A	; 42
- 8ae:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 8ae:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+		
+		Selection_Validity = REQ_DONE;
+ 8b2:	88 e0       	ldi	r24, 0x08	; 8
+ 8b4:	89 83       	std	Y+1, r24	; 0x01
+ 8b6:	07 c0       	rjmp	.+14     	; 0x8c6 <Smart_Home_Process_N_Respond+0x48>
 	}
-	Selection_Validity += NACK_RES;
- 8b2:	89 81       	ldd	r24, Y+1	; 0x01
- 8b4:	89 5f       	subi	r24, 0xF9	; 249
- 8b6:	89 83       	std	Y+1, r24	; 0x01
+	else if(Selection_Validity == DEV_INVALID)
+ 8b8:	83 30       	cpi	r24, 0x03	; 3
+ 8ba:	19 f4       	brne	.+6      	; 0x8c2 <Smart_Home_Process_N_Respond+0x44>
+		Selection_Validity = INV_DEV_SEL;
+ 8bc:	8a e0       	ldi	r24, 0x0A	; 10
+ 8be:	89 83       	std	Y+1, r24	; 0x01
+ 8c0:	02 c0       	rjmp	.+4      	; 0x8c6 <Smart_Home_Process_N_Respond+0x48>
+	else
+		Selection_Validity = INV_OP_SEL;
+ 8c2:	8b e0       	ldi	r24, 0x0B	; 11
+ 8c4:	89 83       	std	Y+1, r24	; 0x01
+	
 	Comm_Bridge_CMD_Res(&Selection_Validity);
- 8b8:	ce 01       	movw	r24, r28
- 8ba:	01 96       	adiw	r24, 0x01	; 1
- 8bc:	0e 94 dd 00 	call	0x1ba	; 0x1ba <Comm_Bridge_CMD_Res>
+ 8c6:	ce 01       	movw	r24, r28
+ 8c8:	01 96       	adiw	r24, 0x01	; 1
+ 8ca:	0e 94 dd 00 	call	0x1ba	; 0x1ba <Comm_Bridge_CMD_Res>
 }
- 8c0:	0f 90       	pop	r0
- 8c2:	df 91       	pop	r29
- 8c4:	cf 91       	pop	r28
- 8c6:	08 95       	ret
+ 8ce:	0f 90       	pop	r0
+ 8d0:	df 91       	pop	r29
+ 8d2:	cf 91       	pop	r28
+ 8d4:	08 95       	ret
 
-000008c8 <Smart_Home_Init>:
+000008d6 <Smart_Home_Init>:
 #endif /* ECU_ROLE */
 
 
 void Smart_Home_Init(void)
 {
 	Status_FollowUp_Init();
- 8c8:	0e 94 b0 04 	call	0x960	; 0x960 <Status_FollowUp_Init>
+ 8d6:	0e 94 c9 04 	call	0x992	; 0x992 <Status_FollowUp_Init>
 		Status_Disp_LCD(LCD_ROW_TXT_CONTROL_SYSTEM,LCD_ROW_TXT_READY);
 		
 	#elif ECU_ROLE == ACTUATOR_ECU
 		
 		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_STARTING);
- 8cc:	6b e0       	ldi	r22, 0x0B	; 11
- 8ce:	85 e2       	ldi	r24, 0x25	; 37
- 8d0:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
+ 8da:	6b e0       	ldi	r22, 0x0B	; 11
+ 8dc:	85 e2       	ldi	r24, 0x25	; 37
+ 8de:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 		
 		Devices_Init();
- 8d4:	0e 94 28 01 	call	0x250	; 0x250 <Devices_Init>
+ 8e2:	0e 94 28 01 	call	0x250	; 0x250 <Devices_Init>
 		
 		Comm_Bridge_Init();
- 8d8:	0e 94 ae 00 	call	0x15c	; 0x15c <Comm_Bridge_Init>
+ 8e6:	0e 94 ae 00 	call	0x15c	; 0x15c <Comm_Bridge_Init>
 		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_READY);
- 8dc:	6e e1       	ldi	r22, 0x1E	; 30
- 8de:	85 e2       	ldi	r24, 0x25	; 37
- 8e0:	0e 94 b3 04 	call	0x966	; 0x966 <Status_Disp_LCD>
- 8e4:	08 95       	ret
+ 8ea:	6e e1       	ldi	r22, 0x1E	; 30
+ 8ec:	85 e2       	ldi	r24, 0x25	; 37
+ 8ee:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 8f2:	08 95       	ret
 
-000008e6 <Smart_Home_Run>:
+000008f4 <Smart_Home_Run>:
 {
 	#if ECU_ROLE == CONTROL_ECU
 		Smart_Home_User_Selection();
 		Smart_Home_Process_N_Respond();
 	#elif ECU_ROLE == ACTUATOR_ECU
 		Smart_Home_Read_N_Decode();
- 8e6:	0e 94 2c 04 	call	0x858	; 0x858 <Smart_Home_Read_N_Decode>
+ 8f4:	0e 94 2c 04 	call	0x858	; 0x858 <Smart_Home_Read_N_Decode>
 		Smart_Home_Process_N_Respond();
- 8ea:	0e 94 3f 04 	call	0x87e	; 0x87e <Smart_Home_Process_N_Respond>
- 8ee:	08 95       	ret
+ 8f8:	0e 94 3f 04 	call	0x87e	; 0x87e <Smart_Home_Process_N_Respond>
+ 8fc:	08 95       	ret
 
-000008f0 <SPI_Master_InitTrans>:
+000008fe <SPI_Master_InitTrans>:
 }
 
 void SPI_Master_InitTrans(void)
 {
 	// Clear the SS to have the slaves ready to receive data
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_LOW);
- 8f0:	40 e0       	ldi	r20, 0x00	; 0
- 8f2:	64 e0       	ldi	r22, 0x04	; 4
- 8f4:	86 e3       	ldi	r24, 0x36	; 54
- 8f6:	90 e0       	ldi	r25, 0x00	; 0
- 8f8:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 8fc:	2f ef       	ldi	r18, 0xFF	; 255
- 8fe:	86 e7       	ldi	r24, 0x76	; 118
- 900:	91 e0       	ldi	r25, 0x01	; 1
- 902:	21 50       	subi	r18, 0x01	; 1
- 904:	80 40       	sbci	r24, 0x00	; 0
- 906:	90 40       	sbci	r25, 0x00	; 0
- 908:	e1 f7       	brne	.-8      	; 0x902 <SPI_Master_InitTrans+0x12>
- 90a:	00 c0       	rjmp	.+0      	; 0x90c <SPI_Master_InitTrans+0x1c>
- 90c:	00 00       	nop
- 90e:	08 95       	ret
+ 8fe:	40 e0       	ldi	r20, 0x00	; 0
+ 900:	64 e0       	ldi	r22, 0x04	; 4
+ 902:	86 e3       	ldi	r24, 0x36	; 54
+ 904:	90 e0       	ldi	r25, 0x00	; 0
+ 906:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 90a:	2f ef       	ldi	r18, 0xFF	; 255
+ 90c:	86 e7       	ldi	r24, 0x76	; 118
+ 90e:	91 e0       	ldi	r25, 0x01	; 1
+ 910:	21 50       	subi	r18, 0x01	; 1
+ 912:	80 40       	sbci	r24, 0x00	; 0
+ 914:	90 40       	sbci	r25, 0x00	; 0
+ 916:	e1 f7       	brne	.-8      	; 0x910 <SPI_Master_InitTrans+0x12>
+ 918:	00 c0       	rjmp	.+0      	; 0x91a <SPI_Master_InitTrans+0x1c>
+ 91a:	00 00       	nop
+ 91c:	08 95       	ret
 
-00000910 <SPI_Master_TermTrans>:
+0000091e <SPI_Master_TermTrans>:
 }
 
 void SPI_Master_TermTrans(void)
 {
 	// Set SS to terminate transmission to slaves
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_HIGH);
- 910:	41 e0       	ldi	r20, 0x01	; 1
- 912:	64 e0       	ldi	r22, 0x04	; 4
- 914:	86 e3       	ldi	r24, 0x36	; 54
- 916:	90 e0       	ldi	r25, 0x00	; 0
- 918:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 91c:	08 95       	ret
+ 91e:	41 e0       	ldi	r20, 0x01	; 1
+ 920:	64 e0       	ldi	r22, 0x04	; 4
+ 922:	86 e3       	ldi	r24, 0x36	; 54
+ 924:	90 e0       	ldi	r25, 0x00	; 0
+ 926:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 92a:	08 95       	ret
 
-0000091e <SPI_Transiver>:
+0000092c <SPI_Transiver>:
 }
 
 uint8 SPI_Transiver(uint8 data)
 {
- 91e:	cf 93       	push	r28
- 920:	c8 2f       	mov	r28, r24
+ 92c:	cf 93       	push	r28
+ 92e:	c8 2f       	mov	r28, r24
 	uint8 Received_Data = 0;
 	uint16 Trans_N_Started_counter = 1;
 	
 	#if SPI_ROLE == SPI_MASTER
 		// Clear SS Pin to start transmission
 		SPI_Master_InitTrans();
- 922:	0e 94 78 04 	call	0x8f0	; 0x8f0 <SPI_Master_InitTrans>
+ 930:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
 		
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
- 926:	cf b9       	out	0x0f, r28	; 15
+ 934:	cf b9       	out	0x0f, r28	; 15
 }
 
 uint8 SPI_Transiver(uint8 data)
 {
 	uint8 Received_Data = 0;
 	uint16 Trans_N_Started_counter = 1;
- 928:	81 e0       	ldi	r24, 0x01	; 1
- 92a:	90 e0       	ldi	r25, 0x00	; 0
+ 936:	81 e0       	ldi	r24, 0x01	; 1
+ 938:	90 e0       	ldi	r25, 0x00	; 0
 		SPI_Master_InitTrans();
 		
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
 		
 		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
- 92c:	01 c0       	rjmp	.+2      	; 0x930 <SPI_Transiver+0x12>
+ 93a:	01 c0       	rjmp	.+2      	; 0x93e <SPI_Transiver+0x12>
 			Trans_N_Started_counter++;
- 92e:	01 96       	adiw	r24, 0x01	; 1
+ 93c:	01 96       	adiw	r24, 0x01	; 1
 		SPI_Master_InitTrans();
 		
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
 		
 		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
- 930:	77 99       	sbic	0x0e, 7	; 14
- 932:	02 c0       	rjmp	.+4      	; 0x938 <SPI_Transiver+0x1a>
- 934:	00 97       	sbiw	r24, 0x00	; 0
- 936:	d9 f7       	brne	.-10     	; 0x92e <SPI_Transiver+0x10>
+ 93e:	77 99       	sbic	0x0e, 7	; 14
+ 940:	02 c0       	rjmp	.+4      	; 0x946 <SPI_Transiver+0x1a>
+ 942:	00 97       	sbiw	r24, 0x00	; 0
+ 944:	d9 f7       	brne	.-10     	; 0x93c <SPI_Transiver+0x10>
 			Trans_N_Started_counter++;
 		if(Trans_N_Started_counter == 0)
- 938:	89 2b       	or	r24, r25
- 93a:	11 f0       	breq	.+4      	; 0x940 <SPI_Transiver+0x22>
+ 946:	89 2b       	or	r24, r25
+ 948:	11 f0       	breq	.+4      	; 0x94e <SPI_Transiver+0x22>
 			Received_Data = TRANS_FAILED;
 		else
 			Received_Data = SPI->SPDR;
- 93c:	cf b1       	in	r28, 0x0f	; 15
- 93e:	01 c0       	rjmp	.+2      	; 0x942 <SPI_Transiver+0x24>
+ 94a:	cf b1       	in	r28, 0x0f	; 15
+ 94c:	01 c0       	rjmp	.+2      	; 0x950 <SPI_Transiver+0x24>
 		SPI->SPDR = data;
 		
 		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
 			Trans_N_Started_counter++;
 		if(Trans_N_Started_counter == 0)
 			Received_Data = TRANS_FAILED;
- 940:	c0 e0       	ldi	r28, 0x00	; 0
+ 94e:	c0 e0       	ldi	r28, 0x00	; 0
 		else
 			Received_Data = SPI->SPDR;
 
 		SPI_Master_TermTrans();
- 942:	0e 94 88 04 	call	0x910	; 0x910 <SPI_Master_TermTrans>
+ 950:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
 			Received_Data = TRANS_FAILED;
 		else
 			Received_Data = SPI->SPDR;
 	#endif /* SPI_ROLE */
 	return Received_Data;
 }
- 946:	8c 2f       	mov	r24, r28
- 948:	cf 91       	pop	r28
- 94a:	08 95       	ret
+ 954:	8c 2f       	mov	r24, r28
+ 956:	cf 91       	pop	r28
+ 958:	08 95       	ret
 
-0000094c <SPI_Slave_Init>:
+0000095a <SPI_Slave_Init>:
 
 void SPI_Slave_Init(void)
 {
 	//MISO
 	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_OUTPUT);
- 94c:	41 e0       	ldi	r20, 0x01	; 1
- 94e:	66 e0       	ldi	r22, 0x06	; 6
- 950:	86 e3       	ldi	r24, 0x36	; 54
- 952:	90 e0       	ldi	r25, 0x00	; 0
- 954:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
-	//DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
+ 95a:	41 e0       	ldi	r20, 0x01	; 1
+ 95c:	66 e0       	ldi	r22, 0x06	; 6
+ 95e:	86 e3       	ldi	r24, 0x36	; 54
+ 960:	90 e0       	ldi	r25, 0x00	; 0
+ 962:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+	//MOSI
+	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
+ 966:	40 e0       	ldi	r20, 0x00	; 0
+ 968:	65 e0       	ldi	r22, 0x05	; 5
+ 96a:	86 e3       	ldi	r24, 0x36	; 54
+ 96c:	90 e0       	ldi	r25, 0x00	; 0
+ 96e:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+	//CLK
+	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
+ 972:	40 e0       	ldi	r20, 0x00	; 0
+ 974:	67 e0       	ldi	r22, 0x07	; 7
+ 976:	86 e3       	ldi	r24, 0x36	; 54
+ 978:	90 e0       	ldi	r25, 0x00	; 0
+ 97a:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
 	//SS
-	//DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
+ 97e:	40 e0       	ldi	r20, 0x00	; 0
+ 980:	64 e0       	ldi	r22, 0x04	; 4
+ 982:	86 e3       	ldi	r24, 0x36	; 54
+ 984:	90 e0       	ldi	r25, 0x00	; 0
+ 986:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
 	
 	// Enable SPI Peripheral & Set the polarity of the transmission to setup then sample
 	SPI->SPCR |= (1<<SPE) | (1<<CPHA);
- 958:	8d b1       	in	r24, 0x0d	; 13
- 95a:	84 64       	ori	r24, 0x44	; 68
- 95c:	8d b9       	out	0x0d, r24	; 13
- 95e:	08 95       	ret
+ 98a:	8d b1       	in	r24, 0x0d	; 13
+ 98c:	84 64       	ori	r24, 0x44	; 68
+ 98e:	8d b9       	out	0x0d, r24	; 13
+ 990:	08 95       	ret
 
-00000960 <Status_FollowUp_Init>:
+00000992 <Status_FollowUp_Init>:
     "Invalid Operation Requested!"
 };
 
 void Status_FollowUp_Init(void)
 {
     LCD_Init();
- 960:	0e 94 96 02 	call	0x52c	; 0x52c <LCD_Init>
- 964:	08 95       	ret
+ 992:	0e 94 96 02 	call	0x52c	; 0x52c <LCD_Init>
+ 996:	08 95       	ret
 
-00000966 <Status_Disp_LCD>:
+00000998 <Status_Disp_LCD>:
 }
 void Status_Disp_LCD(uint8 R1_Text_Index, uint8 R2_Text_Index)
 {
- 966:	cf 93       	push	r28
- 968:	df 93       	push	r29
- 96a:	d8 2f       	mov	r29, r24
- 96c:	c6 2f       	mov	r28, r22
+ 998:	cf 93       	push	r28
+ 99a:	df 93       	push	r29
+ 99c:	d8 2f       	mov	r29, r24
+ 99e:	c6 2f       	mov	r28, r22
     LCD_Clear();
- 96e:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <LCD_Clear>
+ 9a0:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <LCD_Clear>
     LCD_WriteString(LCD_Row_Text_Options[R1_Text_Index]);
- 972:	20 e1       	ldi	r18, 0x10	; 16
- 974:	d2 9f       	mul	r29, r18
- 976:	c0 01       	movw	r24, r0
- 978:	11 24       	eor	r1, r1
- 97a:	88 58       	subi	r24, 0x88	; 136
- 97c:	9f 4f       	sbci	r25, 0xFF	; 255
- 97e:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
+ 9a4:	20 e1       	ldi	r18, 0x10	; 16
+ 9a6:	d2 9f       	mul	r29, r18
+ 9a8:	c0 01       	movw	r24, r0
+ 9aa:	11 24       	eor	r1, r1
+ 9ac:	88 58       	subi	r24, 0x88	; 136
+ 9ae:	9f 4f       	sbci	r25, 0xFF	; 255
+ 9b0:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
     LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
- 982:	60 e0       	ldi	r22, 0x00	; 0
- 984:	81 e0       	ldi	r24, 0x01	; 1
- 986:	0e 94 ba 03 	call	0x774	; 0x774 <LCD_GoToLocation>
+ 9b4:	60 e0       	ldi	r22, 0x00	; 0
+ 9b6:	81 e0       	ldi	r24, 0x01	; 1
+ 9b8:	0e 94 ba 03 	call	0x774	; 0x774 <LCD_GoToLocation>
     LCD_WriteString(LCD_Row_Text_Options[R2_Text_Index]);
- 98a:	20 e1       	ldi	r18, 0x10	; 16
- 98c:	c2 9f       	mul	r28, r18
- 98e:	c0 01       	movw	r24, r0
- 990:	11 24       	eor	r1, r1
- 992:	88 58       	subi	r24, 0x88	; 136
- 994:	9f 4f       	sbci	r25, 0xFF	; 255
- 996:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
- 99a:	8f ef       	ldi	r24, 0xFF	; 255
- 99c:	96 e1       	ldi	r25, 0x16	; 22
- 99e:	21 e1       	ldi	r18, 0x11	; 17
- 9a0:	81 50       	subi	r24, 0x01	; 1
- 9a2:	90 40       	sbci	r25, 0x00	; 0
- 9a4:	20 40       	sbci	r18, 0x00	; 0
- 9a6:	e1 f7       	brne	.-8      	; 0x9a0 <Status_Disp_LCD+0x3a>
- 9a8:	00 c0       	rjmp	.+0      	; 0x9aa <Status_Disp_LCD+0x44>
- 9aa:	00 00       	nop
+ 9bc:	20 e1       	ldi	r18, 0x10	; 16
+ 9be:	c2 9f       	mul	r28, r18
+ 9c0:	c0 01       	movw	r24, r0
+ 9c2:	11 24       	eor	r1, r1
+ 9c4:	88 58       	subi	r24, 0x88	; 136
+ 9c6:	9f 4f       	sbci	r25, 0xFF	; 255
+ 9c8:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
+ 9cc:	8f ef       	ldi	r24, 0xFF	; 255
+ 9ce:	96 e1       	ldi	r25, 0x16	; 22
+ 9d0:	21 e1       	ldi	r18, 0x11	; 17
+ 9d2:	81 50       	subi	r24, 0x01	; 1
+ 9d4:	90 40       	sbci	r25, 0x00	; 0
+ 9d6:	20 40       	sbci	r18, 0x00	; 0
+ 9d8:	e1 f7       	brne	.-8      	; 0x9d2 <Status_Disp_LCD+0x3a>
+ 9da:	00 c0       	rjmp	.+0      	; 0x9dc <Status_Disp_LCD+0x44>
+ 9dc:	00 00       	nop
     _delay_ms(LCD_DISP_DELAY_MS);
 }
- 9ac:	df 91       	pop	r29
- 9ae:	cf 91       	pop	r28
- 9b0:	08 95       	ret
+ 9de:	df 91       	pop	r29
+ 9e0:	cf 91       	pop	r28
+ 9e2:	08 95       	ret
 
-000009b2 <Status_Disp_LCD_IncludeInteger>:
+000009e4 <Status_Disp_LCD_IncludeInteger>:
 void Status_Disp_LCD_IncludeInteger(uint8 R1_Text_Index,uint8 Integer_Number, uint8 R2_Text_Index)
 {
- 9b2:	1f 93       	push	r17
- 9b4:	cf 93       	push	r28
- 9b6:	df 93       	push	r29
- 9b8:	18 2f       	mov	r17, r24
- 9ba:	d6 2f       	mov	r29, r22
- 9bc:	c4 2f       	mov	r28, r20
+ 9e4:	1f 93       	push	r17
+ 9e6:	cf 93       	push	r28
+ 9e8:	df 93       	push	r29
+ 9ea:	18 2f       	mov	r17, r24
+ 9ec:	d6 2f       	mov	r29, r22
+ 9ee:	c4 2f       	mov	r28, r20
     LCD_Clear();
- 9be:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <LCD_Clear>
+ 9f0:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <LCD_Clear>
 	LCD_WriteString(LCD_Row_Text_Options[R1_Text_Index]);
- 9c2:	20 e1       	ldi	r18, 0x10	; 16
- 9c4:	12 9f       	mul	r17, r18
- 9c6:	c0 01       	movw	r24, r0
- 9c8:	11 24       	eor	r1, r1
- 9ca:	88 58       	subi	r24, 0x88	; 136
- 9cc:	9f 4f       	sbci	r25, 0xFF	; 255
- 9ce:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
+ 9f4:	20 e1       	ldi	r18, 0x10	; 16
+ 9f6:	12 9f       	mul	r17, r18
+ 9f8:	c0 01       	movw	r24, r0
+ 9fa:	11 24       	eor	r1, r1
+ 9fc:	88 58       	subi	r24, 0x88	; 136
+ 9fe:	9f 4f       	sbci	r25, 0xFF	; 255
+ a00:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
 	LCD_WriteInteger(Integer_Number);
- 9d2:	6d 2f       	mov	r22, r29
- 9d4:	70 e0       	ldi	r23, 0x00	; 0
- 9d6:	80 e0       	ldi	r24, 0x00	; 0
- 9d8:	90 e0       	ldi	r25, 0x00	; 0
- 9da:	0e 94 2d 03 	call	0x65a	; 0x65a <LCD_WriteInteger>
+ a04:	6d 2f       	mov	r22, r29
+ a06:	70 e0       	ldi	r23, 0x00	; 0
+ a08:	80 e0       	ldi	r24, 0x00	; 0
+ a0a:	90 e0       	ldi	r25, 0x00	; 0
+ a0c:	0e 94 2d 03 	call	0x65a	; 0x65a <LCD_WriteInteger>
 	LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
- 9de:	60 e0       	ldi	r22, 0x00	; 0
- 9e0:	81 e0       	ldi	r24, 0x01	; 1
- 9e2:	0e 94 ba 03 	call	0x774	; 0x774 <LCD_GoToLocation>
+ a10:	60 e0       	ldi	r22, 0x00	; 0
+ a12:	81 e0       	ldi	r24, 0x01	; 1
+ a14:	0e 94 ba 03 	call	0x774	; 0x774 <LCD_GoToLocation>
 	LCD_WriteString(LCD_Row_Text_Options[R2_Text_Index]);
- 9e6:	20 e1       	ldi	r18, 0x10	; 16
- 9e8:	c2 9f       	mul	r28, r18
- 9ea:	c0 01       	movw	r24, r0
- 9ec:	11 24       	eor	r1, r1
- 9ee:	88 58       	subi	r24, 0x88	; 136
- 9f0:	9f 4f       	sbci	r25, 0xFF	; 255
- 9f2:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
- 9f6:	8f ef       	ldi	r24, 0xFF	; 255
- 9f8:	96 e1       	ldi	r25, 0x16	; 22
- 9fa:	21 e1       	ldi	r18, 0x11	; 17
- 9fc:	81 50       	subi	r24, 0x01	; 1
- 9fe:	90 40       	sbci	r25, 0x00	; 0
- a00:	20 40       	sbci	r18, 0x00	; 0
- a02:	e1 f7       	brne	.-8      	; 0x9fc <Status_Disp_LCD_IncludeInteger+0x4a>
- a04:	00 c0       	rjmp	.+0      	; 0xa06 <Status_Disp_LCD_IncludeInteger+0x54>
- a06:	00 00       	nop
+ a18:	20 e1       	ldi	r18, 0x10	; 16
+ a1a:	c2 9f       	mul	r28, r18
+ a1c:	c0 01       	movw	r24, r0
+ a1e:	11 24       	eor	r1, r1
+ a20:	88 58       	subi	r24, 0x88	; 136
+ a22:	9f 4f       	sbci	r25, 0xFF	; 255
+ a24:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
+ a28:	8f ef       	ldi	r24, 0xFF	; 255
+ a2a:	96 e1       	ldi	r25, 0x16	; 22
+ a2c:	21 e1       	ldi	r18, 0x11	; 17
+ a2e:	81 50       	subi	r24, 0x01	; 1
+ a30:	90 40       	sbci	r25, 0x00	; 0
+ a32:	20 40       	sbci	r18, 0x00	; 0
+ a34:	e1 f7       	brne	.-8      	; 0xa2e <Status_Disp_LCD_IncludeInteger+0x4a>
+ a36:	00 c0       	rjmp	.+0      	; 0xa38 <Status_Disp_LCD_IncludeInteger+0x54>
+ a38:	00 00       	nop
 	_delay_ms(LCD_DISP_DELAY_MS);
 }
- a08:	df 91       	pop	r29
- a0a:	cf 91       	pop	r28
- a0c:	1f 91       	pop	r17
- a0e:	08 95       	ret
+ a3a:	df 91       	pop	r29
+ a3c:	cf 91       	pop	r28
+ a3e:	1f 91       	pop	r17
+ a40:	08 95       	ret
 
-00000a10 <__divmodsi4>:
- a10:	05 2e       	mov	r0, r21
- a12:	97 fb       	bst	r25, 7
- a14:	1e f4       	brtc	.+6      	; 0xa1c <__divmodsi4+0xc>
- a16:	00 94       	com	r0
- a18:	0e 94 1f 05 	call	0xa3e	; 0xa3e <__negsi2>
- a1c:	57 fd       	sbrc	r21, 7
- a1e:	07 d0       	rcall	.+14     	; 0xa2e <__divmodsi4_neg2>
- a20:	0e 94 36 05 	call	0xa6c	; 0xa6c <__udivmodsi4>
- a24:	07 fc       	sbrc	r0, 7
- a26:	03 d0       	rcall	.+6      	; 0xa2e <__divmodsi4_neg2>
- a28:	4e f4       	brtc	.+18     	; 0xa3c <__divmodsi4_exit>
- a2a:	0c 94 1f 05 	jmp	0xa3e	; 0xa3e <__negsi2>
+00000a42 <__divmodsi4>:
+ a42:	05 2e       	mov	r0, r21
+ a44:	97 fb       	bst	r25, 7
+ a46:	1e f4       	brtc	.+6      	; 0xa4e <__divmodsi4+0xc>
+ a48:	00 94       	com	r0
+ a4a:	0e 94 38 05 	call	0xa70	; 0xa70 <__negsi2>
+ a4e:	57 fd       	sbrc	r21, 7
+ a50:	07 d0       	rcall	.+14     	; 0xa60 <__divmodsi4_neg2>
+ a52:	0e 94 4f 05 	call	0xa9e	; 0xa9e <__udivmodsi4>
+ a56:	07 fc       	sbrc	r0, 7
+ a58:	03 d0       	rcall	.+6      	; 0xa60 <__divmodsi4_neg2>
+ a5a:	4e f4       	brtc	.+18     	; 0xa6e <__divmodsi4_exit>
+ a5c:	0c 94 38 05 	jmp	0xa70	; 0xa70 <__negsi2>
 
-00000a2e <__divmodsi4_neg2>:
- a2e:	50 95       	com	r21
- a30:	40 95       	com	r20
- a32:	30 95       	com	r19
- a34:	21 95       	neg	r18
- a36:	3f 4f       	sbci	r19, 0xFF	; 255
- a38:	4f 4f       	sbci	r20, 0xFF	; 255
- a3a:	5f 4f       	sbci	r21, 0xFF	; 255
+00000a60 <__divmodsi4_neg2>:
+ a60:	50 95       	com	r21
+ a62:	40 95       	com	r20
+ a64:	30 95       	com	r19
+ a66:	21 95       	neg	r18
+ a68:	3f 4f       	sbci	r19, 0xFF	; 255
+ a6a:	4f 4f       	sbci	r20, 0xFF	; 255
+ a6c:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000a3c <__divmodsi4_exit>:
- a3c:	08 95       	ret
+00000a6e <__divmodsi4_exit>:
+ a6e:	08 95       	ret
 
-00000a3e <__negsi2>:
- a3e:	90 95       	com	r25
- a40:	80 95       	com	r24
- a42:	70 95       	com	r23
- a44:	61 95       	neg	r22
- a46:	7f 4f       	sbci	r23, 0xFF	; 255
- a48:	8f 4f       	sbci	r24, 0xFF	; 255
- a4a:	9f 4f       	sbci	r25, 0xFF	; 255
- a4c:	08 95       	ret
+00000a70 <__negsi2>:
+ a70:	90 95       	com	r25
+ a72:	80 95       	com	r24
+ a74:	70 95       	com	r23
+ a76:	61 95       	neg	r22
+ a78:	7f 4f       	sbci	r23, 0xFF	; 255
+ a7a:	8f 4f       	sbci	r24, 0xFF	; 255
+ a7c:	9f 4f       	sbci	r25, 0xFF	; 255
+ a7e:	08 95       	ret
 
-00000a4e <__umulhisi3>:
- a4e:	a2 9f       	mul	r26, r18
- a50:	b0 01       	movw	r22, r0
- a52:	b3 9f       	mul	r27, r19
- a54:	c0 01       	movw	r24, r0
- a56:	a3 9f       	mul	r26, r19
- a58:	70 0d       	add	r23, r0
- a5a:	81 1d       	adc	r24, r1
- a5c:	11 24       	eor	r1, r1
- a5e:	91 1d       	adc	r25, r1
- a60:	b2 9f       	mul	r27, r18
- a62:	70 0d       	add	r23, r0
- a64:	81 1d       	adc	r24, r1
- a66:	11 24       	eor	r1, r1
- a68:	91 1d       	adc	r25, r1
- a6a:	08 95       	ret
+00000a80 <__umulhisi3>:
+ a80:	a2 9f       	mul	r26, r18
+ a82:	b0 01       	movw	r22, r0
+ a84:	b3 9f       	mul	r27, r19
+ a86:	c0 01       	movw	r24, r0
+ a88:	a3 9f       	mul	r26, r19
+ a8a:	70 0d       	add	r23, r0
+ a8c:	81 1d       	adc	r24, r1
+ a8e:	11 24       	eor	r1, r1
+ a90:	91 1d       	adc	r25, r1
+ a92:	b2 9f       	mul	r27, r18
+ a94:	70 0d       	add	r23, r0
+ a96:	81 1d       	adc	r24, r1
+ a98:	11 24       	eor	r1, r1
+ a9a:	91 1d       	adc	r25, r1
+ a9c:	08 95       	ret
 
-00000a6c <__udivmodsi4>:
- a6c:	a1 e2       	ldi	r26, 0x21	; 33
- a6e:	1a 2e       	mov	r1, r26
- a70:	aa 1b       	sub	r26, r26
- a72:	bb 1b       	sub	r27, r27
- a74:	fd 01       	movw	r30, r26
- a76:	0d c0       	rjmp	.+26     	; 0xa92 <__udivmodsi4_ep>
+00000a9e <__udivmodsi4>:
+ a9e:	a1 e2       	ldi	r26, 0x21	; 33
+ aa0:	1a 2e       	mov	r1, r26
+ aa2:	aa 1b       	sub	r26, r26
+ aa4:	bb 1b       	sub	r27, r27
+ aa6:	fd 01       	movw	r30, r26
+ aa8:	0d c0       	rjmp	.+26     	; 0xac4 <__udivmodsi4_ep>
 
-00000a78 <__udivmodsi4_loop>:
- a78:	aa 1f       	adc	r26, r26
- a7a:	bb 1f       	adc	r27, r27
- a7c:	ee 1f       	adc	r30, r30
- a7e:	ff 1f       	adc	r31, r31
- a80:	a2 17       	cp	r26, r18
- a82:	b3 07       	cpc	r27, r19
- a84:	e4 07       	cpc	r30, r20
- a86:	f5 07       	cpc	r31, r21
- a88:	20 f0       	brcs	.+8      	; 0xa92 <__udivmodsi4_ep>
- a8a:	a2 1b       	sub	r26, r18
- a8c:	b3 0b       	sbc	r27, r19
- a8e:	e4 0b       	sbc	r30, r20
- a90:	f5 0b       	sbc	r31, r21
+00000aaa <__udivmodsi4_loop>:
+ aaa:	aa 1f       	adc	r26, r26
+ aac:	bb 1f       	adc	r27, r27
+ aae:	ee 1f       	adc	r30, r30
+ ab0:	ff 1f       	adc	r31, r31
+ ab2:	a2 17       	cp	r26, r18
+ ab4:	b3 07       	cpc	r27, r19
+ ab6:	e4 07       	cpc	r30, r20
+ ab8:	f5 07       	cpc	r31, r21
+ aba:	20 f0       	brcs	.+8      	; 0xac4 <__udivmodsi4_ep>
+ abc:	a2 1b       	sub	r26, r18
+ abe:	b3 0b       	sbc	r27, r19
+ ac0:	e4 0b       	sbc	r30, r20
+ ac2:	f5 0b       	sbc	r31, r21
 
-00000a92 <__udivmodsi4_ep>:
- a92:	66 1f       	adc	r22, r22
- a94:	77 1f       	adc	r23, r23
- a96:	88 1f       	adc	r24, r24
- a98:	99 1f       	adc	r25, r25
- a9a:	1a 94       	dec	r1
- a9c:	69 f7       	brne	.-38     	; 0xa78 <__udivmodsi4_loop>
- a9e:	60 95       	com	r22
- aa0:	70 95       	com	r23
- aa2:	80 95       	com	r24
- aa4:	90 95       	com	r25
- aa6:	9b 01       	movw	r18, r22
- aa8:	ac 01       	movw	r20, r24
- aaa:	bd 01       	movw	r22, r26
- aac:	cf 01       	movw	r24, r30
- aae:	08 95       	ret
+00000ac4 <__udivmodsi4_ep>:
+ ac4:	66 1f       	adc	r22, r22
+ ac6:	77 1f       	adc	r23, r23
+ ac8:	88 1f       	adc	r24, r24
+ aca:	99 1f       	adc	r25, r25
+ acc:	1a 94       	dec	r1
+ ace:	69 f7       	brne	.-38     	; 0xaaa <__udivmodsi4_loop>
+ ad0:	60 95       	com	r22
+ ad2:	70 95       	com	r23
+ ad4:	80 95       	com	r24
+ ad6:	90 95       	com	r25
+ ad8:	9b 01       	movw	r18, r22
+ ada:	ac 01       	movw	r20, r24
+ adc:	bd 01       	movw	r22, r26
+ ade:	cf 01       	movw	r24, r30
+ ae0:	08 95       	ret
 
-00000ab0 <_exit>:
- ab0:	f8 94       	cli
+00000ae2 <_exit>:
+ ae2:	f8 94       	cli
 
-00000ab2 <__stop_program>:
- ab2:	ff cf       	rjmp	.-2      	; 0xab2 <__stop_program>
+00000ae4 <__stop_program>:
+ ae4:	ff cf       	rjmp	.-2      	; 0xae4 <__stop_program>

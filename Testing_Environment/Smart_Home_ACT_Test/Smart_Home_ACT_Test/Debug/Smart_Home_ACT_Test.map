@@ -167,7 +167,7 @@ Discarded input sections
  .data          0x00000000        0x0 SPI.o
  .bss           0x00000000        0x0 SPI.o
  .text.SPI_Master_Init
-                0x00000000       0x56 SPI.o
+                0x00000000       0x62 SPI.o
  .text          0x00000000        0x0 Status_FollowUp.o
  .data          0x00000000        0x0 Status_FollowUp.o
  .bss           0x00000000        0x0 Status_FollowUp.o
@@ -440,7 +440,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xab4
+.text           0x00000000      0xae6
  *(.vectors)
  .vectors       0x00000000       0x54 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -626,51 +626,51 @@ END GROUP
  .text.Smart_Home_Read_N_Decode
                 0x00000858       0x26 Smart_Home.o
  .text.Smart_Home_Process_N_Respond
-                0x0000087e       0x4a Smart_Home.o
+                0x0000087e       0x58 Smart_Home.o
  .text.Smart_Home_Init
-                0x000008c8       0x1e Smart_Home.o
-                0x000008c8                Smart_Home_Init
+                0x000008d6       0x1e Smart_Home.o
+                0x000008d6                Smart_Home_Init
  .text.Smart_Home_Run
-                0x000008e6        0xa Smart_Home.o
-                0x000008e6                Smart_Home_Run
+                0x000008f4        0xa Smart_Home.o
+                0x000008f4                Smart_Home_Run
  .text.SPI_Master_InitTrans
-                0x000008f0       0x20 SPI.o
-                0x000008f0                SPI_Master_InitTrans
+                0x000008fe       0x20 SPI.o
+                0x000008fe                SPI_Master_InitTrans
  .text.SPI_Master_TermTrans
-                0x00000910        0xe SPI.o
-                0x00000910                SPI_Master_TermTrans
+                0x0000091e        0xe SPI.o
+                0x0000091e                SPI_Master_TermTrans
  .text.SPI_Transiver
-                0x0000091e       0x2e SPI.o
-                0x0000091e                SPI_Transiver
+                0x0000092c       0x2e SPI.o
+                0x0000092c                SPI_Transiver
  .text.SPI_Slave_Init
-                0x0000094c       0x14 SPI.o
-                0x0000094c                SPI_Slave_Init
+                0x0000095a       0x38 SPI.o
+                0x0000095a                SPI_Slave_Init
  .text.Status_FollowUp_Init
-                0x00000960        0x6 Status_FollowUp.o
-                0x00000960                Status_FollowUp_Init
+                0x00000992        0x6 Status_FollowUp.o
+                0x00000992                Status_FollowUp_Init
  .text.Status_Disp_LCD
-                0x00000966       0x4c Status_FollowUp.o
-                0x00000966                Status_Disp_LCD
+                0x00000998       0x4c Status_FollowUp.o
+                0x00000998                Status_Disp_LCD
  .text.Status_Disp_LCD_IncludeInteger
-                0x000009b2       0x5e Status_FollowUp.o
-                0x000009b2                Status_Disp_LCD_IncludeInteger
+                0x000009e4       0x5e Status_FollowUp.o
+                0x000009e4                Status_Disp_LCD_IncludeInteger
  .text.libgcc.div
-                0x00000a10       0x2e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
-                0x00000a10                __divmodsi4
+                0x00000a42       0x2e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_divmodsi4.o)
+                0x00000a42                __divmodsi4
  .text.libgcc.div
-                0x00000a3e       0x10 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
-                0x00000a3e                __negsi2
+                0x00000a70       0x10 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_negsi2.o)
+                0x00000a70                __negsi2
  .text.libgcc.mul
-                0x00000a4e       0x1e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00000a4e                __umulhisi3
+                0x00000a80       0x1e d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00000a80                __umulhisi3
  .text.libgcc.div
-                0x00000a6c       0x44 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000a6c                __udivmodsi4
-                0x00000ab0                . = ALIGN (0x2)
+                0x00000a9e       0x44 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000a9e                __udivmodsi4
+                0x00000ae2                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000ab0        0x0 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000ab0                _exit
-                0x00000ab0                exit
+ .fini9         0x00000ae2        0x0 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000ae2                _exit
+                0x00000ae2                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -689,11 +689,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000ab0        0x4 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000ae2        0x4 d:/studies/amit embedded systems course/tools/atmel studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000ab4                _etext = .
+                0x00000ae6                _etext = .
 
-.data           0x00800060      0x2e8 load address 0x00000ab4
+.data           0x00800060      0x2e8 load address 0x00000ae6
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -727,8 +727,8 @@ END GROUP
  COMMON         0x00800368        0x3 Smart_Home.o
                 0x00800368                User_Selection
                 0x0080036b                PROVIDE (__bss_end, .)
-                0x00000ab4                __data_load_start = LOADADDR (.data)
-                0x00000d9c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000ae6                __data_load_start = LOADADDR (.data)
+                0x00000dce                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080036b        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -837,7 +837,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x335a
+.debug_info     0x00000000     0x33e6
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x3ce CMD_Bus.o
@@ -849,8 +849,8 @@ END GROUP
  .debug_info    0x00001f5b      0x616 LED.o
  .debug_info    0x00002571       0xca main.o
  .debug_info    0x0000263b      0x4c9 Smart_Home.o
- .debug_info    0x00002b04      0x394 SPI.o
- .debug_info    0x00002e98      0x4c2 Status_FollowUp.o
+ .debug_info    0x00002b04      0x420 SPI.o
+ .debug_info    0x00002f24      0x4c2 Status_FollowUp.o
 
 .debug_abbrev   0x00000000     0x10fe
  *(.debug_abbrev)
@@ -867,7 +867,7 @@ END GROUP
  .debug_abbrev  0x00000e36      0x168 SPI.o
  .debug_abbrev  0x00000f9e      0x160 Status_FollowUp.o
 
-.debug_line     0x00000000     0x15b8
+.debug_line     0x00000000     0x15e2
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 D:/Studies/AMIT Embedded Systems course/Tools/ATMEL Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x2f8 CMD_Bus.o
@@ -878,9 +878,9 @@ END GROUP
  .debug_line    0x00000a2a      0x37c LCD.o
  .debug_line    0x00000da6      0x23e LED.o
  .debug_line    0x00000fe4       0x59 main.o
- .debug_line    0x0000103d      0x133 Smart_Home.o
- .debug_line    0x00001170      0x233 SPI.o
- .debug_line    0x000013a3      0x215 Status_FollowUp.o
+ .debug_line    0x0000103d      0x145 Smart_Home.o
+ .debug_line    0x00001182      0x24b SPI.o
+ .debug_line    0x000013cd      0x215 Status_FollowUp.o
 
 .debug_frame    0x00000000      0x5f4
  *(.debug_frame)

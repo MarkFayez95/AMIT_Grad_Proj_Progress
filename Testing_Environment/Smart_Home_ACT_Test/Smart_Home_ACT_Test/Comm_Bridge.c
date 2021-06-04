@@ -119,25 +119,17 @@ void Comm_Bridge_BT_Send(uint8 Response)
     Bluetooth_Mod_Tx(Response);
     if(Response == REQ_DONE)
     {
-        // Comm_Bridge_BT_Send :: Send Sequence over Bluetooth 'Request Done!'
-        Status_Send_BT(TXT_BT_REQUEST_DONE);
-    
         // Comm_Bridge_BT_Send :: Status LCD Display 'Send to BT Peer' 'Request Done!'
         Status_Disp_LCD(LCD_ROW_TXT_SENT_TO_BT_PEER,LCD_ROW_TXT_REQUEST_DONE);
     }
     else if(Response == INV_DEV_SEL)
     {
-        // Comm_Bridge_BT_Send :: Send Sequence over Bluetooth 'Invalid Device Requested!'
-        Status_Send_BT(TXT_BT_INVALID_DEVICE_REQUESTED);
-
+      
         // Comm_Bridge_BT_Send :: Status LCD Display 'Send to BT Peer' 'Invalid Device!'
         Status_Disp_LCD(LCD_ROW_TXT_SENT_TO_BT_PEER, LCD_ROW_TXT_INVALID_DEVICE);
     }
     else
     {
-        // Comm_Bridge_BT_Send :: Send Sequence over Bluetooth 'Invalid Operation Requested!'
-        Status_Send_BT(TXT_BT_INVALID_OPERATION_REQUESTED);
-
         // Comm_Bridge_BT_Send :: Status LCD Display 'Send to BT Peer' 'Invalid Option!'
         Status_Disp_LCD(LCD_ROW_TXT_SENT_TO_BT_PEER, LCD_ROW_TXT_INVALID_OPTION);
     }

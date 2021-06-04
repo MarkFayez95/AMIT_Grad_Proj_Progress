@@ -112,8 +112,14 @@ static void Smart_Home_Process_N_Respond(void)
 		Device_Apply_Request(Selected_Device,Selected_Operation);
 		
 		Status_Disp_LCD(LCD_ROW_TXT_REQUEST,LCD_ROW_TXT_DONE);
+		
+		Selection_Validity = REQ_DONE;
 	}
-	Selection_Validity += NACK_RES;
+	else if(Selection_Validity == DEV_INVALID)
+		Selection_Validity = INV_DEV_SEL;
+	else
+		Selection_Validity = INV_OP_SEL;
+	
 	Comm_Bridge_CMD_Res(&Selection_Validity);
 }
 #endif /* ECU_ROLE */ 

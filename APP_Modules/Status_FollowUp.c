@@ -5,6 +5,7 @@
  *  Author: Mark Fayez
  */ 
 
+#include "Smart_Home_Sys_Config.h"
 #include "Status_FollowUp.h"
 
 LCD_Row_Text LCD_Row_Text_Options[LCD_ROW_TXT_NONE+1] =
@@ -38,7 +39,7 @@ LCD_Row_Text LCD_Row_Text_Options[LCD_ROW_TXT_NONE+1] =
     "Op Selected",
     "Dev/Op Selected",
     "Response Sent",
-    "Device - ",
+    "Device : ",
     "READY!",
     "Already Running",
     "Valid Selection",
@@ -53,14 +54,10 @@ LCD_Row_Text LCD_Row_Text_Options[LCD_ROW_TXT_NONE+1] =
     "Selection ERROR!",
     "Request:...",
 	"CTRL ACT System",
+    "Send B1 Failed",
+    "Send B2 Failed",
+    "Send Cmd Failed",
     '\0'
-};
-
-uint8 BT_Text_Options[3][30] =
-{
-    "Request Done!",
-    "Invalid Device Requested!",
-    "Invalid Operation Requested!"
 };
 
 void Status_FollowUp_Init(void)
@@ -83,8 +80,4 @@ void Status_Disp_LCD_IncludeInteger(uint8 R1_Text_Index,uint8 Integer_Number, ui
 	LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
 	LCD_WriteString(LCD_Row_Text_Options[R2_Text_Index]);
 	_delay_ms(LCD_DISP_DELAY_MS);
-}
-void Status_Send_BT(uint8 Text_Index)
-{
-    Bluetooth_Mod_Seq_Tx(BT_Text_Options[Text_Index]);
 }

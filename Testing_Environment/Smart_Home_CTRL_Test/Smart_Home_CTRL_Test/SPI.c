@@ -5,12 +5,13 @@
  *  Author: Mark Fayez
  */ 
 
+#include "Smart_Home_Sys_Config.h"
 #include "SPI.h"
 
 void SPI_Master_Init(void)
 {
 	//MISO
-	//DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_INPUT);
 	//MOSI
 	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_OUTPUT);
 	//CLK
@@ -87,11 +88,11 @@ void SPI_Slave_Init(void)
 	//MISO
 	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_OUTPUT);
 	//MOSI
-	//DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
 	//CLK
-	//DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
 	//SS
-	//DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
+	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
 	
 	// Enable SPI Peripheral & Set the polarity of the transmission to setup then sample
 	SPI->SPCR |= (1<<SPE) | (1<<CPHA);

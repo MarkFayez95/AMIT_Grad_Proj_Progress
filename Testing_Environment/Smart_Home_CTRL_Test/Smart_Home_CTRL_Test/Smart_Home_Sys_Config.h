@@ -63,7 +63,8 @@
 
     #define CMD_FAILED_TRANS_REPEAT_DELAY_MS        30
     #define CMD_FAILED_HANDSHAKE_REPEAT_DELAY_MS    10
-    #define CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS       2000
+    #define CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS       1800
+    #define CMD_SEND_REQ_SYNC_DELAY_MS              500
 
         // SPI Driver Configurations //
         #if ECU_ROLE == CONTROL_ECU
@@ -97,7 +98,6 @@
 #define MAX_OPS_PER_DEV     3
 
 #define INIT_FUN_INDEX		0
-#define OP_2_INDEX			INIT_FUN_INDEX+1
 
 #define DEV_CONST	0x07
 #define OPER_CONST	0x07

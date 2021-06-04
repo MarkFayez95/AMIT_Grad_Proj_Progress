@@ -47,7 +47,7 @@ void SPI_Master_InitTrans(void)
 void SPI_Master_TermTrans(void)
 {
 	_delay_ms(MASTER_SS_SET_DELAY_MS);
-	
+
 	// Set SS to terminate transmission to slaves
 	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_HIGH);
 }
@@ -75,6 +75,7 @@ uint8 SPI_Transiver(uint8 data)
 
 		Received_Data = SPI->SPDR;
 	#endif /* SPI_ROLE */
+
 	return Received_Data;
 }
 

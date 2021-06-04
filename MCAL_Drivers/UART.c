@@ -27,16 +27,17 @@ void UART_Init(void)
 void UART_Tx(uint8 data)
 {
 	UDR = data;
-	while ( GetBit(UCSRA,TXCIE) == UART_Flag_Down );
-	ClearBit(UCSRA,TXCIE);
+	while ( GetBit(UCSRA,TXC) == UART_Flag_Down );
+	ClearBit(UCSRA,TXC);
 }
 
 uint8 UART_Rx(void)
 {
-	while (GetBit(UCSRA,RXCIE) == UART_Flag_Down);
-	ClearBit(UCSRA,RXCIE);
+	while (GetBit(UCSRA,RXC) == UART_Flag_Down);
+	ClearBit(UCSRA,RXC);
 	return UDR;
 }
+
 void UART_RxString(uint8* str)
 {
 	uint8 Count = 0;

@@ -6,7 +6,6 @@
  */
 
 #include "Smart_Home_Sys_Config.h"
-
 #include "Smart_Home.h"
 #include "Status_FollowUp.h"
 
@@ -110,14 +109,14 @@ static void Smart_Home_Read_N_Decode(void)
 	static void Smart_Home_Process_N_Respond(void)
 	{
 		uint8 Selection_Validity = SEND_FAILED;
-		uint8 Transmission_Status = OUT_OF_SYNC;
+		uint8 Transmission_Status = IN_SYNC;
 
 		Transmission_Status = Comm_Bridge_CMD_Req(User_Selection);
 
-		if(Transmission_Status == RECEIVED)
+		if(Transmission_Status != OUT_OF_SYNC)
 		{
 			Selection_Validity = User_Selection[RESPONSE_DATA_BYTE];
-			if(Selection_Validity == ACK_RES)
+			if(Selection_Validity == REQ_DONE)
 			{
 				Status_Disp_LCD(LCD_ROW_TXT_OP_STATUS,LCD_ROW_TXT_DONE);
 				Comm_Bridge_BT_Send(REQ_DONE);
@@ -125,12 +124,12 @@ static void Smart_Home_Read_N_Decode(void)
 			else if(Selection_Validity == INV_DEV_SEL)
 			{
 				Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_DEVICE);
-				Comm_Bridge_BT_Send(Selection_Validity);
+				Comm_Bridge_BT_Send(INV_DEV_SEL);
 			}
 			else if(Selection_Validity == INV_OP_SEL)
 			{
 				Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_OPTION);
-				Comm_Bridge_BT_Send(Selection_Validity);
+				Comm_Bridge_BT_Send(INV_OP_SEL);
 			}
 		}
 		else
@@ -174,6 +173,7 @@ static void Smart_Home_Read_N_Decode(void)
 				Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
 			}
 		}
+		_delay_ms(CMD_SEND_REQ_SYNC_DELAY_MS);
 	}
 #endif /* ECU_ROLE */ 
 

@@ -33,9 +33,8 @@ typedef enum
 
 typedef enum
 {
-	RESERVED_0,
+	RESERVED,
 	DEV_N_OP_VALID,
-	RESERVED_1,
 	DEV_INVALID,
 	OP_INVALID
 } Dev_Ops_Check_Status;

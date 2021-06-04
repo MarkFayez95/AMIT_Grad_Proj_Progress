@@ -31,7 +31,8 @@ typedef enum
     INV_OP_SEL, // Invalid device selection code 0x10
     INVALID_NACK_REASON, // Invalid Reason for NACK code 0x11
     REQ_DONE, // Request Done code 0x12
-	OUT_OF_SYNC // Out of Sync state code 0x13
+	OUT_OF_SYNC, // Out of Sync state code 0x13
+    IN_SYNC // In Sync state code 0x14
 }CMD_Bus_States;
 
 /*
@@ -51,6 +52,7 @@ void CMD_Bus_Master_Init(void);
  * Author: Mark Fayez
 **/
 void CMD_Bus_Slave_Init(void);
+
 /*
  * Description: CMD Bus Handshake between Master and Slave of SPI bus
  * Inputs: None

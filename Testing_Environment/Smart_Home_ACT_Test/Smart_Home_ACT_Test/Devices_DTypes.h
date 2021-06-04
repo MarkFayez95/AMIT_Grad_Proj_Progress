@@ -9,6 +9,7 @@
 
 #include "Smart_Home_Sys_Config.h"
 #include "STD_DTypes.h"
+
 typedef struct
 {
 	uint8 Device_Ref;

@@ -8,8 +8,7 @@ Devices.d Devices.o: .././Devices.c .././Devices_LCFG.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././Bluetooth_Mod.h .././UART.h
+ d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
 .././Devices_LCFG.h:
 
@@ -46,7 +45,3 @@ d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr
 d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 d:\studies\amit\ embedded\ systems\ course\tools\atmel\ studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
-
-.././Bluetooth_Mod.h:
-
-.././UART.h:

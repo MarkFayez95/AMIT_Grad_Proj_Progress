@@ -3,31 +3,31 @@ Smart_Home_ACT_Test.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000ae6  00000000  00000000  00000094  2**1
+  0 .text         00000b2c  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         000002e8  00800060  00000ae6  00000b7a  2**0
+  1 .data         0000031a  00800060  00000b2c  00000bc0  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000023  00800348  00800348  00000e62  2**0
+  2 .bss          00000023  0080037a  0080037a  00000eda  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000e62  2**0
+  3 .comment      00000030  00000000  00000000  00000eda  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000e94  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000f0c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000310  00000000  00000000  00000ed0  2**0
+  5 .debug_aranges 00000320  00000000  00000000  00000f48  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000033e6  00000000  00000000  000011e0  2**0
+  6 .debug_info   0000347f  00000000  00000000  00001268  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000010fe  00000000  00000000  000045c6  2**0
+  7 .debug_abbrev 000010b4  00000000  00000000  000046e7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000015e2  00000000  00000000  000056c4  2**0
+  8 .debug_line   00001683  00000000  00000000  0000579b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000005f4  00000000  00000000  00006ca8  2**2
+  9 .debug_frame  00000640  00000000  00000000  00006e20  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000101a  00000000  00000000  0000729c  2**0
+ 10 .debug_str    000010bd  00000000  00000000  00007460  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000011c3  00000000  00000000  000082b6  2**0
+ 11 .debug_loc    0000136d  00000000  00000000  0000851d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000260  00000000  00000000  00009479  2**0
+ 12 .debug_ranges 00000270  00000000  00000000  0000988a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -67,18 +67,18 @@ Disassembly of section .text:
   60:	13 e0       	ldi	r17, 0x03	; 3
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 ee       	ldi	r30, 0xE6	; 230
-  68:	fa e0       	ldi	r31, 0x0A	; 10
+  66:	ec e2       	ldi	r30, 0x2C	; 44
+  68:	fb e0       	ldi	r31, 0x0B	; 11
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	a8 34       	cpi	r26, 0x48	; 72
+  70:	aa 37       	cpi	r26, 0x7A	; 122
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
   76:	23 e0       	ldi	r18, 0x03	; 3
-  78:	a8 e4       	ldi	r26, 0x48	; 72
+  78:	aa e7       	ldi	r26, 0x7A	; 122
   7a:	b3 e0       	ldi	r27, 0x03	; 3
   7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,1970 +86,2091 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	ab 36       	cpi	r26, 0x6B	; 107
+  80:	ad 39       	cpi	r26, 0x9D	; 157
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 27 04 	call	0x84e	; 0x84e <main>
-  8a:	0c 94 71 05 	jmp	0xae2	; 0xae2 <_exit>
+  86:	0e 94 64 04 	call	0x8c8	; 0x8c8 <main>
+  8a:	0c 94 94 05 	jmp	0xb28	; 0xb28 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <CMD_Bus_HandShake>:
-        if ((*Ack_Req_Response == ACK_RES) || (*Ack_Req_Response == NACK_RES))
-            return RECEIVED;
-        else 
-            return INVALID_ACK_RESPONSE;
-    }
+    if ((*Nack_Res_Reason == INV_DEV_SEL) || (*Nack_Res_Reason == INV_OP_SEL))
+        return RECEIVED;
+    else 
+        return INVALID_NACK_REASON;
+    
 }
-  92:	cf 93       	push	r28
-  94:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
-  98:	2f ef       	ldi	r18, 0xFF	; 255
-  9a:	86 e7       	ldi	r24, 0x76	; 118
-  9c:	91 e0       	ldi	r25, 0x01	; 1
-  9e:	21 50       	subi	r18, 0x01	; 1
-  a0:	80 40       	sbci	r24, 0x00	; 0
-  a2:	90 40       	sbci	r25, 0x00	; 0
-  a4:	e1 f7       	brne	.-8      	; 0x9e <CMD_Bus_HandShake+0xc>
-  a6:	00 c0       	rjmp	.+0      	; 0xa8 <CMD_Bus_HandShake+0x16>
-  a8:	00 00       	nop
-  aa:	80 eb       	ldi	r24, 0xB0	; 176
-  ac:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
-  b0:	c8 2f       	mov	r28, r24
-  b2:	88 23       	and	r24, r24
-  b4:	89 f3       	breq	.-30     	; 0x98 <CMD_Bus_HandShake+0x6>
-  b6:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
-  ba:	c0 3a       	cpi	r28, 0xA0	; 160
-  bc:	11 f4       	brne	.+4      	; 0xc2 <CMD_Bus_HandShake+0x30>
-  be:	81 e0       	ldi	r24, 0x01	; 1
-  c0:	01 c0       	rjmp	.+2      	; 0xc4 <CMD_Bus_HandShake+0x32>
-  c2:	82 e0       	ldi	r24, 0x02	; 2
-  c4:	cf 91       	pop	r28
-  c6:	08 95       	ret
+  92:	80 eb       	ldi	r24, 0xB0	; 176
+  94:	0e 94 cb 04 	call	0x996	; 0x996 <SPI_Transiver>
+  98:	80 3a       	cpi	r24, 0xA0	; 160
+  9a:	11 f4       	brne	.+4      	; 0xa0 <CMD_Bus_HandShake+0xe>
+  9c:	81 e0       	ldi	r24, 0x01	; 1
+  9e:	08 95       	ret
+  a0:	82 e0       	ldi	r24, 0x02	; 2
+  a2:	08 95       	ret
 
-000000c8 <CMD_Bus_Slave_Init>:
-  c8:	0e 94 ad 04 	call	0x95a	; 0x95a <SPI_Slave_Init>
-  cc:	08 95       	ret
+000000a4 <CMD_Bus_Slave_Init>:
+  a4:	0e 94 d0 04 	call	0x9a0	; 0x9a0 <SPI_Slave_Init>
+  a8:	08 95       	ret
 
-000000ce <CMD_Bus_Write>:
-  ce:	cf 93       	push	r28
-  d0:	df 93       	push	r29
-  d2:	d8 2f       	mov	r29, r24
-  d4:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
-  d8:	82 30       	cpi	r24, 0x02	; 2
-  da:	61 f0       	breq	.+24     	; 0xf4 <CMD_Bus_Write+0x26>
-  dc:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
-  e0:	8d 2f       	mov	r24, r29
-  e2:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
-  e6:	c8 2f       	mov	r28, r24
-  e8:	88 23       	and	r24, r24
-  ea:	d1 f3       	breq	.-12     	; 0xe0 <CMD_Bus_Write+0x12>
-  ec:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
-  f0:	8c 2f       	mov	r24, r28
-  f2:	01 c0       	rjmp	.+2      	; 0xf6 <CMD_Bus_Write+0x28>
-  f4:	8b e0       	ldi	r24, 0x0B	; 11
-  f6:	df 91       	pop	r29
-  f8:	cf 91       	pop	r28
-  fa:	08 95       	ret
+000000aa <CMD_Bus_Read>:
+  aa:	cf 93       	push	r28
+  ac:	df 93       	push	r29
+  ae:	ec 01       	movw	r28, r24
+  b0:	83 e0       	ldi	r24, 0x03	; 3
+  b2:	0e 94 cb 04 	call	0x996	; 0x996 <SPI_Transiver>
+  b6:	88 83       	st	Y, r24
+  b8:	8f 3f       	cpi	r24, 0xFF	; 255
+  ba:	d1 f3       	breq	.-12     	; 0xb0 <CMD_Bus_Read+0x6>
+  bc:	84 e0       	ldi	r24, 0x04	; 4
+  be:	df 91       	pop	r29
+  c0:	cf 91       	pop	r28
+  c2:	08 95       	ret
 
-000000fc <CMD_Bus_Read>:
-  fc:	cf 93       	push	r28
-  fe:	df 93       	push	r29
- 100:	ec 01       	movw	r28, r24
- 102:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
- 106:	82 30       	cpi	r24, 0x02	; 2
- 108:	51 f0       	breq	.+20     	; 0x11e <CMD_Bus_Read+0x22>
- 10a:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
- 10e:	83 e0       	ldi	r24, 0x03	; 3
- 110:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
- 114:	88 83       	st	Y, r24
- 116:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
- 11a:	84 e0       	ldi	r24, 0x04	; 4
- 11c:	01 c0       	rjmp	.+2      	; 0x120 <CMD_Bus_Read+0x24>
- 11e:	8b e0       	ldi	r24, 0x0B	; 11
- 120:	df 91       	pop	r29
- 122:	cf 91       	pop	r28
- 124:	08 95       	ret
+000000c4 <CMD_Bus_Res_Ack>:
+  c4:	1f 93       	push	r17
+  c6:	cf 93       	push	r28
+  c8:	df 93       	push	r29
+  ca:	18 2f       	mov	r17, r24
+  cc:	c0 e0       	ldi	r28, 0x00	; 0
+  ce:	d0 e0       	ldi	r29, 0x00	; 0
+  d0:	81 2f       	mov	r24, r17
+  d2:	0e 94 cb 04 	call	0x996	; 0x996 <SPI_Transiver>
+  d6:	21 96       	adiw	r28, 0x01	; 1
+  d8:	87 30       	cpi	r24, 0x07	; 7
+  da:	11 f0       	breq	.+4      	; 0xe0 <CMD_Bus_Res_Ack+0x1c>
+  dc:	20 97       	sbiw	r28, 0x00	; 0
+  de:	c1 f7       	brne	.-16     	; 0xd0 <CMD_Bus_Res_Ack+0xc>
+  e0:	87 30       	cpi	r24, 0x07	; 7
+  e2:	11 f4       	brne	.+4      	; 0xe8 <CMD_Bus_Res_Ack+0x24>
+  e4:	85 e0       	ldi	r24, 0x05	; 5
+  e6:	01 c0       	rjmp	.+2      	; 0xea <CMD_Bus_Res_Ack+0x26>
+  e8:	8a e0       	ldi	r24, 0x0A	; 10
+  ea:	df 91       	pop	r29
+  ec:	cf 91       	pop	r28
+  ee:	1f 91       	pop	r17
+  f0:	08 95       	ret
 
-00000126 <CMD_Bus_Res_Ack>:
- * Outputs: ...
- * Returns: ...
+000000f2 <CMD_Bus_Res_Reason_NACK>:
+ * Outputs: Delivered Code (0x05) if a valid Ack_Request code received ||OR|| Invalid Reason for NACK code (0x0e) if not
+ * Returns: uint8 (code indicating the status of the requested process)
  * Author: Mark Fayez
 **/
-uint8 CMD_Bus_Res_Ack(uint8 Ack_Response)
+uint8 CMD_Bus_Res_Reason_NACK(uint8 NACK_Reason)
 {
- 126:	cf 93       	push	r28
- 128:	df 93       	push	r29
- 12a:	d8 2f       	mov	r29, r24
-    uint8 Response=0;
-    Response = CMD_Bus_HandShake();
- 12c:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
-
-    if(Response == INVALID_PEER)
- 130:	82 30       	cpi	r24, 0x02	; 2
- 132:	71 f0       	breq	.+28     	; 0x150 <CMD_Bus_Res_Ack+0x2a>
-        return PEER_UNAVAILABLE;
-    else 
+  f2:	1f 93       	push	r17
+  f4:	cf 93       	push	r28
+  f6:	df 93       	push	r29
+  f8:	18 2f       	mov	r17, r24
+    uint8 Response = 0;
+    uint16 Iteration_counter = 0;
+  fa:	c0 e0       	ldi	r28, 0x00	; 0
+  fc:	d0 e0       	ldi	r29, 0x00	; 0
     {
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_InitTrans();
- 134:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
         #endif /* SPI_ROLE */
 
-        do{Response = SPI_Transiver(Ack_Response);}
- 138:	8d 2f       	mov	r24, r29
- 13a:	0e 94 96 04 	call	0x92c	; 0x92c <SPI_Transiver>
- 13e:	c8 2f       	mov	r28, r24
-        while(Response == REQ_DROPPED);
- 140:	88 23       	and	r24, r24
- 142:	d1 f3       	breq	.-12     	; 0x138 <CMD_Bus_Res_Ack+0x12>
+        Response = SPI_Transiver(NACK_Reason);
+  fe:	81 2f       	mov	r24, r17
+ 100:	0e 94 cb 04 	call	0x996	; 0x996 <SPI_Transiver>
 
         #if SPI_ROLE == SPI_MASTER
             SPI_Master_TermTrans();
- 144:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
         #endif /* SPI_ROLE */
+        
+        Iteration_counter ++;
+ 104:	21 96       	adiw	r28, 0x01	; 1
+    }
+    while((Response != NACK_REASON_REQ) && (Iteration_counter != 0));
+ 106:	8d 30       	cpi	r24, 0x0D	; 13
+ 108:	11 f0       	breq	.+4      	; 0x10e <CMD_Bus_Res_Reason_NACK+0x1c>
+ 10a:	20 97       	sbiw	r28, 0x00	; 0
+ 10c:	c1 f7       	brne	.-16     	; 0xfe <CMD_Bus_Res_Reason_NACK+0xc>
 
-        if (Response == REQUEST_ACK)
- 148:	c6 30       	cpi	r28, 0x06	; 6
- 14a:	21 f4       	brne	.+8      	; 0x154 <CMD_Bus_Res_Ack+0x2e>
-            return DELIVERED;
- 14c:	85 e0       	ldi	r24, 0x05	; 5
- 14e:	03 c0       	rjmp	.+6      	; 0x156 <CMD_Bus_Res_Ack+0x30>
+    if (Response == NACK_REASON_REQ)
+ 10e:	8d 30       	cpi	r24, 0x0D	; 13
+ 110:	11 f4       	brne	.+4      	; 0x116 <CMD_Bus_Res_Reason_NACK+0x24>
+        return DELIVERED;
+ 112:	85 e0       	ldi	r24, 0x05	; 5
+ 114:	01 c0       	rjmp	.+2      	; 0x118 <CMD_Bus_Res_Reason_NACK+0x26>
+    else 
+        return INVALID_NACK_REASON_REQ;
+ 116:	8e e0       	ldi	r24, 0x0E	; 14
+ 118:	df 91       	pop	r29
+ 11a:	cf 91       	pop	r28
+ 11c:	1f 91       	pop	r17
+ 11e:	08 95       	ret
+
+00000120 <Comm_Bridge_Init>:
+*           Exact codes of the response are decided by the devices manager module in the actuator system.
+* Returns: None
+* Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Req(uint8* Request_Command)
 {
-    uint8 Response=0;
-    Response = CMD_Bus_HandShake();
+ 120:	0e 94 52 00 	call	0xa4	; 0xa4 <CMD_Bus_Slave_Init>
+ 124:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+ 128:	82 30       	cpi	r24, 0x02	; 2
+ 12a:	29 f4       	brne	.+10     	; 0x136 <Comm_Bridge_Init+0x16>
+ 12c:	6c e0       	ldi	r22, 0x0C	; 12
+ 12e:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+ 132:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+ 136:	82 30       	cpi	r24, 0x02	; 2
+ 138:	f1 f3       	breq	.-4      	; 0x136 <Comm_Bridge_Init+0x16>
+ 13a:	60 e1       	ldi	r22, 0x10	; 16
+ 13c:	82 e0       	ldi	r24, 0x02	; 2
+ 13e:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+ 142:	08 95       	ret
 
-    if(Response == INVALID_PEER)
-        return PEER_UNAVAILABLE;
- 150:	8b e0       	ldi	r24, 0x0B	; 11
- 152:	01 c0       	rjmp	.+2      	; 0x156 <CMD_Bus_Res_Ack+0x30>
-        #endif /* SPI_ROLE */
-
-        if (Response == REQUEST_ACK)
-            return DELIVERED;
-        else 
-            return INVALID_ACK_REQUEST;
- 154:	89 e0       	ldi	r24, 0x09	; 9
-    }
- 156:	df 91       	pop	r29
- 158:	cf 91       	pop	r28
- 15a:	08 95       	ret
-
-0000015c <Comm_Bridge_Init>:
-        return Ack_Response;
-    }
-    else
-        return OUT_OF_SYNC;
-#endif	/* ECU_ROLE */
-}
- 15c:	0e 94 64 00 	call	0xc8	; 0xc8 <CMD_Bus_Slave_Init>
- 160:	04 c0       	rjmp	.+8      	; 0x16a <Comm_Bridge_Init+0xe>
- 162:	6c e0       	ldi	r22, 0x0C	; 12
- 164:	82 e0       	ldi	r24, 0x02	; 2
- 166:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
- 16a:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
- 16e:	82 30       	cpi	r24, 0x02	; 2
- 170:	c1 f3       	breq	.-16     	; 0x162 <Comm_Bridge_Init+0x6>
- 172:	60 e1       	ldi	r22, 0x10	; 16
- 174:	82 e0       	ldi	r24, 0x02	; 2
- 176:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
- 17a:	08 95       	ret
-
-0000017c <Comm_Bridge_CMD_Read_Req>:
- * Outputs: ...
- * Returns: ...
+00000144 <Comm_Bridge_CMD_Read_Req>:
+ * Outputs: RECEIVED code (0x04) if command data byte/s is/are received after a successfull handshake with the peer ||OR|| OUT_OF_SYNC code (4) if handshake couldn't be completed, hence no data received.
+ * Returns: uint8 (code indicating the status of the requested process)
  * Author: Mark Fayez
 **/
-void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
+uint8 Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
 {
- 17c:	cf 93       	push	r28
- 17e:	df 93       	push	r29
- 180:	ec 01       	movw	r28, r24
+ 144:	0f 93       	push	r16
+ 146:	1f 93       	push	r17
+ 148:	cf 93       	push	r28
+ 14a:	8c 01       	movw	r16, r24
 #if ECU_ROLE == ACTUATOR_ECU
-    uint8 ECUs_Comm_State = REQ_DROPPED;
-    ECUs_Comm_State = CMD_Bus_Read(Request_Command);
- 182:	0e 94 7e 00 	call	0xfc	; 0xfc <CMD_Bus_Read>
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
- 186:	10 c0       	rjmp	.+32     	; 0x1a8 <Comm_Bridge_CMD_Read_Req+0x2c>
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    uint8 Failed_Iteration_counter = 0;
+
+    ECUs_Comm_State = CMD_Bus_HandShake();
+ 14c:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+    if(ECUs_Comm_State == INVALID_PEER)
+ 150:	82 30       	cpi	r24, 0x02	; 2
+ 152:	29 f4       	brne	.+10     	; 0x15e <Comm_Bridge_CMD_Read_Req+0x1a>
     {
         // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
         Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
- 188:	65 e1       	ldi	r22, 0x15	; 21
- 18a:	82 e0       	ldi	r24, 0x02	; 2
- 18c:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 154:	65 e1       	ldi	r22, 0x15	; 21
+ 156:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 
-        ECUs_Comm_State = CMD_Bus_Read(Request_Command);
- 190:	ce 01       	movw	r24, r28
- 192:	0e 94 7e 00 	call	0xfc	; 0xfc <CMD_Bus_Read>
+        ECUs_Comm_State = CMD_Bus_HandShake();
+ 15a:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+        if((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_HANDSHAKES-1) && (ECUs_Comm_State == INVALID_PEER))
+        {
+            // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+
+            ECUs_Comm_State = OUT_OF_SYNC;
+ 15e:	c0 e0       	ldi	r28, 0x00	; 0
+ 160:	0c c0       	rjmp	.+24     	; 0x17a <Comm_Bridge_CMD_Read_Req+0x36>
+
+        ECUs_Comm_State = CMD_Bus_HandShake();
+    }
+    for(Failed_Iteration_counter = 0; (ECUs_Comm_State != VALID_PEER) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_HANDSHAKES); Failed_Iteration_counter++)
+    {
+        ECUs_Comm_State = CMD_Bus_HandShake();
+ 162:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+        if((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_HANDSHAKES-1) && (ECUs_Comm_State == INVALID_PEER))
+ 166:	c4 30       	cpi	r28, 0x04	; 4
+ 168:	39 f4       	brne	.+14     	; 0x178 <Comm_Bridge_CMD_Read_Req+0x34>
+ 16a:	82 30       	cpi	r24, 0x02	; 2
+ 16c:	29 f4       	brne	.+10     	; 0x178 <Comm_Bridge_CMD_Read_Req+0x34>
+        {
+            // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+ 16e:	66 e1       	ldi	r22, 0x16	; 22
+ 170:	89 e0       	ldi	r24, 0x09	; 9
+ 172:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+
+            ECUs_Comm_State = OUT_OF_SYNC;
+ 176:	83 e1       	ldi	r24, 0x13	; 19
+        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+
+        ECUs_Comm_State = CMD_Bus_HandShake();
+    }
+    for(Failed_Iteration_counter = 0; (ECUs_Comm_State != VALID_PEER) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_HANDSHAKES); Failed_Iteration_counter++)
+ 178:	cf 5f       	subi	r28, 0xFF	; 255
+ 17a:	81 30       	cpi	r24, 0x01	; 1
+ 17c:	11 f0       	breq	.+4      	; 0x182 <Comm_Bridge_CMD_Read_Req+0x3e>
+ 17e:	c5 30       	cpi	r28, 0x05	; 5
+ 180:	80 f3       	brcs	.-32     	; 0x162 <Comm_Bridge_CMD_Read_Req+0x1e>
+            ECUs_Comm_State = OUT_OF_SYNC;
+        }
+    }
+    // Repeat handshake if failed with max iterations pre-set in configurations file then break out of loop anyway.
+    
+    if(ECUs_Comm_State == VALID_PEER)
+ 182:	81 30       	cpi	r24, 0x01	; 1
+ 184:	49 f4       	brne	.+18     	; 0x198 <Comm_Bridge_CMD_Read_Req+0x54>
+    
+        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Op Selected'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_OP_SELECTED);
+
+        #elif COMMAND_BYTE_LENGTH == 1
+        CMD_Bus_Read(Request_Command);
+ 186:	c8 01       	movw	r24, r16
+ 188:	0e 94 55 00 	call	0xaa	; 0xaa <CMD_Bus_Read>
+        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Dev/Op Selected'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEV_OP_SELECTED);
+ 18c:	6b e1       	ldi	r22, 0x1B	; 27
+ 18e:	82 e0       	ldi	r24, 0x02	; 2
+ 190:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+        #endif /* COMMAND_BYTE_LENGTH */
+
+        return RECEIVED;
+ 194:	84 e0       	ldi	r24, 0x04	; 4
+ 196:	01 c0       	rjmp	.+2      	; 0x19a <Comm_Bridge_CMD_Read_Req+0x56>
+    }
+    else
+    {
+        return OUT_OF_SYNC;
+ 198:	83 e1       	ldi	r24, 0x13	; 19
+    }
+#endif /* ECU_ROLE */
+}
+ 19a:	cf 91       	pop	r28
+ 19c:	1f 91       	pop	r17
+ 19e:	0f 91       	pop	r16
+ 1a0:	08 95       	ret
+
+000001a2 <Comm_Bridge_CMD_Res>:
+ * Outputs: replace the Ack response value by OUT_OF_SYNC if end of function reached without being able to send the data.
+ * Returns: None
+ * Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Res(uint8* Ack_Response)
+{
+ 1a2:	0f 93       	push	r16
+ 1a4:	1f 93       	push	r17
+ 1a6:	cf 93       	push	r28
+ 1a8:	df 93       	push	r29
+ 1aa:	8c 01       	movw	r16, r24
+#if ECU_ROLE == ACTUATOR_ECU
+    uint8 Ack_Request = INVALID_ACK_REQUEST;
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    uint8 Failed_Iteration_counter = 0;
+
+    if(*Ack_Response == REQ_DONE)
+ 1ac:	fc 01       	movw	r30, r24
+ 1ae:	80 81       	ld	r24, Z
+ 1b0:	82 31       	cpi	r24, 0x12	; 18
+ 1b2:	f9 f4       	brne	.+62     	; 0x1f2 <Comm_Bridge_CMD_Res+0x50>
+    {
+        Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
+ 1b4:	0e 94 62 00 	call	0xc4	; 0xc4 <CMD_Bus_Res_Ack>
+ 1b8:	d8 2f       	mov	r29, r24
+        if(Ack_Request == INVALID_ACK_REQUEST)
+ 1ba:	8a 30       	cpi	r24, 0x0A	; 10
+ 1bc:	21 f4       	brne	.+8      	; 0x1c6 <Comm_Bridge_CMD_Res+0x24>
+        {
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+ 1be:	6a e0       	ldi	r22, 0x0A	; 10
+ 1c0:	82 e0       	ldi	r24, 0x02	; 2
+ 1c2:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+ * Outputs: replace the Ack response value by OUT_OF_SYNC if end of function reached without being able to send the data.
+ * Returns: None
+ * Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Res(uint8* Ack_Response)
+{
+ 1c6:	c0 e0       	ldi	r28, 0x00	; 0
+ 1c8:	0e c0       	rjmp	.+28     	; 0x1e6 <Comm_Bridge_CMD_Res+0x44>
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+        }
+        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+        {
+            if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS -1) && (Ack_Request == INVALID_ACK_REQUEST))
+ 1ca:	c9 30       	cpi	r28, 0x09	; 9
+ 1cc:	31 f4       	brne	.+12     	; 0x1da <Comm_Bridge_CMD_Res+0x38>
+ 1ce:	da 30       	cpi	r29, 0x0A	; 10
+ 1d0:	21 f4       	brne	.+8      	; 0x1da <Comm_Bridge_CMD_Res+0x38>
+            {
+                // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+ 1d2:	66 e1       	ldi	r22, 0x16	; 22
+ 1d4:	89 e0       	ldi	r24, 0x09	; 9
+ 1d6:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+
+                ECUs_Comm_State = OUT_OF_SYNC;
+            }
+            Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
+ 1da:	f8 01       	movw	r30, r16
+ 1dc:	80 81       	ld	r24, Z
+ 1de:	0e 94 62 00 	call	0xc4	; 0xc4 <CMD_Bus_Res_Ack>
+ 1e2:	d8 2f       	mov	r29, r24
+        if(Ack_Request == INVALID_ACK_REQUEST)
+        {
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+        }
+        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+ 1e4:	cf 5f       	subi	r28, 0xFF	; 255
+ 1e6:	da 30       	cpi	r29, 0x0A	; 10
+ 1e8:	09 f0       	breq	.+2      	; 0x1ec <Comm_Bridge_CMD_Res+0x4a>
+ 1ea:	41 c0       	rjmp	.+130    	; 0x26e <Comm_Bridge_CMD_Res+0xcc>
+ 1ec:	ca 30       	cpi	r28, 0x0A	; 10
+ 1ee:	68 f3       	brcs	.-38     	; 0x1ca <Comm_Bridge_CMD_Res+0x28>
+ 1f0:	3e c0       	rjmp	.+124    	; 0x26e <Comm_Bridge_CMD_Res+0xcc>
+            Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
+        }
+    }
+    else
+    {
+        Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
+ 1f2:	88 e0       	ldi	r24, 0x08	; 8
+ 1f4:	0e 94 62 00 	call	0xc4	; 0xc4 <CMD_Bus_Res_Ack>
+ 1f8:	d8 2f       	mov	r29, r24
+        if(Ack_Request == INVALID_ACK_REQUEST)
+ 1fa:	8a 30       	cpi	r24, 0x0A	; 10
+ 1fc:	21 f4       	brne	.+8      	; 0x206 <Comm_Bridge_CMD_Res+0x64>
+        {
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+ 1fe:	6a e0       	ldi	r22, 0x0A	; 10
+ 200:	82 e0       	ldi	r24, 0x02	; 2
+ 202:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+ * Outputs: replace the Ack response value by OUT_OF_SYNC if end of function reached without being able to send the data.
+ * Returns: None
+ * Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Res(uint8* Ack_Response)
+{
+ 206:	c0 e0       	ldi	r28, 0x00	; 0
+ 208:	0d c0       	rjmp	.+26     	; 0x224 <Comm_Bridge_CMD_Res+0x82>
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+        }
+        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+        {
+            if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS -1) && (Ack_Request == INVALID_ACK_REQUEST))
+ 20a:	c9 30       	cpi	r28, 0x09	; 9
+ 20c:	31 f4       	brne	.+12     	; 0x21a <Comm_Bridge_CMD_Res+0x78>
+ 20e:	da 30       	cpi	r29, 0x0A	; 10
+ 210:	21 f4       	brne	.+8      	; 0x21a <Comm_Bridge_CMD_Res+0x78>
+            {
+                // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+ 212:	66 e1       	ldi	r22, 0x16	; 22
+ 214:	89 e0       	ldi	r24, 0x09	; 9
+ 216:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+
+                ECUs_Comm_State = OUT_OF_SYNC;
+            }
+            Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
+ 21a:	88 e0       	ldi	r24, 0x08	; 8
+ 21c:	0e 94 62 00 	call	0xc4	; 0xc4 <CMD_Bus_Res_Ack>
+ 220:	d8 2f       	mov	r29, r24
+        if(Ack_Request == INVALID_ACK_REQUEST)
+        {
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+        }
+        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+ 222:	cf 5f       	subi	r28, 0xFF	; 255
+ 224:	da 30       	cpi	r29, 0x0A	; 10
+ 226:	11 f4       	brne	.+4      	; 0x22c <Comm_Bridge_CMD_Res+0x8a>
+ 228:	ca 30       	cpi	r28, 0x0A	; 10
+ 22a:	78 f3       	brcs	.-34     	; 0x20a <Comm_Bridge_CMD_Res+0x68>
+
+                ECUs_Comm_State = OUT_OF_SYNC;
+            }
+            Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
+        }
+        if(Ack_Request == DELIVERED)
+ 22c:	d5 30       	cpi	r29, 0x05	; 5
+ 22e:	f9 f4       	brne	.+62     	; 0x26e <Comm_Bridge_CMD_Res+0xcc>
+        {
+            Ack_Request = CMD_Bus_Res_Reason_NACK(*Ack_Response);
+ 230:	f8 01       	movw	r30, r16
+ 232:	80 81       	ld	r24, Z
+ 234:	0e 94 79 00 	call	0xf2	; 0xf2 <CMD_Bus_Res_Reason_NACK>
+ 238:	d8 2f       	mov	r29, r24
+            if(Ack_Request == INVALID_NACK_REASON_REQ)
+ 23a:	8e 30       	cpi	r24, 0x0E	; 14
+ 23c:	21 f4       	brne	.+8      	; 0x246 <Comm_Bridge_CMD_Res+0xa4>
+            {
+                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+ 23e:	6a e0       	ldi	r22, 0x0A	; 10
+ 240:	82 e0       	ldi	r24, 0x02	; 2
+ 242:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+ * Outputs: replace the Ack response value by OUT_OF_SYNC if end of function reached without being able to send the data.
+ * Returns: None
+ * Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Res(uint8* Ack_Response)
+{
+ 246:	c0 e0       	ldi	r28, 0x00	; 0
+ 248:	0e c0       	rjmp	.+28     	; 0x266 <Comm_Bridge_CMD_Res+0xc4>
+                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+            }
+            for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_NACK_REASON_REQ) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+            {
+                if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS -1) && (Ack_Request == INVALID_NACK_REASON_REQ))
+ 24a:	c9 30       	cpi	r28, 0x09	; 9
+ 24c:	31 f4       	brne	.+12     	; 0x25a <Comm_Bridge_CMD_Res+0xb8>
+ 24e:	de 30       	cpi	r29, 0x0E	; 14
+ 250:	21 f4       	brne	.+8      	; 0x25a <Comm_Bridge_CMD_Res+0xb8>
+                {
+                    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                    Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+ 252:	66 e1       	ldi	r22, 0x16	; 22
+ 254:	89 e0       	ldi	r24, 0x09	; 9
+ 256:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+
+                    ECUs_Comm_State = OUT_OF_SYNC;
+                }
+                Ack_Request = CMD_Bus_Res_Reason_NACK(*Ack_Response);
+ 25a:	f8 01       	movw	r30, r16
+ 25c:	80 81       	ld	r24, Z
+ 25e:	0e 94 79 00 	call	0xf2	; 0xf2 <CMD_Bus_Res_Reason_NACK>
+ 262:	d8 2f       	mov	r29, r24
+            if(Ack_Request == INVALID_NACK_REASON_REQ)
+            {
+                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+            }
+            for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_NACK_REASON_REQ) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+ 264:	cf 5f       	subi	r28, 0xFF	; 255
+ 266:	de 30       	cpi	r29, 0x0E	; 14
+ 268:	11 f4       	brne	.+4      	; 0x26e <Comm_Bridge_CMD_Res+0xcc>
+ 26a:	ca 30       	cpi	r28, 0x0A	; 10
+ 26c:	70 f3       	brcs	.-36     	; 0x24a <Comm_Bridge_CMD_Res+0xa8>
+        // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Response Sent'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_RESPONSE_SENT);
+    }
+    else
+    {
+        *Ack_Response = OUT_OF_SYNC;
+ 26e:	83 e1       	ldi	r24, 0x13	; 19
+ 270:	f8 01       	movw	r30, r16
+ 272:	80 83       	st	Z, r24
+    }
+
+#endif /* ECU_ROLE */
+}
+ 274:	df 91       	pop	r29
+ 276:	cf 91       	pop	r28
+ 278:	1f 91       	pop	r17
+ 27a:	0f 91       	pop	r16
+ 27c:	08 95       	ret
+
+0000027e <Comm_Bridge_CMD_Bus_Re_Sync>:
+ * Outputs: None
+ * Returns: None
+ * Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Bus_Re_Sync(void)
+{
+ 27e:	cf 93       	push	r28
+    uint8 Iteration_counter = 0;
+
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    
+    ECUs_Comm_State = CMD_Bus_HandShake();
+ 280:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+    
+    for(Iteration_counter = 0; (ECUs_Comm_State == VALID_PEER) && (Iteration_counter < NUM_OF_RESYNC_HANDSHAKES); Iteration_counter++)
+ 284:	c0 e0       	ldi	r28, 0x00	; 0
+ 286:	09 c0       	rjmp	.+18     	; 0x29a <Comm_Bridge_CMD_Bus_Re_Sync+0x1c>
+    {
+        if(ECUs_Comm_State == INVALID_PEER)
+ 288:	82 30       	cpi	r24, 0x02	; 2
+ 28a:	21 f4       	brne	.+8      	; 0x294 <Comm_Bridge_CMD_Bus_Re_Sync+0x16>
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+ 28c:	65 e1       	ldi	r22, 0x15	; 21
+ 28e:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+            Iteration_counter = 0;
+ 292:	c0 e0       	ldi	r28, 0x00	; 0
+        }
+        ECUs_Comm_State = CMD_Bus_HandShake();
+ 294:	0e 94 49 00 	call	0x92	; 0x92 <CMD_Bus_HandShake>
+
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    
+    ECUs_Comm_State = CMD_Bus_HandShake();
+    
+    for(Iteration_counter = 0; (ECUs_Comm_State == VALID_PEER) && (Iteration_counter < NUM_OF_RESYNC_HANDSHAKES); Iteration_counter++)
+ 298:	cf 5f       	subi	r28, 0xFF	; 255
+ 29a:	81 30       	cpi	r24, 0x01	; 1
+ 29c:	11 f4       	brne	.+4      	; 0x2a2 <Comm_Bridge_CMD_Bus_Re_Sync+0x24>
+ 29e:	c8 30       	cpi	r28, 0x08	; 8
+ 2a0:	98 f3       	brcs	.-26     	; 0x288 <Comm_Bridge_CMD_Bus_Re_Sync+0xa>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 196:	2f ef       	ldi	r18, 0xFF	; 255
- 198:	36 e7       	ldi	r19, 0x76	; 118
- 19a:	91 e0       	ldi	r25, 0x01	; 1
- 19c:	21 50       	subi	r18, 0x01	; 1
- 19e:	30 40       	sbci	r19, 0x00	; 0
- 1a0:	90 40       	sbci	r25, 0x00	; 0
- 1a2:	e1 f7       	brne	.-8      	; 0x19c <Comm_Bridge_CMD_Read_Req+0x20>
- 1a4:	00 c0       	rjmp	.+0      	; 0x1a6 <Comm_Bridge_CMD_Read_Req+0x2a>
- 1a6:	00 00       	nop
-void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
-{
-#if ECU_ROLE == ACTUATOR_ECU
-    uint8 ECUs_Comm_State = REQ_DROPPED;
-    ECUs_Comm_State = CMD_Bus_Read(Request_Command);
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
- 1a8:	8b 30       	cpi	r24, 0x0B	; 11
- 1aa:	71 f3       	breq	.-36     	; 0x188 <Comm_Bridge_CMD_Read_Req+0xc>
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_OP_SELECTED);
-
-    #elif COMMAND_BYTE_LENGTH == 1
-
-    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Dev/Op Selected'
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEV_OP_SELECTED);
- 1ac:	6b e1       	ldi	r22, 0x1B	; 27
- 1ae:	82 e0       	ldi	r24, 0x02	; 2
- 1b0:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-    
-    #endif /* COMMAND_BYTE_LENGTH */
-#endif /* ECU_ROLE */
-}
- 1b4:	df 91       	pop	r29
- 1b6:	cf 91       	pop	r28
- 1b8:	08 95       	ret
-
-000001ba <Comm_Bridge_CMD_Res>:
- * Outputs: ...
- * Returns: ...
- * Author: Mark Fayez
-**/
-void Comm_Bridge_CMD_Res(uint8* Ack_Response)
-{
- 1ba:	0f 93       	push	r16
- 1bc:	1f 93       	push	r17
- 1be:	cf 93       	push	r28
- 1c0:	8c 01       	movw	r16, r24
-#if ECU_ROLE == ACTUATOR_ECU
-    uint8 Ack_Request = INVALID_ACK_REQUEST;
-    if(*Ack_Response == REQ_DONE)
- 1c2:	fc 01       	movw	r30, r24
- 1c4:	80 81       	ld	r24, Z
- 1c6:	88 30       	cpi	r24, 0x08	; 8
- 1c8:	b9 f4       	brne	.+46     	; 0x1f8 <Comm_Bridge_CMD_Res+0x3e>
-    {
-        do
-        {
-            Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
- 1ca:	f8 01       	movw	r30, r16
- 1cc:	80 81       	ld	r24, Z
- 1ce:	0e 94 93 00 	call	0x126	; 0x126 <CMD_Bus_Res_Ack>
- 1d2:	c8 2f       	mov	r28, r24
-            if(Ack_Request == PEER_UNAVAILABLE)
- 1d4:	8b 30       	cpi	r24, 0x0B	; 11
- 1d6:	29 f4       	brne	.+10     	; 0x1e2 <Comm_Bridge_CMD_Res+0x28>
-            {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
- 1d8:	65 e1       	ldi	r22, 0x15	; 21
- 1da:	82 e0       	ldi	r24, 0x02	; 2
- 1dc:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
- 1e0:	06 c0       	rjmp	.+12     	; 0x1ee <Comm_Bridge_CMD_Res+0x34>
-            }
-            else if (Ack_Request == INVALID_ACK_REQUEST)
- 1e2:	89 30       	cpi	r24, 0x09	; 9
- 1e4:	21 f4       	brne	.+8      	; 0x1ee <Comm_Bridge_CMD_Res+0x34>
-            {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
- 1e6:	6a e0       	ldi	r22, 0x0A	; 10
- 1e8:	82 e0       	ldi	r24, 0x02	; 2
- 1ea:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-            }
-            
+ 2a2:	2f ef       	ldi	r18, 0xFF	; 255
+ 2a4:	80 e7       	ldi	r24, 0x70	; 112
+ 2a6:	92 e0       	ldi	r25, 0x02	; 2
+ 2a8:	21 50       	subi	r18, 0x01	; 1
+ 2aa:	80 40       	sbci	r24, 0x00	; 0
+ 2ac:	90 40       	sbci	r25, 0x00	; 0
+ 2ae:	e1 f7       	brne	.-8      	; 0x2a8 <Comm_Bridge_CMD_Bus_Re_Sync+0x2a>
+ 2b0:	00 c0       	rjmp	.+0      	; 0x2b2 <Comm_Bridge_CMD_Bus_Re_Sync+0x34>
+ 2b2:	00 00       	nop
         }
-        while((Ack_Request == PEER_UNAVAILABLE) || (Ack_Request == INVALID_ACK_REQUEST));
- 1ee:	cb 30       	cpi	r28, 0x0B	; 11
- 1f0:	61 f3       	breq	.-40     	; 0x1ca <Comm_Bridge_CMD_Res+0x10>
- 1f2:	c9 30       	cpi	r28, 0x09	; 9
- 1f4:	51 f3       	breq	.-44     	; 0x1ca <Comm_Bridge_CMD_Res+0x10>
- 1f6:	24 c0       	rjmp	.+72     	; 0x240 <Comm_Bridge_CMD_Res+0x86>
-    else
-    {
-        
-        do
-        {
-            Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
- 1f8:	87 e0       	ldi	r24, 0x07	; 7
- 1fa:	0e 94 93 00 	call	0x126	; 0x126 <CMD_Bus_Res_Ack>
- 1fe:	c8 2f       	mov	r28, r24
-            if(Ack_Request == PEER_UNAVAILABLE)
- 200:	8b 30       	cpi	r24, 0x0B	; 11
- 202:	29 f4       	brne	.+10     	; 0x20e <Comm_Bridge_CMD_Res+0x54>
-            {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
- 204:	65 e1       	ldi	r22, 0x15	; 21
- 206:	82 e0       	ldi	r24, 0x02	; 2
- 208:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
- 20c:	06 c0       	rjmp	.+12     	; 0x21a <Comm_Bridge_CMD_Res+0x60>
-            }
-            else if (Ack_Request == INVALID_ACK_REQUEST)
- 20e:	89 30       	cpi	r24, 0x09	; 9
- 210:	21 f4       	brne	.+8      	; 0x21a <Comm_Bridge_CMD_Res+0x60>
-            {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
- 212:	6a e0       	ldi	r22, 0x0A	; 10
- 214:	82 e0       	ldi	r24, 0x02	; 2
- 216:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-            }
-            
-        }
-        while((Ack_Request == PEER_UNAVAILABLE) || (Ack_Request == INVALID_ACK_REQUEST));
- 21a:	cb 30       	cpi	r28, 0x0B	; 11
- 21c:	69 f3       	breq	.-38     	; 0x1f8 <Comm_Bridge_CMD_Res+0x3e>
- 21e:	c9 30       	cpi	r28, 0x09	; 9
- 220:	59 f3       	breq	.-42     	; 0x1f8 <Comm_Bridge_CMD_Res+0x3e>
-        
-        Ack_Request = CMD_Bus_Write(*Ack_Response);
- 222:	f8 01       	movw	r30, r16
- 224:	80 81       	ld	r24, Z
- 226:	0e 94 67 00 	call	0xce	; 0xce <CMD_Bus_Write>
-
-        do
-        {
-            Ack_Request = CMD_Bus_Write(*Ack_Response);
- 22a:	f8 01       	movw	r30, r16
- 22c:	80 81       	ld	r24, Z
- 22e:	0e 94 67 00 	call	0xce	; 0xce <CMD_Bus_Write>
- 232:	c8 2f       	mov	r28, r24
-
-            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
- 234:	65 e1       	ldi	r22, 0x15	; 21
- 236:	82 e0       	ldi	r24, 0x02	; 2
- 238:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-        }
-        while(Ack_Request == PEER_UNAVAILABLE);
- 23c:	cb 30       	cpi	r28, 0x0B	; 11
- 23e:	a9 f3       	breq	.-22     	; 0x22a <Comm_Bridge_CMD_Res+0x70>
+        ECUs_Comm_State = CMD_Bus_HandShake();
     }
-    // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Response Sent'
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_RESPONSE_SENT);
- 240:	6c e1       	ldi	r22, 0x1C	; 28
- 242:	82 e0       	ldi	r24, 0x02	; 2
- 244:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
 
-#endif /* ECU_ROLE */
- 248:	cf 91       	pop	r28
- 24a:	1f 91       	pop	r17
- 24c:	0f 91       	pop	r16
- 24e:	08 95       	ret
+    _delay_ms(PRIOR_RE_SYNC_HANDSHAKES_DELAY_MS);
+ 2b4:	cf 91       	pop	r28
+ 2b6:	08 95       	ret
 
-00000250 <Devices_Init>:
+000002b8 <Devices_Init>:
 #include "Status_FollowUp.h"
 
 volatile DevicesDB Smart_Home_Devices;
 
 void Devices_Init(void)
 {
- 250:	1f 93       	push	r17
- 252:	cf 93       	push	r28
- 254:	df 93       	push	r29
+ 2b8:	1f 93       	push	r17
+ 2ba:	cf 93       	push	r28
+ 2bc:	df 93       	push	r29
 	Devices_DB_Config(&Smart_Home_Devices);
- 256:	8a e4       	ldi	r24, 0x4A	; 74
- 258:	93 e0       	ldi	r25, 0x03	; 3
- 25a:	0e 94 bc 01 	call	0x378	; 0x378 <Devices_DB_Config>
+ 2be:	8c e7       	ldi	r24, 0x7C	; 124
+ 2c0:	93 e0       	ldi	r25, 0x03	; 3
+ 2c2:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <Devices_DB_Config>
 
 	uint8 device_counter = 0;
 	for(device_counter = 0; device_counter < NUM_OF_DEVICES; device_counter++)
- 25e:	10 e0       	ldi	r17, 0x00	; 0
- 260:	1c c0       	rjmp	.+56     	; 0x29a <Devices_Init+0x4a>
+ 2c6:	10 e0       	ldi	r17, 0x00	; 0
+ 2c8:	1c c0       	rjmp	.+56     	; 0x302 <Devices_Init+0x4a>
 	{
 		Smart_Home_Devices.Device[device_counter].Init();
- 262:	81 2f       	mov	r24, r17
- 264:	90 e0       	ldi	r25, 0x00	; 0
- 266:	ec 01       	movw	r28, r24
- 268:	cc 0f       	add	r28, r28
- 26a:	dd 1f       	adc	r29, r29
- 26c:	88 0f       	add	r24, r24
- 26e:	99 1f       	adc	r25, r25
- 270:	88 0f       	add	r24, r24
- 272:	99 1f       	adc	r25, r25
- 274:	88 0f       	add	r24, r24
- 276:	99 1f       	adc	r25, r25
- 278:	c8 0f       	add	r28, r24
- 27a:	d9 1f       	adc	r29, r25
- 27c:	c6 5b       	subi	r28, 0xB6	; 182
- 27e:	dc 4f       	sbci	r29, 0xFC	; 252
- 280:	e9 81       	ldd	r30, Y+1	; 0x01
- 282:	fa 81       	ldd	r31, Y+2	; 0x02
- 284:	09 95       	icall
+ 2ca:	81 2f       	mov	r24, r17
+ 2cc:	90 e0       	ldi	r25, 0x00	; 0
+ 2ce:	ec 01       	movw	r28, r24
+ 2d0:	cc 0f       	add	r28, r28
+ 2d2:	dd 1f       	adc	r29, r29
+ 2d4:	88 0f       	add	r24, r24
+ 2d6:	99 1f       	adc	r25, r25
+ 2d8:	88 0f       	add	r24, r24
+ 2da:	99 1f       	adc	r25, r25
+ 2dc:	88 0f       	add	r24, r24
+ 2de:	99 1f       	adc	r25, r25
+ 2e0:	c8 0f       	add	r28, r24
+ 2e2:	d9 1f       	adc	r29, r25
+ 2e4:	c4 58       	subi	r28, 0x84	; 132
+ 2e6:	dc 4f       	sbci	r29, 0xFC	; 252
+ 2e8:	e9 81       	ldd	r30, Y+1	; 0x01
+ 2ea:	fa 81       	ldd	r31, Y+2	; 0x02
+ 2ec:	09 95       	icall
 		Smart_Home_Devices.Device[device_counter].OpFn[OP_1]();
- 286:	ec 81       	ldd	r30, Y+4	; 0x04
- 288:	fd 81       	ldd	r31, Y+5	; 0x05
- 28a:	09 95       	icall
+ 2ee:	ec 81       	ldd	r30, Y+4	; 0x04
+ 2f0:	fd 81       	ldd	r31, Y+5	; 0x05
+ 2f2:	09 95       	icall
 		Smart_Home_Devices.Device[device_counter].Current_Operation = OP_1;
- 28c:	1b 82       	std	Y+3, r1	; 0x03
+ 2f4:	1b 82       	std	Y+3, r1	; 0x03
 		
 		Status_Disp_LCD_IncludeInteger(LCD_ROW_TXT_DEVICE_,(device_counter + 1),LCD_ROW_TXT_READY);
- 28e:	1f 5f       	subi	r17, 0xFF	; 255
- 290:	4e e1       	ldi	r20, 0x1E	; 30
- 292:	61 2f       	mov	r22, r17
- 294:	8d e1       	ldi	r24, 0x1D	; 29
- 296:	0e 94 f2 04 	call	0x9e4	; 0x9e4 <Status_Disp_LCD_IncludeInteger>
+ 2f6:	1f 5f       	subi	r17, 0xFF	; 255
+ 2f8:	4e e1       	ldi	r20, 0x1E	; 30
+ 2fa:	61 2f       	mov	r22, r17
+ 2fc:	8d e1       	ldi	r24, 0x1D	; 29
+ 2fe:	0e 94 15 05 	call	0xa2a	; 0xa2a <Status_Disp_LCD_IncludeInteger>
 void Devices_Init(void)
 {
 	Devices_DB_Config(&Smart_Home_Devices);
 
 	uint8 device_counter = 0;
 	for(device_counter = 0; device_counter < NUM_OF_DEVICES; device_counter++)
- 29a:	13 30       	cpi	r17, 0x03	; 3
- 29c:	10 f3       	brcs	.-60     	; 0x262 <Devices_Init+0x12>
+ 302:	13 30       	cpi	r17, 0x03	; 3
+ 304:	10 f3       	brcs	.-60     	; 0x2ca <Devices_Init+0x12>
 		Smart_Home_Devices.Device[device_counter].OpFn[OP_1]();
 		Smart_Home_Devices.Device[device_counter].Current_Operation = OP_1;
 		
 		Status_Disp_LCD_IncludeInteger(LCD_ROW_TXT_DEVICE_,(device_counter + 1),LCD_ROW_TXT_READY);
 	}
 }
- 29e:	df 91       	pop	r29
- 2a0:	cf 91       	pop	r28
- 2a2:	1f 91       	pop	r17
- 2a4:	08 95       	ret
+ 306:	df 91       	pop	r29
+ 308:	cf 91       	pop	r28
+ 30a:	1f 91       	pop	r17
+ 30c:	08 95       	ret
 
-000002a6 <Dev_Op_Check_Valid>:
+0000030e <Dev_Op_Check_Valid>:
 uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 {
 	if(((Req_Device-DEV_CONST) >= 0) && ((Req_Device-DEV_CONST)<NUM_OF_DEVICES))
- 2a6:	90 e0       	ldi	r25, 0x00	; 0
- 2a8:	07 97       	sbiw	r24, 0x07	; 7
- 2aa:	83 30       	cpi	r24, 0x03	; 3
- 2ac:	91 05       	cpc	r25, r1
- 2ae:	50 f5       	brcc	.+84     	; 0x304 <Dev_Op_Check_Valid+0x5e>
+ 30e:	90 e0       	ldi	r25, 0x00	; 0
+ 310:	07 97       	sbiw	r24, 0x07	; 7
+ 312:	83 30       	cpi	r24, 0x03	; 3
+ 314:	91 05       	cpc	r25, r1
+ 316:	98 f5       	brcc	.+102    	; 0x37e <Dev_Op_Check_Valid+0x70>
 	{
 		if (((Req_Operation-OPER_CONST) >= 0) && ((Req_Operation-OPER_CONST) < MAX_OPS_PER_DEV))
- 2b0:	70 e0       	ldi	r23, 0x00	; 0
- 2b2:	67 50       	subi	r22, 0x07	; 7
- 2b4:	71 09       	sbc	r23, r1
- 2b6:	63 30       	cpi	r22, 0x03	; 3
- 2b8:	71 05       	cpc	r23, r1
- 2ba:	f0 f4       	brcc	.+60     	; 0x2f8 <Dev_Op_Check_Valid+0x52>
+ 318:	70 e0       	ldi	r23, 0x00	; 0
+ 31a:	67 50       	subi	r22, 0x07	; 7
+ 31c:	71 09       	sbc	r23, r1
+ 31e:	63 30       	cpi	r22, 0x03	; 3
+ 320:	71 05       	cpc	r23, r1
+ 322:	38 f5       	brcc	.+78     	; 0x372 <Dev_Op_Check_Valid+0x64>
 		{
-			if((Req_Operation-OPER_CONST) == Smart_Home_Devices.Device[(Req_Device-DEV_CONST)].Current_Operation)
- 2bc:	fc 01       	movw	r30, r24
- 2be:	ee 0f       	add	r30, r30
- 2c0:	ff 1f       	adc	r31, r31
- 2c2:	88 0f       	add	r24, r24
- 2c4:	99 1f       	adc	r25, r25
- 2c6:	88 0f       	add	r24, r24
- 2c8:	99 1f       	adc	r25, r25
- 2ca:	88 0f       	add	r24, r24
- 2cc:	99 1f       	adc	r25, r25
- 2ce:	e8 0f       	add	r30, r24
- 2d0:	f9 1f       	adc	r31, r25
- 2d2:	e6 5b       	subi	r30, 0xB6	; 182
- 2d4:	fc 4f       	sbci	r31, 0xFC	; 252
- 2d6:	83 81       	ldd	r24, Z+3	; 0x03
- 2d8:	90 e0       	ldi	r25, 0x00	; 0
- 2da:	68 17       	cp	r22, r24
- 2dc:	79 07       	cpc	r23, r25
- 2de:	31 f4       	brne	.+12     	; 0x2ec <Dev_Op_Check_Valid+0x46>
+			if((Req_Operation-OPER_CONST) < OP_3)
+ 324:	62 30       	cpi	r22, 0x02	; 2
+ 326:	71 05       	cpc	r23, r1
+ 328:	f4 f4       	brge	.+60     	; 0x366 <Dev_Op_Check_Valid+0x58>
 			{
-				Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_ALREADY_RUNNING);
- 2e0:	6f e1       	ldi	r22, 0x1F	; 31
- 2e2:	8a e1       	ldi	r24, 0x1A	; 26
- 2e4:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-				
-				return OP_INVALID;
- 2e8:	84 e0       	ldi	r24, 0x04	; 4
- 2ea:	08 95       	ret
+				if((Req_Operation-OPER_CONST) == Smart_Home_Devices.Device[(Req_Device-DEV_CONST)].Current_Operation)
+ 32a:	fc 01       	movw	r30, r24
+ 32c:	ee 0f       	add	r30, r30
+ 32e:	ff 1f       	adc	r31, r31
+ 330:	88 0f       	add	r24, r24
+ 332:	99 1f       	adc	r25, r25
+ 334:	88 0f       	add	r24, r24
+ 336:	99 1f       	adc	r25, r25
+ 338:	88 0f       	add	r24, r24
+ 33a:	99 1f       	adc	r25, r25
+ 33c:	e8 0f       	add	r30, r24
+ 33e:	f9 1f       	adc	r31, r25
+ 340:	e4 58       	subi	r30, 0x84	; 132
+ 342:	fc 4f       	sbci	r31, 0xFC	; 252
+ 344:	83 81       	ldd	r24, Z+3	; 0x03
+ 346:	90 e0       	ldi	r25, 0x00	; 0
+ 348:	68 17       	cp	r22, r24
+ 34a:	79 07       	cpc	r23, r25
+ 34c:	31 f4       	brne	.+12     	; 0x35a <Dev_Op_Check_Valid+0x4c>
+				{
+					Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_ALREADY_RUNNING);
+ 34e:	6f e1       	ldi	r22, 0x1F	; 31
+ 350:	8a e1       	ldi	r24, 0x1A	; 26
+ 352:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+					
+					return OP_INVALID;
+ 356:	83 e0       	ldi	r24, 0x03	; 3
+ 358:	08 95       	ret
+				}
+				else
+				{
+					Status_Disp_LCD(LCD_ROW_TXT_VALID_SELECTION,LCD_ROW_TXT_PROCEEDING);
+ 35a:	62 e1       	ldi	r22, 0x12	; 18
+ 35c:	80 e2       	ldi	r24, 0x20	; 32
+ 35e:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+
+					return DEV_N_OP_VALID;
+ 362:	81 e0       	ldi	r24, 0x01	; 1
+ 364:	08 95       	ret
+				}
 			}
 			else
 			{
 				Status_Disp_LCD(LCD_ROW_TXT_VALID_SELECTION,LCD_ROW_TXT_PROCEEDING);
- 2ec:	62 e1       	ldi	r22, 0x12	; 18
- 2ee:	80 e2       	ldi	r24, 0x20	; 32
- 2f0:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 366:	62 e1       	ldi	r22, 0x12	; 18
+ 368:	80 e2       	ldi	r24, 0x20	; 32
+ 36a:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 
 				return DEV_N_OP_VALID;
- 2f4:	81 e0       	ldi	r24, 0x01	; 1
- 2f6:	08 95       	ret
+ 36e:	81 e0       	ldi	r24, 0x01	; 1
+ 370:	08 95       	ret
 			}
 		}
 		else
 		{
 			Status_Disp_LCD(LCD_ROW_TXT_OP_SELECTED,LCD_ROW_TXT_INVALID);
- 2f8:	61 e2       	ldi	r22, 0x21	; 33
- 2fa:	8a e1       	ldi	r24, 0x1A	; 26
- 2fc:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 372:	61 e2       	ldi	r22, 0x21	; 33
+ 374:	8a e1       	ldi	r24, 0x1A	; 26
+ 376:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 
 			return OP_INVALID;
- 300:	84 e0       	ldi	r24, 0x04	; 4
- 302:	08 95       	ret
+ 37a:	83 e0       	ldi	r24, 0x03	; 3
+ 37c:	08 95       	ret
 		}
 	}
 	else
 	{
 		Status_Disp_LCD(LCD_ROW_TXT_DEVICE_SELECTED,LCD_ROW_TXT_INVALID);
- 304:	61 e2       	ldi	r22, 0x21	; 33
- 306:	89 e1       	ldi	r24, 0x19	; 25
- 308:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 37e:	61 e2       	ldi	r22, 0x21	; 33
+ 380:	89 e1       	ldi	r24, 0x19	; 25
+ 382:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 
 		return DEV_INVALID;
- 30c:	83 e0       	ldi	r24, 0x03	; 3
+ 386:	82 e0       	ldi	r24, 0x02	; 2
 	}
 }
- 30e:	08 95       	ret
+ 388:	08 95       	ret
 
-00000310 <Device_Apply_Request>:
+0000038a <Device_Apply_Request>:
 void Device_Apply_Request(uint8 Req_Device, uint8 Req_Operation)
 {
- 310:	1f 93       	push	r17
- 312:	cf 93       	push	r28
- 314:	df 93       	push	r29
- 316:	16 2f       	mov	r17, r22
+ 38a:	1f 93       	push	r17
+ 38c:	cf 93       	push	r28
+ 38e:	df 93       	push	r29
+ 390:	16 2f       	mov	r17, r22
 	Smart_Home_Devices.Device[Req_Device-DEV_CONST].OpFn[Req_Operation-OPER_CONST]();
- 318:	c8 2f       	mov	r28, r24
- 31a:	d0 e0       	ldi	r29, 0x00	; 0
- 31c:	27 97       	sbiw	r28, 0x07	; 7
- 31e:	e6 2f       	mov	r30, r22
- 320:	f0 e0       	ldi	r31, 0x00	; 0
- 322:	cf 01       	movw	r24, r30
- 324:	07 97       	sbiw	r24, 0x07	; 7
- 326:	fe 01       	movw	r30, r28
- 328:	ee 0f       	add	r30, r30
- 32a:	ff 1f       	adc	r31, r31
- 32c:	ee 0f       	add	r30, r30
- 32e:	ff 1f       	adc	r31, r31
- 330:	ec 0f       	add	r30, r28
- 332:	fd 1f       	adc	r31, r29
- 334:	e8 0f       	add	r30, r24
- 336:	f9 1f       	adc	r31, r25
- 338:	32 96       	adiw	r30, 0x02	; 2
- 33a:	ee 0f       	add	r30, r30
- 33c:	ff 1f       	adc	r31, r31
- 33e:	e6 5b       	subi	r30, 0xB6	; 182
- 340:	fc 4f       	sbci	r31, 0xFC	; 252
- 342:	01 90       	ld	r0, Z+
- 344:	f0 81       	ld	r31, Z
- 346:	e0 2d       	mov	r30, r0
- 348:	09 95       	icall
+ 392:	c8 2f       	mov	r28, r24
+ 394:	d0 e0       	ldi	r29, 0x00	; 0
+ 396:	27 97       	sbiw	r28, 0x07	; 7
+ 398:	e6 2f       	mov	r30, r22
+ 39a:	f0 e0       	ldi	r31, 0x00	; 0
+ 39c:	cf 01       	movw	r24, r30
+ 39e:	07 97       	sbiw	r24, 0x07	; 7
+ 3a0:	fe 01       	movw	r30, r28
+ 3a2:	ee 0f       	add	r30, r30
+ 3a4:	ff 1f       	adc	r31, r31
+ 3a6:	ee 0f       	add	r30, r30
+ 3a8:	ff 1f       	adc	r31, r31
+ 3aa:	ec 0f       	add	r30, r28
+ 3ac:	fd 1f       	adc	r31, r29
+ 3ae:	e8 0f       	add	r30, r24
+ 3b0:	f9 1f       	adc	r31, r25
+ 3b2:	32 96       	adiw	r30, 0x02	; 2
+ 3b4:	ee 0f       	add	r30, r30
+ 3b6:	ff 1f       	adc	r31, r31
+ 3b8:	e4 58       	subi	r30, 0x84	; 132
+ 3ba:	fc 4f       	sbci	r31, 0xFC	; 252
+ 3bc:	01 90       	ld	r0, Z+
+ 3be:	f0 81       	ld	r31, Z
+ 3c0:	e0 2d       	mov	r30, r0
+ 3c2:	09 95       	icall
 	Smart_Home_Devices.Device[Req_Device-DEV_CONST].Current_Operation = (Req_Operation-OPER_CONST);
- 34a:	17 50       	subi	r17, 0x07	; 7
- 34c:	ce 01       	movw	r24, r28
- 34e:	88 0f       	add	r24, r24
- 350:	99 1f       	adc	r25, r25
- 352:	cc 0f       	add	r28, r28
- 354:	dd 1f       	adc	r29, r29
- 356:	cc 0f       	add	r28, r28
- 358:	dd 1f       	adc	r29, r29
- 35a:	cc 0f       	add	r28, r28
- 35c:	dd 1f       	adc	r29, r29
- 35e:	c8 0f       	add	r28, r24
- 360:	d9 1f       	adc	r29, r25
- 362:	c6 5b       	subi	r28, 0xB6	; 182
- 364:	dc 4f       	sbci	r29, 0xFC	; 252
- 366:	1b 83       	std	Y+3, r17	; 0x03
+ 3c4:	17 50       	subi	r17, 0x07	; 7
+ 3c6:	ce 01       	movw	r24, r28
+ 3c8:	88 0f       	add	r24, r24
+ 3ca:	99 1f       	adc	r25, r25
+ 3cc:	cc 0f       	add	r28, r28
+ 3ce:	dd 1f       	adc	r29, r29
+ 3d0:	cc 0f       	add	r28, r28
+ 3d2:	dd 1f       	adc	r29, r29
+ 3d4:	cc 0f       	add	r28, r28
+ 3d6:	dd 1f       	adc	r29, r29
+ 3d8:	c8 0f       	add	r28, r24
+ 3da:	d9 1f       	adc	r29, r25
+ 3dc:	c4 58       	subi	r28, 0x84	; 132
+ 3de:	dc 4f       	sbci	r29, 0xFC	; 252
+ 3e0:	1b 83       	std	Y+3, r17	; 0x03
 	
 	Status_Disp_LCD(LCD_ROW_TXT_DEVICE_OP,LCD_ROW_TXT_APPLIED);
- 368:	63 e2       	ldi	r22, 0x23	; 35
- 36a:	82 e2       	ldi	r24, 0x22	; 34
- 36c:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 3e2:	63 e2       	ldi	r22, 0x23	; 35
+ 3e4:	82 e2       	ldi	r24, 0x22	; 34
+ 3e6:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 }
- 370:	df 91       	pop	r29
- 372:	cf 91       	pop	r28
- 374:	1f 91       	pop	r17
- 376:	08 95       	ret
+ 3ea:	df 91       	pop	r29
+ 3ec:	cf 91       	pop	r28
+ 3ee:	1f 91       	pop	r17
+ 3f0:	08 95       	ret
 
-00000378 <Devices_DB_Config>:
+000003f2 <Devices_DB_Config>:
     LED2_ON,
     LED2_Toggle
 };
 
 void Devices_DB_Config(DevicesDB* Smart_Home_DevDB)
 {
- 378:	cf 93       	push	r28
- 37a:	df 93       	push	r29
+ 3f2:	cf 93       	push	r28
+ 3f4:	df 93       	push	r29
 	Device_Codes Dev_Cod = LED_0;
 	
 	uint8 device_counter = 0;
 	uint8 Operation_counter = 0;
 	
 	for(device_counter = 0; device_counter < NUM_OF_DEVICES; device_counter++)
- 37c:	d0 e0       	ldi	r29, 0x00	; 0
- 37e:	3e c0       	rjmp	.+124    	; 0x3fc <Devices_DB_Config+0x84>
+ 3f6:	d0 e0       	ldi	r29, 0x00	; 0
+ 3f8:	3e c0       	rjmp	.+124    	; 0x476 <__EEPROM_REGION_LENGTH__+0x76>
 	{
 		Dev_Cod = LED_0;
 		Smart_Home_DevDB->Device[device_counter].Device_Ref = (Dev_Cod+device_counter+DEV_CONST) << 4;
- 380:	4d 2f       	mov	r20, r29
- 382:	50 e0       	ldi	r21, 0x00	; 0
- 384:	fa 01       	movw	r30, r20
- 386:	ee 0f       	add	r30, r30
- 388:	ff 1f       	adc	r31, r31
- 38a:	9a 01       	movw	r18, r20
- 38c:	22 0f       	add	r18, r18
- 38e:	33 1f       	adc	r19, r19
- 390:	22 0f       	add	r18, r18
- 392:	33 1f       	adc	r19, r19
- 394:	22 0f       	add	r18, r18
- 396:	33 1f       	adc	r19, r19
- 398:	e2 0f       	add	r30, r18
- 39a:	f3 1f       	adc	r31, r19
- 39c:	e8 0f       	add	r30, r24
- 39e:	f9 1f       	adc	r31, r25
- 3a0:	67 e0       	ldi	r22, 0x07	; 7
- 3a2:	6d 0f       	add	r22, r29
- 3a4:	62 95       	swap	r22
- 3a6:	60 7f       	andi	r22, 0xF0	; 240
- 3a8:	60 83       	st	Z, r22
+ 3fa:	4d 2f       	mov	r20, r29
+ 3fc:	50 e0       	ldi	r21, 0x00	; 0
+ 3fe:	fa 01       	movw	r30, r20
+ 400:	ee 0f       	add	r30, r30
+ 402:	ff 1f       	adc	r31, r31
+ 404:	9a 01       	movw	r18, r20
+ 406:	22 0f       	add	r18, r18
+ 408:	33 1f       	adc	r19, r19
+ 40a:	22 0f       	add	r18, r18
+ 40c:	33 1f       	adc	r19, r19
+ 40e:	22 0f       	add	r18, r18
+ 410:	33 1f       	adc	r19, r19
+ 412:	e2 0f       	add	r30, r18
+ 414:	f3 1f       	adc	r31, r19
+ 416:	e8 0f       	add	r30, r24
+ 418:	f9 1f       	adc	r31, r25
+ 41a:	67 e0       	ldi	r22, 0x07	; 7
+ 41c:	6d 0f       	add	r22, r29
+ 41e:	62 95       	swap	r22
+ 420:	60 7f       	andi	r22, 0xF0	; 240
+ 422:	60 83       	st	Z, r22
 		Smart_Home_DevDB->Device[device_counter].Init = Op_Fun_Ptr[device_counter][INIT_FUN_INDEX];
- 3aa:	d9 01       	movw	r26, r18
- 3ac:	a0 5a       	subi	r26, 0xA0	; 160
- 3ae:	bf 4f       	sbci	r27, 0xFF	; 255
- 3b0:	2d 91       	ld	r18, X+
- 3b2:	3c 91       	ld	r19, X
- 3b4:	32 83       	std	Z+2, r19	; 0x02
- 3b6:	21 83       	std	Z+1, r18	; 0x01
+ 424:	d9 01       	movw	r26, r18
+ 426:	a0 5a       	subi	r26, 0xA0	; 160
+ 428:	bf 4f       	sbci	r27, 0xFF	; 255
+ 42a:	2d 91       	ld	r18, X+
+ 42c:	3c 91       	ld	r19, X
+ 42e:	32 83       	std	Z+2, r19	; 0x02
+ 430:	21 83       	std	Z+1, r18	; 0x01
 		for(Operation_counter = 0; Operation_counter < MAX_OPS_PER_DEV ; Operation_counter++)
- 3b8:	c0 e0       	ldi	r28, 0x00	; 0
- 3ba:	1d c0       	rjmp	.+58     	; 0x3f6 <Devices_DB_Config+0x7e>
+ 432:	c0 e0       	ldi	r28, 0x00	; 0
+ 434:	1d c0       	rjmp	.+58     	; 0x470 <__EEPROM_REGION_LENGTH__+0x70>
 		{
 			Smart_Home_DevDB->Device[device_counter].OpFn[Operation_counter] =  Op_Fun_Ptr[device_counter][Operation_counter+1];
- 3bc:	2c 2f       	mov	r18, r28
- 3be:	30 e0       	ldi	r19, 0x00	; 0
- 3c0:	d9 01       	movw	r26, r18
- 3c2:	11 96       	adiw	r26, 0x01	; 1
- 3c4:	fa 01       	movw	r30, r20
- 3c6:	ee 0f       	add	r30, r30
- 3c8:	ff 1f       	adc	r31, r31
- 3ca:	ee 0f       	add	r30, r30
- 3cc:	ff 1f       	adc	r31, r31
- 3ce:	ae 0f       	add	r26, r30
- 3d0:	bf 1f       	adc	r27, r31
- 3d2:	aa 0f       	add	r26, r26
- 3d4:	bb 1f       	adc	r27, r27
- 3d6:	a0 5a       	subi	r26, 0xA0	; 160
- 3d8:	bf 4f       	sbci	r27, 0xFF	; 255
- 3da:	6d 91       	ld	r22, X+
- 3dc:	7c 91       	ld	r23, X
- 3de:	e4 0f       	add	r30, r20
- 3e0:	f5 1f       	adc	r31, r21
- 3e2:	e2 0f       	add	r30, r18
- 3e4:	f3 1f       	adc	r31, r19
- 3e6:	32 96       	adiw	r30, 0x02	; 2
- 3e8:	ee 0f       	add	r30, r30
- 3ea:	ff 1f       	adc	r31, r31
- 3ec:	e8 0f       	add	r30, r24
- 3ee:	f9 1f       	adc	r31, r25
- 3f0:	71 83       	std	Z+1, r23	; 0x01
- 3f2:	60 83       	st	Z, r22
+ 436:	2c 2f       	mov	r18, r28
+ 438:	30 e0       	ldi	r19, 0x00	; 0
+ 43a:	d9 01       	movw	r26, r18
+ 43c:	11 96       	adiw	r26, 0x01	; 1
+ 43e:	fa 01       	movw	r30, r20
+ 440:	ee 0f       	add	r30, r30
+ 442:	ff 1f       	adc	r31, r31
+ 444:	ee 0f       	add	r30, r30
+ 446:	ff 1f       	adc	r31, r31
+ 448:	ae 0f       	add	r26, r30
+ 44a:	bf 1f       	adc	r27, r31
+ 44c:	aa 0f       	add	r26, r26
+ 44e:	bb 1f       	adc	r27, r27
+ 450:	a0 5a       	subi	r26, 0xA0	; 160
+ 452:	bf 4f       	sbci	r27, 0xFF	; 255
+ 454:	6d 91       	ld	r22, X+
+ 456:	7c 91       	ld	r23, X
+ 458:	e4 0f       	add	r30, r20
+ 45a:	f5 1f       	adc	r31, r21
+ 45c:	e2 0f       	add	r30, r18
+ 45e:	f3 1f       	adc	r31, r19
+ 460:	32 96       	adiw	r30, 0x02	; 2
+ 462:	ee 0f       	add	r30, r30
+ 464:	ff 1f       	adc	r31, r31
+ 466:	e8 0f       	add	r30, r24
+ 468:	f9 1f       	adc	r31, r25
+ 46a:	71 83       	std	Z+1, r23	; 0x01
+ 46c:	60 83       	st	Z, r22
 	for(device_counter = 0; device_counter < NUM_OF_DEVICES; device_counter++)
 	{
 		Dev_Cod = LED_0;
 		Smart_Home_DevDB->Device[device_counter].Device_Ref = (Dev_Cod+device_counter+DEV_CONST) << 4;
 		Smart_Home_DevDB->Device[device_counter].Init = Op_Fun_Ptr[device_counter][INIT_FUN_INDEX];
 		for(Operation_counter = 0; Operation_counter < MAX_OPS_PER_DEV ; Operation_counter++)
- 3f4:	cf 5f       	subi	r28, 0xFF	; 255
- 3f6:	c3 30       	cpi	r28, 0x03	; 3
- 3f8:	08 f3       	brcs	.-62     	; 0x3bc <Devices_DB_Config+0x44>
+ 46e:	cf 5f       	subi	r28, 0xFF	; 255
+ 470:	c3 30       	cpi	r28, 0x03	; 3
+ 472:	08 f3       	brcs	.-62     	; 0x436 <__EEPROM_REGION_LENGTH__+0x36>
 	Device_Codes Dev_Cod = LED_0;
 	
 	uint8 device_counter = 0;
 	uint8 Operation_counter = 0;
 	
 	for(device_counter = 0; device_counter < NUM_OF_DEVICES; device_counter++)
- 3fa:	df 5f       	subi	r29, 0xFF	; 255
- 3fc:	d3 30       	cpi	r29, 0x03	; 3
- 3fe:	08 f4       	brcc	.+2      	; 0x402 <__EEPROM_REGION_LENGTH__+0x2>
- 400:	bf cf       	rjmp	.-130    	; 0x380 <Devices_DB_Config+0x8>
+ 474:	df 5f       	subi	r29, 0xFF	; 255
+ 476:	d3 30       	cpi	r29, 0x03	; 3
+ 478:	08 f4       	brcc	.+2      	; 0x47c <__EEPROM_REGION_LENGTH__+0x7c>
+ 47a:	bf cf       	rjmp	.-130    	; 0x3fa <Devices_DB_Config+0x8>
 		for(Operation_counter = 0; Operation_counter < MAX_OPS_PER_DEV ; Operation_counter++)
 		{
 			Smart_Home_DevDB->Device[device_counter].OpFn[Operation_counter] =  Op_Fun_Ptr[device_counter][Operation_counter+1];
 		}
 	}
- 402:	df 91       	pop	r29
- 404:	cf 91       	pop	r28
- 406:	08 95       	ret
+ 47c:	df 91       	pop	r29
+ 47e:	cf 91       	pop	r28
+ 480:	08 95       	ret
 
-00000408 <DIO_SetPinDir>:
+00000482 <DIO_SetPinDir>:
 	*Value = GetBit(Port->PIN,Pin);
 }
 
 void DIO_TogglePort(volatile PORT_REG* Port)
 {
 	Port->PORT ^= DIO_PORT_HIGH;
- 408:	fc 01       	movw	r30, r24
- 40a:	94 2f       	mov	r25, r20
- 40c:	81 81       	ldd	r24, Z+1	; 0x01
- 40e:	41 e0       	ldi	r20, 0x01	; 1
- 410:	50 e0       	ldi	r21, 0x00	; 0
- 412:	9a 01       	movw	r18, r20
- 414:	06 2e       	mov	r0, r22
- 416:	02 c0       	rjmp	.+4      	; 0x41c <DIO_SetPinDir+0x14>
- 418:	22 0f       	add	r18, r18
- 41a:	33 1f       	adc	r19, r19
- 41c:	0a 94       	dec	r0
- 41e:	e2 f7       	brpl	.-8      	; 0x418 <DIO_SetPinDir+0x10>
- 420:	32 2f       	mov	r19, r18
- 422:	30 95       	com	r19
- 424:	83 23       	and	r24, r19
- 426:	81 83       	std	Z+1, r24	; 0x01
- 428:	81 81       	ldd	r24, Z+1	; 0x01
- 42a:	49 2f       	mov	r20, r25
- 42c:	50 e0       	ldi	r21, 0x00	; 0
- 42e:	02 c0       	rjmp	.+4      	; 0x434 <DIO_SetPinDir+0x2c>
- 430:	44 0f       	add	r20, r20
- 432:	55 1f       	adc	r21, r21
- 434:	6a 95       	dec	r22
- 436:	e2 f7       	brpl	.-8      	; 0x430 <DIO_SetPinDir+0x28>
- 438:	42 23       	and	r20, r18
- 43a:	48 2b       	or	r20, r24
- 43c:	41 83       	std	Z+1, r20	; 0x01
- 43e:	08 95       	ret
+ 482:	fc 01       	movw	r30, r24
+ 484:	94 2f       	mov	r25, r20
+ 486:	81 81       	ldd	r24, Z+1	; 0x01
+ 488:	41 e0       	ldi	r20, 0x01	; 1
+ 48a:	50 e0       	ldi	r21, 0x00	; 0
+ 48c:	9a 01       	movw	r18, r20
+ 48e:	06 2e       	mov	r0, r22
+ 490:	02 c0       	rjmp	.+4      	; 0x496 <DIO_SetPinDir+0x14>
+ 492:	22 0f       	add	r18, r18
+ 494:	33 1f       	adc	r19, r19
+ 496:	0a 94       	dec	r0
+ 498:	e2 f7       	brpl	.-8      	; 0x492 <DIO_SetPinDir+0x10>
+ 49a:	32 2f       	mov	r19, r18
+ 49c:	30 95       	com	r19
+ 49e:	83 23       	and	r24, r19
+ 4a0:	81 83       	std	Z+1, r24	; 0x01
+ 4a2:	81 81       	ldd	r24, Z+1	; 0x01
+ 4a4:	49 2f       	mov	r20, r25
+ 4a6:	50 e0       	ldi	r21, 0x00	; 0
+ 4a8:	02 c0       	rjmp	.+4      	; 0x4ae <DIO_SetPinDir+0x2c>
+ 4aa:	44 0f       	add	r20, r20
+ 4ac:	55 1f       	adc	r21, r21
+ 4ae:	6a 95       	dec	r22
+ 4b0:	e2 f7       	brpl	.-8      	; 0x4aa <DIO_SetPinDir+0x28>
+ 4b2:	42 23       	and	r20, r18
+ 4b4:	48 2b       	or	r20, r24
+ 4b6:	41 83       	std	Z+1, r20	; 0x01
+ 4b8:	08 95       	ret
 
-00000440 <DIO_SetPinValue>:
- 440:	fc 01       	movw	r30, r24
- 442:	94 2f       	mov	r25, r20
- 444:	82 81       	ldd	r24, Z+2	; 0x02
- 446:	41 e0       	ldi	r20, 0x01	; 1
- 448:	50 e0       	ldi	r21, 0x00	; 0
- 44a:	9a 01       	movw	r18, r20
- 44c:	06 2e       	mov	r0, r22
- 44e:	02 c0       	rjmp	.+4      	; 0x454 <DIO_SetPinValue+0x14>
- 450:	22 0f       	add	r18, r18
- 452:	33 1f       	adc	r19, r19
- 454:	0a 94       	dec	r0
- 456:	e2 f7       	brpl	.-8      	; 0x450 <DIO_SetPinValue+0x10>
- 458:	32 2f       	mov	r19, r18
- 45a:	30 95       	com	r19
- 45c:	83 23       	and	r24, r19
- 45e:	82 83       	std	Z+2, r24	; 0x02
- 460:	82 81       	ldd	r24, Z+2	; 0x02
- 462:	49 2f       	mov	r20, r25
- 464:	50 e0       	ldi	r21, 0x00	; 0
- 466:	02 c0       	rjmp	.+4      	; 0x46c <DIO_SetPinValue+0x2c>
- 468:	44 0f       	add	r20, r20
- 46a:	55 1f       	adc	r21, r21
- 46c:	6a 95       	dec	r22
- 46e:	e2 f7       	brpl	.-8      	; 0x468 <DIO_SetPinValue+0x28>
- 470:	42 23       	and	r20, r18
- 472:	48 2b       	or	r20, r24
- 474:	42 83       	std	Z+2, r20	; 0x02
- 476:	08 95       	ret
+000004ba <DIO_SetPinValue>:
+ 4ba:	fc 01       	movw	r30, r24
+ 4bc:	94 2f       	mov	r25, r20
+ 4be:	82 81       	ldd	r24, Z+2	; 0x02
+ 4c0:	41 e0       	ldi	r20, 0x01	; 1
+ 4c2:	50 e0       	ldi	r21, 0x00	; 0
+ 4c4:	9a 01       	movw	r18, r20
+ 4c6:	06 2e       	mov	r0, r22
+ 4c8:	02 c0       	rjmp	.+4      	; 0x4ce <DIO_SetPinValue+0x14>
+ 4ca:	22 0f       	add	r18, r18
+ 4cc:	33 1f       	adc	r19, r19
+ 4ce:	0a 94       	dec	r0
+ 4d0:	e2 f7       	brpl	.-8      	; 0x4ca <DIO_SetPinValue+0x10>
+ 4d2:	32 2f       	mov	r19, r18
+ 4d4:	30 95       	com	r19
+ 4d6:	83 23       	and	r24, r19
+ 4d8:	82 83       	std	Z+2, r24	; 0x02
+ 4da:	82 81       	ldd	r24, Z+2	; 0x02
+ 4dc:	49 2f       	mov	r20, r25
+ 4de:	50 e0       	ldi	r21, 0x00	; 0
+ 4e0:	02 c0       	rjmp	.+4      	; 0x4e6 <DIO_SetPinValue+0x2c>
+ 4e2:	44 0f       	add	r20, r20
+ 4e4:	55 1f       	adc	r21, r21
+ 4e6:	6a 95       	dec	r22
+ 4e8:	e2 f7       	brpl	.-8      	; 0x4e2 <DIO_SetPinValue+0x28>
+ 4ea:	42 23       	and	r20, r18
+ 4ec:	48 2b       	or	r20, r24
+ 4ee:	42 83       	std	Z+2, r20	; 0x02
+ 4f0:	08 95       	ret
 
-00000478 <DIO_TogglePin>:
+000004f2 <DIO_TogglePin>:
 	
 }
 void DIO_TogglePin(volatile PORT_REG* Port, uint8 Pin)
 {
 	ToggleBit(Port->PORT,Pin);
- 478:	fc 01       	movw	r30, r24
- 47a:	42 81       	ldd	r20, Z+2	; 0x02
- 47c:	21 e0       	ldi	r18, 0x01	; 1
- 47e:	30 e0       	ldi	r19, 0x00	; 0
- 480:	02 c0       	rjmp	.+4      	; 0x486 <DIO_TogglePin+0xe>
- 482:	22 0f       	add	r18, r18
- 484:	33 1f       	adc	r19, r19
- 486:	6a 95       	dec	r22
- 488:	e2 f7       	brpl	.-8      	; 0x482 <DIO_TogglePin+0xa>
- 48a:	24 27       	eor	r18, r20
- 48c:	22 83       	std	Z+2, r18	; 0x02
- 48e:	08 95       	ret
+ 4f2:	fc 01       	movw	r30, r24
+ 4f4:	42 81       	ldd	r20, Z+2	; 0x02
+ 4f6:	21 e0       	ldi	r18, 0x01	; 1
+ 4f8:	30 e0       	ldi	r19, 0x00	; 0
+ 4fa:	02 c0       	rjmp	.+4      	; 0x500 <DIO_TogglePin+0xe>
+ 4fc:	22 0f       	add	r18, r18
+ 4fe:	33 1f       	adc	r19, r19
+ 500:	6a 95       	dec	r22
+ 502:	e2 f7       	brpl	.-8      	; 0x4fc <DIO_TogglePin+0xa>
+ 504:	24 27       	eor	r18, r20
+ 506:	22 83       	std	Z+2, r18	; 0x02
+ 508:	08 95       	ret
 
-00000490 <LCD_WriteCommand>:
+0000050a <LCD_WriteCommand>:
 	
 	#endif
 }
 
 void LCD_WriteCommand (uint8 cmd)
 {
- 490:	cf 93       	push	r28
- 492:	c8 2f       	mov	r28, r24
+ 50a:	cf 93       	push	r28
+ 50c:	c8 2f       	mov	r28, r24
 	
 	#if LCD_MODE == 4
 	
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_RS_PIN, DIO_PIN_LOW);
- 494:	40 e0       	ldi	r20, 0x00	; 0
- 496:	61 e0       	ldi	r22, 0x01	; 1
- 498:	86 e3       	ldi	r24, 0x36	; 54
- 49a:	90 e0       	ldi	r25, 0x00	; 0
- 49c:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 50e:	40 e0       	ldi	r20, 0x00	; 0
+ 510:	61 e0       	ldi	r22, 0x01	; 1
+ 512:	86 e3       	ldi	r24, 0x36	; 54
+ 514:	90 e0       	ldi	r25, 0x00	; 0
+ 516:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_RW_PIN, DIO_PIN_LOW);
- 4a0:	40 e0       	ldi	r20, 0x00	; 0
- 4a2:	62 e0       	ldi	r22, 0x02	; 2
- 4a4:	86 e3       	ldi	r24, 0x36	; 54
- 4a6:	90 e0       	ldi	r25, 0x00	; 0
- 4a8:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 51a:	40 e0       	ldi	r20, 0x00	; 0
+ 51c:	62 e0       	ldi	r22, 0x02	; 2
+ 51e:	86 e3       	ldi	r24, 0x36	; 54
+ 520:	90 e0       	ldi	r25, 0x00	; 0
+ 522:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
- 4ac:	40 e0       	ldi	r20, 0x00	; 0
- 4ae:	63 e0       	ldi	r22, 0x03	; 3
- 4b0:	86 e3       	ldi	r24, 0x36	; 54
- 4b2:	90 e0       	ldi	r25, 0x00	; 0
- 4b4:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 526:	40 e0       	ldi	r20, 0x00	; 0
+ 528:	63 e0       	ldi	r22, 0x03	; 3
+ 52a:	86 e3       	ldi	r24, 0x36	; 54
+ 52c:	90 e0       	ldi	r25, 0x00	; 0
+ 52e:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	
 	LCD_4BIT_MODE_DATA_BUS = (cmd & 0xf0) | (LCD_4BIT_MODE_DATA_BUS & 0x0f);
- 4b8:	8b b3       	in	r24, 0x1b	; 27
- 4ba:	9c 2f       	mov	r25, r28
- 4bc:	90 7f       	andi	r25, 0xF0	; 240
- 4be:	8f 70       	andi	r24, 0x0F	; 15
- 4c0:	89 2b       	or	r24, r25
- 4c2:	8b bb       	out	0x1b, r24	; 27
+ 532:	8b b3       	in	r24, 0x1b	; 27
+ 534:	9c 2f       	mov	r25, r28
+ 536:	90 7f       	andi	r25, 0xF0	; 240
+ 538:	8f 70       	andi	r24, 0x0F	; 15
+ 53a:	89 2b       	or	r24, r25
+ 53c:	8b bb       	out	0x1b, r24	; 27
 	
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_HIGH);
- 4c4:	41 e0       	ldi	r20, 0x01	; 1
- 4c6:	63 e0       	ldi	r22, 0x03	; 3
- 4c8:	86 e3       	ldi	r24, 0x36	; 54
- 4ca:	90 e0       	ldi	r25, 0x00	; 0
- 4cc:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 4d0:	8f e9       	ldi	r24, 0x9F	; 159
- 4d2:	9f e0       	ldi	r25, 0x0F	; 15
- 4d4:	01 97       	sbiw	r24, 0x01	; 1
- 4d6:	f1 f7       	brne	.-4      	; 0x4d4 <LCD_WriteCommand+0x44>
- 4d8:	00 c0       	rjmp	.+0      	; 0x4da <LCD_WriteCommand+0x4a>
- 4da:	00 00       	nop
+ 53e:	41 e0       	ldi	r20, 0x01	; 1
+ 540:	63 e0       	ldi	r22, 0x03	; 3
+ 542:	86 e3       	ldi	r24, 0x36	; 54
+ 544:	90 e0       	ldi	r25, 0x00	; 0
+ 546:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 54a:	8f e9       	ldi	r24, 0x9F	; 159
+ 54c:	9f e0       	ldi	r25, 0x0F	; 15
+ 54e:	01 97       	sbiw	r24, 0x01	; 1
+ 550:	f1 f7       	brne	.-4      	; 0x54e <LCD_WriteCommand+0x44>
+ 552:	00 c0       	rjmp	.+0      	; 0x554 <LCD_WriteCommand+0x4a>
+ 554:	00 00       	nop
 	_delay_ms(1);
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
- 4dc:	40 e0       	ldi	r20, 0x00	; 0
- 4de:	63 e0       	ldi	r22, 0x03	; 3
- 4e0:	86 e3       	ldi	r24, 0x36	; 54
- 4e2:	90 e0       	ldi	r25, 0x00	; 0
- 4e4:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 556:	40 e0       	ldi	r20, 0x00	; 0
+ 558:	63 e0       	ldi	r22, 0x03	; 3
+ 55a:	86 e3       	ldi	r24, 0x36	; 54
+ 55c:	90 e0       	ldi	r25, 0x00	; 0
+ 55e:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	
 	LCD_4BIT_MODE_DATA_BUS = (cmd << 4) | (LCD_4BIT_MODE_DATA_BUS & 0x0f);
- 4e8:	20 e1       	ldi	r18, 0x10	; 16
- 4ea:	c2 9f       	mul	r28, r18
- 4ec:	c0 01       	movw	r24, r0
- 4ee:	11 24       	eor	r1, r1
- 4f0:	9b b3       	in	r25, 0x1b	; 27
- 4f2:	9f 70       	andi	r25, 0x0F	; 15
- 4f4:	89 2b       	or	r24, r25
- 4f6:	8b bb       	out	0x1b, r24	; 27
+ 562:	20 e1       	ldi	r18, 0x10	; 16
+ 564:	c2 9f       	mul	r28, r18
+ 566:	c0 01       	movw	r24, r0
+ 568:	11 24       	eor	r1, r1
+ 56a:	9b b3       	in	r25, 0x1b	; 27
+ 56c:	9f 70       	andi	r25, 0x0F	; 15
+ 56e:	89 2b       	or	r24, r25
+ 570:	8b bb       	out	0x1b, r24	; 27
 	
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_HIGH);
- 4f8:	41 e0       	ldi	r20, 0x01	; 1
- 4fa:	63 e0       	ldi	r22, 0x03	; 3
- 4fc:	86 e3       	ldi	r24, 0x36	; 54
- 4fe:	90 e0       	ldi	r25, 0x00	; 0
- 500:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 504:	8f e9       	ldi	r24, 0x9F	; 159
- 506:	9f e0       	ldi	r25, 0x0F	; 15
- 508:	01 97       	sbiw	r24, 0x01	; 1
- 50a:	f1 f7       	brne	.-4      	; 0x508 <LCD_WriteCommand+0x78>
- 50c:	00 c0       	rjmp	.+0      	; 0x50e <LCD_WriteCommand+0x7e>
- 50e:	00 00       	nop
+ 572:	41 e0       	ldi	r20, 0x01	; 1
+ 574:	63 e0       	ldi	r22, 0x03	; 3
+ 576:	86 e3       	ldi	r24, 0x36	; 54
+ 578:	90 e0       	ldi	r25, 0x00	; 0
+ 57a:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 57e:	8f e9       	ldi	r24, 0x9F	; 159
+ 580:	9f e0       	ldi	r25, 0x0F	; 15
+ 582:	01 97       	sbiw	r24, 0x01	; 1
+ 584:	f1 f7       	brne	.-4      	; 0x582 <LCD_WriteCommand+0x78>
+ 586:	00 c0       	rjmp	.+0      	; 0x588 <LCD_WriteCommand+0x7e>
+ 588:	00 00       	nop
 	_delay_ms(1);
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
- 510:	40 e0       	ldi	r20, 0x00	; 0
- 512:	63 e0       	ldi	r22, 0x03	; 3
- 514:	86 e3       	ldi	r24, 0x36	; 54
- 516:	90 e0       	ldi	r25, 0x00	; 0
- 518:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 51c:	8f e1       	ldi	r24, 0x1F	; 31
- 51e:	9e e4       	ldi	r25, 0x4E	; 78
- 520:	01 97       	sbiw	r24, 0x01	; 1
- 522:	f1 f7       	brne	.-4      	; 0x520 <LCD_WriteCommand+0x90>
- 524:	00 c0       	rjmp	.+0      	; 0x526 <LCD_WriteCommand+0x96>
- 526:	00 00       	nop
+ 58a:	40 e0       	ldi	r20, 0x00	; 0
+ 58c:	63 e0       	ldi	r22, 0x03	; 3
+ 58e:	86 e3       	ldi	r24, 0x36	; 54
+ 590:	90 e0       	ldi	r25, 0x00	; 0
+ 592:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 596:	8f e1       	ldi	r24, 0x1F	; 31
+ 598:	9e e4       	ldi	r25, 0x4E	; 78
+ 59a:	01 97       	sbiw	r24, 0x01	; 1
+ 59c:	f1 f7       	brne	.-4      	; 0x59a <LCD_WriteCommand+0x90>
+ 59e:	00 c0       	rjmp	.+0      	; 0x5a0 <LCD_WriteCommand+0x96>
+ 5a0:	00 00       	nop
 	DIO_SetPinValue(LCD_8BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
 	
 	_delay_ms(5);
 	
 	#endif
 }
- 528:	cf 91       	pop	r28
- 52a:	08 95       	ret
+ 5a2:	cf 91       	pop	r28
+ 5a4:	08 95       	ret
 
-0000052c <LCD_Init>:
+000005a6 <LCD_Init>:
 
 void LCD_Init (void)
 {
 	#if LCD_MODE == 4
 	
 	DIO_SetPinDir(LCD_4BIT_MODE_CMD_PORT, LCD_RS_PIN , DIO_PIN_OUTPUT);
- 52c:	41 e0       	ldi	r20, 0x01	; 1
- 52e:	61 e0       	ldi	r22, 0x01	; 1
- 530:	86 e3       	ldi	r24, 0x36	; 54
- 532:	90 e0       	ldi	r25, 0x00	; 0
- 534:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 5a6:	41 e0       	ldi	r20, 0x01	; 1
+ 5a8:	61 e0       	ldi	r22, 0x01	; 1
+ 5aa:	86 e3       	ldi	r24, 0x36	; 54
+ 5ac:	90 e0       	ldi	r25, 0x00	; 0
+ 5ae:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	DIO_SetPinDir(LCD_4BIT_MODE_CMD_PORT, LCD_RW_PIN , DIO_PIN_OUTPUT);
- 538:	41 e0       	ldi	r20, 0x01	; 1
- 53a:	62 e0       	ldi	r22, 0x02	; 2
- 53c:	86 e3       	ldi	r24, 0x36	; 54
- 53e:	90 e0       	ldi	r25, 0x00	; 0
- 540:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 5b2:	41 e0       	ldi	r20, 0x01	; 1
+ 5b4:	62 e0       	ldi	r22, 0x02	; 2
+ 5b6:	86 e3       	ldi	r24, 0x36	; 54
+ 5b8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ba:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	DIO_SetPinDir(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN , DIO_PIN_OUTPUT);
- 544:	41 e0       	ldi	r20, 0x01	; 1
- 546:	63 e0       	ldi	r22, 0x03	; 3
- 548:	86 e3       	ldi	r24, 0x36	; 54
- 54a:	90 e0       	ldi	r25, 0x00	; 0
- 54c:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 5be:	41 e0       	ldi	r20, 0x01	; 1
+ 5c0:	63 e0       	ldi	r22, 0x03	; 3
+ 5c2:	86 e3       	ldi	r24, 0x36	; 54
+ 5c4:	90 e0       	ldi	r25, 0x00	; 0
+ 5c6:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	
 	DIO_SetPinDir(LCD_4BIT_MODE_DATA_PORT, LCD_D4_PIN , DIO_PIN_OUTPUT);
- 550:	41 e0       	ldi	r20, 0x01	; 1
- 552:	64 e0       	ldi	r22, 0x04	; 4
- 554:	89 e3       	ldi	r24, 0x39	; 57
- 556:	90 e0       	ldi	r25, 0x00	; 0
- 558:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 5ca:	41 e0       	ldi	r20, 0x01	; 1
+ 5cc:	64 e0       	ldi	r22, 0x04	; 4
+ 5ce:	89 e3       	ldi	r24, 0x39	; 57
+ 5d0:	90 e0       	ldi	r25, 0x00	; 0
+ 5d2:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	DIO_SetPinDir(LCD_4BIT_MODE_DATA_PORT, LCD_D5_PIN , DIO_PIN_OUTPUT);
- 55c:	41 e0       	ldi	r20, 0x01	; 1
- 55e:	65 e0       	ldi	r22, 0x05	; 5
- 560:	89 e3       	ldi	r24, 0x39	; 57
- 562:	90 e0       	ldi	r25, 0x00	; 0
- 564:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 5d6:	41 e0       	ldi	r20, 0x01	; 1
+ 5d8:	65 e0       	ldi	r22, 0x05	; 5
+ 5da:	89 e3       	ldi	r24, 0x39	; 57
+ 5dc:	90 e0       	ldi	r25, 0x00	; 0
+ 5de:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	DIO_SetPinDir(LCD_4BIT_MODE_DATA_PORT, LCD_D6_PIN , DIO_PIN_OUTPUT);
- 568:	41 e0       	ldi	r20, 0x01	; 1
- 56a:	66 e0       	ldi	r22, 0x06	; 6
- 56c:	89 e3       	ldi	r24, 0x39	; 57
- 56e:	90 e0       	ldi	r25, 0x00	; 0
- 570:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 5e2:	41 e0       	ldi	r20, 0x01	; 1
+ 5e4:	66 e0       	ldi	r22, 0x06	; 6
+ 5e6:	89 e3       	ldi	r24, 0x39	; 57
+ 5e8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ea:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	DIO_SetPinDir(LCD_4BIT_MODE_DATA_PORT, LCD_D7_PIN , DIO_PIN_OUTPUT);
- 574:	41 e0       	ldi	r20, 0x01	; 1
- 576:	67 e0       	ldi	r22, 0x07	; 7
- 578:	89 e3       	ldi	r24, 0x39	; 57
- 57a:	90 e0       	ldi	r25, 0x00	; 0
- 57c:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
- 580:	2f ef       	ldi	r18, 0xFF	; 255
- 582:	81 ee       	ldi	r24, 0xE1	; 225
- 584:	94 e0       	ldi	r25, 0x04	; 4
- 586:	21 50       	subi	r18, 0x01	; 1
- 588:	80 40       	sbci	r24, 0x00	; 0
- 58a:	90 40       	sbci	r25, 0x00	; 0
- 58c:	e1 f7       	brne	.-8      	; 0x586 <LCD_Init+0x5a>
- 58e:	00 c0       	rjmp	.+0      	; 0x590 <LCD_Init+0x64>
- 590:	00 00       	nop
+ 5ee:	41 e0       	ldi	r20, 0x01	; 1
+ 5f0:	67 e0       	ldi	r22, 0x07	; 7
+ 5f2:	89 e3       	ldi	r24, 0x39	; 57
+ 5f4:	90 e0       	ldi	r25, 0x00	; 0
+ 5f6:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
+ 5fa:	2f ef       	ldi	r18, 0xFF	; 255
+ 5fc:	81 ee       	ldi	r24, 0xE1	; 225
+ 5fe:	94 e0       	ldi	r25, 0x04	; 4
+ 600:	21 50       	subi	r18, 0x01	; 1
+ 602:	80 40       	sbci	r24, 0x00	; 0
+ 604:	90 40       	sbci	r25, 0x00	; 0
+ 606:	e1 f7       	brne	.-8      	; 0x600 <LCD_Init+0x5a>
+ 608:	00 c0       	rjmp	.+0      	; 0x60a <LCD_Init+0x64>
+ 60a:	00 00       	nop
 	
 	_delay_ms(100);
 	
 	LCD_WriteCommand(0x33);
- 592:	83 e3       	ldi	r24, 0x33	; 51
- 594:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 60c:	83 e3       	ldi	r24, 0x33	; 51
+ 60e:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	LCD_WriteCommand(0x32);
- 598:	82 e3       	ldi	r24, 0x32	; 50
- 59a:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 612:	82 e3       	ldi	r24, 0x32	; 50
+ 614:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	LCD_WriteCommand(0x28);
- 59e:	88 e2       	ldi	r24, 0x28	; 40
- 5a0:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 618:	88 e2       	ldi	r24, 0x28	; 40
+ 61a:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	
 	LCD_WriteCommand(0x0C);
- 5a4:	8c e0       	ldi	r24, 0x0C	; 12
- 5a6:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 61e:	8c e0       	ldi	r24, 0x0C	; 12
+ 620:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	LCD_WriteCommand(0x01);
- 5aa:	81 e0       	ldi	r24, 0x01	; 1
- 5ac:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 624:	81 e0       	ldi	r24, 0x01	; 1
+ 626:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	LCD_WriteCommand(0x06);
- 5b0:	86 e0       	ldi	r24, 0x06	; 6
- 5b2:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 62a:	86 e0       	ldi	r24, 0x06	; 6
+ 62c:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	LCD_WriteCommand(0x02);
- 5b6:	82 e0       	ldi	r24, 0x02	; 2
- 5b8:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
- 5bc:	08 95       	ret
+ 630:	82 e0       	ldi	r24, 0x02	; 2
+ 632:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
+ 636:	08 95       	ret
 
-000005be <LCD_WriteChar>:
+00000638 <LCD_WriteChar>:
 	
 	#endif
 }
 
 void LCD_WriteChar (uint8 data)
 {
- 5be:	cf 93       	push	r28
- 5c0:	c8 2f       	mov	r28, r24
+ 638:	cf 93       	push	r28
+ 63a:	c8 2f       	mov	r28, r24
 	#if LCD_MODE == 4
 	
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_RS_PIN, DIO_PIN_HIGH);
- 5c2:	41 e0       	ldi	r20, 0x01	; 1
- 5c4:	61 e0       	ldi	r22, 0x01	; 1
- 5c6:	86 e3       	ldi	r24, 0x36	; 54
- 5c8:	90 e0       	ldi	r25, 0x00	; 0
- 5ca:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 63c:	41 e0       	ldi	r20, 0x01	; 1
+ 63e:	61 e0       	ldi	r22, 0x01	; 1
+ 640:	86 e3       	ldi	r24, 0x36	; 54
+ 642:	90 e0       	ldi	r25, 0x00	; 0
+ 644:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_RW_PIN, DIO_PIN_LOW);
- 5ce:	40 e0       	ldi	r20, 0x00	; 0
- 5d0:	62 e0       	ldi	r22, 0x02	; 2
- 5d2:	86 e3       	ldi	r24, 0x36	; 54
- 5d4:	90 e0       	ldi	r25, 0x00	; 0
- 5d6:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 648:	40 e0       	ldi	r20, 0x00	; 0
+ 64a:	62 e0       	ldi	r22, 0x02	; 2
+ 64c:	86 e3       	ldi	r24, 0x36	; 54
+ 64e:	90 e0       	ldi	r25, 0x00	; 0
+ 650:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
- 5da:	40 e0       	ldi	r20, 0x00	; 0
- 5dc:	63 e0       	ldi	r22, 0x03	; 3
- 5de:	86 e3       	ldi	r24, 0x36	; 54
- 5e0:	90 e0       	ldi	r25, 0x00	; 0
- 5e2:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 654:	40 e0       	ldi	r20, 0x00	; 0
+ 656:	63 e0       	ldi	r22, 0x03	; 3
+ 658:	86 e3       	ldi	r24, 0x36	; 54
+ 65a:	90 e0       	ldi	r25, 0x00	; 0
+ 65c:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	
 	LCD_4BIT_MODE_DATA_BUS = (data & 0xf0) | (LCD_4BIT_MODE_DATA_BUS & 0x0f);
- 5e6:	8b b3       	in	r24, 0x1b	; 27
- 5e8:	9c 2f       	mov	r25, r28
- 5ea:	90 7f       	andi	r25, 0xF0	; 240
- 5ec:	8f 70       	andi	r24, 0x0F	; 15
- 5ee:	89 2b       	or	r24, r25
- 5f0:	8b bb       	out	0x1b, r24	; 27
+ 660:	8b b3       	in	r24, 0x1b	; 27
+ 662:	9c 2f       	mov	r25, r28
+ 664:	90 7f       	andi	r25, 0xF0	; 240
+ 666:	8f 70       	andi	r24, 0x0F	; 15
+ 668:	89 2b       	or	r24, r25
+ 66a:	8b bb       	out	0x1b, r24	; 27
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_HIGH);
- 5f2:	41 e0       	ldi	r20, 0x01	; 1
- 5f4:	63 e0       	ldi	r22, 0x03	; 3
- 5f6:	86 e3       	ldi	r24, 0x36	; 54
- 5f8:	90 e0       	ldi	r25, 0x00	; 0
- 5fa:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 5fe:	8f e9       	ldi	r24, 0x9F	; 159
- 600:	9f e0       	ldi	r25, 0x0F	; 15
- 602:	01 97       	sbiw	r24, 0x01	; 1
- 604:	f1 f7       	brne	.-4      	; 0x602 <LCD_WriteChar+0x44>
- 606:	00 c0       	rjmp	.+0      	; 0x608 <LCD_WriteChar+0x4a>
- 608:	00 00       	nop
+ 66c:	41 e0       	ldi	r20, 0x01	; 1
+ 66e:	63 e0       	ldi	r22, 0x03	; 3
+ 670:	86 e3       	ldi	r24, 0x36	; 54
+ 672:	90 e0       	ldi	r25, 0x00	; 0
+ 674:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 678:	8f e9       	ldi	r24, 0x9F	; 159
+ 67a:	9f e0       	ldi	r25, 0x0F	; 15
+ 67c:	01 97       	sbiw	r24, 0x01	; 1
+ 67e:	f1 f7       	brne	.-4      	; 0x67c <LCD_WriteChar+0x44>
+ 680:	00 c0       	rjmp	.+0      	; 0x682 <LCD_WriteChar+0x4a>
+ 682:	00 00       	nop
 	_delay_ms(1);
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
- 60a:	40 e0       	ldi	r20, 0x00	; 0
- 60c:	63 e0       	ldi	r22, 0x03	; 3
- 60e:	86 e3       	ldi	r24, 0x36	; 54
- 610:	90 e0       	ldi	r25, 0x00	; 0
- 612:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
+ 684:	40 e0       	ldi	r20, 0x00	; 0
+ 686:	63 e0       	ldi	r22, 0x03	; 3
+ 688:	86 e3       	ldi	r24, 0x36	; 54
+ 68a:	90 e0       	ldi	r25, 0x00	; 0
+ 68c:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
 	
 	LCD_4BIT_MODE_DATA_BUS = (data << 4) | (LCD_4BIT_MODE_DATA_BUS & 0x0f);
- 616:	20 e1       	ldi	r18, 0x10	; 16
- 618:	c2 9f       	mul	r28, r18
- 61a:	c0 01       	movw	r24, r0
- 61c:	11 24       	eor	r1, r1
- 61e:	9b b3       	in	r25, 0x1b	; 27
- 620:	9f 70       	andi	r25, 0x0F	; 15
- 622:	89 2b       	or	r24, r25
- 624:	8b bb       	out	0x1b, r24	; 27
+ 690:	20 e1       	ldi	r18, 0x10	; 16
+ 692:	c2 9f       	mul	r28, r18
+ 694:	c0 01       	movw	r24, r0
+ 696:	11 24       	eor	r1, r1
+ 698:	9b b3       	in	r25, 0x1b	; 27
+ 69a:	9f 70       	andi	r25, 0x0F	; 15
+ 69c:	89 2b       	or	r24, r25
+ 69e:	8b bb       	out	0x1b, r24	; 27
 	
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_HIGH);
- 626:	41 e0       	ldi	r20, 0x01	; 1
- 628:	63 e0       	ldi	r22, 0x03	; 3
- 62a:	86 e3       	ldi	r24, 0x36	; 54
- 62c:	90 e0       	ldi	r25, 0x00	; 0
- 62e:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 632:	8f e9       	ldi	r24, 0x9F	; 159
- 634:	9f e0       	ldi	r25, 0x0F	; 15
- 636:	01 97       	sbiw	r24, 0x01	; 1
- 638:	f1 f7       	brne	.-4      	; 0x636 <LCD_WriteChar+0x78>
- 63a:	00 c0       	rjmp	.+0      	; 0x63c <LCD_WriteChar+0x7e>
- 63c:	00 00       	nop
+ 6a0:	41 e0       	ldi	r20, 0x01	; 1
+ 6a2:	63 e0       	ldi	r22, 0x03	; 3
+ 6a4:	86 e3       	ldi	r24, 0x36	; 54
+ 6a6:	90 e0       	ldi	r25, 0x00	; 0
+ 6a8:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 6ac:	8f e9       	ldi	r24, 0x9F	; 159
+ 6ae:	9f e0       	ldi	r25, 0x0F	; 15
+ 6b0:	01 97       	sbiw	r24, 0x01	; 1
+ 6b2:	f1 f7       	brne	.-4      	; 0x6b0 <LCD_WriteChar+0x78>
+ 6b4:	00 c0       	rjmp	.+0      	; 0x6b6 <LCD_WriteChar+0x7e>
+ 6b6:	00 00       	nop
 	_delay_ms(1);
 	DIO_SetPinValue(LCD_4BIT_MODE_CMD_PORT, LCD_E_PIN, DIO_PIN_LOW);
- 63e:	40 e0       	ldi	r20, 0x00	; 0
- 640:	63 e0       	ldi	r22, 0x03	; 3
- 642:	86 e3       	ldi	r24, 0x36	; 54
- 644:	90 e0       	ldi	r25, 0x00	; 0
- 646:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 64a:	8f e1       	ldi	r24, 0x1F	; 31
- 64c:	9e e4       	ldi	r25, 0x4E	; 78
- 64e:	01 97       	sbiw	r24, 0x01	; 1
- 650:	f1 f7       	brne	.-4      	; 0x64e <LCD_WriteChar+0x90>
- 652:	00 c0       	rjmp	.+0      	; 0x654 <LCD_WriteChar+0x96>
- 654:	00 00       	nop
+ 6b8:	40 e0       	ldi	r20, 0x00	; 0
+ 6ba:	63 e0       	ldi	r22, 0x03	; 3
+ 6bc:	86 e3       	ldi	r24, 0x36	; 54
+ 6be:	90 e0       	ldi	r25, 0x00	; 0
+ 6c0:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 6c4:	8f e1       	ldi	r24, 0x1F	; 31
+ 6c6:	9e e4       	ldi	r25, 0x4E	; 78
+ 6c8:	01 97       	sbiw	r24, 0x01	; 1
+ 6ca:	f1 f7       	brne	.-4      	; 0x6c8 <LCD_WriteChar+0x90>
+ 6cc:	00 c0       	rjmp	.+0      	; 0x6ce <LCD_WriteChar+0x96>
+ 6ce:	00 00       	nop
 	
 	_delay_ms(5);
 	
 	#endif
 	
 }
- 656:	cf 91       	pop	r28
- 658:	08 95       	ret
+ 6d0:	cf 91       	pop	r28
+ 6d2:	08 95       	ret
 
-0000065a <LCD_WriteInteger>:
+000006d4 <LCD_WriteInteger>:
 
 
 /*  Assignment  */
 void LCD_WriteInteger (sint32 num)
 {
- 65a:	cf 92       	push	r12
- 65c:	df 92       	push	r13
- 65e:	ef 92       	push	r14
- 660:	ff 92       	push	r15
- 662:	1f 93       	push	r17
- 664:	cf 93       	push	r28
- 666:	df 93       	push	r29
- 668:	6b 01       	movw	r12, r22
- 66a:	7c 01       	movw	r14, r24
+ 6d4:	cf 92       	push	r12
+ 6d6:	df 92       	push	r13
+ 6d8:	ef 92       	push	r14
+ 6da:	ff 92       	push	r15
+ 6dc:	1f 93       	push	r17
+ 6de:	cf 93       	push	r28
+ 6e0:	df 93       	push	r29
+ 6e2:	6b 01       	movw	r12, r22
+ 6e4:	7c 01       	movw	r14, r24
 	sint32 temp_num;
 	uint16 increment_temp_num = 0;
 	sint8 counter = 0; // adjusting variable to be signed solve the last loop going infinite
 	
 	if (num < 0)
- 66c:	99 23       	and	r25, r25
- 66e:	5c f4       	brge	.+22     	; 0x686 <LCD_WriteInteger+0x2c>
+ 6e6:	99 23       	and	r25, r25
+ 6e8:	5c f4       	brge	.+22     	; 0x700 <LCD_WriteInteger+0x2c>
 	{
 		LCD_WriteChar('-');
- 670:	8d e2       	ldi	r24, 0x2D	; 45
- 672:	0e 94 df 02 	call	0x5be	; 0x5be <LCD_WriteChar>
+ 6ea:	8d e2       	ldi	r24, 0x2D	; 45
+ 6ec:	0e 94 1c 03 	call	0x638	; 0x638 <LCD_WriteChar>
 		temp_num = num * -1;
- 676:	f0 94       	com	r15
- 678:	e0 94       	com	r14
- 67a:	d0 94       	com	r13
- 67c:	c0 94       	com	r12
- 67e:	c1 1c       	adc	r12, r1
- 680:	d1 1c       	adc	r13, r1
- 682:	e1 1c       	adc	r14, r1
- 684:	f1 1c       	adc	r15, r1
+ 6f0:	f0 94       	com	r15
+ 6f2:	e0 94       	com	r14
+ 6f4:	d0 94       	com	r13
+ 6f6:	c0 94       	com	r12
+ 6f8:	c1 1c       	adc	r12, r1
+ 6fa:	d1 1c       	adc	r13, r1
+ 6fc:	e1 1c       	adc	r14, r1
+ 6fe:	f1 1c       	adc	r15, r1
 	}
 	else
 		temp_num = num;
 	
 	if(temp_num == 0)
- 686:	c1 14       	cp	r12, r1
- 688:	d1 04       	cpc	r13, r1
- 68a:	e1 04       	cpc	r14, r1
- 68c:	f1 04       	cpc	r15, r1
- 68e:	f9 f4       	brne	.+62     	; 0x6ce <LCD_WriteInteger+0x74>
+ 700:	c1 14       	cp	r12, r1
+ 702:	d1 04       	cpc	r13, r1
+ 704:	e1 04       	cpc	r14, r1
+ 706:	f1 04       	cpc	r15, r1
+ 708:	f9 f4       	brne	.+62     	; 0x748 <LCD_WriteInteger+0x74>
 	{
 		LCD_WriteChar('0');
- 690:	80 e3       	ldi	r24, 0x30	; 48
- 692:	0e 94 df 02 	call	0x5be	; 0x5be <LCD_WriteChar>
- 696:	53 c0       	rjmp	.+166    	; 0x73e <LCD_WriteInteger+0xe4>
+ 70a:	80 e3       	ldi	r24, 0x30	; 48
+ 70c:	0e 94 1c 03 	call	0x638	; 0x638 <LCD_WriteChar>
+ 710:	53 c0       	rjmp	.+166    	; 0x7b8 <LCD_WriteInteger+0xe4>
 	}
 	else
 	{
 		while (temp_num > 0 && counter < 10)
 		{
 			increment_temp_num = ((increment_temp_num * 10) + (temp_num % 10));
- 698:	be 01       	movw	r22, r28
- 69a:	66 0f       	add	r22, r22
- 69c:	77 1f       	adc	r23, r23
- 69e:	cc 0f       	add	r28, r28
- 6a0:	dd 1f       	adc	r29, r29
- 6a2:	cc 0f       	add	r28, r28
- 6a4:	dd 1f       	adc	r29, r29
- 6a6:	cc 0f       	add	r28, r28
- 6a8:	dd 1f       	adc	r29, r29
- 6aa:	c6 0f       	add	r28, r22
- 6ac:	d7 1f       	adc	r29, r23
- 6ae:	c7 01       	movw	r24, r14
- 6b0:	b6 01       	movw	r22, r12
- 6b2:	2a e0       	ldi	r18, 0x0A	; 10
- 6b4:	30 e0       	ldi	r19, 0x00	; 0
- 6b6:	40 e0       	ldi	r20, 0x00	; 0
- 6b8:	50 e0       	ldi	r21, 0x00	; 0
- 6ba:	0e 94 21 05 	call	0xa42	; 0xa42 <__divmodsi4>
- 6be:	c6 0f       	add	r28, r22
- 6c0:	d7 1f       	adc	r29, r23
+ 712:	be 01       	movw	r22, r28
+ 714:	66 0f       	add	r22, r22
+ 716:	77 1f       	adc	r23, r23
+ 718:	cc 0f       	add	r28, r28
+ 71a:	dd 1f       	adc	r29, r29
+ 71c:	cc 0f       	add	r28, r28
+ 71e:	dd 1f       	adc	r29, r29
+ 720:	cc 0f       	add	r28, r28
+ 722:	dd 1f       	adc	r29, r29
+ 724:	c6 0f       	add	r28, r22
+ 726:	d7 1f       	adc	r29, r23
+ 728:	c7 01       	movw	r24, r14
+ 72a:	b6 01       	movw	r22, r12
+ 72c:	2a e0       	ldi	r18, 0x0A	; 10
+ 72e:	30 e0       	ldi	r19, 0x00	; 0
+ 730:	40 e0       	ldi	r20, 0x00	; 0
+ 732:	50 e0       	ldi	r21, 0x00	; 0
+ 734:	0e 94 44 05 	call	0xa88	; 0xa88 <__divmodsi4>
+ 738:	c6 0f       	add	r28, r22
+ 73a:	d7 1f       	adc	r29, r23
 			temp_num /= 10;
- 6c2:	c2 2e       	mov	r12, r18
- 6c4:	d3 2e       	mov	r13, r19
- 6c6:	e4 2e       	mov	r14, r20
- 6c8:	f5 2e       	mov	r15, r21
+ 73c:	c2 2e       	mov	r12, r18
+ 73e:	d3 2e       	mov	r13, r19
+ 740:	e4 2e       	mov	r14, r20
+ 742:	f5 2e       	mov	r15, r21
 			counter++;
- 6ca:	1f 5f       	subi	r17, 0xFF	; 255
- 6cc:	03 c0       	rjmp	.+6      	; 0x6d4 <LCD_WriteInteger+0x7a>
- 6ce:	10 e0       	ldi	r17, 0x00	; 0
- 6d0:	c0 e0       	ldi	r28, 0x00	; 0
- 6d2:	d0 e0       	ldi	r29, 0x00	; 0
+ 744:	1f 5f       	subi	r17, 0xFF	; 255
+ 746:	03 c0       	rjmp	.+6      	; 0x74e <LCD_WriteInteger+0x7a>
+ 748:	10 e0       	ldi	r17, 0x00	; 0
+ 74a:	c0 e0       	ldi	r28, 0x00	; 0
+ 74c:	d0 e0       	ldi	r29, 0x00	; 0
 	{
 		LCD_WriteChar('0');
 	}
 	else
 	{
 		while (temp_num > 0 && counter < 10)
- 6d4:	1c 14       	cp	r1, r12
- 6d6:	1d 04       	cpc	r1, r13
- 6d8:	1e 04       	cpc	r1, r14
- 6da:	1f 04       	cpc	r1, r15
- 6dc:	14 f4       	brge	.+4      	; 0x6e2 <LCD_WriteInteger+0x88>
- 6de:	1a 30       	cpi	r17, 0x0A	; 10
- 6e0:	dc f2       	brlt	.-74     	; 0x698 <LCD_WriteInteger+0x3e>
+ 74e:	1c 14       	cp	r1, r12
+ 750:	1d 04       	cpc	r1, r13
+ 752:	1e 04       	cpc	r1, r14
+ 754:	1f 04       	cpc	r1, r15
+ 756:	14 f4       	brge	.+4      	; 0x75c <LCD_WriteInteger+0x88>
+ 758:	1a 30       	cpi	r17, 0x0A	; 10
+ 75a:	dc f2       	brlt	.-74     	; 0x712 <LCD_WriteInteger+0x3e>
 		{
 			increment_temp_num = ((increment_temp_num * 10) + (temp_num % 10));
 			temp_num /= 10;
 			counter++;
 		}
 		counter--;
- 6e2:	11 50       	subi	r17, 0x01	; 1
+ 75c:	11 50       	subi	r17, 0x01	; 1
 		while(counter>=0)
- 6e4:	2a c0       	rjmp	.+84     	; 0x73a <LCD_WriteInteger+0xe0>
+ 75e:	2a c0       	rjmp	.+84     	; 0x7b4 <LCD_WriteInteger+0xe0>
 		{
 			LCD_WriteChar('0' + (increment_temp_num % 10));
- 6e6:	9e 01       	movw	r18, r28
- 6e8:	ad ec       	ldi	r26, 0xCD	; 205
- 6ea:	bc ec       	ldi	r27, 0xCC	; 204
- 6ec:	0e 94 40 05 	call	0xa80	; 0xa80 <__umulhisi3>
- 6f0:	96 95       	lsr	r25
- 6f2:	87 95       	ror	r24
- 6f4:	96 95       	lsr	r25
- 6f6:	87 95       	ror	r24
- 6f8:	96 95       	lsr	r25
- 6fa:	87 95       	ror	r24
- 6fc:	9c 01       	movw	r18, r24
- 6fe:	22 0f       	add	r18, r18
- 700:	33 1f       	adc	r19, r19
- 702:	88 0f       	add	r24, r24
- 704:	99 1f       	adc	r25, r25
- 706:	88 0f       	add	r24, r24
- 708:	99 1f       	adc	r25, r25
- 70a:	88 0f       	add	r24, r24
- 70c:	99 1f       	adc	r25, r25
- 70e:	82 0f       	add	r24, r18
- 710:	93 1f       	adc	r25, r19
- 712:	9e 01       	movw	r18, r28
- 714:	28 1b       	sub	r18, r24
- 716:	39 0b       	sbc	r19, r25
- 718:	c9 01       	movw	r24, r18
- 71a:	80 5d       	subi	r24, 0xD0	; 208
- 71c:	0e 94 df 02 	call	0x5be	; 0x5be <LCD_WriteChar>
+ 760:	9e 01       	movw	r18, r28
+ 762:	ad ec       	ldi	r26, 0xCD	; 205
+ 764:	bc ec       	ldi	r27, 0xCC	; 204
+ 766:	0e 94 63 05 	call	0xac6	; 0xac6 <__umulhisi3>
+ 76a:	96 95       	lsr	r25
+ 76c:	87 95       	ror	r24
+ 76e:	96 95       	lsr	r25
+ 770:	87 95       	ror	r24
+ 772:	96 95       	lsr	r25
+ 774:	87 95       	ror	r24
+ 776:	9c 01       	movw	r18, r24
+ 778:	22 0f       	add	r18, r18
+ 77a:	33 1f       	adc	r19, r19
+ 77c:	88 0f       	add	r24, r24
+ 77e:	99 1f       	adc	r25, r25
+ 780:	88 0f       	add	r24, r24
+ 782:	99 1f       	adc	r25, r25
+ 784:	88 0f       	add	r24, r24
+ 786:	99 1f       	adc	r25, r25
+ 788:	82 0f       	add	r24, r18
+ 78a:	93 1f       	adc	r25, r19
+ 78c:	9e 01       	movw	r18, r28
+ 78e:	28 1b       	sub	r18, r24
+ 790:	39 0b       	sbc	r19, r25
+ 792:	c9 01       	movw	r24, r18
+ 794:	80 5d       	subi	r24, 0xD0	; 208
+ 796:	0e 94 1c 03 	call	0x638	; 0x638 <LCD_WriteChar>
 			increment_temp_num /= 10;
- 720:	9e 01       	movw	r18, r28
- 722:	ad ec       	ldi	r26, 0xCD	; 205
- 724:	bc ec       	ldi	r27, 0xCC	; 204
- 726:	0e 94 40 05 	call	0xa80	; 0xa80 <__umulhisi3>
- 72a:	ec 01       	movw	r28, r24
- 72c:	d6 95       	lsr	r29
- 72e:	c7 95       	ror	r28
- 730:	d6 95       	lsr	r29
- 732:	c7 95       	ror	r28
- 734:	d6 95       	lsr	r29
- 736:	c7 95       	ror	r28
+ 79a:	9e 01       	movw	r18, r28
+ 79c:	ad ec       	ldi	r26, 0xCD	; 205
+ 79e:	bc ec       	ldi	r27, 0xCC	; 204
+ 7a0:	0e 94 63 05 	call	0xac6	; 0xac6 <__umulhisi3>
+ 7a4:	ec 01       	movw	r28, r24
+ 7a6:	d6 95       	lsr	r29
+ 7a8:	c7 95       	ror	r28
+ 7aa:	d6 95       	lsr	r29
+ 7ac:	c7 95       	ror	r28
+ 7ae:	d6 95       	lsr	r29
+ 7b0:	c7 95       	ror	r28
 			counter--;
- 738:	11 50       	subi	r17, 0x01	; 1
+ 7b2:	11 50       	subi	r17, 0x01	; 1
 			increment_temp_num = ((increment_temp_num * 10) + (temp_num % 10));
 			temp_num /= 10;
 			counter++;
 		}
 		counter--;
 		while(counter>=0)
- 73a:	11 23       	and	r17, r17
- 73c:	a4 f6       	brge	.-88     	; 0x6e6 <LCD_WriteInteger+0x8c>
+ 7b4:	11 23       	and	r17, r17
+ 7b6:	a4 f6       	brge	.-88     	; 0x760 <LCD_WriteInteger+0x8c>
 			LCD_WriteChar('0' + (increment_temp_num % 10));
 			increment_temp_num /= 10;
 			counter--;
 		}
 	}
 }
- 73e:	df 91       	pop	r29
- 740:	cf 91       	pop	r28
- 742:	1f 91       	pop	r17
- 744:	ff 90       	pop	r15
- 746:	ef 90       	pop	r14
- 748:	df 90       	pop	r13
- 74a:	cf 90       	pop	r12
- 74c:	08 95       	ret
+ 7b8:	df 91       	pop	r29
+ 7ba:	cf 91       	pop	r28
+ 7bc:	1f 91       	pop	r17
+ 7be:	ff 90       	pop	r15
+ 7c0:	ef 90       	pop	r14
+ 7c2:	df 90       	pop	r13
+ 7c4:	cf 90       	pop	r12
+ 7c6:	08 95       	ret
 
-0000074e <LCD_WriteString>:
+000007c8 <LCD_WriteString>:
 /******************/
 
 void LCD_WriteString(uint8* str)
 {
- 74e:	0f 93       	push	r16
- 750:	1f 93       	push	r17
- 752:	cf 93       	push	r28
- 754:	8c 01       	movw	r16, r24
+ 7c8:	0f 93       	push	r16
+ 7ca:	1f 93       	push	r17
+ 7cc:	cf 93       	push	r28
+ 7ce:	8c 01       	movw	r16, r24
 	uint8 Str_count = 0;
- 756:	c0 e0       	ldi	r28, 0x00	; 0
+ 7d0:	c0 e0       	ldi	r28, 0x00	; 0
 	while (str[Str_count] != '\0')
- 758:	03 c0       	rjmp	.+6      	; 0x760 <LCD_WriteString+0x12>
+ 7d2:	03 c0       	rjmp	.+6      	; 0x7da <LCD_WriteString+0x12>
 	{
 		LCD_WriteChar (str[Str_count]);
- 75a:	0e 94 df 02 	call	0x5be	; 0x5be <LCD_WriteChar>
+ 7d4:	0e 94 1c 03 	call	0x638	; 0x638 <LCD_WriteChar>
 		Str_count++;
- 75e:	cf 5f       	subi	r28, 0xFF	; 255
+ 7d8:	cf 5f       	subi	r28, 0xFF	; 255
 /******************/
 
 void LCD_WriteString(uint8* str)
 {
 	uint8 Str_count = 0;
 	while (str[Str_count] != '\0')
- 760:	f8 01       	movw	r30, r16
- 762:	ec 0f       	add	r30, r28
- 764:	f1 1d       	adc	r31, r1
- 766:	80 81       	ld	r24, Z
- 768:	81 11       	cpse	r24, r1
- 76a:	f7 cf       	rjmp	.-18     	; 0x75a <LCD_WriteString+0xc>
+ 7da:	f8 01       	movw	r30, r16
+ 7dc:	ec 0f       	add	r30, r28
+ 7de:	f1 1d       	adc	r31, r1
+ 7e0:	80 81       	ld	r24, Z
+ 7e2:	81 11       	cpse	r24, r1
+ 7e4:	f7 cf       	rjmp	.-18     	; 0x7d4 <LCD_WriteString+0xc>
 	{
 		LCD_WriteChar (str[Str_count]);
 		Str_count++;
 	}
 }
- 76c:	cf 91       	pop	r28
- 76e:	1f 91       	pop	r17
- 770:	0f 91       	pop	r16
- 772:	08 95       	ret
+ 7e6:	cf 91       	pop	r28
+ 7e8:	1f 91       	pop	r17
+ 7ea:	0f 91       	pop	r16
+ 7ec:	08 95       	ret
 
-00000774 <LCD_GoToLocation>:
+000007ee <LCD_GoToLocation>:
 
 void LCD_GoToLocation(uint8 row, uint8 col)
 {
- 774:	cf 93       	push	r28
- 776:	df 93       	push	r29
- 778:	00 d0       	rcall	.+0      	; 0x77a <LCD_GoToLocation+0x6>
- 77a:	cd b7       	in	r28, 0x3d	; 61
- 77c:	de b7       	in	r29, 0x3e	; 62
+ 7ee:	cf 93       	push	r28
+ 7f0:	df 93       	push	r29
+ 7f2:	00 d0       	rcall	.+0      	; 0x7f4 <LCD_GoToLocation+0x6>
+ 7f4:	cd b7       	in	r28, 0x3d	; 61
+ 7f6:	de b7       	in	r29, 0x3e	; 62
 	uint8 rows[2] = {LCD_ROW_1_ADDR,LCD_ROW_2_ADDR};
- 77e:	90 e8       	ldi	r25, 0x80	; 128
- 780:	99 83       	std	Y+1, r25	; 0x01
- 782:	90 ec       	ldi	r25, 0xC0	; 192
- 784:	9a 83       	std	Y+2, r25	; 0x02
+ 7f8:	90 e8       	ldi	r25, 0x80	; 128
+ 7fa:	99 83       	std	Y+1, r25	; 0x01
+ 7fc:	90 ec       	ldi	r25, 0xC0	; 192
+ 7fe:	9a 83       	std	Y+2, r25	; 0x02
 	
 	LCD_WriteCommand(rows[row]+col);
- 786:	e1 e0       	ldi	r30, 0x01	; 1
- 788:	f0 e0       	ldi	r31, 0x00	; 0
- 78a:	ec 0f       	add	r30, r28
- 78c:	fd 1f       	adc	r31, r29
- 78e:	e8 0f       	add	r30, r24
- 790:	f1 1d       	adc	r31, r1
- 792:	80 81       	ld	r24, Z
- 794:	86 0f       	add	r24, r22
- 796:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
+ 800:	e1 e0       	ldi	r30, 0x01	; 1
+ 802:	f0 e0       	ldi	r31, 0x00	; 0
+ 804:	ec 0f       	add	r30, r28
+ 806:	fd 1f       	adc	r31, r29
+ 808:	e8 0f       	add	r30, r24
+ 80a:	f1 1d       	adc	r31, r1
+ 80c:	80 81       	ld	r24, Z
+ 80e:	86 0f       	add	r24, r22
+ 810:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
 	
 }
- 79a:	0f 90       	pop	r0
- 79c:	0f 90       	pop	r0
- 79e:	df 91       	pop	r29
- 7a0:	cf 91       	pop	r28
- 7a2:	08 95       	ret
+ 814:	0f 90       	pop	r0
+ 816:	0f 90       	pop	r0
+ 818:	df 91       	pop	r29
+ 81a:	cf 91       	pop	r28
+ 81c:	08 95       	ret
 
-000007a4 <LCD_Clear>:
+0000081e <LCD_Clear>:
 
 void LCD_Clear (void)
 {
 	LCD_WriteCommand(LCD_CLR_CMD);
- 7a4:	81 e0       	ldi	r24, 0x01	; 1
- 7a6:	0e 94 48 02 	call	0x490	; 0x490 <LCD_WriteCommand>
- 7aa:	08 95       	ret
+ 81e:	81 e0       	ldi	r24, 0x01	; 1
+ 820:	0e 94 85 02 	call	0x50a	; 0x50a <LCD_WriteCommand>
+ 824:	08 95       	ret
 
-000007ac <LED0_Init>:
+00000826 <LED0_Init>:
 
 
 #ifdef LEDS_VOID_INPUT_FUNCTIONS
 	void LED0_Init(void)
 	{
 		DIO_SetPinDir(LED0_PORT, LED0_PIN, DIO_PIN_OUTPUT);
- 7ac:	41 e0       	ldi	r20, 0x01	; 1
- 7ae:	62 e0       	ldi	r22, 0x02	; 2
- 7b0:	83 e3       	ldi	r24, 0x33	; 51
- 7b2:	90 e0       	ldi	r25, 0x00	; 0
- 7b4:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
- 7b8:	08 95       	ret
+ 826:	41 e0       	ldi	r20, 0x01	; 1
+ 828:	62 e0       	ldi	r22, 0x02	; 2
+ 82a:	83 e3       	ldi	r24, 0x33	; 51
+ 82c:	90 e0       	ldi	r25, 0x00	; 0
+ 82e:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
+ 832:	08 95       	ret
 
-000007ba <LED1_Init>:
+00000834 <LED1_Init>:
 	}
 	void LED1_Init(void)
 	{
 		DIO_SetPinDir(LED1_PORT, LED1_PIN, DIO_PIN_OUTPUT);
- 7ba:	41 e0       	ldi	r20, 0x01	; 1
- 7bc:	67 e0       	ldi	r22, 0x07	; 7
- 7be:	83 e3       	ldi	r24, 0x33	; 51
- 7c0:	90 e0       	ldi	r25, 0x00	; 0
- 7c2:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
- 7c6:	08 95       	ret
+ 834:	41 e0       	ldi	r20, 0x01	; 1
+ 836:	67 e0       	ldi	r22, 0x07	; 7
+ 838:	83 e3       	ldi	r24, 0x33	; 51
+ 83a:	90 e0       	ldi	r25, 0x00	; 0
+ 83c:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
+ 840:	08 95       	ret
 
-000007c8 <LED2_Init>:
+00000842 <LED2_Init>:
 	}
 	void LED2_Init(void)
 	{
 		DIO_SetPinDir(LED2_PORT, LED2_PIN, DIO_PIN_OUTPUT);
- 7c8:	41 e0       	ldi	r20, 0x01	; 1
- 7ca:	63 e0       	ldi	r22, 0x03	; 3
- 7cc:	80 e3       	ldi	r24, 0x30	; 48
- 7ce:	90 e0       	ldi	r25, 0x00	; 0
- 7d0:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
- 7d4:	08 95       	ret
+ 842:	41 e0       	ldi	r20, 0x01	; 1
+ 844:	63 e0       	ldi	r22, 0x03	; 3
+ 846:	80 e3       	ldi	r24, 0x30	; 48
+ 848:	90 e0       	ldi	r25, 0x00	; 0
+ 84a:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
+ 84e:	08 95       	ret
 
-000007d6 <LED0_ON>:
+00000850 <LED0_ON>:
 	}
 
 	void LED0_ON(void)
 	{
 		DIO_SetPinValue(LED0_PORT, LED0_PIN, DIO_PIN_HIGH);
- 7d6:	41 e0       	ldi	r20, 0x01	; 1
- 7d8:	62 e0       	ldi	r22, 0x02	; 2
- 7da:	83 e3       	ldi	r24, 0x33	; 51
- 7dc:	90 e0       	ldi	r25, 0x00	; 0
- 7de:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 7e2:	08 95       	ret
+ 850:	41 e0       	ldi	r20, 0x01	; 1
+ 852:	62 e0       	ldi	r22, 0x02	; 2
+ 854:	83 e3       	ldi	r24, 0x33	; 51
+ 856:	90 e0       	ldi	r25, 0x00	; 0
+ 858:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 85c:	08 95       	ret
 
-000007e4 <LED1_ON>:
+0000085e <LED1_ON>:
 	}
 	void LED1_ON(void)
 	{
 		DIO_SetPinValue(LED1_PORT, LED1_PIN, DIO_PIN_HIGH);
- 7e4:	41 e0       	ldi	r20, 0x01	; 1
- 7e6:	67 e0       	ldi	r22, 0x07	; 7
- 7e8:	83 e3       	ldi	r24, 0x33	; 51
- 7ea:	90 e0       	ldi	r25, 0x00	; 0
- 7ec:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 7f0:	08 95       	ret
+ 85e:	41 e0       	ldi	r20, 0x01	; 1
+ 860:	67 e0       	ldi	r22, 0x07	; 7
+ 862:	83 e3       	ldi	r24, 0x33	; 51
+ 864:	90 e0       	ldi	r25, 0x00	; 0
+ 866:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 86a:	08 95       	ret
 
-000007f2 <LED2_ON>:
+0000086c <LED2_ON>:
 	}
 	void LED2_ON(void)
 	{
 		DIO_SetPinValue(LED2_PORT, LED2_PIN, DIO_PIN_HIGH);
- 7f2:	41 e0       	ldi	r20, 0x01	; 1
- 7f4:	63 e0       	ldi	r22, 0x03	; 3
- 7f6:	80 e3       	ldi	r24, 0x30	; 48
- 7f8:	90 e0       	ldi	r25, 0x00	; 0
- 7fa:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 7fe:	08 95       	ret
+ 86c:	41 e0       	ldi	r20, 0x01	; 1
+ 86e:	63 e0       	ldi	r22, 0x03	; 3
+ 870:	80 e3       	ldi	r24, 0x30	; 48
+ 872:	90 e0       	ldi	r25, 0x00	; 0
+ 874:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 878:	08 95       	ret
 
-00000800 <LED0_OFF>:
+0000087a <LED0_OFF>:
 	}
 
 	void LED0_OFF(void)
 	{
 		DIO_SetPinValue(LED0_PORT, LED0_PIN, DIO_PIN_LOW);
- 800:	40 e0       	ldi	r20, 0x00	; 0
- 802:	62 e0       	ldi	r22, 0x02	; 2
- 804:	83 e3       	ldi	r24, 0x33	; 51
- 806:	90 e0       	ldi	r25, 0x00	; 0
- 808:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 80c:	08 95       	ret
+ 87a:	40 e0       	ldi	r20, 0x00	; 0
+ 87c:	62 e0       	ldi	r22, 0x02	; 2
+ 87e:	83 e3       	ldi	r24, 0x33	; 51
+ 880:	90 e0       	ldi	r25, 0x00	; 0
+ 882:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 886:	08 95       	ret
 
-0000080e <LED1_OFF>:
+00000888 <LED1_OFF>:
 	}
 	void LED1_OFF(void)
 	{
 		DIO_SetPinValue(LED1_PORT, LED1_PIN, DIO_PIN_LOW);
- 80e:	40 e0       	ldi	r20, 0x00	; 0
- 810:	67 e0       	ldi	r22, 0x07	; 7
- 812:	83 e3       	ldi	r24, 0x33	; 51
- 814:	90 e0       	ldi	r25, 0x00	; 0
- 816:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 81a:	08 95       	ret
+ 888:	40 e0       	ldi	r20, 0x00	; 0
+ 88a:	67 e0       	ldi	r22, 0x07	; 7
+ 88c:	83 e3       	ldi	r24, 0x33	; 51
+ 88e:	90 e0       	ldi	r25, 0x00	; 0
+ 890:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 894:	08 95       	ret
 
-0000081c <LED2_OFF>:
+00000896 <LED2_OFF>:
 	}
 	void LED2_OFF(void)
 	{
 		DIO_SetPinValue(LED2_PORT, LED2_PIN, DIO_PIN_LOW);
- 81c:	40 e0       	ldi	r20, 0x00	; 0
- 81e:	63 e0       	ldi	r22, 0x03	; 3
- 820:	80 e3       	ldi	r24, 0x30	; 48
- 822:	90 e0       	ldi	r25, 0x00	; 0
- 824:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 828:	08 95       	ret
+ 896:	40 e0       	ldi	r20, 0x00	; 0
+ 898:	63 e0       	ldi	r22, 0x03	; 3
+ 89a:	80 e3       	ldi	r24, 0x30	; 48
+ 89c:	90 e0       	ldi	r25, 0x00	; 0
+ 89e:	0e 94 5d 02 	call	0x4ba	; 0x4ba <DIO_SetPinValue>
+ 8a2:	08 95       	ret
 
-0000082a <LED0_Toggle>:
+000008a4 <LED0_Toggle>:
 	}
 
 	void LED0_Toggle(void)
 	{
 		DIO_TogglePin(LED0_PORT, LED0_PIN);
- 82a:	62 e0       	ldi	r22, 0x02	; 2
- 82c:	83 e3       	ldi	r24, 0x33	; 51
- 82e:	90 e0       	ldi	r25, 0x00	; 0
- 830:	0e 94 3c 02 	call	0x478	; 0x478 <DIO_TogglePin>
- 834:	08 95       	ret
+ 8a4:	62 e0       	ldi	r22, 0x02	; 2
+ 8a6:	83 e3       	ldi	r24, 0x33	; 51
+ 8a8:	90 e0       	ldi	r25, 0x00	; 0
+ 8aa:	0e 94 79 02 	call	0x4f2	; 0x4f2 <DIO_TogglePin>
+ 8ae:	08 95       	ret
 
-00000836 <LED1_Toggle>:
+000008b0 <LED1_Toggle>:
 	}
 	void LED1_Toggle(void)
 	{
 		DIO_TogglePin(LED1_PORT, LED1_PIN);
- 836:	67 e0       	ldi	r22, 0x07	; 7
- 838:	83 e3       	ldi	r24, 0x33	; 51
- 83a:	90 e0       	ldi	r25, 0x00	; 0
- 83c:	0e 94 3c 02 	call	0x478	; 0x478 <DIO_TogglePin>
- 840:	08 95       	ret
+ 8b0:	67 e0       	ldi	r22, 0x07	; 7
+ 8b2:	83 e3       	ldi	r24, 0x33	; 51
+ 8b4:	90 e0       	ldi	r25, 0x00	; 0
+ 8b6:	0e 94 79 02 	call	0x4f2	; 0x4f2 <DIO_TogglePin>
+ 8ba:	08 95       	ret
 
-00000842 <LED2_Toggle>:
+000008bc <LED2_Toggle>:
 	}
 	void LED2_Toggle(void)
 	{
 		DIO_TogglePin(LED2_PORT, LED2_PIN);
- 842:	63 e0       	ldi	r22, 0x03	; 3
- 844:	80 e3       	ldi	r24, 0x30	; 48
- 846:	90 e0       	ldi	r25, 0x00	; 0
- 848:	0e 94 3c 02 	call	0x478	; 0x478 <DIO_TogglePin>
- 84c:	08 95       	ret
+ 8bc:	63 e0       	ldi	r22, 0x03	; 3
+ 8be:	80 e3       	ldi	r24, 0x30	; 48
+ 8c0:	90 e0       	ldi	r25, 0x00	; 0
+ 8c2:	0e 94 79 02 	call	0x4f2	; 0x4f2 <DIO_TogglePin>
+ 8c6:	08 95       	ret
 
-0000084e <main>:
+000008c8 <main>:
 #include "Smart_Home.h"
 
 
 int main(void)
 {
     Smart_Home_Init();
- 84e:	0e 94 6b 04 	call	0x8d6	; 0x8d6 <Smart_Home_Init>
+ 8c8:	0e 94 ad 04 	call	0x95a	; 0x95a <Smart_Home_Init>
     while (1) 
     {
 		Smart_Home_Run();
- 852:	0e 94 7a 04 	call	0x8f4	; 0x8f4 <Smart_Home_Run>
- 856:	fd cf       	rjmp	.-6      	; 0x852 <main+0x4>
+ 8cc:	0e 94 bc 04 	call	0x978	; 0x978 <Smart_Home_Run>
+ 8d0:	fd cf       	rjmp	.-6      	; 0x8cc <main+0x4>
 
-00000858 <Smart_Home_Read_N_Decode>:
+000008d2 <Smart_Home_Read_N_Decode>:
 	#endif /* ECU_ROLE */
 }
 static void Smart_Home_Read_N_Decode(void)
 {
 	#if ECU_ROLE == ACTUATOR_ECU
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_PENDING_INPUT);
- 858:	61 e1       	ldi	r22, 0x11	; 17
- 85a:	85 e2       	ldi	r24, 0x25	; 37
- 85c:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-		Comm_Bridge_CMD_Read_Req(User_Selection);
- 860:	88 e6       	ldi	r24, 0x68	; 104
- 862:	93 e0       	ldi	r25, 0x03	; 3
- 864:	0e 94 be 00 	call	0x17c	; 0x17c <Comm_Bridge_CMD_Read_Req>
-		#if COMMAND_BYTE_LENGTH == 1
-			Selected_Device = User_Selection[CMD_DATA_BYTE] >> REQ_DEV_SHIFT_MASK;
- 868:	80 91 68 03 	lds	r24, 0x0368	; 0x800368 <User_Selection>
- 86c:	98 2f       	mov	r25, r24
- 86e:	92 95       	swap	r25
- 870:	9f 70       	andi	r25, 0x0F	; 15
- 872:	90 93 49 03 	sts	0x0349, r25	; 0x800349 <Selected_Device>
-			Selected_Operation = (User_Selection[CMD_DATA_BYTE] & REQ_OP_MASK);
- 876:	8f 70       	andi	r24, 0x0F	; 15
- 878:	80 93 48 03 	sts	0x0348, r24	; 0x800348 <__data_end>
- 87c:	08 95       	ret
+ 8d2:	61 e1       	ldi	r22, 0x11	; 17
+ 8d4:	85 e2       	ldi	r24, 0x25	; 37
+ 8d6:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+		if(Comm_Bridge_CMD_Read_Req(User_Selection) == OUT_OF_SYNC)
+ 8da:	8a e9       	ldi	r24, 0x9A	; 154
+ 8dc:	93 e0       	ldi	r25, 0x03	; 3
+ 8de:	0e 94 a2 00 	call	0x144	; 0x144 <Comm_Bridge_CMD_Read_Req>
+ 8e2:	83 31       	cpi	r24, 0x13	; 19
+ 8e4:	41 f4       	brne	.+16     	; 0x8f6 <Smart_Home_Read_N_Decode+0x24>
+		{
+			Status_Disp_LCD(LCD_ROW_TXT_CTRL_ACT_SYSTEM,LCD_ROW_TXT_NOT_IN_SYNC);
+ 8e6:	66 e1       	ldi	r22, 0x16	; 22
+ 8e8:	8b e2       	ldi	r24, 0x2B	; 43
+ 8ea:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+			Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
+ 8ee:	83 e1       	ldi	r24, 0x13	; 19
+ 8f0:	80 93 78 00 	sts	0x0078, r24	; 0x800078 <Smart_Home_Sys_Sync_Flag>
+ 8f4:	08 95       	ret
+		}
+		else
+		{
+			#if COMMAND_BYTE_LENGTH == 1
+				Selected_Device = User_Selection[CMD_DATA_BYTE] >> REQ_DEV_SHIFT_MASK; // shift the command byte 4 times to the right to get the 4 MSbs which represent the Device Identifier.
+ 8f6:	80 91 9a 03 	lds	r24, 0x039A	; 0x80039a <User_Selection>
+ 8fa:	98 2f       	mov	r25, r24
+ 8fc:	92 95       	swap	r25
+ 8fe:	9f 70       	andi	r25, 0x0F	; 15
+ 900:	90 93 7b 03 	sts	0x037B, r25	; 0x80037b <Selected_Device>
+				Selected_Operation = (User_Selection[CMD_DATA_BYTE] & REQ_OP_MASK); // Mask the 4 LSbs from the command byte to get the Operation identifier.
+ 904:	8f 70       	andi	r24, 0x0F	; 15
+ 906:	80 93 7a 03 	sts	0x037A, r24	; 0x80037a <__data_end>
+ 90a:	08 95       	ret
 
-0000087e <Smart_Home_Process_N_Respond>:
-	
-	Comm_Bridge_BT_Send(Selection_Validity);
+0000090c <Smart_Home_Process_N_Respond>:
+		Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
+	}
 }
 #elif ECU_ROLE == ACTUATOR_ECU
 static void Smart_Home_Process_N_Respond(void)
 {
- 87e:	cf 93       	push	r28
- 880:	df 93       	push	r29
- 882:	1f 92       	push	r1
- 884:	cd b7       	in	r28, 0x3d	; 61
- 886:	de b7       	in	r29, 0x3e	; 62
+ 90c:	cf 93       	push	r28
+ 90e:	df 93       	push	r29
+ 910:	1f 92       	push	r1
+ 912:	cd b7       	in	r28, 0x3d	; 61
+ 914:	de b7       	in	r29, 0x3e	; 62
 	uint8 Selection_Validity = SEND_FAILED;
- 888:	87 e0       	ldi	r24, 0x07	; 7
- 88a:	89 83       	std	Y+1, r24	; 0x01
+ 916:	86 e0       	ldi	r24, 0x06	; 6
+ 918:	89 83       	std	Y+1, r24	; 0x01
 	Selection_Validity = Dev_Op_Check_Valid(Selected_Device, Selected_Operation);
- 88c:	60 91 48 03 	lds	r22, 0x0348	; 0x800348 <__data_end>
- 890:	80 91 49 03 	lds	r24, 0x0349	; 0x800349 <Selected_Device>
- 894:	0e 94 53 01 	call	0x2a6	; 0x2a6 <Dev_Op_Check_Valid>
- 898:	89 83       	std	Y+1, r24	; 0x01
+ 91a:	60 91 7a 03 	lds	r22, 0x037A	; 0x80037a <__data_end>
+ 91e:	80 91 7b 03 	lds	r24, 0x037B	; 0x80037b <Selected_Device>
+ 922:	0e 94 87 01 	call	0x30e	; 0x30e <Dev_Op_Check_Valid>
+ 926:	89 83       	std	Y+1, r24	; 0x01
 	if(Selection_Validity == DEV_N_OP_VALID)
- 89a:	81 30       	cpi	r24, 0x01	; 1
- 89c:	69 f4       	brne	.+26     	; 0x8b8 <Smart_Home_Process_N_Respond+0x3a>
+ 928:	81 30       	cpi	r24, 0x01	; 1
+ 92a:	51 f4       	brne	.+20     	; 0x940 <Smart_Home_Process_N_Respond+0x34>
 	{
 		Device_Apply_Request(Selected_Device,Selected_Operation);
- 89e:	60 91 48 03 	lds	r22, 0x0348	; 0x800348 <__data_end>
- 8a2:	80 91 49 03 	lds	r24, 0x0349	; 0x800349 <Selected_Device>
- 8a6:	0e 94 88 01 	call	0x310	; 0x310 <Device_Apply_Request>
+ 92c:	60 91 7a 03 	lds	r22, 0x037A	; 0x80037a <__data_end>
+ 930:	80 91 7b 03 	lds	r24, 0x037B	; 0x80037b <Selected_Device>
+ 934:	0e 94 c5 01 	call	0x38a	; 0x38a <Device_Apply_Request>
 		
 		Status_Disp_LCD(LCD_ROW_TXT_REQUEST,LCD_ROW_TXT_DONE);
- 8aa:	68 e2       	ldi	r22, 0x28	; 40
- 8ac:	8a e2       	ldi	r24, 0x2A	; 42
- 8ae:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
-		
-		Selection_Validity = REQ_DONE;
- 8b2:	88 e0       	ldi	r24, 0x08	; 8
- 8b4:	89 83       	std	Y+1, r24	; 0x01
- 8b6:	07 c0       	rjmp	.+14     	; 0x8c6 <Smart_Home_Process_N_Respond+0x48>
+ 938:	68 e2       	ldi	r22, 0x28	; 40
+ 93a:	8a e2       	ldi	r24, 0x2A	; 42
+ 93c:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 	}
-	else if(Selection_Validity == DEV_INVALID)
- 8b8:	83 30       	cpi	r24, 0x03	; 3
- 8ba:	19 f4       	brne	.+6      	; 0x8c2 <Smart_Home_Process_N_Respond+0x44>
-		Selection_Validity = INV_DEV_SEL;
- 8bc:	8a e0       	ldi	r24, 0x0A	; 10
- 8be:	89 83       	std	Y+1, r24	; 0x01
- 8c0:	02 c0       	rjmp	.+4      	; 0x8c6 <Smart_Home_Process_N_Respond+0x48>
-	else
-		Selection_Validity = INV_OP_SEL;
- 8c2:	8b e0       	ldi	r24, 0x0B	; 11
- 8c4:	89 83       	std	Y+1, r24	; 0x01
-	
 	Comm_Bridge_CMD_Res(&Selection_Validity);
- 8c6:	ce 01       	movw	r24, r28
- 8c8:	01 96       	adiw	r24, 0x01	; 1
- 8ca:	0e 94 dd 00 	call	0x1ba	; 0x1ba <Comm_Bridge_CMD_Res>
+ 940:	ce 01       	movw	r24, r28
+ 942:	01 96       	adiw	r24, 0x01	; 1
+ 944:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <Comm_Bridge_CMD_Res>
+	if(Selection_Validity == OUT_OF_SYNC)
+ 948:	89 81       	ldd	r24, Y+1	; 0x01
+ 94a:	83 31       	cpi	r24, 0x13	; 19
+ 94c:	11 f4       	brne	.+4      	; 0x952 <Smart_Home_Process_N_Respond+0x46>
+	{
+		Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
+ 94e:	80 93 78 00 	sts	0x0078, r24	; 0x800078 <Smart_Home_Sys_Sync_Flag>
+	}
 }
- 8ce:	0f 90       	pop	r0
- 8d0:	df 91       	pop	r29
- 8d2:	cf 91       	pop	r28
- 8d4:	08 95       	ret
+ 952:	0f 90       	pop	r0
+ 954:	df 91       	pop	r29
+ 956:	cf 91       	pop	r28
+ 958:	08 95       	ret
 
-000008d6 <Smart_Home_Init>:
+0000095a <Smart_Home_Init>:
 #endif /* ECU_ROLE */
 
 
 void Smart_Home_Init(void)
 {
 	Status_FollowUp_Init();
- 8d6:	0e 94 c9 04 	call	0x992	; 0x992 <Status_FollowUp_Init>
+ 95a:	0e 94 ec 04 	call	0x9d8	; 0x9d8 <Status_FollowUp_Init>
 		Status_Disp_LCD(LCD_ROW_TXT_CONTROL_SYSTEM,LCD_ROW_TXT_READY);
 		
 	#elif ECU_ROLE == ACTUATOR_ECU
 		
 		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_STARTING);
- 8da:	6b e0       	ldi	r22, 0x0B	; 11
- 8dc:	85 e2       	ldi	r24, 0x25	; 37
- 8de:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
+ 95e:	6b e0       	ldi	r22, 0x0B	; 11
+ 960:	85 e2       	ldi	r24, 0x25	; 37
+ 962:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
 		
 		Devices_Init();
- 8e2:	0e 94 28 01 	call	0x250	; 0x250 <Devices_Init>
+ 966:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <Devices_Init>
 		
 		Comm_Bridge_Init();
- 8e6:	0e 94 ae 00 	call	0x15c	; 0x15c <Comm_Bridge_Init>
+ 96a:	0e 94 90 00 	call	0x120	; 0x120 <Comm_Bridge_Init>
 		
 		Status_Disp_LCD(LCD_ROW_TXT_ACTUATOR_SYSTEM,LCD_ROW_TXT_READY);
- 8ea:	6e e1       	ldi	r22, 0x1E	; 30
- 8ec:	85 e2       	ldi	r24, 0x25	; 37
- 8ee:	0e 94 cc 04 	call	0x998	; 0x998 <Status_Disp_LCD>
- 8f2:	08 95       	ret
+ 96e:	6e e1       	ldi	r22, 0x1E	; 30
+ 970:	85 e2       	ldi	r24, 0x25	; 37
+ 972:	0e 94 ef 04 	call	0x9de	; 0x9de <Status_Disp_LCD>
+ 976:	08 95       	ret
 
-000008f4 <Smart_Home_Run>:
+00000978 <Smart_Home_Run>:
+		
+	#endif /* ECU_ROLE */
+}
+void Smart_Home_Run(void)
 {
-	#if ECU_ROLE == CONTROL_ECU
-		Smart_Home_User_Selection();
-		Smart_Home_Process_N_Respond();
+	if(Smart_Home_Sys_Sync_Flag == OUT_OF_SYNC)
+ 978:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <Smart_Home_Sys_Sync_Flag>
+ 97c:	83 31       	cpi	r24, 0x13	; 19
+ 97e:	11 f4       	brne	.+4      	; 0x984 <Smart_Home_Run+0xc>
+	{
+		// Force sync on CMD_Bus by NUM_OF_RESYNC_HANDSHAKES consecutive successfull handshakes.
+		Comm_Bridge_CMD_Bus_Re_Sync();
+ 980:	0e 94 3f 01 	call	0x27e	; 0x27e <Comm_Bridge_CMD_Bus_Re_Sync>
+		if(Smart_Home_Sys_Sync_Flag == IN_SYNC)
+		{
+			Smart_Home_Process_N_Respond();
+		}
 	#elif ECU_ROLE == ACTUATOR_ECU
 		Smart_Home_Read_N_Decode();
- 8f4:	0e 94 2c 04 	call	0x858	; 0x858 <Smart_Home_Read_N_Decode>
-		Smart_Home_Process_N_Respond();
- 8f8:	0e 94 3f 04 	call	0x87e	; 0x87e <Smart_Home_Process_N_Respond>
- 8fc:	08 95       	ret
+ 984:	0e 94 69 04 	call	0x8d2	; 0x8d2 <Smart_Home_Read_N_Decode>
+		if(Smart_Home_Sys_Sync_Flag == IN_SYNC)
+ 988:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <Smart_Home_Sys_Sync_Flag>
+ 98c:	84 31       	cpi	r24, 0x14	; 20
+ 98e:	11 f4       	brne	.+4      	; 0x994 <Smart_Home_Run+0x1c>
+		{
+			Smart_Home_Process_N_Respond();
+ 990:	0e 94 86 04 	call	0x90c	; 0x90c <Smart_Home_Process_N_Respond>
+ 994:	08 95       	ret
 
-000008fe <SPI_Master_InitTrans>:
-}
-
-void SPI_Master_InitTrans(void)
-{
-	// Clear the SS to have the slaves ready to receive data
-	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_LOW);
- 8fe:	40 e0       	ldi	r20, 0x00	; 0
- 900:	64 e0       	ldi	r22, 0x04	; 4
- 902:	86 e3       	ldi	r24, 0x36	; 54
- 904:	90 e0       	ldi	r25, 0x00	; 0
- 906:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 90a:	2f ef       	ldi	r18, 0xFF	; 255
- 90c:	86 e7       	ldi	r24, 0x76	; 118
- 90e:	91 e0       	ldi	r25, 0x01	; 1
- 910:	21 50       	subi	r18, 0x01	; 1
- 912:	80 40       	sbci	r24, 0x00	; 0
- 914:	90 40       	sbci	r25, 0x00	; 0
- 916:	e1 f7       	brne	.-8      	; 0x910 <SPI_Master_InitTrans+0x12>
- 918:	00 c0       	rjmp	.+0      	; 0x91a <SPI_Master_InitTrans+0x1c>
- 91a:	00 00       	nop
- 91c:	08 95       	ret
-
-0000091e <SPI_Master_TermTrans>:
-}
-
-void SPI_Master_TermTrans(void)
-{
-	// Set SS to terminate transmission to slaves
-	DIO_SetPinValue(SPI_PORT,SPI_SS_PIN,DIO_PIN_HIGH);
- 91e:	41 e0       	ldi	r20, 0x01	; 1
- 920:	64 e0       	ldi	r22, 0x04	; 4
- 922:	86 e3       	ldi	r24, 0x36	; 54
- 924:	90 e0       	ldi	r25, 0x00	; 0
- 926:	0e 94 20 02 	call	0x440	; 0x440 <DIO_SetPinValue>
- 92a:	08 95       	ret
-
-0000092c <SPI_Transiver>:
-}
-
-uint8 SPI_Transiver(uint8 data)
-{
- 92c:	cf 93       	push	r28
- 92e:	c8 2f       	mov	r28, r24
-	uint8 Received_Data = 0;
-	uint16 Trans_N_Started_counter = 1;
-	
-	#if SPI_ROLE == SPI_MASTER
-		// Clear SS Pin to start transmission
-		SPI_Master_InitTrans();
- 930:	0e 94 7f 04 	call	0x8fe	; 0x8fe <SPI_Master_InitTrans>
+00000996 <SPI_Transiver>:
 		
-		// write to SPDR of the Master to start the transmission and clock
-		SPI->SPDR = data;
- 934:	cf b9       	out	0x0f, r28	; 15
-}
-
-uint8 SPI_Transiver(uint8 data)
-{
-	uint8 Received_Data = 0;
-	uint16 Trans_N_Started_counter = 1;
- 936:	81 e0       	ldi	r24, 0x01	; 1
- 938:	90 e0       	ldi	r25, 0x00	; 0
-		SPI_Master_InitTrans();
-		
-		// write to SPDR of the Master to start the transmission and clock
-		SPI->SPDR = data;
-		
-		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
- 93a:	01 c0       	rjmp	.+2      	; 0x93e <SPI_Transiver+0x12>
-			Trans_N_Started_counter++;
- 93c:	01 96       	adiw	r24, 0x01	; 1
-		SPI_Master_InitTrans();
-		
-		// write to SPDR of the Master to start the transmission and clock
-		SPI->SPDR = data;
-		
-		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
- 93e:	77 99       	sbic	0x0e, 7	; 14
- 940:	02 c0       	rjmp	.+4      	; 0x946 <SPI_Transiver+0x1a>
- 942:	00 97       	sbiw	r24, 0x00	; 0
- 944:	d9 f7       	brne	.-10     	; 0x93c <SPI_Transiver+0x10>
-			Trans_N_Started_counter++;
-		if(Trans_N_Started_counter == 0)
- 946:	89 2b       	or	r24, r25
- 948:	11 f0       	breq	.+4      	; 0x94e <SPI_Transiver+0x22>
-			Received_Data = TRANS_FAILED;
-		else
-			Received_Data = SPI->SPDR;
- 94a:	cf b1       	in	r28, 0x0f	; 15
- 94c:	01 c0       	rjmp	.+2      	; 0x950 <SPI_Transiver+0x24>
-		SPI->SPDR = data;
-		
-		while((GetBit(SPI->SPSR,SPIF) == 0) && (Trans_N_Started_counter != 0))
-			Trans_N_Started_counter++;
-		if(Trans_N_Started_counter == 0)
-			Received_Data = TRANS_FAILED;
- 94e:	c0 e0       	ldi	r28, 0x00	; 0
-		else
-			Received_Data = SPI->SPDR;
+		Received_Data = SPI->SPDR;
 
 		SPI_Master_TermTrans();
- 950:	0e 94 8f 04 	call	0x91e	; 0x91e <SPI_Master_TermTrans>
-			Received_Data = TRANS_FAILED;
-		else
-			Received_Data = SPI->SPDR;
+	#elif SPI_ROLE == SPI_SLAVE
+		SPI->SPDR = data;
+ 996:	8f b9       	out	0x0f, r24	; 15
+		
+		while(GetBit(SPI->SPSR,SPIF) == 0);
+ 998:	77 9b       	sbis	0x0e, 7	; 14
+ 99a:	fe cf       	rjmp	.-4      	; 0x998 <SPI_Transiver+0x2>
+
+		Received_Data = SPI->SPDR;
+ 99c:	8f b1       	in	r24, 0x0f	; 15
 	#endif /* SPI_ROLE */
 	return Received_Data;
 }
- 954:	8c 2f       	mov	r24, r28
- 956:	cf 91       	pop	r28
- 958:	08 95       	ret
+ 99e:	08 95       	ret
 
-0000095a <SPI_Slave_Init>:
+000009a0 <SPI_Slave_Init>:
 
 void SPI_Slave_Init(void)
 {
 	//MISO
 	DIO_SetPinDir(SPI_PORT,SPI_MISO_PIN,DIO_PIN_OUTPUT);
- 95a:	41 e0       	ldi	r20, 0x01	; 1
- 95c:	66 e0       	ldi	r22, 0x06	; 6
- 95e:	86 e3       	ldi	r24, 0x36	; 54
- 960:	90 e0       	ldi	r25, 0x00	; 0
- 962:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 9a0:	41 e0       	ldi	r20, 0x01	; 1
+ 9a2:	66 e0       	ldi	r22, 0x06	; 6
+ 9a4:	86 e3       	ldi	r24, 0x36	; 54
+ 9a6:	90 e0       	ldi	r25, 0x00	; 0
+ 9a8:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	//MOSI
 	DIO_SetPinDir(SPI_PORT,SPI_MOSI_PIN,DIO_PIN_INPUT);
- 966:	40 e0       	ldi	r20, 0x00	; 0
- 968:	65 e0       	ldi	r22, 0x05	; 5
- 96a:	86 e3       	ldi	r24, 0x36	; 54
- 96c:	90 e0       	ldi	r25, 0x00	; 0
- 96e:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 9ac:	40 e0       	ldi	r20, 0x00	; 0
+ 9ae:	65 e0       	ldi	r22, 0x05	; 5
+ 9b0:	86 e3       	ldi	r24, 0x36	; 54
+ 9b2:	90 e0       	ldi	r25, 0x00	; 0
+ 9b4:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	//CLK
 	DIO_SetPinDir(SPI_PORT,SPI_CLK_PIN,DIO_PIN_INPUT);
- 972:	40 e0       	ldi	r20, 0x00	; 0
- 974:	67 e0       	ldi	r22, 0x07	; 7
- 976:	86 e3       	ldi	r24, 0x36	; 54
- 978:	90 e0       	ldi	r25, 0x00	; 0
- 97a:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 9b8:	40 e0       	ldi	r20, 0x00	; 0
+ 9ba:	67 e0       	ldi	r22, 0x07	; 7
+ 9bc:	86 e3       	ldi	r24, 0x36	; 54
+ 9be:	90 e0       	ldi	r25, 0x00	; 0
+ 9c0:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	//SS
 	DIO_SetPinDir(SPI_PORT,SPI_SS_PIN,DIO_PIN_INPUT);
- 97e:	40 e0       	ldi	r20, 0x00	; 0
- 980:	64 e0       	ldi	r22, 0x04	; 4
- 982:	86 e3       	ldi	r24, 0x36	; 54
- 984:	90 e0       	ldi	r25, 0x00	; 0
- 986:	0e 94 04 02 	call	0x408	; 0x408 <DIO_SetPinDir>
+ 9c4:	40 e0       	ldi	r20, 0x00	; 0
+ 9c6:	64 e0       	ldi	r22, 0x04	; 4
+ 9c8:	86 e3       	ldi	r24, 0x36	; 54
+ 9ca:	90 e0       	ldi	r25, 0x00	; 0
+ 9cc:	0e 94 41 02 	call	0x482	; 0x482 <DIO_SetPinDir>
 	
 	// Enable SPI Peripheral & Set the polarity of the transmission to setup then sample
 	SPI->SPCR |= (1<<SPE) | (1<<CPHA);
- 98a:	8d b1       	in	r24, 0x0d	; 13
- 98c:	84 64       	ori	r24, 0x44	; 68
- 98e:	8d b9       	out	0x0d, r24	; 13
- 990:	08 95       	ret
+ 9d0:	8d b1       	in	r24, 0x0d	; 13
+ 9d2:	84 64       	ori	r24, 0x44	; 68
+ 9d4:	8d b9       	out	0x0d, r24	; 13
+ 9d6:	08 95       	ret
 
-00000992 <Status_FollowUp_Init>:
-    "Invalid Operation Requested!"
+000009d8 <Status_FollowUp_Init>:
+    '\0'
 };
 
 void Status_FollowUp_Init(void)
 {
     LCD_Init();
- 992:	0e 94 96 02 	call	0x52c	; 0x52c <LCD_Init>
- 996:	08 95       	ret
+ 9d8:	0e 94 d3 02 	call	0x5a6	; 0x5a6 <LCD_Init>
+ 9dc:	08 95       	ret
 
-00000998 <Status_Disp_LCD>:
+000009de <Status_Disp_LCD>:
 }
 void Status_Disp_LCD(uint8 R1_Text_Index, uint8 R2_Text_Index)
 {
- 998:	cf 93       	push	r28
- 99a:	df 93       	push	r29
- 99c:	d8 2f       	mov	r29, r24
- 99e:	c6 2f       	mov	r28, r22
+ 9de:	cf 93       	push	r28
+ 9e0:	df 93       	push	r29
+ 9e2:	d8 2f       	mov	r29, r24
+ 9e4:	c6 2f       	mov	r28, r22
     LCD_Clear();
- 9a0:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <LCD_Clear>
+ 9e6:	0e 94 0f 04 	call	0x81e	; 0x81e <LCD_Clear>
     LCD_WriteString(LCD_Row_Text_Options[R1_Text_Index]);
- 9a4:	20 e1       	ldi	r18, 0x10	; 16
- 9a6:	d2 9f       	mul	r29, r18
- 9a8:	c0 01       	movw	r24, r0
- 9aa:	11 24       	eor	r1, r1
- 9ac:	88 58       	subi	r24, 0x88	; 136
- 9ae:	9f 4f       	sbci	r25, 0xFF	; 255
- 9b0:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
+ 9ea:	20 e1       	ldi	r18, 0x10	; 16
+ 9ec:	d2 9f       	mul	r29, r18
+ 9ee:	c0 01       	movw	r24, r0
+ 9f0:	11 24       	eor	r1, r1
+ 9f2:	87 58       	subi	r24, 0x87	; 135
+ 9f4:	9f 4f       	sbci	r25, 0xFF	; 255
+ 9f6:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <LCD_WriteString>
     LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
- 9b4:	60 e0       	ldi	r22, 0x00	; 0
- 9b6:	81 e0       	ldi	r24, 0x01	; 1
- 9b8:	0e 94 ba 03 	call	0x774	; 0x774 <LCD_GoToLocation>
+ 9fa:	60 e0       	ldi	r22, 0x00	; 0
+ 9fc:	81 e0       	ldi	r24, 0x01	; 1
+ 9fe:	0e 94 f7 03 	call	0x7ee	; 0x7ee <LCD_GoToLocation>
     LCD_WriteString(LCD_Row_Text_Options[R2_Text_Index]);
- 9bc:	20 e1       	ldi	r18, 0x10	; 16
- 9be:	c2 9f       	mul	r28, r18
- 9c0:	c0 01       	movw	r24, r0
- 9c2:	11 24       	eor	r1, r1
- 9c4:	88 58       	subi	r24, 0x88	; 136
- 9c6:	9f 4f       	sbci	r25, 0xFF	; 255
- 9c8:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
- 9cc:	8f ef       	ldi	r24, 0xFF	; 255
- 9ce:	96 e1       	ldi	r25, 0x16	; 22
- 9d0:	21 e1       	ldi	r18, 0x11	; 17
- 9d2:	81 50       	subi	r24, 0x01	; 1
- 9d4:	90 40       	sbci	r25, 0x00	; 0
- 9d6:	20 40       	sbci	r18, 0x00	; 0
- 9d8:	e1 f7       	brne	.-8      	; 0x9d2 <Status_Disp_LCD+0x3a>
- 9da:	00 c0       	rjmp	.+0      	; 0x9dc <Status_Disp_LCD+0x44>
- 9dc:	00 00       	nop
+ a02:	20 e1       	ldi	r18, 0x10	; 16
+ a04:	c2 9f       	mul	r28, r18
+ a06:	c0 01       	movw	r24, r0
+ a08:	11 24       	eor	r1, r1
+ a0a:	87 58       	subi	r24, 0x87	; 135
+ a0c:	9f 4f       	sbci	r25, 0xFF	; 255
+ a0e:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <LCD_WriteString>
+ a12:	8f ef       	ldi	r24, 0xFF	; 255
+ a14:	94 e3       	ldi	r25, 0x34	; 52
+ a16:	2c e0       	ldi	r18, 0x0C	; 12
+ a18:	81 50       	subi	r24, 0x01	; 1
+ a1a:	90 40       	sbci	r25, 0x00	; 0
+ a1c:	20 40       	sbci	r18, 0x00	; 0
+ a1e:	e1 f7       	brne	.-8      	; 0xa18 <Status_Disp_LCD+0x3a>
+ a20:	00 c0       	rjmp	.+0      	; 0xa22 <Status_Disp_LCD+0x44>
+ a22:	00 00       	nop
     _delay_ms(LCD_DISP_DELAY_MS);
 }
- 9de:	df 91       	pop	r29
- 9e0:	cf 91       	pop	r28
- 9e2:	08 95       	ret
+ a24:	df 91       	pop	r29
+ a26:	cf 91       	pop	r28
+ a28:	08 95       	ret
 
-000009e4 <Status_Disp_LCD_IncludeInteger>:
+00000a2a <Status_Disp_LCD_IncludeInteger>:
 void Status_Disp_LCD_IncludeInteger(uint8 R1_Text_Index,uint8 Integer_Number, uint8 R2_Text_Index)
 {
- 9e4:	1f 93       	push	r17
- 9e6:	cf 93       	push	r28
- 9e8:	df 93       	push	r29
- 9ea:	18 2f       	mov	r17, r24
- 9ec:	d6 2f       	mov	r29, r22
- 9ee:	c4 2f       	mov	r28, r20
+ a2a:	1f 93       	push	r17
+ a2c:	cf 93       	push	r28
+ a2e:	df 93       	push	r29
+ a30:	18 2f       	mov	r17, r24
+ a32:	d6 2f       	mov	r29, r22
+ a34:	c4 2f       	mov	r28, r20
     LCD_Clear();
- 9f0:	0e 94 d2 03 	call	0x7a4	; 0x7a4 <LCD_Clear>
+ a36:	0e 94 0f 04 	call	0x81e	; 0x81e <LCD_Clear>
 	LCD_WriteString(LCD_Row_Text_Options[R1_Text_Index]);
- 9f4:	20 e1       	ldi	r18, 0x10	; 16
- 9f6:	12 9f       	mul	r17, r18
- 9f8:	c0 01       	movw	r24, r0
- 9fa:	11 24       	eor	r1, r1
- 9fc:	88 58       	subi	r24, 0x88	; 136
- 9fe:	9f 4f       	sbci	r25, 0xFF	; 255
- a00:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
+ a3a:	20 e1       	ldi	r18, 0x10	; 16
+ a3c:	12 9f       	mul	r17, r18
+ a3e:	c0 01       	movw	r24, r0
+ a40:	11 24       	eor	r1, r1
+ a42:	87 58       	subi	r24, 0x87	; 135
+ a44:	9f 4f       	sbci	r25, 0xFF	; 255
+ a46:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <LCD_WriteString>
 	LCD_WriteInteger(Integer_Number);
- a04:	6d 2f       	mov	r22, r29
- a06:	70 e0       	ldi	r23, 0x00	; 0
- a08:	80 e0       	ldi	r24, 0x00	; 0
- a0a:	90 e0       	ldi	r25, 0x00	; 0
- a0c:	0e 94 2d 03 	call	0x65a	; 0x65a <LCD_WriteInteger>
+ a4a:	6d 2f       	mov	r22, r29
+ a4c:	70 e0       	ldi	r23, 0x00	; 0
+ a4e:	80 e0       	ldi	r24, 0x00	; 0
+ a50:	90 e0       	ldi	r25, 0x00	; 0
+ a52:	0e 94 6a 03 	call	0x6d4	; 0x6d4 <LCD_WriteInteger>
 	LCD_GoToLocation(LCD_ROW_2,0*LCD_SHIFT_CURSOR);
- a10:	60 e0       	ldi	r22, 0x00	; 0
- a12:	81 e0       	ldi	r24, 0x01	; 1
- a14:	0e 94 ba 03 	call	0x774	; 0x774 <LCD_GoToLocation>
+ a56:	60 e0       	ldi	r22, 0x00	; 0
+ a58:	81 e0       	ldi	r24, 0x01	; 1
+ a5a:	0e 94 f7 03 	call	0x7ee	; 0x7ee <LCD_GoToLocation>
 	LCD_WriteString(LCD_Row_Text_Options[R2_Text_Index]);
- a18:	20 e1       	ldi	r18, 0x10	; 16
- a1a:	c2 9f       	mul	r28, r18
- a1c:	c0 01       	movw	r24, r0
- a1e:	11 24       	eor	r1, r1
- a20:	88 58       	subi	r24, 0x88	; 136
- a22:	9f 4f       	sbci	r25, 0xFF	; 255
- a24:	0e 94 a7 03 	call	0x74e	; 0x74e <LCD_WriteString>
- a28:	8f ef       	ldi	r24, 0xFF	; 255
- a2a:	96 e1       	ldi	r25, 0x16	; 22
- a2c:	21 e1       	ldi	r18, 0x11	; 17
- a2e:	81 50       	subi	r24, 0x01	; 1
- a30:	90 40       	sbci	r25, 0x00	; 0
- a32:	20 40       	sbci	r18, 0x00	; 0
- a34:	e1 f7       	brne	.-8      	; 0xa2e <Status_Disp_LCD_IncludeInteger+0x4a>
- a36:	00 c0       	rjmp	.+0      	; 0xa38 <Status_Disp_LCD_IncludeInteger+0x54>
- a38:	00 00       	nop
+ a5e:	20 e1       	ldi	r18, 0x10	; 16
+ a60:	c2 9f       	mul	r28, r18
+ a62:	c0 01       	movw	r24, r0
+ a64:	11 24       	eor	r1, r1
+ a66:	87 58       	subi	r24, 0x87	; 135
+ a68:	9f 4f       	sbci	r25, 0xFF	; 255
+ a6a:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <LCD_WriteString>
+ a6e:	8f ef       	ldi	r24, 0xFF	; 255
+ a70:	94 e3       	ldi	r25, 0x34	; 52
+ a72:	2c e0       	ldi	r18, 0x0C	; 12
+ a74:	81 50       	subi	r24, 0x01	; 1
+ a76:	90 40       	sbci	r25, 0x00	; 0
+ a78:	20 40       	sbci	r18, 0x00	; 0
+ a7a:	e1 f7       	brne	.-8      	; 0xa74 <Status_Disp_LCD_IncludeInteger+0x4a>
+ a7c:	00 c0       	rjmp	.+0      	; 0xa7e <Status_Disp_LCD_IncludeInteger+0x54>
+ a7e:	00 00       	nop
 	_delay_ms(LCD_DISP_DELAY_MS);
 }
- a3a:	df 91       	pop	r29
- a3c:	cf 91       	pop	r28
- a3e:	1f 91       	pop	r17
- a40:	08 95       	ret
+ a80:	df 91       	pop	r29
+ a82:	cf 91       	pop	r28
+ a84:	1f 91       	pop	r17
+ a86:	08 95       	ret
 
-00000a42 <__divmodsi4>:
- a42:	05 2e       	mov	r0, r21
- a44:	97 fb       	bst	r25, 7
- a46:	1e f4       	brtc	.+6      	; 0xa4e <__divmodsi4+0xc>
- a48:	00 94       	com	r0
- a4a:	0e 94 38 05 	call	0xa70	; 0xa70 <__negsi2>
- a4e:	57 fd       	sbrc	r21, 7
- a50:	07 d0       	rcall	.+14     	; 0xa60 <__divmodsi4_neg2>
- a52:	0e 94 4f 05 	call	0xa9e	; 0xa9e <__udivmodsi4>
- a56:	07 fc       	sbrc	r0, 7
- a58:	03 d0       	rcall	.+6      	; 0xa60 <__divmodsi4_neg2>
- a5a:	4e f4       	brtc	.+18     	; 0xa6e <__divmodsi4_exit>
- a5c:	0c 94 38 05 	jmp	0xa70	; 0xa70 <__negsi2>
+00000a88 <__divmodsi4>:
+ a88:	05 2e       	mov	r0, r21
+ a8a:	97 fb       	bst	r25, 7
+ a8c:	1e f4       	brtc	.+6      	; 0xa94 <__divmodsi4+0xc>
+ a8e:	00 94       	com	r0
+ a90:	0e 94 5b 05 	call	0xab6	; 0xab6 <__negsi2>
+ a94:	57 fd       	sbrc	r21, 7
+ a96:	07 d0       	rcall	.+14     	; 0xaa6 <__divmodsi4_neg2>
+ a98:	0e 94 72 05 	call	0xae4	; 0xae4 <__udivmodsi4>
+ a9c:	07 fc       	sbrc	r0, 7
+ a9e:	03 d0       	rcall	.+6      	; 0xaa6 <__divmodsi4_neg2>
+ aa0:	4e f4       	brtc	.+18     	; 0xab4 <__divmodsi4_exit>
+ aa2:	0c 94 5b 05 	jmp	0xab6	; 0xab6 <__negsi2>
 
-00000a60 <__divmodsi4_neg2>:
- a60:	50 95       	com	r21
- a62:	40 95       	com	r20
- a64:	30 95       	com	r19
- a66:	21 95       	neg	r18
- a68:	3f 4f       	sbci	r19, 0xFF	; 255
- a6a:	4f 4f       	sbci	r20, 0xFF	; 255
- a6c:	5f 4f       	sbci	r21, 0xFF	; 255
+00000aa6 <__divmodsi4_neg2>:
+ aa6:	50 95       	com	r21
+ aa8:	40 95       	com	r20
+ aaa:	30 95       	com	r19
+ aac:	21 95       	neg	r18
+ aae:	3f 4f       	sbci	r19, 0xFF	; 255
+ ab0:	4f 4f       	sbci	r20, 0xFF	; 255
+ ab2:	5f 4f       	sbci	r21, 0xFF	; 255
 
-00000a6e <__divmodsi4_exit>:
- a6e:	08 95       	ret
+00000ab4 <__divmodsi4_exit>:
+ ab4:	08 95       	ret
 
-00000a70 <__negsi2>:
- a70:	90 95       	com	r25
- a72:	80 95       	com	r24
- a74:	70 95       	com	r23
- a76:	61 95       	neg	r22
- a78:	7f 4f       	sbci	r23, 0xFF	; 255
- a7a:	8f 4f       	sbci	r24, 0xFF	; 255
- a7c:	9f 4f       	sbci	r25, 0xFF	; 255
- a7e:	08 95       	ret
+00000ab6 <__negsi2>:
+ ab6:	90 95       	com	r25
+ ab8:	80 95       	com	r24
+ aba:	70 95       	com	r23
+ abc:	61 95       	neg	r22
+ abe:	7f 4f       	sbci	r23, 0xFF	; 255
+ ac0:	8f 4f       	sbci	r24, 0xFF	; 255
+ ac2:	9f 4f       	sbci	r25, 0xFF	; 255
+ ac4:	08 95       	ret
 
-00000a80 <__umulhisi3>:
- a80:	a2 9f       	mul	r26, r18
- a82:	b0 01       	movw	r22, r0
- a84:	b3 9f       	mul	r27, r19
- a86:	c0 01       	movw	r24, r0
- a88:	a3 9f       	mul	r26, r19
- a8a:	70 0d       	add	r23, r0
- a8c:	81 1d       	adc	r24, r1
- a8e:	11 24       	eor	r1, r1
- a90:	91 1d       	adc	r25, r1
- a92:	b2 9f       	mul	r27, r18
- a94:	70 0d       	add	r23, r0
- a96:	81 1d       	adc	r24, r1
- a98:	11 24       	eor	r1, r1
- a9a:	91 1d       	adc	r25, r1
- a9c:	08 95       	ret
+00000ac6 <__umulhisi3>:
+ ac6:	a2 9f       	mul	r26, r18
+ ac8:	b0 01       	movw	r22, r0
+ aca:	b3 9f       	mul	r27, r19
+ acc:	c0 01       	movw	r24, r0
+ ace:	a3 9f       	mul	r26, r19
+ ad0:	70 0d       	add	r23, r0
+ ad2:	81 1d       	adc	r24, r1
+ ad4:	11 24       	eor	r1, r1
+ ad6:	91 1d       	adc	r25, r1
+ ad8:	b2 9f       	mul	r27, r18
+ ada:	70 0d       	add	r23, r0
+ adc:	81 1d       	adc	r24, r1
+ ade:	11 24       	eor	r1, r1
+ ae0:	91 1d       	adc	r25, r1
+ ae2:	08 95       	ret
 
-00000a9e <__udivmodsi4>:
- a9e:	a1 e2       	ldi	r26, 0x21	; 33
- aa0:	1a 2e       	mov	r1, r26
- aa2:	aa 1b       	sub	r26, r26
- aa4:	bb 1b       	sub	r27, r27
- aa6:	fd 01       	movw	r30, r26
- aa8:	0d c0       	rjmp	.+26     	; 0xac4 <__udivmodsi4_ep>
+00000ae4 <__udivmodsi4>:
+ ae4:	a1 e2       	ldi	r26, 0x21	; 33
+ ae6:	1a 2e       	mov	r1, r26
+ ae8:	aa 1b       	sub	r26, r26
+ aea:	bb 1b       	sub	r27, r27
+ aec:	fd 01       	movw	r30, r26
+ aee:	0d c0       	rjmp	.+26     	; 0xb0a <__udivmodsi4_ep>
 
-00000aaa <__udivmodsi4_loop>:
- aaa:	aa 1f       	adc	r26, r26
- aac:	bb 1f       	adc	r27, r27
- aae:	ee 1f       	adc	r30, r30
- ab0:	ff 1f       	adc	r31, r31
- ab2:	a2 17       	cp	r26, r18
- ab4:	b3 07       	cpc	r27, r19
- ab6:	e4 07       	cpc	r30, r20
- ab8:	f5 07       	cpc	r31, r21
- aba:	20 f0       	brcs	.+8      	; 0xac4 <__udivmodsi4_ep>
- abc:	a2 1b       	sub	r26, r18
- abe:	b3 0b       	sbc	r27, r19
- ac0:	e4 0b       	sbc	r30, r20
- ac2:	f5 0b       	sbc	r31, r21
+00000af0 <__udivmodsi4_loop>:
+ af0:	aa 1f       	adc	r26, r26
+ af2:	bb 1f       	adc	r27, r27
+ af4:	ee 1f       	adc	r30, r30
+ af6:	ff 1f       	adc	r31, r31
+ af8:	a2 17       	cp	r26, r18
+ afa:	b3 07       	cpc	r27, r19
+ afc:	e4 07       	cpc	r30, r20
+ afe:	f5 07       	cpc	r31, r21
+ b00:	20 f0       	brcs	.+8      	; 0xb0a <__udivmodsi4_ep>
+ b02:	a2 1b       	sub	r26, r18
+ b04:	b3 0b       	sbc	r27, r19
+ b06:	e4 0b       	sbc	r30, r20
+ b08:	f5 0b       	sbc	r31, r21
 
-00000ac4 <__udivmodsi4_ep>:
- ac4:	66 1f       	adc	r22, r22
- ac6:	77 1f       	adc	r23, r23
- ac8:	88 1f       	adc	r24, r24
- aca:	99 1f       	adc	r25, r25
- acc:	1a 94       	dec	r1
- ace:	69 f7       	brne	.-38     	; 0xaaa <__udivmodsi4_loop>
- ad0:	60 95       	com	r22
- ad2:	70 95       	com	r23
- ad4:	80 95       	com	r24
- ad6:	90 95       	com	r25
- ad8:	9b 01       	movw	r18, r22
- ada:	ac 01       	movw	r20, r24
- adc:	bd 01       	movw	r22, r26
- ade:	cf 01       	movw	r24, r30
- ae0:	08 95       	ret
+00000b0a <__udivmodsi4_ep>:
+ b0a:	66 1f       	adc	r22, r22
+ b0c:	77 1f       	adc	r23, r23
+ b0e:	88 1f       	adc	r24, r24
+ b10:	99 1f       	adc	r25, r25
+ b12:	1a 94       	dec	r1
+ b14:	69 f7       	brne	.-38     	; 0xaf0 <__udivmodsi4_loop>
+ b16:	60 95       	com	r22
+ b18:	70 95       	com	r23
+ b1a:	80 95       	com	r24
+ b1c:	90 95       	com	r25
+ b1e:	9b 01       	movw	r18, r22
+ b20:	ac 01       	movw	r20, r24
+ b22:	bd 01       	movw	r22, r26
+ b24:	cf 01       	movw	r24, r30
+ b26:	08 95       	ret
 
-00000ae2 <_exit>:
- ae2:	f8 94       	cli
+00000b28 <_exit>:
+ b28:	f8 94       	cli
 
-00000ae4 <__stop_program>:
- ae4:	ff cf       	rjmp	.-2      	; 0xae4 <__stop_program>
+00000b2a <__stop_program>:
+ b2a:	ff cf       	rjmp	.-2      	; 0xb2a <__stop_program>

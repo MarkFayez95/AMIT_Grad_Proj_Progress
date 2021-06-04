@@ -6,9 +6,7 @@
  */ 
 
 #include "LCD.h"
-#include "Bluetooth_Mod.h"
 
-#define LCD_DISP_DELAY_MS    350
 #define LCD_DISP_ROW_WIDTH   16
 
 typedef uint8 LCD_Row_Text[LCD_DISP_ROW_WIDTH];
@@ -58,16 +56,12 @@ typedef enum {
     LCD_ROW_TXT_SELECTION_ERROR,
     LCD_ROW_TXT_REQUEST,
 	LCD_ROW_TXT_CTRL_ACT_SYSTEM,
+    LCD_ROW_TXT_SEND_B1_FAILED,
+    LCD_ROW_TXT_SEND_B2_FAILED,
+    LCD_ROW_TXT_SEND_CMD_FAILED,
     LCD_ROW_TXT_NONE
 } LCD_Row_Text_Index;
-
-typedef enum {
-    TXT_BT_REQUEST_DONE,
-    TXT_BT_INVALID_DEVICE_REQUESTED,
-    TXT_BT_INVALID_OPERATION_REQUESTED
-} BT_Text_Index;
 
 void Status_FollowUp_Init(void);
 void Status_Disp_LCD(uint8 R1_Text_Index, uint8 R2_Text_Index);
 void Status_Disp_LCD_IncludeInteger(uint8 R1_Text_Index,uint8 Integer_Number, uint8 R2_Text_Index);
-void Status_Send_BT(uint8 Text_Index);

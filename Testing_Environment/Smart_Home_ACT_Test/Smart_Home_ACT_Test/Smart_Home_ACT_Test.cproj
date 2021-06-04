@@ -175,15 +175,6 @@
     <Compile Include="DIO.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="EEPROM.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="EEPROM_CFG.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="I2C.c">
       <SubType>compile</SubType>
     </Compile>

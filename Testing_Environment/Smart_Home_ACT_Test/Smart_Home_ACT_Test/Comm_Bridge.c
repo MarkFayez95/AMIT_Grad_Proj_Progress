@@ -10,43 +10,57 @@
 #include "Status_FollowUp.h" 
 
 /*
- * Description: ...
- * Inputs: ...
- * Outputs: ...
- * Returns: ...
+ * Description: Initialize the Communication Bridge of the ECU depending on its role defined in the Sys_Config file
+ * Inputs: None
+ * Outputs: None
+ * Returns: None
  * Author: Mark Fayez
 **/
  void Comm_Bridge_Init(void)
  {
+    uint8 ECUs_Comm_State = FAILED_SEND;
+
     #if ECU_ROLE == CONTROL_ECU
-		Bluetooth_Mod_Init();
-		while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
-		{
-			// Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Not Connected'
-			Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_NOT_CONNECTED);
-		}
+		// Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Not Connected'
+		Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_NOT_CONNECTED);
+        
+        // Initialize the Bluetooth Module driver
+        Bluetooth_Mod_Init();
+		while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED);
 
 		// Comm_Bridge_Init :: Status LCD Display 'BT Peer' 'Paired'
 		Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_PAIRED);
 		
-		
+        // Initialize the CMD_Bus driver as Master
         CMD_Bus_Master_Init();
-        while(CMD_Bus_HandShake() == INVALID_PEER)
+
+        // Perform hanshake and hault on its status
+        ECUs_Comm_State = CMD_Bus_HandShake();
+        if( ECUs_Comm_State == INVALID_PEER)
         {
             // Comm_Bridge_Init :: Status LCD Display 'Control Bus' 'Invalid Peer'
             Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_PEER);
+
+            ECUs_Comm_State = CMD_Bus_HandShake();
         }
+        while(ECUs_Comm_State == INVALID_PEER); // loop till a valid CMD_Bus Slave Peer is detected.
 
         // Comm_Bridge_Init :: Status LCD Display 'Control Bus' 'Slave Ready'
         Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_SLAVE_READY);
-        
     #elif ECU_ROLE == ACTUATOR_ECU
+        // Initialize the CMD_Bus driver as Slave
         CMD_Bus_Slave_Init();
-        while(CMD_Bus_HandShake() == INVALID_PEER)
+
+        // Perform hanshake and hault on its status
+        ECUs_Comm_State = CMD_Bus_HandShake();
+        if(ECUs_Comm_State == INVALID_PEER)
         {
             // Comm_Bridge_Init :: Status LCD Display 'Control Bus' 'Invalid Peer'
             Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_PEER);
+
+            ECUs_Comm_State = CMD_Bus_HandShake();
         }
+        while(ECUs_Comm_State == INVALID_PEER); // loop till a valid CMD_Bus Master Peer is detected.
 
         // Comm_Bridge_Init :: Status LCD Display 'Control Bus' 'Master Ready'
         Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_MASTER_READY);
@@ -55,39 +69,40 @@
 
 
 /*
-* Description: ...
-* Inputs: ...
-* Outputs: ...
-* Returns: ...
+* Description: Reading command from Bluetooth user using Bluetooth_Mod Driver
+* Inputs: uint8* (Pointer to array of bytes to store the received command packet in it)
+* Outputs: The command data packet as array of bytes (uint8[])
+* Returns: None
 * Author: Mark Fayez
 */
 void Comm_Bridge_BT_Read(uint8* Command)
 {
 #if ECU_ROLE == CONTROL_ECU    
     uint8 Check_Valid_PUID = INVALID_ID;
-    while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
+    
+    if(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED)
     {
         // Status LCD Display 'BT Peer' 'Not Connected'
         Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_NOT_CONNECTED);
     }
+    while(Bluetooth_Mod_Ch_Pair() == BT_NOT_PAIRED);
 
     do 
     {
         // Comm_Bridge_BT_Read :: Status LCD Display "BT Peer Paired" "pending input"
         Status_Disp_LCD(LCD_ROW_TXT_BT_PEER_PAIRED,LCD_ROW_TXT_PENDING_INPUT);
 
+        // Read the command data stream/packet - from Bluetooth module - in the Command array of bytes
         Bluetooth_Mod_Seq_Rx(Command);
 
+        // check the packet for the Pin User Identifier if it matches the one in the config file defined be the Macro VALID_PUID
         if(Command[BT_PUID_BYTE] == VALID_PUID)
         {
-            Check_Valid_PUID = VALID_ID;
-            // Comm_Bridge_BT_Read :: Status LCD Display "Valid PUID" "Proceeding..."
-            Status_Disp_LCD(LCD_ROW_TXT_BT_PEER,LCD_ROW_TXT_VALID_PUID);
-            break;
+            Check_Valid_PUID = VALID_ID; // set check validity flag to Valid ID to break the loop
         }
         else
         {
-            Check_Valid_PUID = INVALID_ID;
+            Check_Valid_PUID = INVALID_ID; // set check validity flag to Valid ID to keep in loop reading new data from Bluetooth
             // Comm_Bridge_BT_Read :: Status LCD Display "Invalid PUID"
             Status_Disp_LCD(LCD_ROW_TXT_INVALID_PUID,LCD_ROW_TXT_NONE);
         }
@@ -107,10 +122,10 @@ void Comm_Bridge_BT_Read(uint8* Command)
 }
 
 /*
-* Description: ...
-* Inputs: ...
-* Outputs: ...
-* Returns: ...
+* Description: send response code to User's request through Bluetooth
+* Inputs: uint8 (The response code required to be sent)
+* Outputs: None
+* Returns: None
 * Author: Mark Fayez
 */
 void Comm_Bridge_BT_Send(uint8 Response)
@@ -124,7 +139,6 @@ void Comm_Bridge_BT_Send(uint8 Response)
     }
     else if(Response == INV_DEV_SEL)
     {
-      
         // Comm_Bridge_BT_Send :: Status LCD Display 'Send to BT Peer' 'Invalid Device!'
         Status_Disp_LCD(LCD_ROW_TXT_SENT_TO_BT_PEER, LCD_ROW_TXT_INVALID_DEVICE);
     }
@@ -137,10 +151,10 @@ void Comm_Bridge_BT_Send(uint8 Response)
 }
 
 /*
-* Description: ...
-* Inputs: ...
-* Outputs: ...
-* Returns: ...
+* Description: send a stream of bytes to user through Bluetooth Module (in case you want to send a specific message out of the designed codes that are decoded by the user's Application)
+* Inputs: uint8* (pointer to uint8 variable to point to an array of characters/bytes)
+* Outputs: None
+* Returns: None
 * Author: Mark Fayez
 */    
 void Comm_Bridge_BT_SendStream(uint8* data_stream)
@@ -153,223 +167,317 @@ void Comm_Bridge_BT_SendStream(uint8* data_stream)
 
 
 /*
-* Description: ...
-* Inputs: ...
-* Outputs: ...
-* Returns: ...
+* Description: Pass command/Request from CTRL to Actuator ECU and respond Acknowledgement on performing the required action.
+* Inputs: uint8* (Pointer to uint8 array that have the command bytes 1 or 2 bytes depending on Sys_Config file settings)
+* Outputs: The response from the peer regarding the validity of the request and the action taken if it was valid, it's added in the array.
+*           Exact codes of the response are decided by the devices manager module in the actuator system.
+* Returns: None
 * Author: Mark Fayez
 **/
-uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
+void Comm_Bridge_CMD_Req(uint8* Request_Command)
 {
 #if ECU_ROLE == CONTROL_ECU
-    uint8 ECUs_Comm_State = REQ_DROPPED;
+
+    uint8 ECUs_Comm_State = PEER_UNAVAILABLE;
+    uint8 Failed_Iteration_counter = 0;
+
     uint8 Ack_Validity = INVALID_ACK_RESPONSE;
     uint8 Ack_Response = INVALID_ACK_RESPONSE;
-    ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
-
-        ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
-        _delay_ms(CMD_FAILED_TRANS_REPEAT_DELAY_MS);
-    }
-    #if COMMAND_BYTE_LENGTH == 2
-    if(ECUs_Comm_State == READING)
-    {
-        ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE_2]);
-        while(ECUs_Comm_State == PEER_UNAVAILABLE)
+    
+    while(ECUs_Comm_State == SEND_FAILED)
+    { 
+		ECUs_Comm_State = CMD_Bus_HandShake();
+        if(ECUs_Comm_State == INVALID_PEER)
         {
             // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
             Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
 
-            ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE_2]);
-            _delay_ms(CMD_FAILED_TRANS_REPEAT_DELAY_MS);
+            ECUs_Comm_State = CMD_Bus_HandShake();
         }
-        if(ECUs_Comm_State != READING)
+        for(Failed_Iteration_counter = 0; (ECUs_Comm_State == INVALID_PEER) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_HANDSHAKES); Failed_Iteration_counter++)
         {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
-            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+            if((Failed_Iteration_counter == (MAX_FAILED_COMM_BRI_HANDSHAKES - 1)) && (ECUs_Comm_State == INVALID_PEER))
+            {
+                // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
 
-            return SEND_FAILED;
+                ECUs_Comm_State = SEND_FAILED;
+
+                break;
+            }
+            ECUs_Comm_State = CMD_Bus_HandShake();
         }
-    }
-    else 
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
-        Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+        if(ECUs_Comm_State != SEND_FAILED)
+        {
+            for(Failed_Iteration_counter = 0; (ECUs_Comm_State == FAILED_SEND) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+            {
+                #if COMMAND_BYTE_LENGTH == 2
+                    // send the first byte of the command
+                    ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]);
 
-        return SEND_FAILED;
-    }
-    #elif COMMAND_BYTE_LENGTH == 1
-    if(ECUs_Comm_State != READING)
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
-        return SEND_FAILED;
-    }            
-    #endif /* COMMAND_BYTE_LENGTH */
+                    if(ECUs_Comm_State == DELIVERED)
+                    {
+                        // if first byte is sent successfully then send the second byte of the command
+                        ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE_2]);
 
-    _delay_ms(CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS);
+                        if(ECUs_Comm_State == FAILED_SEND) // FAILED TO SEND BYTE 2
+                        {
+                            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Not in Sync'
+                            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_SEND_B2_FAILED);
+                        }
+                    }
+                    else // Failed to send 1 byte
+                    {
+                        // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                        Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_SEND_B1_FAILED);
+                    }
+                #elif COMMAND_BYTE_LENGTH == 1
+                    // send the command byte to the CMD Peer
+                    ECUs_Comm_State = CMD_Bus_Write(Request_Command[CMD_DATA_BYTE]); 
 
+                    if(ECUs_Comm_State == FAILED_SEND) // if FAILED TO SEND Command BYTE
+                    {
+                        // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Not in Sync'
+                        Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_SEND_CMD_FAILED);
+                    }    
+                #endif /* COMMAND_BYTE_LENGTH */
+
+                if((Failed_Iteration_counter == (MAX_FAILED_COMM_BRI_TRANSMISSIONS - 1)) && (ECUs_Comm_State == FAILED_SEND))
+                {
+                    // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                    Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+                }
+            }
+        }
+    } // will keep in loop till the data byte is sent to CMD Peer
+
+        _delay_ms(CMD_SEND_REQ_RECEIVE_ACK_DELAY_MS);
+    
     //* Request Sent, Now confirm with with actuator status of performing the request.*//
 
     Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
-    while((Ack_Validity == PEER_UNAVAILABLE) || (Ack_Validity == INVALID_ACK_RESPONSE))
+    for(Failed_Iteration_counter = 0; (Ack_Validity == INVALID_ACK_RESPONSE) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
     {
-        if(Ack_Validity == PEER_UNAVAILABLE)
+        if ((Failed_Iteration_counter == (MAX_FAILED_COMM_BRI_TRANSMISSIONS - 1)) && (Ack_Validity == INVALID_ACK_RESPONSE))
         {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+            // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+
+            Request_Command[RESPONSE_DATA_BYTE] = OUT_OF_SYNC;
         }
-        else if (Ack_Validity == INVALID_ACK_RESPONSE)
-        {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Invalid Response'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_RESPONSE);
-        }
-        
         Ack_Validity = CMD_Bus_Req_Ack(&Ack_Response);
     }
-    if(Ack_Response == ACK_RES)
+    if(ECUs_Comm_State != OUT_OF_SYNC)
     {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Request Done!' ''
-        Status_Disp_LCD(LCD_ROW_TXT_REQUEST_DONE,LCD_ROW_TXT_NONE);
-
-        return REQ_DONE;
-    }
-    else if(Ack_Response == NACK_RES)
-    {
-        // Comm_Bridge_CMD_Req :: Status LCD Display 'Invalid Request!' 'Requesting Reason'
-        Status_Disp_LCD(LCD_ROW_TXT_INVALID_REQUEST,LCD_ROW_TXT_REQUESTING_REASON);
-
-        Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
-        while(Ack_Response == PEER_UNAVAILABLE)
+        if(Ack_Response == ACK_RES)
         {
-            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Request Done!' ''
+            Status_Disp_LCD(LCD_ROW_TXT_REQUEST_DONE,LCD_ROW_TXT_NONE);
 
-            Ack_Response = CMD_Bus_Write(NACK_REASON_REQ);
-            _delay_ms(10);
+            Request_Command[RESPONSE_DATA_BYTE] = REQ_DONE;
         }
-        
-        // Return the received code (reason for NACK) - as it is - to caller function
-        return Ack_Response;
+        else if(Ack_Response == NACK_RES)
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Invalid Request!' 'Requesting Reason'
+            Status_Disp_LCD(LCD_ROW_TXT_INVALID_REQUEST,LCD_ROW_TXT_REQUESTING_REASON);
+
+            Ack_Validity = CMD_Bus_Req_Reason_NACK(&Ack_Response);
+            for(Failed_Iteration_counter = 0; (Ack_Validity == INVALID_NACK_REASON) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+            {
+                if ((Failed_Iteration_counter ==  (MAX_FAILED_COMM_BRI_TRANSMISSIONS - 1)) && (Ack_Validity == INVALID_NACK_REASON))
+                {
+                    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                    Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+
+                    Request_Command[RESPONSE_DATA_BYTE] = OUT_OF_SYNC;
+                }
+                Ack_Validity = CMD_Bus_Req_Reason_NACK(&Ack_Response);
+            }
+
+            // Return the received code (reason for NACK) - as it is - to caller function in the same array the command was received in.
+            Request_Command[RESPONSE_DATA_BYTE] =  Ack_Response;
+        }
+        else
+            Request_Command[RESPONSE_DATA_BYTE] =  OUT_OF_SYNC;
     }
-    else
-        return OUT_OF_SYNC;
 #endif	/* ECU_ROLE */
 }
 
 
 /*
- * Description: ...
- * Inputs: ...
- * Outputs: ...
- * Returns: ...
+ * Description: read the Command data byte from the peer on CMD_Bus
+ * Inputs: uint8* (pointer to arry to save the received command Byte/s)
+ * Outputs: RECEIVED code (0x04) if command data byte/s is/are received after a successfull handshake with the peer ||OR|| OUT_OF_SYNC code (4) if handshake couldn't be completed, hence no data received.
+ * Returns: uint8 (code indicating the status of the requested process)
  * Author: Mark Fayez
 **/
-void Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
+uint8 Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
 {
 #if ECU_ROLE == ACTUATOR_ECU
-    uint8 ECUs_Comm_State = REQ_DROPPED;
-    ECUs_Comm_State = CMD_Bus_Read(Request_Command);
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    uint8 Failed_Iteration_counter = 0;
+
+    ECUs_Comm_State = CMD_Bus_HandShake();
+    if(ECUs_Comm_State == INVALID_PEER)
     {
         // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
         Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
 
-        ECUs_Comm_State = CMD_Bus_Read(Request_Command);
-        _delay_ms(CMD_FAILED_TRANS_REPEAT_DELAY_MS);
+        ECUs_Comm_State = CMD_Bus_HandShake();
     }
-    #if COMMAND_BYTE_LENGTH == 2
-    
-    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Device Selected'
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEVICE_SELECTED);
-
-    ECUs_Comm_State = CMD_Bus_Read(Request_Command+1);
-    while(ECUs_Comm_State == PEER_UNAVAILABLE)
+    for(Failed_Iteration_counter = 0; (ECUs_Comm_State != VALID_PEER) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_HANDSHAKES); Failed_Iteration_counter++)
     {
-        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+        ECUs_Comm_State = CMD_Bus_HandShake();
+        if((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_HANDSHAKES-1) && (ECUs_Comm_State == INVALID_PEER))
+        {
+            // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+            Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
 
-        ECUs_Comm_State = CMD_Bus_Read(Request_Command+1);
-        _delay_ms(CMD_FAILED_TRANS_REPEAT_DELAY_MS);
+            ECUs_Comm_State = OUT_OF_SYNC;
+        }
     }
-
-    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Op Selected'
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_OP_SELECTED);
-
-    #elif COMMAND_BYTE_LENGTH == 1
-
-    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Dev/Op Selected'
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEV_OP_SELECTED);
+    // Repeat handshake if failed with max iterations pre-set in configurations file then break out of loop anyway.
     
-    #endif /* COMMAND_BYTE_LENGTH */
+    if(ECUs_Comm_State == VALID_PEER)
+    {
+        #if COMMAND_BYTE_LENGTH == 2
+        CMD_Bus_Read(Request_Command);
+        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Device Selected'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEVICE_SELECTED);
+
+        CMD_Bus_Read(Request_Command+1);
+    
+        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Op Selected'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_OP_SELECTED);
+
+        #elif COMMAND_BYTE_LENGTH == 1
+        CMD_Bus_Read(Request_Command);
+        // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'Control Bus' 'Dev/Op Selected'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_DEV_OP_SELECTED);
+        #endif /* COMMAND_BYTE_LENGTH */
+
+        return RECEIVED;
+    }
+    else
+    {
+        return OUT_OF_SYNC;
+    }
 #endif /* ECU_ROLE */
 }
 
 /*
- * Description: ...
- * Inputs: ...
- * Outputs: ...
- * Returns: ...
+ * Description: to respond to the CMD Peer regarding the command that was send to the device, the response is according to request validity
+ * Inputs: uint8* (Pointer to the validity value resolved by the upper layer application - the Devices manager)
+ * Outputs: replace the Ack response value by OUT_OF_SYNC if end of function reached without being able to send the data.
+ * Returns: None
  * Author: Mark Fayez
 **/
 void Comm_Bridge_CMD_Res(uint8* Ack_Response)
 {
 #if ECU_ROLE == ACTUATOR_ECU
     uint8 Ack_Request = INVALID_ACK_REQUEST;
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    uint8 Failed_Iteration_counter = 0;
+
     if(*Ack_Response == REQ_DONE)
     {
-        do
+        Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
+        if(Ack_Request == INVALID_ACK_REQUEST)
         {
-            Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
-            if(Ack_Request == PEER_UNAVAILABLE)
-            {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
-            }
-            else if (Ack_Request == INVALID_ACK_REQUEST)
-            {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
-            }
-            
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
         }
-        while((Ack_Request == PEER_UNAVAILABLE) || (Ack_Request == INVALID_ACK_REQUEST));
+        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+        {
+            if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS -1) && (Ack_Request == INVALID_ACK_REQUEST))
+            {
+                // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+
+                ECUs_Comm_State = OUT_OF_SYNC;
+            }
+            Ack_Request = CMD_Bus_Res_Ack(*Ack_Response);
+        }
     }
     else
     {
-        
-        do
+        Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
+        if(Ack_Request == INVALID_ACK_REQUEST)
         {
-            Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
-            if(Ack_Request == PEER_UNAVAILABLE)
+            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
+        }
+        for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_ACK_REQUEST) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+        {
+            if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS -1) && (Ack_Request == INVALID_ACK_REQUEST))
             {
-                // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-                Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+                // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
+
+                ECUs_Comm_State = OUT_OF_SYNC;
             }
-            else if (Ack_Request == INVALID_ACK_REQUEST)
+            Ack_Request = CMD_Bus_Res_Ack(NACK_RES);
+        }
+        if(Ack_Request == DELIVERED)
+        {
+            Ack_Request = CMD_Bus_Res_Reason_NACK(*Ack_Response);
+            if(Ack_Request == INVALID_NACK_REASON_REQ)
             {
                 // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Invalid Request'
                 Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_INVALID_REQUEST);
             }
-            
-        }
-        while((Ack_Request == PEER_UNAVAILABLE) || (Ack_Request == INVALID_ACK_REQUEST));
-        
-        Ack_Request = CMD_Bus_Write(*Ack_Response);
+            for(Failed_Iteration_counter = 0; (Ack_Request == INVALID_NACK_REASON_REQ) && (Failed_Iteration_counter < MAX_FAILED_COMM_BRI_TRANSMISSIONS); Failed_Iteration_counter++)
+            {
+                if ((Failed_Iteration_counter == MAX_FAILED_COMM_BRI_TRANSMISSIONS -1) && (Ack_Request == INVALID_NACK_REASON_REQ))
+                {
+                    // Comm_Bridge_CMD_Read_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
+                    Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
 
-        do
-        {
-            Ack_Request = CMD_Bus_Write(*Ack_Response);
-
-            // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Peer Unavailable'
-            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+                    ECUs_Comm_State = OUT_OF_SYNC;
+                }
+                Ack_Request = CMD_Bus_Res_Reason_NACK(*Ack_Response);
+            }
         }
-        while(Ack_Request == PEER_UNAVAILABLE);
     }
-    // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Response Sent'
-    Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_RESPONSE_SENT);
+    if(ECUs_Comm_State != OUT_OF_SYNC)
+    {
+        // Comm_Bridge_CMD_Res :: Status LCD Display 'Control Bus' 'Response Sent'
+        Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_RESPONSE_SENT);
+    }
+    else
+    {
+        *Ack_Response = OUT_OF_SYNC;
+    }
 
 #endif /* ECU_ROLE */
+}
+
+
+/*
+ * Description: Re-sync the Peers on the CMD bus using a certain amount of hanshakes and then a delay
+ * Inputs: None (predefined macro for number of hanshakes required for re-syncing)
+ * Outputs: None
+ * Returns: None
+ * Author: Mark Fayez
+**/
+void Comm_Bridge_CMD_Bus_Re_Sync(void)
+{
+    uint8 Iteration_counter = 0;
+
+    uint8 ECUs_Comm_State = OUT_OF_SYNC;
+    
+    ECUs_Comm_State = CMD_Bus_HandShake();
+    
+    for(Iteration_counter = 0; (ECUs_Comm_State == VALID_PEER) && (Iteration_counter < NUM_OF_RESYNC_HANDSHAKES); Iteration_counter++)
+    {
+        if(ECUs_Comm_State == INVALID_PEER)
+        {
+            // Comm_Bridge_CMD_Req :: Status LCD Display 'Control Bus' 'Peer Unavailable'
+            Status_Disp_LCD(LCD_ROW_TXT_CONTROL_BUS,LCD_ROW_TXT_PEER_UNAVAILABLE);
+            Iteration_counter = 0;
+        }
+        ECUs_Comm_State = CMD_Bus_HandShake();
+    }
+
+    _delay_ms(PRIOR_RE_SYNC_HANDSHAKES_DELAY_MS);
 }

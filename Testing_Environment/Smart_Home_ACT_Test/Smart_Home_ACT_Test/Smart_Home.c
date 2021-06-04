@@ -99,51 +99,53 @@ static void Smart_Home_Read_N_Decode(void)
 	#endif /* ECU_ROLE */
 }
 #if ECU_ROLE == CONTROL_ECU
-static void Smart_Home_Process_N_Respond(void)
-{
-	uint8 Selection_Validity = SEND_FAILED;
+	static void Smart_Home_Process_N_Respond(void)
+	{
+		uint8 Selection_Validity = SEND_FAILED;
 
-	Comm_Bridge_CMD_Req(User_Selection);
+		Comm_Bridge_CMD_Req(User_Selection);
 
-	Selection_Validity = User_Selection[RESPONSE_DATA_BYTE];
-	
-	if(Selection_Validity == REQ_DONE)
-	{
-		Status_Disp_LCD(LCD_ROW_TXT_OP_STATUS,LCD_ROW_TXT_DONE);
-		Comm_Bridge_BT_Send(Selection_Validity);
-	}
-	else if(Selection_Validity == INV_DEV_SEL)
-	{
-		Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_DEVICE);
-		Comm_Bridge_BT_Send(Selection_Validity);
-	}
-	else if(Selection_Validity == INV_OP_SEL)
-	{
-		Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_OPTION);
-		Comm_Bridge_BT_Send(Selection_Validity);
-	}
-	else
-	{
-		Status_Disp_LCD(LCD_ROW_TXT_CTRL_ACT_SYSTEM,LCD_ROW_TXT_NOT_IN_SYNC);
-		Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
-	}
-}
-#elif ECU_ROLE == ACTUATOR_ECU
-static void Smart_Home_Process_N_Respond(void)
-{
-	uint8 Selection_Validity = SEND_FAILED;
-	Selection_Validity = Dev_Op_Check_Valid(Selected_Device, Selected_Operation);
-	if(Selection_Validity == DEV_N_OP_VALID)
-	{
-		Device_Apply_Request(Selected_Device,Selected_Operation);
+		Selection_Validity = User_Selection[RESPONSE_DATA_BYTE];
 		
-		Status_Disp_LCD(LCD_ROW_TXT_REQUEST,LCD_ROW_TXT_DONE);
+		if(Selection_Validity == REQ_DONE)
+		{
+			Status_Disp_LCD(LCD_ROW_TXT_OP_STATUS,LCD_ROW_TXT_DONE);
+			Comm_Bridge_BT_Send(Selection_Validity);
+		}
+		else if(Selection_Validity == INV_DEV_SEL)
+		{
+			Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_DEVICE);
+			Comm_Bridge_BT_Send(Selection_Validity);
+		}
+		else if(Selection_Validity == INV_OP_SEL)
+		{
+			Status_Disp_LCD(LCD_ROW_TXT_SELECTION_ERROR,LCD_ROW_TXT_INVALID_OPTION);
+			Comm_Bridge_BT_Send(Selection_Validity);
+		}
+		else
+		{
+			Status_Disp_LCD(LCD_ROW_TXT_CTRL_ACT_SYSTEM,LCD_ROW_TXT_NOT_IN_SYNC);
+			Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
+		}
 	}
-	Comm_Bridge_CMD_Res(&Selection_Validity);
-	if(Selection_Validity == OUT_OF_SYNC)
+#elif ECU_ROLE == ACTUATOR_ECU
+	static void Smart_Home_Process_N_Respond(void)
 	{
-		Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
+		uint8 Selection_Validity = SEND_FAILED;
+		uint8 Respond_Send_Status = OUT_OF_SYNC;
+
+		Selection_Validity = Dev_Op_Check_Valid(Selected_Device, Selected_Operation);
+		if(Selection_Validity == DEV_N_OP_VALID)
+		{
+			Device_Apply_Request(Selected_Device,Selected_Operation);
+			
+			Status_Disp_LCD(LCD_ROW_TXT_REQUEST,LCD_ROW_TXT_DONE);
+		}
+		Respond_Send_Status = Comm_Bridge_CMD_Res(&Selection_Validity);
+		if(Respond_Send_Status == OUT_OF_SYNC)
+		{
+			Smart_Home_Sys_Sync_Flag = OUT_OF_SYNC;
+		}
 	}
-}
 #endif /* ECU_ROLE */ 
 

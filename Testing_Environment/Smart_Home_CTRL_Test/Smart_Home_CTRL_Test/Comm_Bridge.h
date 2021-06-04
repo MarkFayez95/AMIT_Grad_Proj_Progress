@@ -61,7 +61,7 @@ void Comm_Bridge_BT_SendStream(uint8* data_stream);
 * Returns: None
 * Author: Mark Fayez
 **/
-void Comm_Bridge_CMD_Req(uint8* Request_Command);
+uint8 Comm_Bridge_CMD_Req(uint8* Request_Command);
 
 /*
  * Description: read the Command data byte from the peer on CMD_Bus
@@ -75,11 +75,11 @@ uint8 Comm_Bridge_CMD_Read_Req(uint8* Request_Command);
 /*
  * Description: to respond to the CMD Peer regarding the command that was send to the device, the response is according to request validity
  * Inputs: uint8* (Pointer to the validity value resolved by the upper layer application - the Devices manager)
- * Outputs: replace the Ack response value by OUT_OF_SYNC if end of function reached without being able to send the data.
- * Returns: None
+ * Outputs: output OUT_OF_SYNC code if MAX_FAILED_COMM_BRI_TRANSMISSIONS is reached without being able to send the data ||OR|| IN_SYNC if Response was sent successfully
+ * Returns: uint8 (code indicating the status of the requested process)
  * Author: Mark Fayez
 **/
-void Comm_Bridge_CMD_Res(uint8* Ack_Response);
+uint8 Comm_Bridge_CMD_Res(uint8* Ack_Response);
 
 /*
  * Description: Re-sync the Peers on the CMD bus using a certain amount of hanshakes and then a delay

@@ -199,7 +199,7 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
         // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
         Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
         ECUs_Comm_State = SEND_FAILED;
-        Failed_Trans_counter++;
+
         return OUT_OF_SYNC;
     }
 
@@ -222,7 +222,7 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
             // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
             Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
             ECUs_Comm_State = SEND_FAILED;
-            Failed_Trans_counter++;
+
             return OUT_OF_SYNC;
         }
         #if COMMAND_BYTE_LENGTH == 2
@@ -244,7 +244,7 @@ uint8 Comm_Bridge_CMD_Req(uint8* Request_Command)
                     // Comm_Bridge_CMD_Req :: Status LCD Display 'CMD Bus Peers' 'Not in Sync'
                     Status_Disp_LCD(LCD_ROW_TXT_CMD_BUS_PEERS,LCD_ROW_TXT_NOT_IN_SYNC);
                     ECUs_Comm_State = SEND_FAILED;
-                    Failed_Trans_counter++;
+
                     return OUT_OF_SYNC;
                 }
             }

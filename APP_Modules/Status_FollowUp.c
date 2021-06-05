@@ -1,6 +1,7 @@
 /*
  * Status_FollowUp.c
- *
+ * APP Layer application responsible for displaying the current status of the system on each ECU.
+ * 
  * Created: 01/06/2021 02:03:50 AM
  *  Author: Mark Fayez
  */ 
@@ -60,10 +61,14 @@ LCD_Row_Text LCD_Row_Text_Options[LCD_ROW_TXT_NONE+1] =
     '\0'
 };
 
+// Initialize the LCD
 void Status_FollowUp_Init(void)
 {
     LCD_Init();
 }
+
+// Display a 2 row status on LCD
+// Inputs are 2 codes for the corresponding row text in the application database.
 void Status_Disp_LCD(uint8 R1_Text_Index, uint8 R2_Text_Index)
 {
     LCD_Clear();
@@ -72,6 +77,10 @@ void Status_Disp_LCD(uint8 R1_Text_Index, uint8 R2_Text_Index)
     LCD_WriteString(LCD_Row_Text_Options[R2_Text_Index]);
     _delay_ms(LCD_DISP_DELAY_MS);
 }
+
+// Display a 2 row status on LCD that includes integer value in the first row.
+// Inputs are 2 codes for the corresponding row string of text defined in the application database.
+// as well as the integer value required to be displayed.
 void Status_Disp_LCD_IncludeInteger(uint8 R1_Text_Index,uint8 Integer_Number, uint8 R2_Text_Index)
 {
     LCD_Clear();

@@ -1,6 +1,7 @@
 /*
  * Status_FollowUp.h
- *
+ * APP Layer application responsible for displaying the current status of the system on each ECU.
+ * 
  * Created: 01/06/2021 02:03:32 AM
  *  Author: Mark Fayez
  */ 

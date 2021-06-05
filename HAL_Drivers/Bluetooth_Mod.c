@@ -1,6 +1,9 @@
 /*
  * Bluetooth_Mod.c
- *
+ * 
+ * HAL Layer Driver that utilize the UART MCAL Driver to interface with an external Bluetooth module to interface with a wireless user.
+ * Role in architecture: this driver is to perform under the Comm_Bridge which acts as the communication manager of the system.
+ * 
  * Created: 27/05/2021 08:40:30 PM
  *  Author: Mark Fayez
  */ 

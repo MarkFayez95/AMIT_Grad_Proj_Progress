@@ -33,8 +33,8 @@
     #endif /* COMMAND_BYTE_LENGTH */
 
 
-    #define VALID_PUID    0xA8 // static pre-defined Pin User ID for security communicating with peer
-    #define ECU_PUID      0xAB
+    #define VALID_PUID    0x37 // static pre-defined Pin User ID for security communicating with peer
+    #define ECU_PUID      0x40
     #define VALID_ID      0x0A
     #define INVALID_ID    0x0C
 
@@ -99,7 +99,7 @@
 
 #define INIT_FUN_INDEX		0
 
-#define DEV_CONST	0x07
-#define OPER_CONST	0x07
+#define DEV_CONST	0x03
+#define OPER_CONST	0x01
 
 #endif /* SMART_HOME_SYS_CONFIG_H_ */

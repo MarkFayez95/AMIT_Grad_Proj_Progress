@@ -354,7 +354,7 @@ uint8 CMD_Bus_Req_Reason_NACK(uint8* Nack_Res_Reason)
  23a:	ce 01       	movw	r24, r28
  23c:	0e 94 70 00 	call	0xe0	; 0xe0 <Bluetooth_Mod_Seq_Rx>
  240:	88 81       	ld	r24, Y
- 242:	88 3a       	cpi	r24, 0xA8	; 168
+ 242:	87 33       	cpi	r24, 0x37	; 55
  244:	31 f0       	breq	.+12     	; 0x252 <Comm_Bridge_BT_Read+0x3e>
  246:	6f e2       	ldi	r22, 0x2F	; 47
  248:	85 e0       	ldi	r24, 0x05	; 5

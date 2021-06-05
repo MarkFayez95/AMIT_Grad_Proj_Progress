@@ -548,7 +548,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 {
 	if(((Req_Device-DEV_CONST) >= 0) && ((Req_Device-DEV_CONST)<NUM_OF_DEVICES))
  276:	90 e0       	ldi	r25, 0x00	; 0
- 278:	07 97       	sbiw	r24, 0x07	; 7
+ 278:	03 97       	sbiw	r24, 0x03	; 3
  27a:	83 30       	cpi	r24, 0x03	; 3
  27c:	91 05       	cpc	r25, r1
  27e:	98 f5       	brcc	.+102    	; 0x2e6 <Dev_Op_Check_Valid+0x70>
@@ -556,7 +556,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
 		if (((Req_Operation-OPER_CONST) >= 0) && ((Req_Operation-OPER_CONST) < MAX_OPS_PER_DEV))
  280:	26 2f       	mov	r18, r22
  282:	30 e0       	ldi	r19, 0x00	; 0
- 284:	27 50       	subi	r18, 0x07	; 7
+ 284:	21 50       	subi	r18, 0x01	; 1
  286:	31 09       	sbc	r19, r1
  288:	23 30       	cpi	r18, 0x03	; 3
  28a:	31 05       	cpc	r19, r1
@@ -583,7 +583,7 @@ uint8 Dev_Op_Check_Valid(uint8 Req_Device, uint8 Req_Operation)
  2b0:	71 f4       	brne	.+28     	; 0x2ce <Dev_Op_Check_Valid+0x58>
 			{
 				if((Req_Operation-OPER_CONST) == OP_3)
- 2b2:	69 30       	cpi	r22, 0x09	; 9
+ 2b2:	63 30       	cpi	r22, 0x03	; 3
  2b4:	31 f4       	brne	.+12     	; 0x2c2 <Dev_Op_Check_Valid+0x4c>
 				{
 					Status_Disp_LCD(LCD_ROW_TXT_VALID_SELECTION,LCD_ROW_TXT_PROCEEDING);
@@ -655,11 +655,11 @@ void Device_Apply_Request(uint8 Req_Device, uint8 Req_Operation)
 	Smart_Home_Devices.Device[Req_Device-DEV_CONST].OpFn[Req_Operation-OPER_CONST]();
  2fa:	c8 2f       	mov	r28, r24
  2fc:	d0 e0       	ldi	r29, 0x00	; 0
- 2fe:	27 97       	sbiw	r28, 0x07	; 7
+ 2fe:	23 97       	sbiw	r28, 0x03	; 3
  300:	e6 2f       	mov	r30, r22
  302:	f0 e0       	ldi	r31, 0x00	; 0
  304:	cf 01       	movw	r24, r30
- 306:	07 97       	sbiw	r24, 0x07	; 7
+ 306:	01 97       	sbiw	r24, 0x01	; 1
  308:	fe 01       	movw	r30, r28
  30a:	ee 0f       	add	r30, r30
  30c:	ff 1f       	adc	r31, r31
@@ -679,7 +679,7 @@ void Device_Apply_Request(uint8 Req_Device, uint8 Req_Operation)
  328:	e0 2d       	mov	r30, r0
  32a:	09 95       	icall
 	Smart_Home_Devices.Device[Req_Device-DEV_CONST].Current_Operation = (Req_Operation-OPER_CONST);
- 32c:	17 50       	subi	r17, 0x07	; 7
+ 32c:	11 50       	subi	r17, 0x01	; 1
  32e:	ce 01       	movw	r24, r28
  330:	88 0f       	add	r24, r24
  332:	99 1f       	adc	r25, r25
@@ -741,7 +741,7 @@ void Devices_DB_Config(DevicesDB* Smart_Home_DevDB)
  37c:	f3 1f       	adc	r31, r19
  37e:	e8 0f       	add	r30, r24
  380:	f9 1f       	adc	r31, r25
- 382:	67 e0       	ldi	r22, 0x07	; 7
+ 382:	63 e0       	ldi	r22, 0x03	; 3
  384:	6d 0f       	add	r22, r29
  386:	62 95       	swap	r22
  388:	60 7f       	andi	r22, 0xF0	; 240

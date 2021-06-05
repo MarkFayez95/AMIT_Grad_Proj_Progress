@@ -351,7 +351,7 @@ uint8 Comm_Bridge_CMD_Read_Req(uint8* Request_Command)
  * Description: to respond to the CMD Peer regarding the command that was send to the device, the response is according to request validity
  * Inputs: uint8* (Pointer to the validity value resolved by the upper layer application - the Devices manager)
  * Outputs: replace the Ack response value by OUT_OF_SYNC if MAX_FAILED_COMM_BRI_TRANSMISSIONS is reached without being able to send the data.
- * Returns: None
+ * Returns: uint8 (code indicating the status of the requested process)
  * Author: Mark Fayez
 **/
 uint8 Comm_Bridge_CMD_Res(uint8 Ack_Response)

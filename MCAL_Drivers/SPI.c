@@ -63,10 +63,13 @@ uint8 SPI_Transiver(uint8 data)
 		// write to SPDR of the Master to start the transmission and clock
 		SPI->SPDR = data;
 		
+		// Hault on the end of transmission flag
 		while(GetBit(SPI->SPSR,SPIF) == 0);
 		
+		// Read the received data from the SPI Data Register.
 		Received_Data = SPI->SPDR;
 
+		// Set the SS Pin once more to mark end of the transmission.
 		SPI_Master_TermTrans();
 	#elif SPI_ROLE == SPI_SLAVE
 		SPI->SPDR = data;
